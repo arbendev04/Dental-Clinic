@@ -1,0 +1,155 @@
+---
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/servicios', label: 'Services' },
+  { href: '/nosotros', label: 'About' },
+  { href: '/contacto', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 transition-colors" style="background-color: var(--bg-primary);">
+  <nav class="container mx-auto px-4 lg:px-20">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2.5">
+        <svg class="w-6 h-6" style="color: var(--teal-600);" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L2 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l8 4v5.32c0 4.52-3.13 8.78-8 9.82-4.87-1.04-8-5.3-8-9.82V8.18l8-4zM12 6.5l-5 2.5v4.5c0 3.36 2.33 6.51 5 7.28 2.67-.77 5-3.92 5-7.28V9l-5-2.5z"/>
+        </svg>
+        <span class="font-semibold tracking-[0.2em] text-[22px]" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">AURUM DENTAL</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-12">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-normal transition-colors duration-300 hover:opacity-60"
+            style={currentPath === link.href ? 'color: var(--text-primary);' : 'color: var(--text-secondary);'}
+          >
+            {link.label}
+          </a>
+        ))}
+
+        <!-- Theme Toggle -->
+        <button
+          id="theme-toggle"
+          class="p-2 rounded-lg transition-colors hover:opacity-60"
+          style="background-color: var(--bg-secondary); color: var(--text-secondary);"
+          aria-label="Cambiar tema"
+        >
+          <!-- Sun icon (dark mode) -->
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <!-- Moon icon (light mode) -->
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <a
+          href="http://localhost:4200"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-10 py-4 text-white text-[13px] font-medium tracking-wider transition-all duration-300 hover:opacity-90"
+          style="background-color: var(--teal-600); letter-spacing: 0.05em;"
+        >
+          Book Now
+        </a>
+      </div>
+
+      <!-- Mobile buttons -->
+      <div class="flex items-center gap-2 md:hidden">
+        <!-- Theme Toggle Mobile -->
+        <button
+          id="theme-toggle-mobile"
+          class="p-2 rounded-lg transition-colors hover:opacity-60"
+          style="background-color: var(--bg-secondary); color: var(--text-secondary);"
+          aria-label="Cambiar tema"
+        >
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="p-2 hover:opacity-60 transition-opacity"
+          style="color: var(--text-secondary);"
+          aria-label="Abrir menú"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <div class="flex flex-col gap-2">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-300 hover:opacity-60"
+            style={currentPath === link.href
+              ? 'background-color: var(--teal-100); color: var(--teal-600);'
+              : 'color: var(--text-secondary);'}
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href="http://localhost:4200"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-white px-3 py-2 text-sm font-medium transition-all duration-300 hover:opacity-90 text-center mt-2"
+          style="background-color: var(--teal-600);"
+        >
+          Book Now
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+
+      if (isDark) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', toggleTheme);
+    }
+    if (themeToggleMobile) {
+      themeToggleMobile.addEventListener('click', toggleTheme);
+    }
+  });
+</script>

@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const servicios = [
+  {
+    nombre: 'Limpieza Dental',
+    descripcion: 'Eliminación de placa y sarro para mantener tus dientes sanos y prevenir enfermedades periodontales.',
+    duracion: '45 min',
+    precio: '$50',
+  },
+  {
+    nombre: 'Blanqueamiento Dental',
+    descripcion: 'Tratamiento profesional para aclarar el tono de tus dientes y lograr una sonrisa más brillante.',
+    duracion: '60 min',
+    precio: '$150',
+  },
+  {
+    nombre: 'Ortodoncia',
+    descripcion: 'Corrección de la posición dental con brackets tradicionales o alineadores invisibles.',
+    duracion: 'Consulta inicial',
+    precio: 'Desde $1,500',
+  },
+  {
+    nombre: 'Implantes Dentales',
+    descripcion: 'Reemplazo permanente de piezas dentales perdidas con implantes de titanio de alta calidad.',
+    duracion: 'Múltiples sesiones',
+    precio: 'Desde $800',
+  },
+  {
+    nombre: 'Endodoncia',
+    descripcion: 'Tratamiento de conducto para salvar dientes dañados y eliminar infecciones.',
+    duracion: '90 min',
+    precio: '$200',
+  },
+  {
+    nombre: 'Carillas Dentales',
+    descripcion: 'Láminas de porcelana para corregir forma, color y tamaño de los dientes frontales.',
+    duracion: '2 sesiones',
+    precio: 'Desde $300',
+  },
+];
+---
+
+<Layout title="Services" description="Discover all the dental services we offer at Aurum Dental">
+  <!-- Header -->
+  <section class="py-24 px-4 lg:px-20 text-center transition-colors" style="background-color: var(--teal-700);">
+    <div class="container mx-auto">
+      <h1 class="text-5xl lg:text-6xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">Our Services</h1>
+      <p class="text-lg max-w-2xl mx-auto leading-relaxed" style="color: var(--teal-200); line-height: 1.7;">
+        We offer a comprehensive range of dental treatments with the best technology and certified professionals.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="py-24 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-primary);">
+    <div class="container mx-auto">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {servicios.map((servicio) => (
+          <div class="p-8 transition-all duration-300 hover:translate-y-[-4px]" style="background-color: var(--bg-secondary); border: 1px solid var(--border-primary);">
+            <h3 class="text-2xl font-semibold mb-4" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">{servicio.nombre}</h3>
+            <p class="mb-6 leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">{servicio.descripcion}</p>
+            <div class="flex items-center justify-between text-sm pt-4" style="border-top: 1px solid var(--border-primary);">
+              <span class="flex items-center gap-2" style="color: var(--text-secondary);">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {servicio.duracion}
+              </span>
+              <span class="font-semibold" style="color: var(--teal-600);">{servicio.precio}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-secondary);">
+    <div class="container mx-auto text-center max-w-2xl">
+      <h2 class="text-3xl font-normal mb-4" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Need More Information?</h2>
+      <p class="mb-10 leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Contact us or book a consultation appointment.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contacto" class="px-8 py-4 text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-60" style="border: 1px solid var(--teal-600); color: var(--teal-600); letter-spacing: 0.05em;">
+          Contact Us
+        </a>
+        <a
+          href="http://localhost:4200"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-8 py-4 text-white text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-90"
+          style="background-color: var(--teal-600); letter-spacing: 0.05em;"
+        >
+          Book Appointment
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

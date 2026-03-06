@@ -1,0 +1,100 @@
+---
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/servicios', label: 'Services' },
+  { href: '/nosotros', label: 'About' },
+  { href: '/contacto', label: 'Contact' },
+];
+
+const services = [
+  { name: 'Teeth Whitening', href: '/servicios#whitening' },
+  { name: 'Dental Implants', href: '/servicios#implants' },
+  { name: 'Orthodontics', href: '/servicios#orthodontics' },
+  { name: 'Cosmetic Dentistry', href: '/servicios#cosmetic' },
+];
+
+const quickLinks = [
+  { name: 'Book Appointment', href: 'http://localhost:4200' },
+  { name: 'Patient Portal', href: '/portal' },
+  { name: 'Insurance', href: '/insurance' },
+  { name: 'FAQs', href: '/faq' },
+];
+---
+
+<footer class="transition-colors duration-500" style="background-color: var(--teal-800); color: var(--text-secondary);">
+  <div class="container mx-auto px-4 lg:px-20 py-16">
+    <div class="flex flex-col md:flex-row justify-between gap-12 mb-12">
+      <!-- Logo y descripción -->
+      <div class="max-w-xs">
+        <a href="/" class="flex items-center gap-2.5 mb-4">
+          <svg class="w-6 h-6" style="color: var(--teal-600);" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L2 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l8 4v5.32c0 4.52-3.13 8.78-8 9.82-4.87-1.04-8-5.3-8-9.82V8.18l8-4zM12 6.5l-5 2.5v4.5c0 3.36 2.33 6.51 5 7.28 2.67-.77 5-3.92 5-7.28V9l-5-2.5z"/>
+          </svg>
+          <span class="font-semibold tracking-[0.2em] text-[22px]" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">AURUM DENTAL</span>
+        </a>
+        <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+          Where luxury meets exceptional dental care. Your smile deserves nothing less.
+        </p>
+      </div>
+
+      <!-- Links Columns -->
+      <div class="flex flex-wrap md:flex-nowrap gap-12 md:gap-20">
+        <!-- Navigation -->
+        <div>
+          <h3 class="font-semibold mb-4 transition-colors duration-500" style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text-primary);">Navigation</h3>
+          <ul class="space-y-4">
+            {navLinks.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm hover:opacity-60 transition-opacity duration-300" style="color: var(--text-tertiary);">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h3 class="font-semibold mb-4 transition-colors duration-500" style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text-primary);">Services</h3>
+          <ul class="space-y-4">
+            {services.map((service) => (
+              <li>
+                <a href={service.href} class="text-sm hover:opacity-60 transition-opacity duration-300" style="color: var(--text-tertiary);">
+                  {service.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="font-semibold mb-4 transition-colors duration-500" style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text-primary);">Quick Links</h3>
+          <ul class="space-y-4">
+            {quickLinks.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm hover:opacity-60 transition-opacity duration-300" style="color: var(--text-tertiary);">
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="h-px w-full transition-colors duration-500" style="background-color: var(--teal-700);"></div>
+
+    <!-- Bottom Section -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-12">
+      <p class="text-[13px] transition-colors duration-500" style="color: var(--text-tertiary);">
+        © {new Date().getFullYear()} Aurum Dental. All rights reserved.
+      </p>
+      <div class="flex items-center gap-6">
+        <a href="/politica-privacidad" class="text-[13px] hover:opacity-60 transition-opacity duration-300" style="color: var(--text-tertiary);">Privacy Policy</a>
+        <a href="/terminos-condiciones" class="text-[13px] hover:opacity-60 transition-opacity duration-300" style="color: var(--text-tertiary);">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>

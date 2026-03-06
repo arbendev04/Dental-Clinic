@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const equipo = [
+  {
+    nombre: 'Dra. María García',
+    especialidad: 'Odontología General',
+    descripcion: 'Más de 15 años de experiencia en tratamientos preventivos y restaurativos.',
+  },
+  {
+    nombre: 'Dr. Carlos Rodríguez',
+    especialidad: 'Ortodoncia',
+    descripcion: 'Especialista en brackets y alineadores invisibles para todas las edades.',
+  },
+  {
+    nombre: 'Dra. Ana Martínez',
+    especialidad: 'Endodoncia',
+    descripcion: 'Experta en tratamientos de conducto y microcirugía endodóntica.',
+  },
+];
+---
+
+<Layout title="About" description="Meet the professional team at Aurum Dental">
+  <!-- Header -->
+  <section class="py-24 px-4 lg:px-20 text-center transition-colors" style="background-color: var(--teal-700);">
+    <div class="container mx-auto">
+      <h1 class="text-5xl lg:text-6xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">About Us</h1>
+      <p class="text-lg max-w-2xl mx-auto leading-relaxed" style="color: var(--teal-200); line-height: 1.7;">
+        A team committed to your oral health and well-being.
+      </p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="py-24 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-primary);">
+    <div class="container mx-auto">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-4xl font-normal mb-8" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Our Story</h2>
+        <p class="mb-6 leading-relaxed text-lg" style="color: var(--text-secondary); line-height: 1.7;">
+          Aurum Dental was founded in 2010 with a clear vision: to offer quality dental care in a warm and professional environment. Since then, we have served thousands of patients who trust us for their oral health care.
+        </p>
+        <p class="leading-relaxed text-lg" style="color: var(--text-secondary); line-height: 1.7;">
+          We have modern facilities, state-of-the-art equipment, and a team of highly trained professionals who stay updated with the latest techniques and treatments in the sector.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="py-24 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-secondary);">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-normal text-center mb-16" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Our Values</h2>
+      <div class="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+        <div class="text-center">
+          <div class="w-16 h-16 flex items-center justify-center mx-auto mb-6" style="background-color: var(--teal-100);">
+            <svg class="w-8 h-8" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Trust</h3>
+          <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">We build relationships based on transparency and honesty.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 flex items-center justify-center mx-auto mb-6" style="background-color: var(--teal-100);">
+            <svg class="w-8 h-8" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Excellence</h3>
+          <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">We seek perfection in every treatment we perform.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 flex items-center justify-center mx-auto mb-6" style="background-color: var(--teal-100);">
+            <svg class="w-8 h-8" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Empathy</h3>
+          <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">We understand your needs and accompany you every step of the way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="py-24 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-primary);">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-normal text-center mb-16" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Our Team</h2>
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {equipo.map((miembro) => (
+          <div class="p-8 text-center transition-all duration-300" style="background-color: var(--bg-secondary); border: 1px solid var(--border-primary);">
+            <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center" style="background-color: var(--teal-100);">
+              <svg class="w-12 h-12" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">{miembro.nombre}</h3>
+            <p class="text-sm mb-3 font-medium" style="color: var(--teal-600);">{miembro.especialidad}</p>
+            <p class="text-sm leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">{miembro.descripcion}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

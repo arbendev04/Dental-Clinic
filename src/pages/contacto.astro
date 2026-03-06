@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact" description="Contact us for more information or to schedule an appointment">
+  <!-- Header -->
+  <section class="py-24 px-4 lg:px-20 text-center transition-colors" style="background-color: var(--teal-700);">
+    <div class="container mx-auto">
+      <h1 class="text-5xl lg:text-6xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">Contact Us</h1>
+      <p class="text-lg max-w-2xl mx-auto leading-relaxed" style="color: var(--teal-200); line-height: 1.7;">
+        We're here to help. Contact us through any means.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-24 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-primary);">
+    <div class="container mx-auto">
+      <div class="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
+        <!-- Contact Info -->
+        <div>
+          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Contact Information</h2>
+
+          <div class="space-y-8">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" style="background-color: var(--teal-100);">
+                <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Address</h3>
+                <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Avd. Alfonso Puchades 22<br>Benidorm, Alicante 03501</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" style="background-color: var(--teal-100);">
+                <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Phone</h3>
+                <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">96 508 82 82</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" style="background-color: var(--teal-100);">
+                <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Email</h3>
+                <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Arangodentalclinic@gmail.com</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" style="background-color: var(--teal-100);">
+                <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Hours</h3>
+                <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Mon - Fri: 9:00 - 19:00<br>Sat: 9:00 - 14:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div>
+          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Send us a message</h2>
+          <form class="space-y-6">
+            <div>
+              <label for="nombre" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Name</label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                class="w-full px-4 py-3 outline-none transition-colors"
+                style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
+                placeholder="Your name"
+                required
+              />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full px-4 py-3 outline-none transition-colors"
+                style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div>
+              <label for="telefono" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Phone</label>
+              <input
+                type="tel"
+                id="telefono"
+                name="telefono"
+                class="w-full px-4 py-3 outline-none transition-colors"
+                style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
+                placeholder="(123) 456-7890"
+              />
+            </div>
+            <div>
+              <label for="mensaje" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Message</label>
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                rows="4"
+                class="w-full px-4 py-3 outline-none transition-colors resize-none"
+                style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
+                placeholder="How can we help you?"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full py-4 text-white text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-90"
+              style="background-color: var(--teal-600); letter-spacing: 0.05em;"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design System Variables */
+:root {
+  /* Light Mode Colors */
+  --bg-primary: #FDFBF7;
+  --bg-secondary: #F7F4EF;
+  --bg-tertiary: #EFECE6;
+  --border-primary: #E0DDD6;
+  --border-secondary: #D0CDC6;
+
+  /* Teal Scale */
+  --teal-100: #E6F5F3;
+  --teal-200: #B3E0DA;
+  --teal-300: #80CBC1;
+  --teal-400: #4DB6A8;
+  --teal-500: #1A7A6E;
+  --teal-600: #15635A;
+  --teal-700: #104D45;
+  --teal-800: #0B3630;
+  --teal-900: #061F1B;
+
+  /* Gold Scale */
+  --gold-100: #FDF6E8;
+  --gold-200: #F9E8C4;
+  --gold-300: #F2D494;
+  --gold-400: #E8BE64;
+  --gold-500: #C9A44A;
+  --gold-600: #A8893E;
+  --gold-700: #876E32;
+  --gold-800: #665326;
+  --gold-900: #45381A;
+
+  /* Text Colors */
+  --text-primary: #1A1A1A;
+  --text-secondary: #4A4A4A;
+  --text-tertiary: #787878;
+}
+
+.dark {
+  /* Dark Mode Colors */
+  --bg-primary: #141414;
+  --bg-secondary: #1C1C1C;
+  --bg-tertiary: #242424;
+  --border-primary: #2E2E2E;
+  --border-secondary: #3A3A3A;
+
+  /* Teal Scale - Dark Mode */
+  --teal-100: #0A2E2A;
+  --teal-200: #0F3D37;
+  --teal-300: #1A5C52;
+  --teal-400: #267A6E;
+  --teal-500: #3A9E90;
+  --teal-600: #4DB6A8;
+  --teal-700: #80CBC1;
+  --teal-800: #B3E0DA;
+  --teal-900: #E6F5F3;
+
+  /* Gold Scale - Dark Mode */
+  --gold-100: #2A2210;
+  --gold-200: #3D3218;
+  --gold-300: #5C4B24;
+  --gold-400: #8B7038;
+  --gold-500: #C9A44A;
+  --gold-600: #D4B565;
+  --gold-700: #E0C882;
+  --gold-800: #ECD9A0;
+  --gold-900: #F5EACC;
+
+  /* Text Colors - Dark Mode */
+  --text-primary: #F5F5F0;
+  --text-secondary: #A0A0A0;
+  --text-tertiary: #6E6E6E;
+}
+
+/* Typography */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Hero Section Styles */
+.hero-section video {
+  filter: brightness(0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section video {
+    display: none;
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, var(--teal-600) 0%, var(--teal-800) 100%);
+  }
+}

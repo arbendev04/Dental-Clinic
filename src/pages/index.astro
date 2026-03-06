@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    icon: 'sparkles',
+    title: 'Teeth Whitening',
+    description: 'Advanced whitening treatments that restore your smile\'s natural brilliance with lasting results.'
+  },
+  {
+    icon: 'shield-check',
+    title: 'Dental Implants',
+    description: 'State-of-the-art implant solutions that look and feel like natural teeth, built to last.'
+  },
+  {
+    icon: 'smile',
+    title: 'Cosmetic Dentistry',
+    description: 'Transform your smile with precision cosmetic procedures tailored to your unique features.'
+  },
+];
+
+const stats = [
+  { number: '15+', label: 'Years Experience' },
+  { number: '5,000+', label: 'Smiling Patients' },
+  { number: '98%', label: 'Success Rate' },
+  { number: '24/7', label: 'Emergency Care' },
+];
+
+const testimonials = [
+  {
+    quote: 'The care and attention to detail at Aurum Dental is truly exceptional. My smile has never looked better.',
+    author: 'Sarah Mitchell'
+  },
+  {
+    quote: 'Professional, courteous, and genuinely caring. They made what I thought would be a difficult process completely stress-free.',
+    author: 'Michael Chen'
+  },
+  {
+    quote: 'From the moment I walked in, I knew I was in expert hands. The results exceeded all my expectations.',
+    author: 'Emily Rodriguez'
+  },
+];
+---
+
+<Layout title="Home">
+  <!-- Hero Section -->
+  <section class="flex items-center justify-between px-4 lg:px-20 py-16 lg:py-0 lg:h-[680px] transition-colors" style="background-color: var(--bg-primary);">
+    <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
+      <!-- Hero Content -->
+      <div class="flex-1 max-w-xl">
+        <span class="text-xs tracking-[0.3em] uppercase font-light mb-6 block" style="color: var(--text-secondary); letter-spacing: 0.3em;">Welcome to Excellence</span>
+        <h1 class="text-5xl lg:text-6xl font-normal mb-8 leading-tight" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">
+          Your Smile Deserves Excellence
+        </h1>
+        <p class="text-lg mb-10 leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">
+          Experience the perfect blend of artistry and advanced dental care. We create smiles that transform lives with uncompromising attention to detail.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="http://localhost:4200"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-10 py-4 text-white text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-90 text-center"
+            style="background-color: var(--teal-600); letter-spacing: 0.05em;"
+          >
+            Book Appointment
+          </a>
+          <a
+            href="/servicios"
+            class="px-10 py-4 text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-60 text-center"
+            style="border: 1px solid var(--teal-600); color: var(--teal-600); letter-spacing: 0.05em;"
+          >
+            Learn More
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="flex-1 max-w-lg">
+        <div class="relative w-full h-[400px] lg:h-[580px]">
+          <img
+            src="/img/hero-dental.jpg"
+            alt="Dental Excellence"
+            class="w-full h-full object-cover"
+            style="object-position: center;"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="px-4 lg:px-20 py-24 transition-colors" style="background-color: var(--bg-secondary);">
+    <div class="container mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <span class="text-xs tracking-[0.3em] uppercase font-light mb-4 block" style="color: var(--text-secondary); letter-spacing: 0.3em;">Our Specialties</span>
+        <h2 class="text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Professional Care Tailored to You</h2>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid md:grid-cols-3 gap-6">
+        {services.map((service) => (
+          <div class="p-10 transition-all duration-300 hover:translate-y-[-4px]" style="background-color: var(--bg-primary); border: 1px solid var(--border-primary);">
+            <!-- Icon -->
+            <div class="w-14 h-14 flex items-center justify-center mb-6" style="background-color: var(--teal-100);">
+              <svg class="w-7 h-7" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {service.icon === 'sparkles' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                )}
+                {service.icon === 'shield-check' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                )}
+                {service.icon === 'smile' && (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                )}
+              </svg>
+            </div>
+            <!-- Content -->
+            <h3 class="text-2xl font-semibold mb-6" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">{service.title}</h3>
+            <p class="mb-6 leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">{service.description}</p>
+            <!-- Link -->
+            <a href="/servicios" class="inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-60" style="color: var(--gold-600);">
+              <span>Learn More</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="px-4 lg:px-20 py-24 transition-colors" style="background-color: var(--bg-primary);">
+    <div class="container mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <span class="text-xs tracking-[0.3em] uppercase font-light mb-4 block" style="color: var(--text-secondary); letter-spacing: 0.3em;">Excellence in Numbers</span>
+        <h2 class="text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">A Legacy of Excellence</h2>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="flex flex-wrap justify-around gap-12">
+        {stats.map((stat) => (
+          <div class="flex flex-col items-center gap-2 min-w-[150px]">
+            <div class="text-5xl font-light" style="font-family: 'Cormorant Garamond', serif; color: var(--teal-600);">
+              {stat.number}
+            </div>
+            <div class="text-[13px] font-medium tracking-widest uppercase" style="color: var(--text-secondary); letter-spacing: 0.15em;">
+              {stat.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="px-4 lg:px-20 py-24 transition-colors" style="background-color: var(--bg-secondary);">
+    <div class="container mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <span class="text-xs tracking-[0.3em] uppercase font-light mb-4 block" style="color: var(--text-secondary); letter-spacing: 0.3em;">Testimonials</span>
+        <h2 class="text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">What Our Patients Say</h2>
+      </div>
+
+      <!-- Testimonials Grid -->
+      <div class="grid md:grid-cols-3 gap-6">
+        {testimonials.map((testimonial) => (
+          <div class="p-10 transition-all duration-300" style="background-color: var(--bg-primary); border: 1px solid var(--border-primary);">
+            <p class="text-lg italic mb-6 leading-relaxed" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary); line-height: 1.7;">
+              "{testimonial.quote}"
+            </p>
+            <div class="flex items-center gap-3">
+              <div class="h-px flex-1" style="background-color: var(--gold-500);"></div>
+              <span class="text-[13px] font-medium tracking-widest" style="color: var(--text-secondary); letter-spacing: 0.08em;">
+                {testimonial.author}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner Section -->
+  <section class="px-4 lg:px-20 py-20 flex items-center justify-center transition-colors" style="background-color: var(--teal-700);">
+    <div class="container mx-auto text-center max-w-3xl">
+      <h2 class="text-4xl lg:text-5xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">
+        Ready to Experience the Difference?
+      </h2>
+      <p class="text-base mb-10 leading-relaxed" style="color: var(--teal-400); line-height: 1.7; max-width: 560px; margin-left: auto; margin-right: auto;">
+        Book your consultation today and discover why discerning patients choose Aurum Dental.
+      </p>
+      <a
+        href="http://localhost:4200"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block px-10 py-4 text-white text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-90"
+        style="background-color: var(--gold-500); letter-spacing: 0.05em;"
+      >
+        Book Your Appointment
+      </a>
+    </div>
+  </section>
+</Layout>
