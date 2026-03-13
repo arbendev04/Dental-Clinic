@@ -1,51 +1,54 @@
 ---
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/servicios', label: 'Services' },
-  { href: '/nosotros', label: 'About' },
-  { href: '/contacto', label: 'Contact' },
+  { href: '/', label: 'Inicio' },
+  { href: '/servicios', label: 'Servicios' },
+  { href: '/nosotros', label: 'Nosotros' },
+  { href: '/contacto', label: 'Contacto' },
 ];
 
-const services = [
-  { name: 'Teeth Whitening', href: '/servicios#whitening' },
-  { name: 'Dental Implants', href: '/servicios#implants' },
-  { name: 'Orthodontics', href: '/servicios#orthodontics' },
-  { name: 'Cosmetic Dentistry', href: '/servicios#cosmetic' },
-];
-
-const quickLinks = [
-  { name: 'Book Appointment', href: 'http://localhost:4200' },
-  { name: 'Patient Portal', href: '/portal' },
-  { name: 'Insurance', href: '/insurance' },
-  { name: 'FAQs', href: '/faq' },
+const servicios = [
+  { href: '/servicios#blanqueamiento', label: 'Blanqueamiento Dental' },
+  { href: '/servicios#implantes', label: 'Implantes Dentales' },
+  { href: '/servicios#ortodoncia', label: 'Ortodoncia' },
+  { href: '/servicios#general', label: 'Odontología General' },
 ];
 ---
 
-<footer class="transition-colors duration-500" style="background-color: var(--teal-800); color: var(--text-secondary);">
-  <div class="container mx-auto px-4 lg:px-20 py-16">
-    <div class="flex flex-col md:flex-row justify-between gap-12 mb-12">
-      <!-- Logo y descripción -->
-      <div class="max-w-xs">
-        <a href="/" class="flex items-center gap-2.5 mb-4">
-          <svg class="w-6 h-6" style="color: var(--teal-600);" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2L2 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l8 4v5.32c0 4.52-3.13 8.78-8 9.82-4.87-1.04-8-5.3-8-9.82V8.18l8-4zM12 6.5l-5 2.5v4.5c0 3.36 2.33 6.51 5 7.28 2.67-.77 5-3.92 5-7.28V9l-5-2.5z"/>
-          </svg>
-          <span class="font-semibold tracking-[0.2em] text-[22px]" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">AURUM DENTAL</span>
+<footer style="background-color: var(--teal-800);">
+  <div class="container mx-auto px-4 lg:px-20 py-16 lg:py-20">
+    <!-- Top Row -->
+    <div class="flex flex-col lg:flex-row justify-between gap-12 lg:gap-20">
+      <!-- Brand Column -->
+      <div class="lg:max-w-xs">
+        <!-- Logo -->
+        <a href="/" class="block mb-4">
+          <img
+            src="/img/logo-blanco.png"
+            alt="Aurum Dental"
+            class="h-10 w-auto"
+          />
         </a>
-        <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
-          Where luxury meets exceptional dental care. Your smile deserves nothing less.
+        <!-- Tagline -->
+        <p class="text-sm leading-relaxed" style="color: #A0A0A0; line-height: 1.7;">
+          Donde el lujo se encuentra con el cuidado dental excepcional. Tu sonrisa merece lo mejor.
         </p>
       </div>
 
       <!-- Links Columns -->
-      <div class="flex flex-wrap md:flex-nowrap gap-12 md:gap-20">
-        <!-- Navigation -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-8 lg:gap-20">
+        <!-- Column 1: Clinic -->
         <div>
-          <h3 class="font-semibold mb-4 transition-colors duration-500" style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text-primary);">Navigation</h3>
-          <ul class="space-y-4">
+          <h3 class="text-[11px] font-semibold tracking-[0.2em] uppercase mb-4" style="color: var(--gold-500);">
+            Clínica
+          </h3>
+          <ul class="space-y-3">
             {navLinks.map((link) => (
               <li>
-                <a href={link.href} class="text-sm hover:opacity-60 transition-opacity duration-300" style="color: var(--text-tertiary);">
+                <a
+                  href={link.href}
+                  class="text-sm transition-colors duration-300 hover:text-white"
+                  style="color: #A0A0A0;"
+                >
                   {link.label}
                 </a>
               </li>
@@ -53,47 +56,134 @@ const quickLinks = [
           </ul>
         </div>
 
-        <!-- Services -->
+        <!-- Column 2: Services -->
         <div>
-          <h3 class="font-semibold mb-4 transition-colors duration-500" style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text-primary);">Services</h3>
-          <ul class="space-y-4">
-            {services.map((service) => (
+          <h3 class="text-[11px] font-semibold tracking-[0.2em] uppercase mb-4" style="color: var(--gold-500);">
+            Servicios
+          </h3>
+          <ul class="space-y-3">
+            {servicios.map((servicio) => (
               <li>
-                <a href={service.href} class="text-sm hover:opacity-60 transition-opacity duration-300" style="color: var(--text-tertiary);">
-                  {service.name}
+                <a
+                  href={servicio.href}
+                  class="text-sm transition-colors duration-300 hover:text-white"
+                  style="color: #A0A0A0;"
+                >
+                  {servicio.label}
                 </a>
               </li>
             ))}
           </ul>
         </div>
 
-        <!-- Quick Links -->
-        <div>
-          <h3 class="font-semibold mb-4 transition-colors duration-500" style="font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text-primary);">Quick Links</h3>
-          <ul class="space-y-4">
-            {quickLinks.map((link) => (
-              <li>
-                <a href={link.href} class="text-sm hover:opacity-60 transition-opacity duration-300" style="color: var(--text-tertiary);">
-                  {link.name}
-                </a>
-              </li>
-            ))}
+        <!-- Column 3: Contact -->
+        <div class="col-span-2 md:col-span-1">
+          <h3 class="text-[11px] font-semibold tracking-[0.2em] uppercase mb-4" style="color: var(--gold-500);">
+            Contacto
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <span class="text-sm" style="color: #A0A0A0;">Avd. Alfonso Puchades 22</span>
+            </li>
+            <li>
+              <span class="text-sm" style="color: #A0A0A0;">Benidorm, Alicante 03501</span>
+            </li>
+            <li>
+              <a
+                href="tel:+34965088282"
+                class="text-sm transition-colors duration-300 hover:text-white"
+                style="color: #A0A0A0;"
+              >
+                96 508 82 82
+              </a>
+            </li>
+            <li>
+              <a
+                href="mailto:Arangodentalclinic@gmail.com"
+                class="text-sm transition-colors duration-300 hover:text-white"
+                style="color: #A0A0A0;"
+              >
+                Arangodentalclinic@gmail.com
+              </a>
+            </li>
           </ul>
+
+          <!-- Social Links -->
+          <div class="flex items-center gap-4 mt-6">
+            <a
+              href="https://www.facebook.com/p/Arango-Dental-Clinic-61574405870200/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition-colors duration-300 hover:opacity-80"
+              style="color: #A0A0A0;"
+              aria-label="Facebook"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/arangodentalclinic/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition-colors duration-300 hover:opacity-80"
+              style="color: #A0A0A0;"
+              aria-label="Instagram"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <a
+              href="https://api.whatsapp.com/send?phone=34665886439&text=Hola%20quisiera%20mas%20informaci%C3%B3n"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition-colors duration-300 hover:opacity-80"
+              style="color: #A0A0A0;"
+              aria-label="WhatsApp"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Divider -->
-    <div class="h-px w-full transition-colors duration-500" style="background-color: var(--teal-700);"></div>
+    <div class="h-px mt-12 mb-8" style="background-color: #1A5C52;"></div>
 
-    <!-- Bottom Section -->
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-12">
-      <p class="text-[13px] transition-colors duration-500" style="color: var(--text-tertiary);">
-        © {new Date().getFullYear()} Aurum Dental. All rights reserved.
+    <!-- Bottom Row -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <!-- Copyright -->
+      <p class="text-[13px]" style="color: #6E6E6E;">
+        © {new Date().getFullYear()} Aurum Dental. Todos los derechos reservados.
       </p>
-      <div class="flex items-center gap-6">
-        <a href="/politica-privacidad" class="text-[13px] hover:opacity-60 transition-opacity duration-300" style="color: var(--text-tertiary);">Privacy Policy</a>
-        <a href="/terminos-condiciones" class="text-[13px] hover:opacity-60 transition-opacity duration-300" style="color: var(--text-tertiary);">Terms of Service</a>
+
+      <!-- Legal Links -->
+      <div class="flex flex-wrap justify-center gap-6">
+        <a
+          href="/politica-privacidad"
+          class="text-[13px] transition-colors duration-300 hover:text-white"
+          style="color: #6E6E6E;"
+        >
+          Política de Privacidad
+        </a>
+        <a
+          href="/terminos-condiciones"
+          class="text-[13px] transition-colors duration-300 hover:text-white"
+          style="color: #6E6E6E;"
+        >
+          Términos y Condiciones
+        </a>
+        <a
+          href="/aviso-legal"
+          class="text-[13px] transition-colors duration-300 hover:text-white"
+          style="color: #6E6E6E;"
+        >
+          Aviso Legal
+        </a>
       </div>
     </div>
   </div>

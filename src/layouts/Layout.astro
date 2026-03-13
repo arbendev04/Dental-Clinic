@@ -6,9 +6,100 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = 'Clínica Odontológica - Servicios dentales profesionales' } = Astro.props;
+const {
+  title,
+  description = 'Aurum Dental - Clínica odontológica de alta gama en Benidorm. Blanqueamiento dental, implantes, ortodoncia y más. Tu sonrisa merece excelencia.',
+  image = '/img/og-image.jpg'
+} = Astro.props;
+
+const siteUrl = 'https://aurumdental.es';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const fullTitle = `${title} | Aurum Dental`;
+
+// Schema.org structured data for Dentist
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  "name": "Aurum Dental",
+  "alternateName": "Arango Dental Clinic",
+  "description": "Clínica odontológica de alta gama especializada en blanqueamiento dental, implantes, ortodoncia y odontología estética.",
+  "url": siteUrl,
+  "logo": `${siteUrl}/img/logo-oscuro.png`,
+  "image": `${siteUrl}/img/hero-dental.jpg`,
+  "telephone": "+34 965 088 282",
+  "email": "Arangodentalclinic@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Avd. Alfonso Puchades 22",
+    "addressLocality": "Benidorm",
+    "addressRegion": "Alicante",
+    "postalCode": "03501",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "38.5411",
+    "longitude": "-0.1225"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "19:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "09:00",
+      "closes": "14:00"
+    }
+  ],
+  "priceRange": "€€€",
+  "paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
+  "currenciesAccepted": "EUR",
+  "sameAs": [
+    "https://www.facebook.com/p/Arango-Dental-Clinic-61574405870200/",
+    "https://www.instagram.com/arangodentalclinic/"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios Dentales",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Blanqueamiento Dental"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Implantes Dentales"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Ortodoncia"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Odontología Estética"
+        }
+      }
+    ]
+  }
+};
 ---
 
 <!doctype html>
@@ -16,9 +107,46 @@ const { title, description = 'Clínica Odontológica - Servicios dentales profes
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO básico -->
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title} | DentalCare</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${image}`} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Aurum Dental" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${image}`} />
+
+    <!-- Otros meta tags útiles -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Aurum Dental" />
+    <meta name="theme-color" content="#1A7A6E" />
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+    <!-- Dark mode detection -->
     <script is:inline>
       const theme = localStorage.getItem('theme');
       if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -27,8 +155,17 @@ const { title, description = 'Clínica Odontológica - Servicios dentales profes
     </script>
   </head>
   <body class="min-h-screen flex flex-col transition-colors" style="background-color: var(--bg-primary); color: var(--text-primary);">
+    <!-- Skip to main content (Accesibilidad) -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:text-white focus:outline-none"
+      style="background-color: var(--teal-600);"
+    >
+      Saltar al contenido principal
+    </a>
+
     <Navbar />
-    <main class="grow">
+    <main id="main-content" class="grow">
       <slot />
     </main>
     <Footer />

@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
-@custom-variant dark (&:where(.dark, .dark *));
 
 /* Design System Variables */
 :root {
@@ -42,33 +39,33 @@
 
 .dark {
   /* Dark Mode Colors */
-  --bg-primary: #141414;
-  --bg-secondary: #1C1C1C;
+  --bg-primary: #121212;
+  --bg-secondary: #1A1A1A;
   --bg-tertiary: #242424;
   --border-primary: #2E2E2E;
   --border-secondary: #3A3A3A;
 
   /* Teal Scale - Dark Mode */
-  --teal-100: #0A2E2A;
-  --teal-200: #0F3D37;
-  --teal-300: #1A5C52;
-  --teal-400: #267A6E;
-  --teal-500: #3A9E90;
-  --teal-600: #4DB6A8;
-  --teal-700: #80CBC1;
-  --teal-800: #B3E0DA;
-  --teal-900: #E6F5F3;
+  --teal-100: #ecf0f3;
+  --teal-200: #d8e0e7;
+  --teal-300: #c5d1dc;
+  --teal-400: #b1c2d0;
+  --teal-500: #9eb3c4;
+  --teal-600: #7794ac;
+  --teal-700: #6485a1;
+  --teal-800: #507595;
+  --teal-900: #3d6689;
 
   /* Gold Scale - Dark Mode */
-  --gold-100: #2A2210;
-  --gold-200: #3D3218;
-  --gold-300: #5C4B24;
-  --gold-400: #8B7038;
+  --gold-100: #726154;
+  --gold-200: #887465;
+  --gold-300: #9f8876 ;
+  --gold-400: #b69b86;
   --gold-500: #C9A44A;
-  --gold-600: #D4B565;
-  --gold-700: #E0C882;
-  --gold-800: #ECD9A0;
-  --gold-900: #F5EACC;
+  --gold-600: #ebd4c2;
+  --gold-700: #e9ceb9;
+  --gold-800: #e6c8b1;
+  --gold-900: #e3c2a8;
 
   /* Text Colors - Dark Mode */
   --text-primary: #F5F5F0;
@@ -97,5 +94,95 @@ h1, h2, h3, h4, h5, h6 {
 
   .hero-section {
     background: linear-gradient(135deg, var(--teal-600) 0%, var(--teal-800) 100%);
+  }
+}
+
+/* ==========================================
+   Navbar Styles
+   ========================================== */
+
+.nav-item:hover .nav-icon {
+  color: var(--teal-600) !important;
+}
+
+.nav-item:hover .nav-label {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ==========================================
+   Accessibility Styles
+   ========================================== */
+
+/* Screen reader only - visually hidden but accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus visible styles for better keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--teal-500);
+  outline-offset: 2px;
+}
+
+/* Remove default focus outline when using mouse */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Enhanced focus for dark mode */
+.dark a:focus-visible,
+.dark button:focus-visible,
+.dark input:focus-visible,
+.dark textarea:focus-visible,
+.dark select:focus-visible,
+.dark [tabindex]:focus-visible {
+  outline-color: var(--gold-500);
+}
+
+/* Skip link becomes visible on focus */
+.sr-only:focus,
+.sr-only:focus-visible {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1.5rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: nowrap;
+}
+
+/* Smooth scrolling with reduced motion preference */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border-primary: #1A1A1A;
+    --border-secondary: #1A1A1A;
+  }
+
+  .dark {
+    --border-primary: #F5F5F0;
+    --border-secondary: #F5F5F0;
   }
 }

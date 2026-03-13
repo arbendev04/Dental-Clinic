@@ -1,0 +1,12 @@
+# Robots.txt para Aurum Dental
+# https://aurumdental.es
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://aurumdental.es/sitemap.xml
+
+# Bloquear recursos innecesarios para crawlers
+Disallow: /api/
+Disallow: /_astro/

@@ -1,5 +1,41 @@
-node_modules
-.claude
-design.pen
-pencil-welcome.pen
+# ─── Dependencias ─────────────────────────────────────
+node_modules/
 
+# ─── Build output ─────────────────────────────────────
+dist/
+.astro/
+
+# ─── Variables de entorno ─────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ─── Herramientas de desarrollo ───────────────────────
+.claude/
+.agents/
+skills-lock.json
+
+# ─── Archivos de diseño (Pencil / Stitch) ─────────────
+*.pen
+
+# ─── Documentación interna ────────────────────────────
+claude.md
+CLAUDE.md
+
+# ─── Multimedia pesada ────────────────────────────────
+# Vídeos: no versionar binarios grandes
+public/video/
+
+# Imágenes del hero (webp pesados, se gestionan aparte)
+public/img/hero/
+
+# ─── Caché y temporales ───────────────────────────────
+.cache/
+.temp/
+*.log
+*.tsbuildinfo
+
+# ─── Sistema operativo ────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini

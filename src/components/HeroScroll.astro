@@ -1,0 +1,487 @@
+---
+// Componente de hero con scroll-driven crossfade entre 4 frames
+// Estilo visual basado en diseño Stitch: viñeta cinemática, overlay oscuro, CTA
+---
+
+<div class="hero-scroll-wrapper">
+  <div class="hero-scroll-inner">
+    <!-- Frames apilados -->
+    <img
+      id="hero-frame1"
+      class="hero-frame"
+      src="/img/hero/frame1.webp"
+      alt="Arango Dental Clinic"
+      style="opacity: 1;"
+    />
+    <img
+      id="hero-frame2"
+      class="hero-frame"
+      src="/img/hero/frame2.webp"
+      alt="Arango Dental Clinic"
+      style="opacity: 0;"
+    />
+    <img
+      id="hero-frame3"
+      class="hero-frame"
+      src="/img/hero/frame3.webp"
+      alt="Arango Dental Clinic"
+      style="opacity: 0;"
+    />
+    <img
+      id="hero-frame4"
+      class="hero-frame"
+      src="/img/hero/frame4.webp"
+      alt="Arango Dental Clinic"
+      style="opacity: 0;"
+    />
+
+    <!-- Overlay oscuro base -->
+    <div class="hero-overlay"></div>
+
+    <!-- Viñeta cinemática -->
+    <div class="hero-vignette"></div>
+
+    <!-- Grain overlay -->
+    <div class="hero-grain"></div>
+
+    <!-- Contenido principal (aparece con frame4) -->
+    <div class="hero-content" id="hero-content">
+      <!-- Label superior -->
+      <div class="hero-label" id="hero-label">
+        <span>BENIDORM</span>
+        <div class="hero-label-dot"></div>
+        <span>PREMIUM DENTAL CARE</span>
+      </div>
+
+      <!-- Título principal -->
+      <h1 class="hero-title">
+        <span class="hero-chars" id="hero-chars">Arango Dental Clinic</span>
+      </h1>
+
+      <!-- Descripción -->
+      <p class="hero-description" id="hero-description">
+        Excelencia en cuidado dental. Tecnología avanzada y<br />
+        atención personalizada para tu sonrisa perfecta.
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-ctas" id="hero-ctas">
+        <a href="/reservar" class="hero-btn-primary"> Reservar Cita </a>
+        <a href="/servicios" class="hero-btn-secondary">
+          <span>Nuestros Servicios</span>
+          <svg
+            class="hero-btn-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Indicador de scroll -->
+    <div class="scroll-indicator" id="scroll-indicator">
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-scroll-wrapper {
+    height: 400vh;
+  }
+
+  .hero-scroll-inner {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* --- Frames --- */
+  .hero-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: opacity, transform;
+    transform-origin: center center;
+  }
+
+  /* --- Overlay oscuro base --- */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(10, 10, 10, 0.45);
+    z-index: 5;
+  }
+
+  /* --- Viñeta cinemática (estilo Stitch) --- */
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0) 30%,
+      rgba(10, 10, 10, 0.75) 100%
+    );
+    z-index: 6;
+    pointer-events: none;
+  }
+
+  /* --- Grain overlay --- */
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 7;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 300px 300px;
+  }
+
+  /* --- Contenido principal --- */
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 6%;
+    transform: translateY(-50%);
+    z-index: 20;
+    max-width: 680px;
+  }
+
+  /* Label superior */
+  .hero-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+
+  .hero-label span {
+    font-family: "DM Sans", "Inter", sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+  }
+
+  .hero-label-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.35);
+  }
+
+  /* Título principal */
+  .hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 1.05;
+    margin: 0 0 1.5rem 0;
+    overflow: hidden;
+  }
+
+  /* Cada char se anima individualmente */
+  .hero-char {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+
+  /* Descripción */
+  .hero-description {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 2.5rem 0;
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+
+  /* CTAs */
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+
+  .hero-btn-primary {
+    display: inline-block;
+    padding: 0.875rem 2.25rem;
+    background-color: #ffffff;
+    color: #0a0a0a;
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .hero-btn-primary:hover {
+    background-color: #e5e7eb;
+    transform: translateY(-2px);
+  }
+
+  .hero-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.65);
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .hero-btn-secondary:hover {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .hero-btn-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-btn-secondary:hover .hero-btn-icon {
+    transform: translateX(4px);
+  }
+
+  /* --- Indicador de scroll --- */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 6%;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.35);
+    transform-origin: top center;
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%,
+    100% {
+      opacity: 0.2;
+      transform: scaleY(0.6);
+    }
+    50% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const wrapper = document.querySelector(".hero-scroll-wrapper") as HTMLElement;
+  const frameEls = [1, 2, 3, 4].map(
+    (n) => document.querySelector(`#hero-frame${n}`) as HTMLElement,
+  );
+
+  // quickSetters: forma más eficiente de actualizar opacity/scale en GSAP
+  const setOpacity = frameEls.map((el) => gsap.quickSetter(el, "opacity"));
+  const setScale = frameEls.map((el) => gsap.quickSetter(el, "scale"));
+
+  // Estado inicial: Ken Burns alternado (par=zoom-out, impar=zoom-in)
+  [1.0, 1.07, 1.0, 1.07].forEach((s, i) => {
+    gsap.set(frameEls[i], { opacity: i === 0 ? 1 : 0, scale: s });
+  });
+
+  // Ventanas de transición (fracción 0-1 del progreso del wrapper).
+  // Formato: [fadeInStart, fullVisible, fadeOutStart, fullyGone]
+  // Las ventanas se solapan ~13% para un crossfade suave y largo.
+  const wins = [
+    [0, 0, 0.24, 0.4],
+    [0.24, 0.37, 0.5, 0.63],
+    [0.5, 0.63, 0.76, 0.87],
+    [0.76, 0.87, 1.0, 1.0],
+  ];
+
+  // Ken Burns: [scaleInicio, scaleFin] para cada frame
+  const kb = [
+    [1.0, 1.07],
+    [1.07, 1.0],
+    [1.0, 1.07],
+    [1.07, 1.0],
+  ];
+
+  const remap = gsap.utils.mapRange;
+  const clamp = gsap.utils.clamp(0, 1);
+
+  ScrollTrigger.create({
+    trigger: wrapper,
+    start: "top top",
+    end: "bottom bottom",
+    scrub: 2,
+    onUpdate(self) {
+      const p = self.progress;
+      const last = frameEls.length - 1;
+
+      for (let i = 0; i <= last; i++) {
+        const [fi, fp, fo, fg] = wins[i];
+        const [ks, ke] = kb[i];
+
+        // Opacidad según posición en la ventana
+        let opacity: number;
+        if (i === 0) {
+          opacity = p < fo ? 1 : p < fg ? remap(fo, fg, 1, 0, p) : 0;
+        } else if (i === last) {
+          opacity = p < fi ? 0 : p < fp ? remap(fi, fp, 0, 1, p) : 1;
+        } else {
+          if (p < fi) opacity = 0;
+          else if (p < fp) opacity = remap(fi, fp, 0, 1, p);
+          else if (p < fo) opacity = 1;
+          else if (p < fg) opacity = remap(fo, fg, 1, 0, p);
+          else opacity = 0;
+        }
+
+        // Ken Burns: progreso dentro de la vida activa del frame
+        const lifeStart = i === 0 ? 0 : fi;
+        const lifeEnd = i === last ? 1 : fg;
+        const lifeP =
+          lifeEnd > lifeStart
+            ? clamp((p - lifeStart) / (lifeEnd - lifeStart))
+            : 0;
+        const scale = ks + (ke - ks) * lifeP;
+
+        setOpacity[i](opacity);
+        setScale[i](scale);
+      }
+    },
+  });
+
+  // --- Split por caracteres para el título ---
+  const charsContainer = document.getElementById("hero-chars") as HTMLElement;
+  const text = charsContainer.textContent || "";
+  charsContainer.textContent = "";
+
+  text.split("").forEach((char) => {
+    const span = document.createElement("span");
+    span.classList.add("hero-char");
+    span.textContent = char === " " ? "\u00A0" : char;
+    charsContainer.appendChild(span);
+  });
+
+  const chars = charsContainer.querySelectorAll(".hero-char");
+  const label = document.getElementById("hero-label") as HTMLElement;
+  const description = document.getElementById(
+    "hero-description",
+  ) as HTMLElement;
+  const ctas = document.getElementById("hero-ctas") as HTMLElement;
+
+  // Estado inicial
+  gsap.set(chars, { y: 60, opacity: 0 });
+  gsap.set(label, { y: -16, opacity: 0 });
+  gsap.set(description, { y: 20, opacity: 0 });
+  gsap.set(ctas, { y: 20, opacity: 0 });
+
+  // Animar cuando aparece frame4 (75% del scroll total)
+  const titleTriggerStart = 0.75 * 4 * window.innerHeight - window.innerHeight;
+
+  ScrollTrigger.create({
+    trigger: wrapper,
+    start: `top+=${titleTriggerStart} top`,
+    onEnter: () => {
+      const tl = gsap.timeline();
+
+      // Label entra desde arriba
+      tl.to(label, {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: "power3.out",
+      });
+
+      // Caracteres del título en cascada
+      tl.to(
+        chars,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.03,
+        },
+        "-=0.3",
+      );
+
+      // Descripción
+      tl.to(
+        description,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=0.4",
+      );
+
+      // CTAs
+      tl.to(
+        ctas,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power2.out",
+        },
+        "-=0.5",
+      );
+    },
+    once: true,
+  });
+
+  // --- Ocultar indicador de scroll al hacer scroll ---
+  const scrollIndicator = document.getElementById(
+    "scroll-indicator",
+  ) as HTMLElement;
+
+  ScrollTrigger.create({
+    trigger: wrapper,
+    start: "top+=100 top",
+    onEnter: () => {
+      gsap.to(scrollIndicator, {
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+    },
+    onLeaveBack: () => {
+      gsap.to(scrollIndicator, { opacity: 1, duration: 0.4 });
+    },
+  });
+</script>

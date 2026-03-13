@@ -1,155 +1,571 @@
 ---
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/servicios', label: 'Services' },
-  { href: '/nosotros', label: 'About' },
-  { href: '/contacto', label: 'Contact' },
+  { href: "/",          label: "Inicio"    },
+  { href: "/servicios", label: "Servicios" },
+  { href: "/nosotros",  label: "Nosotros"  },
+  { href: "/contacto",  label: "Contacto"  },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 transition-colors" style="background-color: var(--bg-primary);">
-  <nav class="container mx-auto px-4 lg:px-20">
-    <div class="flex items-center justify-between h-20">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-2.5">
-        <svg class="w-6 h-6" style="color: var(--teal-600);" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2L2 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l8 4v5.32c0 4.52-3.13 8.78-8 9.82-4.87-1.04-8-5.3-8-9.82V8.18l8-4zM12 6.5l-5 2.5v4.5c0 3.36 2.33 6.51 5 7.28 2.67-.77 5-3.92 5-7.28V9l-5-2.5z"/>
-        </svg>
-        <span class="font-semibold tracking-[0.2em] text-[22px]" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">AURUM DENTAL</span>
+<!-- Navbar principal -->
+<header id="navbar" class="navbar">
+  <div class="navbar-inner">
+
+    <!-- Logo -->
+    <a href="/" class="navbar-logo" aria-label="Arango Dental Clinic — Inicio">
+      <img src="/img/logo/logo-blanco.png" alt="Arango Dental Clinic" />
+    </a>
+
+    <!-- Links centrados (desktop) -->
+    <nav class="navbar-nav" aria-label="Navegación principal">
+      <!-- Indicador deslizante -->
+      <span class="nav-indicator" id="nav-indicator" aria-hidden="true"></span>
+
+      <ul class="navbar-links">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class={`navbar-link ${currentPath === link.href ? "is-active" : ""}`}
+              aria-label={link.label}
+            >
+              <!-- Texto visible por defecto -->
+              <span class="link-default" aria-hidden="true">{link.label}</span>
+              <!-- Copia que sube al hacer hover -->
+              <span class="link-hover" aria-hidden="true">{link.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Derecha: CTA + hamburger -->
+    <div class="navbar-right">
+      <a href="/reservar" class="navbar-cta">
+        <span class="link-default" aria-hidden="true">Reservar</span>
+        <span class="link-hover" aria-hidden="true">Reservar</span>
       </a>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-12">
-        {navLinks.map((link) => (
-          <a
-            href={link.href}
-            class="text-sm font-normal transition-colors duration-300 hover:opacity-60"
-            style={currentPath === link.href ? 'color: var(--text-primary);' : 'color: var(--text-secondary);'}
-          >
-            {link.label}
-          </a>
-        ))}
-
-        <!-- Theme Toggle -->
-        <button
-          id="theme-toggle"
-          class="p-2 rounded-lg transition-colors hover:opacity-60"
-          style="background-color: var(--bg-secondary); color: var(--text-secondary);"
-          aria-label="Cambiar tema"
-        >
-          <!-- Sun icon (dark mode) -->
-          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-          <!-- Moon icon (light mode) -->
-          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-        </button>
-
-        <a
-          href="http://localhost:4200"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="px-10 py-4 text-white text-[13px] font-medium tracking-wider transition-all duration-300 hover:opacity-90"
-          style="background-color: var(--teal-600); letter-spacing: 0.05em;"
-        >
-          Book Now
-        </a>
-      </div>
-
-      <!-- Mobile buttons -->
-      <div class="flex items-center gap-2 md:hidden">
-        <!-- Theme Toggle Mobile -->
-        <button
-          id="theme-toggle-mobile"
-          class="p-2 rounded-lg transition-colors hover:opacity-60"
-          style="background-color: var(--bg-secondary); color: var(--text-secondary);"
-          aria-label="Cambiar tema"
-        >
-          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-        </button>
-
-        <!-- Mobile Menu Button -->
-        <button
-          id="mobile-menu-btn"
-          class="p-2 hover:opacity-60 transition-opacity"
-          style="color: var(--text-secondary);"
-          aria-label="Abrir menú"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
+      <button
+        id="nav-open"
+        class="navbar-hamburger"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <span class="bar bar-top"></span>
+        <span class="bar bar-bottom"></span>
+      </button>
     </div>
 
-    <!-- Mobile Navigation -->
-    <div id="mobile-menu" class="hidden md:hidden pb-4">
-      <div class="flex flex-col gap-2">
-        {navLinks.map((link) => (
-          <a
-            href={link.href}
-            class="px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-300 hover:opacity-60"
-            style={currentPath === link.href
-              ? 'background-color: var(--teal-100); color: var(--teal-600);'
-              : 'color: var(--text-secondary);'}
-          >
-            {link.label}
-          </a>
-        ))}
-        <a
-          href="http://localhost:4200"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-white px-3 py-2 text-sm font-medium transition-all duration-300 hover:opacity-90 text-center mt-2"
-          style="background-color: var(--teal-600);"
-        >
-          Book Now
-        </a>
-      </div>
-    </div>
-  </nav>
+  </div>
 </header>
 
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', function() {
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+<!-- Overlay mobile -->
+<div
+  id="nav-overlay"
+  class="nav-overlay"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+>
+  <!-- Botón cerrar -->
+  <button id="nav-close" class="nav-overlay-close" aria-label="Cerrar menú">
+    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
 
-    if (menuBtn && mobileMenu) {
-      menuBtn.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
-      });
+  <!-- Label -->
+  <span class="nav-overlay-label">MENÚ</span>
+
+  <!-- Links grandes -->
+  <nav aria-label="Navegación móvil">
+    <ul class="nav-overlay-links">
+      {navLinks.map((link, i) => (
+        <li style={`--i: ${i}`}>
+          <a href={link.href} class="nav-overlay-link">{link.label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- CTA mobile -->
+  <a href="/reservar" class="nav-overlay-cta">
+    <span>Reservar Cita</span>
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
+  </a>
+
+  <!-- Grain overlay -->
+  <div class="nav-overlay-grain" aria-hidden="true"></div>
+</div>
+
+<style>
+  /* =============================================
+     NAVBAR BASE
+     ============================================= */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: background-color 0.6s ease, backdrop-filter 0.6s ease;
+  }
+
+  .navbar.is-scrolled {
+    background-color: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    height: 5rem;
+  }
+
+  /* =============================================
+     LOGO
+     ============================================= */
+  .navbar-logo {
+    overflow: hidden;
+    display: block;
+    /* Entrada al cargar */
+    opacity: 0;
+    transform: translateY(-8px);
+    animation: navFadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+  }
+
+  .navbar-logo img {
+    height: 3.25rem;
+    width: auto;
+    display: block;
+    transition: opacity 0.35s ease;
+  }
+
+  .navbar-logo:hover img {
+    opacity: 0.65;
+  }
+
+  /* =============================================
+     NAV CONTAINER + INDICADOR
+     ============================================= */
+  .navbar-nav {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @media (min-width: 768px) {
+    .navbar-nav {
+      display: block;
+    }
+  }
+
+  /* Línea indicadora que se desliza bajo el link activo/hover */
+  .nav-indicator {
+    position: absolute;
+    bottom: -2px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.55);
+    transition: left 0.4s cubic-bezier(0.76, 0, 0.24, 1),
+                width 0.4s cubic-bezier(0.76, 0, 0.24, 1),
+                opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* =============================================
+     LINKS DESKTOP
+     ============================================= */
+  .navbar-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+  }
+
+  .navbar-links li {
+    /* Entrada escalonada al cargar */
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: navFadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .navbar-links li:nth-child(1) { animation-delay: 0.15s; }
+  .navbar-links li:nth-child(2) { animation-delay: 0.22s; }
+  .navbar-links li:nth-child(3) { animation-delay: 0.29s; }
+  .navbar-links li:nth-child(4) { animation-delay: 0.36s; }
+
+  @keyframes navFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Link: overflow hidden para el text-flip */
+  .navbar-link {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 1.1em;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Texto visible por defecto */
+  .link-default {
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    transform: translateY(0);
+    transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1),
+                color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  /* Copia que entra desde abajo al hacer hover */
+  .link-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.95);
+    transform: translateY(110%);
+    transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+    white-space: nowrap;
+  }
+
+  /* Al hover: default sube y sale, hover sube y entra */
+  .navbar-link:hover .link-default,
+  .navbar-link.is-active .link-default {
+    transform: translateY(-110%);
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .navbar-link:hover .link-hover,
+  .navbar-link.is-active .link-hover {
+    transform: translateY(0);
+  }
+
+  /* =============================================
+     DERECHA: CTA + HAMBURGER
+     ============================================= */
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    /* Entrada al cargar */
+    opacity: 0;
+    transform: translateY(-8px);
+    animation: navFadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.42s forwards;
+  }
+
+  /* CTA: mismo efecto text-flip */
+  .navbar-cta {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    height: 1.1em;
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.6rem 1.5rem;
+    background-color: #ffffff;
+    /* Necesario para que el overflow:hidden del flip funcione con padding */
+    height: auto;
+    overflow: hidden;
+  }
+
+  .navbar-cta .link-default {
+    color: rgba(10, 10, 10, 0.85);
+    display: block;
+  }
+
+  .navbar-cta .link-hover {
+    color: rgba(10, 10, 10, 1);
+    display: block;
+  }
+
+  .navbar-cta:hover .link-default {
+    transform: translateY(-110%);
+  }
+
+  .navbar-cta:hover .link-hover {
+    transform: translateY(0);
+  }
+
+  @media (min-width: 768px) {
+    .navbar-cta {
+      display: inline-block;
+    }
+  }
+
+  /* Hamburger */
+  .navbar-hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .bar {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.75);
+    transition: transform 0.4s ease, opacity 0.3s ease, width 0.3s ease;
+    transform-origin: center;
+  }
+
+  .bar-bottom {
+    width: 14px;
+    transition: width 0.3s ease, transform 0.4s ease;
+  }
+
+  .navbar-hamburger:hover .bar-bottom {
+    width: 22px;
+  }
+
+  /* =============================================
+     OVERLAY MOBILE
+     ============================================= */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background-color: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 2.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0.45s ease;
+  }
+
+  .nav-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-overlay-grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+  }
+
+  .nav-overlay-close {
+    position: absolute;
+    top: 1.75rem;
+    right: 2.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 0.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    z-index: 1;
+  }
+
+  .nav-overlay-close:hover {
+    color: #ffffff;
+    transform: rotate(90deg);
+  }
+
+  .nav-overlay-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.2);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: block;
+  }
+
+  .nav-overlay-links {
+    list-style: none;
+    margin: 0 0 3rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-overlay-links li {
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .nav-overlay-links li:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .nav-overlay-link {
+    display: block;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    line-height: 1.1;
+    transition: color 0.3s ease, padding-left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .nav-overlay-link:hover {
+    color: #ffffff;
+    padding-left: 1rem;
+  }
+
+  /* Entrada escalonada de los links del overlay */
+  .nav-overlay.is-open .nav-overlay-links li {
+    animation: slideInLink 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(0.08s + var(--i) * 0.08s);
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  @keyframes slideInLink {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .nav-overlay-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(10, 10, 10, 0.9);
+    background-color: #ffffff;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+  }
+
+  .nav-overlay-cta:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const navbar    = document.getElementById("navbar");
+    const overlay   = document.getElementById("nav-overlay");
+    const btnOpen   = document.getElementById("nav-open");
+    const btnClose  = document.getElementById("nav-close");
+    const indicator = document.getElementById("nav-indicator");
+    const navLinks  = document.querySelectorAll(".navbar-link");
+
+    // =============================================
+    // SCROLL: fondo oscuro al salir del hero
+    // =============================================
+    const hero = document.querySelector(".hero-scroll-wrapper");
+
+    function onScroll() {
+      const threshold = hero ? hero.offsetHeight - window.innerHeight : 60;
+      navbar.classList.toggle("is-scrolled", window.scrollY > threshold);
     }
 
-    function toggleTheme() {
-      const html = document.documentElement;
-      const isDark = html.classList.contains('dark');
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
 
-      if (isDark) {
-        html.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
+    // =============================================
+    // INDICADOR DESLIZANTE
+    // =============================================
+    const nav = navbar.querySelector(".navbar-nav");
+
+    function moveIndicator(el) {
+      if (!el || !nav) return;
+      const navRect  = nav.getBoundingClientRect();
+      const linkRect = el.getBoundingClientRect();
+      indicator.style.left    = (linkRect.left - navRect.left) + "px";
+      indicator.style.width   = linkRect.width + "px";
+      indicator.style.opacity = "1";
+    }
+
+    function resetIndicator() {
+      // Vuelve al link activo si existe
+      const active = navbar.querySelector(".navbar-link.is-active");
+      if (active) {
+        moveIndicator(active);
       } else {
-        html.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
+        indicator.style.opacity = "0";
       }
     }
 
-    if (themeToggle) {
-      themeToggle.addEventListener('click', toggleTheme);
+    navLinks.forEach(function (link) {
+      link.addEventListener("mouseenter", function () { moveIndicator(link); });
+    });
+
+    navbar.querySelector(".navbar-links")?.addEventListener("mouseleave", resetIndicator);
+
+    // Posicionar en el activo al cargar
+    resetIndicator();
+
+    // =============================================
+    // OVERLAY MOBILE
+    // =============================================
+    function openMenu() {
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      btnOpen.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
     }
-    if (themeToggleMobile) {
-      themeToggleMobile.addEventListener('click', toggleTheme);
+
+    function closeMenu() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      btnOpen.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
     }
-  });
+
+    btnOpen.addEventListener("click", openMenu);
+    btnClose.addEventListener("click", closeMenu);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    overlay.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeMenu);
+    });
+  })();
 </script>
