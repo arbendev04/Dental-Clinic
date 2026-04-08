@@ -1,40 +1,40 @@
 @import "tailwindcss";
 
-/* Design System Variables — Mediterranean Prestige */
+/* Design System Variables — Clinical Atelier (Stitch: Luxury Dental) */
 :root {
-  /* Light Mode — Warm Ivory */
-  --bg-primary: #FEFCF9;
-  --bg-secondary: #F8F5EE;
-  --bg-tertiary: #F1EDE3;
-  --border-primary: #DDD8CC;
-  --border-secondary: #C9C2B4;
+  /* Light Mode — Warm Linen */
+  --bg-primary: #fcf9f8;       /* Stitch: surface */
+  --bg-secondary: #f6f3f2;     /* Stitch: surface_container_low */
+  --bg-tertiary: #f0eded;      /* Stitch: surface_container */
+  --border-primary: #c1c8c3;   /* Stitch: outline_variant */
+  --border-secondary: #727974; /* Stitch: outline */
 
-  /* Teal Scale — Deep Jewel */
-  --teal-100: #E3F2EE;
-  --teal-200: #B8DDD5;
-  --teal-300: #83C3B7;
-  --teal-400: #4BA89A;
-  --teal-500: #1A8070;
-  --teal-600: #13685A;
-  --teal-700: #0D5044;
-  --teal-800: #083A30;
-  --teal-900: #04221C;
+  /* Forest Green Scale — reemplaza teal, mantiene nombres para compatibilidad */
+  --teal-100: #e8f4ef;
+  --teal-200: #c8eada;         /* Stitch: primary_fixed */
+  --teal-300: #adcebe;         /* Stitch: primary_fixed_dim */
+  --teal-400: #98b9a9;         /* Stitch: on_primary_container */
+  --teal-500: #466558;         /* Stitch: surface_tint — acento visible sobre claro */
+  --teal-600: #2f4d41;         /* Stitch: on_primary_fixed_variant — hover/texto */
+  --teal-700: #153328;         /* Stitch: primary — botones CTA */
+  --teal-800: #0d2219;
+  --teal-900: #061109;
 
-  /* Gold Scale — Warm Champagne */
-  --gold-100: #FBF4E5;
-  --gold-200: #F3E4BC;
-  --gold-300: #E9CF89;
-  --gold-400: #DCB755;
-  --gold-500: #C49B38;
-  --gold-600: #A47E2E;
-  --gold-700: #836225;
-  --gold-800: #62481B;
-  --gold-900: #402E10;
+  /* Gold Scale — Brushed Amber (Stitch: secondary) */
+  --gold-100: #fff8e7;
+  --gold-200: #ffdc8e;         /* Stitch: secondary_container */
+  --gold-300: #ffdf9b;         /* Stitch: secondary_fixed */
+  --gold-400: #e4c278;         /* Stitch: secondary_fixed_dim */
+  --gold-500: #C49B38;         /* acento dorado principal */
+  --gold-600: #A47E2E;         /* dorado hover */
+  --gold-700: #745b1b;         /* Stitch: secondary */
+  --gold-800: #5a4302;         /* Stitch: on_secondary_fixed_variant */
+  --gold-900: #251a00;         /* Stitch: on_secondary_fixed */
 
-  /* Text — Warm Blacks */
-  --text-primary: #1A1714;
-  --text-secondary: #4A4540;
-  --text-tertiary: #7A736A;
+  /* Text — Soft Editorial Blacks (Stitch: on_surface / on_surface_variant) */
+  --text-primary: #1c1b1b;     /* Stitch: on_surface */
+  --text-secondary: #414845;   /* Stitch: on_surface_variant */
+  --text-tertiary: #727974;    /* Stitch: outline */
 }
 
 .dark {
@@ -45,16 +45,16 @@
   --border-primary: #302B23;
   --border-secondary: #3D3830;
 
-  /* Teal Scale — Luminous, conserva la identidad */
-  --teal-100: #0D3D34;
-  --teal-200: #135044;
-  --teal-300: #1A6657;
-  --teal-400: #228070;
-  --teal-500: #2A9A87;
-  --teal-600: #4CB8A6;
-  --teal-700: #72CBBA;
-  --teal-800: #9ADDD0;
-  --teal-900: #C2EEE7;
+  /* Forest Green Scale — luminoso sobre oscuro */
+  --teal-100: #0a1f16;
+  --teal-200: #122b1f;
+  --teal-300: #1d3d2d;
+  --teal-400: #2c4a3e;         /* Stitch: primary_container */
+  --teal-500: #466558;         /* Stitch: surface_tint */
+  --teal-600: #98b9a9;         /* Stitch: on_primary_container — texto sobre oscuro */
+  --teal-700: #adcebe;         /* Stitch: primary_fixed_dim */
+  --teal-800: #c8eada;         /* Stitch: primary_fixed */
+  --teal-900: #e8f4ef;
 
   /* Gold Scale — Ámbar cálido (100=oscuro → 900=claro) */
   --gold-100: #3A2D14;
@@ -63,9 +63,9 @@
   --gold-400: #8E6E22;
   --gold-500: #C49B38;
   --gold-600: #D4AF55;
-  --gold-700: #E2C478;
-  --gold-800: #EDD8A0;
-  --gold-900: #F5EBC8;
+  --gold-700: #e4c278;         /* Stitch: secondary_fixed_dim */
+  --gold-800: #ffdf9b;         /* Stitch: secondary_fixed */
+  --gold-900: #ffdc8e;         /* Stitch: secondary_container */
 
   /* Text — Warm Whites (todos pasan WCAG AA) */
   --text-primary: #F4F0EB;

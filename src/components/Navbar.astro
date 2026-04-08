@@ -15,9 +15,10 @@ const currentPath = Astro.url.pathname;
 <header id="navbar" class="navbar">
   <div class="navbar-inner">
 
-    <!-- Logo -->
+    <!-- Logo: blanco sobre oscuro / oscuro sobre claro al hacer scroll -->
     <a href="/" class="navbar-logo" aria-label="Arango Dental Clinic — Inicio">
-      <img src="/img/logo/logo-blanco.png" alt="Arango Dental Clinic" />
+      <img src="/img/logo/logo-blanco.png" alt="Arango Dental Clinic" class="logo-white" />
+      <img src="/img/logo/logo-oscuro.png" alt="Arango Dental Clinic" class="logo-dark" aria-hidden="true" />
     </a>
 
     <!-- Links centrados (desktop) -->
@@ -118,10 +119,16 @@ const currentPath = Astro.url.pathname;
     transition: background-color 0.6s ease, backdrop-filter 0.6s ease;
   }
 
+  /* Modo claro scrolled — fondo ivory cálido */
   .navbar.is-scrolled {
-    background-color: rgba(10, 10, 10, 0.75);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background-color: rgba(252, 249, 248, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* Modo oscuro scrolled — fondo oscuro (igual que antes) */
+  :global(html.dark) .navbar.is-scrolled {
+    background-color: rgba(10, 10, 10, 0.80);
   }
 
   .navbar-inner {
@@ -156,6 +163,17 @@ const currentPath = Astro.url.pathname;
   .navbar-logo:hover img {
     opacity: 0.65;
   }
+
+  /* Logo blanco por defecto, oscuro solo en modo claro + scroll */
+  .logo-dark { display: none; }
+  .logo-white { display: block; }
+
+  .navbar.is-scrolled .logo-dark  { display: block; }
+  .navbar.is-scrolled .logo-white { display: none; }
+
+  /* Dark mode scrolled: vuelve al logo blanco */
+  :global(html.dark) .navbar.is-scrolled .logo-dark  { display: none; }
+  :global(html.dark) .navbar.is-scrolled .logo-white { display: block; }
 
   /* =============================================
      NAV CONTAINER + INDICADOR
@@ -344,13 +362,27 @@ const currentPath = Astro.url.pathname;
   }
 
   /* =============================================
-     OVERLAY MOBILE
+     OVERLAY MOBILE — variables por modo
      ============================================= */
+
+  /* Modo claro (default) */
   .nav-overlay {
+    --overlay-bg:           var(--bg-primary, #fcf9f8);
+    --overlay-close:        var(--text-tertiary, #727974);
+    --overlay-close-hover:  var(--text-primary, #1c1b1b);
+    --overlay-label:        var(--text-tertiary, #727974);
+    --overlay-border:       rgba(28, 27, 27, 0.08);
+    --overlay-link:         var(--text-secondary, #414845);
+    --overlay-link-hover:   var(--text-primary, #1c1b1b);
+    --overlay-grain-op:     0.03;
+    --overlay-cta-bg:       var(--teal-700, #153328);
+    --overlay-cta-bg-hover: var(--teal-600, #2f4d41);
+    --overlay-cta-color:    #ffffff;
+
     position: fixed;
     inset: 0;
     z-index: 200;
-    background-color: #0a0a0a;
+    background-color: var(--overlay-bg);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -358,7 +390,23 @@ const currentPath = Astro.url.pathname;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                visibility 0.45s ease;
+                visibility 0.45s ease,
+                background-color 0.3s ease;
+  }
+
+  /* Modo oscuro — sobreescribe las variables del overlay */
+  :global(html.dark) .nav-overlay {
+    --overlay-bg:           #0a0a0a;
+    --overlay-close:        rgba(255, 255, 255, 0.4);
+    --overlay-close-hover:  #ffffff;
+    --overlay-label:        rgba(255, 255, 255, 0.2);
+    --overlay-border:       rgba(255, 255, 255, 0.06);
+    --overlay-link:         rgba(255, 255, 255, 0.7);
+    --overlay-link-hover:   #ffffff;
+    --overlay-grain-op:     0.04;
+    --overlay-cta-bg:       #ffffff;
+    --overlay-cta-bg-hover: rgba(255, 255, 255, 0.85);
+    --overlay-cta-color:    rgba(10, 10, 10, 0.9);
   }
 
   .nav-overlay.is-open {
@@ -370,7 +418,7 @@ const currentPath = Astro.url.pathname;
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.04;
+    opacity: var(--overlay-grain-op);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
     background-size: 300px 300px;
   }
@@ -382,14 +430,14 @@ const currentPath = Astro.url.pathname;
     background: none;
     border: none;
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--overlay-close);
     padding: 0.5rem;
     transition: color 0.3s ease, transform 0.3s ease;
     z-index: 1;
   }
 
   .nav-overlay-close:hover {
-    color: #ffffff;
+    color: var(--overlay-close-hover);
     transform: rotate(90deg);
   }
 
@@ -397,7 +445,7 @@ const currentPath = Astro.url.pathname;
     font-family: "Inter", sans-serif;
     font-size: 0.65rem;
     letter-spacing: 0.3em;
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--overlay-label);
     text-transform: uppercase;
     margin-bottom: 3rem;
     display: block;
@@ -413,11 +461,11 @@ const currentPath = Astro.url.pathname;
 
   .nav-overlay-links li {
     overflow: hidden;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--overlay-border);
   }
 
   .nav-overlay-links li:first-child {
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--overlay-border);
   }
 
   .nav-overlay-link {
@@ -425,7 +473,7 @@ const currentPath = Astro.url.pathname;
     font-family: "Cormorant Garamond", serif;
     font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--overlay-link);
     text-decoration: none;
     padding: 0.5rem 0;
     line-height: 1.1;
@@ -433,7 +481,7 @@ const currentPath = Astro.url.pathname;
   }
 
   .nav-overlay-link:hover {
-    color: #ffffff;
+    color: var(--overlay-link-hover);
     padding-left: 1rem;
   }
 
@@ -458,16 +506,82 @@ const currentPath = Astro.url.pathname;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(10, 10, 10, 0.9);
-    background-color: #ffffff;
+    color: var(--overlay-cta-color);
+    background-color: var(--overlay-cta-bg);
     text-decoration: none;
     padding: 1rem 2rem;
     align-self: flex-start;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .nav-overlay-cta:hover {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: var(--overlay-cta-bg-hover);
+  }
+
+  /* =============================================
+     MODO CLARO + SCROLL — adaptación de colores
+     ============================================= */
+
+  /* Links → texto oscuro */
+  .navbar.is-scrolled .link-default {
+    color: rgba(28, 27, 27, 0.50);
+  }
+  .navbar.is-scrolled .link-hover {
+    color: rgba(28, 27, 27, 0.90);
+  }
+  .navbar.is-scrolled .navbar-link:hover .link-default,
+  .navbar.is-scrolled .navbar-link.is-active .link-default {
+    color: rgba(28, 27, 27, 0.90);
+  }
+
+  /* Indicador deslizante → oscuro */
+  .navbar.is-scrolled .nav-indicator {
+    background-color: rgba(28, 27, 27, 0.35);
+  }
+
+  /* Hamburger → barras oscuras */
+  .navbar.is-scrolled .bar {
+    background-color: rgba(28, 27, 27, 0.65);
+  }
+
+  /* Botón Reservar → borde verde forestal, texto verde */
+  .navbar.is-scrolled .navbar-cta {
+    color: #153328;
+    background-color: transparent;
+    border-color: rgba(21, 51, 40, 0.65);
+  }
+  .navbar.is-scrolled .navbar-cta:hover {
+    background-color: #153328;
+    color: #ffffff;
+    border-color: #153328;
+  }
+
+  /* MODO OSCURO + SCROLL — override de vuelta a blanco */
+  :global(html.dark) .navbar.is-scrolled .link-default {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  :global(html.dark) .navbar.is-scrolled .link-hover {
+    color: rgba(255, 255, 255, 0.95);
+  }
+  :global(html.dark) .navbar.is-scrolled .navbar-link:hover .link-default,
+  :global(html.dark) .navbar.is-scrolled .navbar-link.is-active .link-default {
+    color: rgba(255, 255, 255, 0.95);
+  }
+  :global(html.dark) .navbar.is-scrolled .nav-indicator {
+    background-color: rgba(255, 255, 255, 0.55);
+  }
+  :global(html.dark) .navbar.is-scrolled .bar {
+    background-color: rgba(255, 255, 255, 0.75);
+  }
+  :global(html.dark) .navbar.is-scrolled .navbar-cta {
+    color: rgba(255, 255, 255, 0.80);
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.40);
+  }
+  :global(html.dark) .navbar.is-scrolled .navbar-cta:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #0a0a0a;
+    border-color: rgba(255, 255, 255, 0.95);
   }
 </style>
 

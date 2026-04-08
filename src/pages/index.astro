@@ -171,21 +171,59 @@ const testimonials = [
   </section>
 
   <!-- CTA Banner Section -->
-  <section class="px-4 lg:px-20 py-20 flex items-center justify-center transition-colors" style="background-color: var(--teal-700);">
+  <section class="cta-banner px-4 lg:px-20 py-20 flex items-center justify-center transition-colors">
     <div class="container mx-auto text-center max-w-3xl">
-      <h2 class="text-4xl lg:text-5xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">
+      <h2 class="cta-banner-title text-4xl lg:text-5xl font-normal mb-6" style="font-family: 'Cormorant Garamond', serif;">
         ¿Listo para Experimentar la Diferencia?
       </h2>
-      <p class="text-base mb-10 leading-relaxed" style="color: var(--teal-300); line-height: 1.7; max-width: 560px; margin-left: auto; margin-right: auto;">
+      <p class="cta-banner-sub text-base mb-10 leading-relaxed" style="line-height: 1.7; max-width: 560px; margin-left: auto; margin-right: auto;">
         Reserva tu consulta hoy y descubre por qué los pacientes más exigentes eligen Aurum Dental.
       </p>
       <a
         href="/reservar"
-        class="inline-block px-10 py-4 text-white text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-90"
-        style="background-color: var(--gold-500); letter-spacing: 0.05em;"
+        class="cta-banner-btn inline-block px-10 py-4 text-[15px] font-medium tracking-wider transition-all duration-300"
+        style="letter-spacing: 0.05em;"
       >
         Reservar Tu Cita
       </a>
     </div>
   </section>
+
+  <style>
+    /* CTA Banner — modo claro: tono ivory cálido */
+    .cta-banner {
+      background-color: var(--bg-tertiary);
+    }
+    .cta-banner-title {
+      color: var(--teal-700);
+    }
+    .cta-banner-sub {
+      color: var(--text-secondary);
+    }
+    .cta-banner-btn {
+      background-color: var(--teal-700);
+      color: #ffffff;
+    }
+    .cta-banner-btn:hover {
+      background-color: var(--teal-600);
+    }
+
+    /* Modo oscuro: similar al fondo pero con tinte forestal sutil */
+    :global(html.dark) .cta-banner {
+      background-color: var(--teal-300);  /* #1d3d2d — oscuro, matiz verde */
+    }
+    :global(html.dark) .cta-banner-title {
+      color: #ffffff;
+    }
+    :global(html.dark) .cta-banner-sub {
+      color: var(--teal-300);
+    }
+    :global(html.dark) .cta-banner-btn {
+      background-color: var(--gold-500);
+      color: #ffffff;
+    }
+    :global(html.dark) .cta-banner-btn:hover {
+      background-color: var(--gold-600);
+    }
+  </style>
 </Layout>

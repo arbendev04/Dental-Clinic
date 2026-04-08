@@ -44,6 +44,15 @@
   /* En modo oscuro: mostrar sol, ocultar luna */
   :global(html.dark) .theme-toggle .icon-sun  { display: block; }
   :global(html.dark) .theme-toggle .icon-moon { display: none; }
+
+  /* Modo claro + scroll → icono oscuro */
+  :global(html:not(.dark) .navbar.is-scrolled) .theme-toggle {
+    color: rgba(28, 27, 27, 0.55);
+  }
+  :global(html:not(.dark) .navbar.is-scrolled) .theme-toggle:hover {
+    color: rgba(28, 27, 27, 0.95);
+    transform: rotate(15deg);
+  }
 </style>
 
 <script is:inline>
