@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
+
 const navLinks = [
   { href: "/",          label: "Inicio"    },
   { href: "/servicios", label: "Servicios" },
@@ -41,8 +43,10 @@ const currentPath = Astro.url.pathname;
       </ul>
     </nav>
 
-    <!-- Derecha: CTA + hamburger -->
+    <!-- Derecha: toggle + CTA + hamburger -->
     <div class="navbar-right">
+      <ThemeToggle />
+
       <a href="/reservar" class="navbar-cta">Reservar</a>
 
       <button

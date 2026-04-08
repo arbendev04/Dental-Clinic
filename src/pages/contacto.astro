@@ -2,13 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contact" description="Contact us for more information or to schedule an appointment">
+<Layout title="Contacto" description="Contáctanos para más información o para programar una cita">
   <!-- Header -->
   <section class="py-24 px-4 lg:px-20 text-center transition-colors" style="background-color: var(--teal-700);">
     <div class="container mx-auto">
-      <h1 class="text-5xl lg:text-6xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">Contact Us</h1>
+      <h1 class="text-5xl lg:text-6xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">Contacto</h1>
       <p class="text-lg max-w-2xl mx-auto leading-relaxed" style="color: var(--teal-200); line-height: 1.7;">
-        We're here to help. Contact us through any means.
+        Estamos aquí para ayudarte. Contáctanos por cualquier medio.
       </p>
     </div>
   </section>
@@ -18,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
         <!-- Contact Info -->
         <div>
-          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Contact Information</h2>
+          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Información de Contacto</h2>
 
           <div class="space-y-8">
             <div class="flex items-start gap-4">
@@ -29,7 +29,7 @@ import Layout from '../layouts/Layout.astro';
                 </svg>
               </div>
               <div>
-                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Address</h3>
+                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Dirección</h3>
                 <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Avd. Alfonso Puchades 22<br>Benidorm, Alicante 03501</p>
               </div>
             </div>
@@ -41,7 +41,7 @@ import Layout from '../layouts/Layout.astro';
                 </svg>
               </div>
               <div>
-                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Phone</h3>
+                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Teléfono</h3>
                 <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">96 508 82 82</p>
               </div>
             </div>
@@ -65,8 +65,8 @@ import Layout from '../layouts/Layout.astro';
                 </svg>
               </div>
               <div>
-                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Hours</h3>
-                <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Mon - Fri: 9:00 - 19:00<br>Sat: 9:00 - 14:00</p>
+                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Horario</h3>
+                <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Lun - Vie: 9:00 - 19:00<br>Sáb: 9:00 - 14:00</p>
               </div>
             </div>
           </div>
@@ -74,17 +74,17 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- Contact Form -->
         <div>
-          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Send us a message</h2>
-          <form class="space-y-6">
+          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Envíanos un Mensaje</h2>
+          <form class="space-y-6" action={`mailto:Arangodentalclinic@gmail.com`} method="POST" enctype="text/plain">
             <div>
-              <label for="nombre" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Name</label>
+              <label for="nombre" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Nombre</label>
               <input
                 type="text"
                 id="nombre"
                 name="nombre"
                 class="w-full px-4 py-3 outline-none transition-colors"
                 style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
-                placeholder="Your name"
+                placeholder="Tu nombre"
                 required
               />
             </div>
@@ -96,30 +96,30 @@ import Layout from '../layouts/Layout.astro';
                 name="email"
                 class="w-full px-4 py-3 outline-none transition-colors"
                 style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
-                placeholder="your@email.com"
+                placeholder="tu@email.com"
                 required
               />
             </div>
             <div>
-              <label for="telefono" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Phone</label>
+              <label for="telefono" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Teléfono</label>
               <input
                 type="tel"
                 id="telefono"
                 name="telefono"
                 class="w-full px-4 py-3 outline-none transition-colors"
                 style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
-                placeholder="(123) 456-7890"
+                placeholder="600 000 000"
               />
             </div>
             <div>
-              <label for="mensaje" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Message</label>
+              <label for="mensaje" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Mensaje</label>
               <textarea
                 id="mensaje"
                 name="mensaje"
                 rows="4"
                 class="w-full px-4 py-3 outline-none transition-colors resize-none"
                 style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
-                placeholder="How can we help you?"
+                placeholder="¿En qué podemos ayudarte?"
                 required
               ></textarea>
             </div>
@@ -128,7 +128,7 @@ import Layout from '../layouts/Layout.astro';
               class="w-full py-4 text-white text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-90"
               style="background-color: var(--teal-600); letter-spacing: 0.05em;"
             >
-              Send Message
+              Enviar Mensaje
             </button>
           </form>
         </div>

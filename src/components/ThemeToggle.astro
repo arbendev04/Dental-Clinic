@@ -1,150 +1,68 @@
 ---
-// Toggle.astro
+// ThemeToggle: alterna entre modo claro y oscuro
+// Lee/escribe en localStorage bajo la clave 'theme'
 ---
 
-<div class="toggle-wrapper">
-<label class="switch">
-  <span class="sun">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-      <g fill="#ffd43b">
-        <circle r="5" cy="12" cx="12"></circle>
-        <path d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z"></path>
-      </g>
-    </svg>
-  </span>
-
-  <span class="moon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-      <path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path>
-    </svg>
-  </span>
-
-  <!-- FIX: id agregado para que el script pueda encontrar el elemento -->
-  <input type="checkbox" class="input" id="theme-check" />
-  <span class="slider"></span>
-</label>
-</div>
-
-<script>
-  // FIX: sin is:inline — Astro garantiza que el DOM esté listo
-  const checkbox = document.getElementById('theme-check') as HTMLInputElement;
-  const root = document.documentElement;
-
-  // Restaurar preferencia guardada o respetar preferencia del sistema
-  const saved = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const isDark = saved ? saved === 'dark' : prefersDark;
-
-  if (isDark) {
-    root.classList.add('dark');
-    checkbox.checked = true;
-  }
-
-  checkbox.addEventListener('change', () => {
-    root.classList.toggle('dark', checkbox.checked);
-    localStorage.setItem('theme', checkbox.checked ? 'dark' : 'light');
-  });
-</script>
+<button
+  id="theme-toggle"
+  class="theme-toggle"
+  aria-label="Cambiar tema"
+  title="Cambiar tema"
+>
+  <!-- Icono Sol (visible en modo oscuro) -->
+  <svg class="icon-sun" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m14.95 5.66-.7-.7M6.7 6.7l-.7-.7m12.02.02-.7.7M6.7 17.3l-.7.7M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
+  </svg>
+  <!-- Icono Luna (visible en modo claro) -->
+  <svg class="icon-moon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
+  </svg>
+</button>
 
 <style>
-  /* ─── Wrapper fixed ──────────────────────────────────── */
-  .toggle-wrapper {
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    z-index: 999;
-  }
-
-  /* ─── Contenedor ─────────────────────────────────────── */
-  .switch {
-    font-size: 17px;
-    position: relative;
-    display: inline-block;
-    width: 64px;
-    height: 34px;
-  }
-
-  /* ─── Input oculto ───────────────────────────────────── */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  /* ─── Slider (track) ─────────────────────────────────── */
-  .slider {
-    position: absolute;
+  .theme-toggle {
+    background: none;
+    border: none;
     cursor: pointer;
-    inset: 0;
-    background-color: #73C0FC;
-    border-radius: 30px;
-    transition: background-color 0.4s;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.3s ease, transform 0.3s ease;
   }
 
-  .slider::before {
-    content: "";
-    position: absolute;
-    height: 30px;
-    width: 30px;
-    border-radius: 20px;
-    left: 2px;
-    bottom: 2px;
-    z-index: 2;
-    background-color: #e8e8e8;
-    transition: transform 0.4s;
+  .theme-toggle:hover {
+    color: rgba(255, 255, 255, 0.95);
+    transform: rotate(15deg);
   }
 
-  /* ─── Íconos ─────────────────────────────────────────── */
-  .sun svg,
-  .moon svg {
-    position: absolute;
-    top: 5px;
-    z-index: 1;
-    width: 24px;
-    height: 24px;
-  }
+  /* En modo claro: mostrar luna, ocultar sol */
+  .icon-sun  { display: none; }
+  .icon-moon { display: block; }
 
-  .sun svg {
-    top: 6px;
-    left: 36px;
-  }
-
-  .moon svg {
-    fill: #73C0FC;
-    left: 5px;
-  }
-
-  /* ─── Animaciones ────────────────────────────────────── */
-  .sun svg {
-    animation: rotate 15s linear infinite;
-  }
-
-  .moon svg {
-    animation: tilt 5s linear infinite;
-  }
-
-  @keyframes rotate {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-
-  @keyframes tilt {
-    0%,
-    100% { transform: rotate(0deg); }
-    25%  { transform: rotate(-10deg); }
-    75%  { transform: rotate(10deg); }
-  }
-
-  /* ─── Estado: checked ────────────────────────────────── */
-  .input:checked + .slider {
-    background-color: #183153;
-  }
-
-  .input:focus + .slider {
-    box-shadow: 0 0 1px #183153;
-  }
-
-  .input:checked + .slider::before {
-    transform: translateX(30px);
-  }
+  /* En modo oscuro: mostrar sol, ocultar luna */
+  :global(html.dark) .theme-toggle .icon-sun  { display: block; }
+  :global(html.dark) .theme-toggle .icon-moon { display: none; }
 </style>
+
+<script is:inline>
+  (function () {
+    const btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      localStorage.setItem("theme", theme);
+    }
+
+    btn.addEventListener("click", function () {
+      const isDark = document.documentElement.classList.contains("dark");
+      applyTheme(isDark ? "light" : "dark");
+    });
+  })();
+</script>

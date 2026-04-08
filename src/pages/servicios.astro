@@ -6,48 +6,48 @@ const servicios = [
     nombre: 'Limpieza Dental',
     descripcion: 'Eliminación de placa y sarro para mantener tus dientes sanos y prevenir enfermedades periodontales.',
     duracion: '45 min',
-    precio: '$50',
+    precio: '50€',
   },
   {
     nombre: 'Blanqueamiento Dental',
     descripcion: 'Tratamiento profesional para aclarar el tono de tus dientes y lograr una sonrisa más brillante.',
     duracion: '60 min',
-    precio: '$150',
+    precio: '150€',
   },
   {
     nombre: 'Ortodoncia',
     descripcion: 'Corrección de la posición dental con brackets tradicionales o alineadores invisibles.',
     duracion: 'Consulta inicial',
-    precio: 'Desde $1,500',
+    precio: 'Desde 1.500€',
   },
   {
     nombre: 'Implantes Dentales',
     descripcion: 'Reemplazo permanente de piezas dentales perdidas con implantes de titanio de alta calidad.',
     duracion: 'Múltiples sesiones',
-    precio: 'Desde $800',
+    precio: 'Desde 800€',
   },
   {
     nombre: 'Endodoncia',
     descripcion: 'Tratamiento de conducto para salvar dientes dañados y eliminar infecciones.',
     duracion: '90 min',
-    precio: '$200',
+    precio: '200€',
   },
   {
     nombre: 'Carillas Dentales',
     descripcion: 'Láminas de porcelana para corregir forma, color y tamaño de los dientes frontales.',
     duracion: '2 sesiones',
-    precio: 'Desde $300',
+    precio: 'Desde 300€',
   },
 ];
 ---
 
-<Layout title="Services" description="Discover all the dental services we offer at Aurum Dental">
+<Layout title="Servicios" description="Descubre todos los servicios dentales que ofrecemos en Arango Dental Clinic">
   <!-- Header -->
   <section class="py-24 px-4 lg:px-20 text-center transition-colors" style="background-color: var(--teal-700);">
     <div class="container mx-auto">
-      <h1 class="text-5xl lg:text-6xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">Our Services</h1>
+      <h1 class="text-5xl lg:text-6xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">Nuestros Servicios</h1>
       <p class="text-lg max-w-2xl mx-auto leading-relaxed" style="color: var(--teal-200); line-height: 1.7;">
-        We offer a comprehensive range of dental treatments with the best technology and certified professionals.
+        Ofrecemos una amplia gama de tratamientos dentales con la mejor tecnología y profesionales certificados.
       </p>
     </div>
   </section>
@@ -78,20 +78,18 @@ const servicios = [
   <!-- CTA -->
   <section class="py-20 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-secondary);">
     <div class="container mx-auto text-center max-w-2xl">
-      <h2 class="text-3xl font-normal mb-4" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Need More Information?</h2>
-      <p class="mb-10 leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Contact us or book a consultation appointment.</p>
+      <h2 class="text-3xl font-normal mb-4" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">¿Necesitas Más Información?</h2>
+      <p class="mb-10 leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Contáctanos o reserva una consulta de valoración.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/contacto" class="px-8 py-4 text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-60" style="border: 1px solid var(--teal-600); color: var(--teal-600); letter-spacing: 0.05em;">
-          Contact Us
+          Contáctanos
         </a>
         <a
-          href="http://localhost:4200"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/reservar"
           class="px-8 py-4 text-white text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-90"
           style="background-color: var(--teal-600); letter-spacing: 0.05em;"
         >
-          Book Appointment
+          Reservar Cita
         </a>
       </div>
     </div>

@@ -9,29 +9,29 @@
     <img
       id="hero-frame1"
       class="hero-frame"
-      src="/img/hero/frame1.webp"
-      alt="Arango Dental Clinic"
+      src="/img/hero/instrumentos-odontologicos-esterilizados.webp"
+      alt="Instrumentos odontológicos esterilizados"
       style="opacity: 1;"
     />
     <img
       id="hero-frame2"
       class="hero-frame"
-      src="/img/hero/frame2.webp"
-      alt="Arango Dental Clinic"
+      src="/img/hero/kit-instrumental-odontologico.webp"
+      alt="Kit instrumental odontológico"
       style="opacity: 0;"
     />
     <img
       id="hero-frame3"
       class="hero-frame"
-      src="/img/hero/frame3.webp"
-      alt="Arango Dental Clinic"
+      src="/img/hero/modelo-dental-sonda-exploradora.webp"
+      alt="Modelo dental con sonda exploradora"
       style="opacity: 0;"
     />
     <img
       id="hero-frame4"
       class="hero-frame"
-      src="/img/hero/frame4.webp"
-      alt="Arango Dental Clinic"
+      src="/img/hero/pieza-mano-dental-alta-velocidad.webp"
+      alt="Pieza de mano dental de alta velocidad"
       style="opacity: 0;"
     />
 
@@ -102,6 +102,8 @@
     top: 0;
     height: 100vh;
     overflow: hidden;
+    perspective: 1200px;
+    perspective-origin: center center;
   }
 
   /* --- Frames --- */
@@ -191,11 +193,10 @@
     color: #ffffff;
     line-height: 1.05;
     margin: 0 0 1.5rem 0;
-    overflow: hidden;
   }
 
-  /* Cada char se anima individualmente */
-  .hero-char {
+  /* Cada palabra se anima de forma independiente */
+  .hero-word {
     display: inline-block;
     will-change: transform, opacity;
   }
@@ -311,158 +312,172 @@
     (n) => document.querySelector(`#hero-frame${n}`) as HTMLElement,
   );
 
-  // quickSetters: forma más eficiente de actualizar opacity/scale en GSAP
   const setOpacity = frameEls.map((el) => gsap.quickSetter(el, "opacity"));
-  const setScale = frameEls.map((el) => gsap.quickSetter(el, "scale"));
+  const setScale   = frameEls.map((el) => gsap.quickSetter(el, "scale"));
+  const setFilter  = frameEls.map((el) => gsap.quickSetter(el, "filter"));
 
-  // Estado inicial: Ken Burns alternado (par=zoom-out, impar=zoom-in)
-  [1.0, 1.07, 1.0, 1.07].forEach((s, i) => {
-    gsap.set(frameEls[i], { opacity: i === 0 ? 1 : 0, scale: s });
-  });
+  // Escala de referencia para el efecto túnel
+  const SCALE_IN   = 1.7;   // zoom de entrada: imagen llega desde el fondo del túnel
+  const SCALE_IDLE = 1.0;   // reposo: imagen a tamaño normal
+  const SCALE_OUT  = 0.75;  // salida: imagen se encoge al alejarse
 
-  // Ventanas de transición (fracción 0-1 del progreso del wrapper).
-  // Formato: [fadeInStart, fullVisible, fadeOutStart, fullyGone]
-  // Las ventanas se solapan ~13% para un crossfade suave y largo.
+  // Estado inicial: frame1 visible, el resto muy zoomed-in (dentro del túnel)
+  gsap.set(frameEls[0], { opacity: 1,  scale: SCALE_IDLE, filter: "blur(0px)" });
+  gsap.set(frameEls[1], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
+  gsap.set(frameEls[2], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
+  gsap.set(frameEls[3], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
+
+  // Ventanas de transición [fadeInStart, fullVisible, fadeOutStart, fullyGone]
   const wins = [
-    [0, 0, 0.24, 0.4],
-    [0.24, 0.37, 0.5, 0.63],
-    [0.5, 0.63, 0.76, 0.87],
-    [0.76, 0.87, 1.0, 1.0],
-  ];
-
-  // Ken Burns: [scaleInicio, scaleFin] para cada frame
-  const kb = [
-    [1.0, 1.07],
-    [1.07, 1.0],
-    [1.0, 1.07],
-    [1.07, 1.0],
+    [0,    0,    0.24, 0.40],
+    [0.24, 0.37, 0.50, 0.63],
+    [0.50, 0.63, 0.76, 0.87],
+    [0.76, 0.87, 1.0,  1.0 ],
   ];
 
   const remap = gsap.utils.mapRange;
-  const clamp = gsap.utils.clamp(0, 1);
 
   ScrollTrigger.create({
     trigger: wrapper,
     start: "top top",
     end: "bottom bottom",
-    scrub: 2,
+    scrub: 1.5,
     onUpdate(self) {
-      const p = self.progress;
+      const p    = self.progress;
       const last = frameEls.length - 1;
 
       for (let i = 0; i <= last; i++) {
         const [fi, fp, fo, fg] = wins[i];
-        const [ks, ke] = kb[i];
 
-        // Opacidad según posición en la ventana
+        // ── Opacidad ──────────────────────────────────────────
         let opacity: number;
         if (i === 0) {
           opacity = p < fo ? 1 : p < fg ? remap(fo, fg, 1, 0, p) : 0;
         } else if (i === last) {
           opacity = p < fi ? 0 : p < fp ? remap(fi, fp, 0, 1, p) : 1;
         } else {
-          if (p < fi) opacity = 0;
+          if      (p < fi) opacity = 0;
           else if (p < fp) opacity = remap(fi, fp, 0, 1, p);
           else if (p < fo) opacity = 1;
           else if (p < fg) opacity = remap(fo, fg, 1, 0, p);
-          else opacity = 0;
+          else              opacity = 0;
         }
 
-        // Ken Burns: progreso dentro de la vida activa del frame
-        const lifeStart = i === 0 ? 0 : fi;
-        const lifeEnd = i === last ? 1 : fg;
-        const lifeP =
-          lifeEnd > lifeStart
-            ? clamp((p - lifeStart) / (lifeEnd - lifeStart))
-            : 0;
-        const scale = ks + (ke - ks) * lifeP;
+        // ── Escala: efecto túnel ───────────────────────────────
+        let scale: number;
+        if (i === 0) {
+          // Primer frame: solo salida (se encoge)
+          if      (p < fo) scale = SCALE_IDLE;
+          else if (p < fg) scale = remap(fo, fg, SCALE_IDLE, SCALE_OUT, p);
+          else              scale = SCALE_OUT;
+        } else if (i === last) {
+          // Último frame: solo entrada (llega desde el fondo)
+          if      (p < fi) scale = SCALE_IN;
+          else if (p < fp) scale = remap(fi, fp, SCALE_IN, SCALE_IDLE, p);
+          else              scale = SCALE_IDLE;
+        } else {
+          // Intermedios: llega del túnel → reposa → se encoge al salir
+          if      (p < fi) scale = SCALE_IN;
+          else if (p < fp) scale = remap(fi, fp, SCALE_IN, SCALE_IDLE, p);
+          else if (p < fo) scale = SCALE_IDLE;
+          else if (p < fg) scale = remap(fo, fg, SCALE_IDLE, SCALE_OUT, p);
+          else              scale = SCALE_OUT;
+        }
+
+        // ── Blur: suaviza el impacto de la transición ──────────
+        // Sube al 50% de la transición de entrada, luego baja a 0
+        let blur = 0;
+        if (i !== 0 && p >= fi && p <= fp) {
+          const t = remap(fi, fp, 0, 1, p);       // 0→1 durante la entrada
+          blur = Math.sin(t * Math.PI * 0.5) * 6; // pico de 6px al inicio, baja a 0
+          blur = Math.max(0, 6 * (1 - t));         // 6px → 0px lineal
+        }
 
         setOpacity[i](opacity);
         setScale[i](scale);
+        setFilter[i](`blur(${blur.toFixed(1)}px)`);
       }
     },
   });
 
-  // --- Split por caracteres para el título ---
+  // --- Kinetic Typography: split por palabras ---
   const charsContainer = document.getElementById("hero-chars") as HTMLElement;
-  const text = charsContainer.textContent || "";
+  const titleText = charsContainer.textContent?.trim() || "";
   charsContainer.textContent = "";
+  charsContainer.style.cssText =
+    "display:flex; flex-wrap:wrap; gap:0.3em; align-items:baseline;";
 
-  text.split("").forEach((char) => {
+  const words = titleText.split(" ");
+  const wordEls: HTMLElement[] = words.map((word) => {
     const span = document.createElement("span");
-    span.classList.add("hero-char");
-    span.textContent = char === " " ? "\u00A0" : char;
+    span.classList.add("hero-word");
+    span.textContent = word;
     charsContainer.appendChild(span);
+    return span;
   });
 
-  const chars = charsContainer.querySelectorAll(".hero-char");
-  const label = document.getElementById("hero-label") as HTMLElement;
-  const description = document.getElementById(
-    "hero-description",
-  ) as HTMLElement;
-  const ctas = document.getElementById("hero-ctas") as HTMLElement;
+  const label       = document.getElementById("hero-label")       as HTMLElement;
+  const description = document.getElementById("hero-description") as HTMLElement;
+  const ctas        = document.getElementById("hero-ctas")        as HTMLElement;
 
-  // Estado inicial
-  gsap.set(chars, { y: 60, opacity: 0 });
-  gsap.set(label, { y: -16, opacity: 0 });
-  gsap.set(description, { y: 20, opacity: 0 });
-  gsap.set(ctas, { y: 20, opacity: 0 });
+  // Distancia total de scroll del wrapper (400vh - 100vh = 300vh)
+  const totalScroll = 3 * window.innerHeight;
 
-  // Animar cuando aparece frame4 (75% del scroll total)
-  const titleTriggerStart = 0.75 * 4 * window.innerHeight - window.innerHeight;
+  // Offsets exactos: cuándo empieza a aparecer cada frame
+  const frame2Offset = wins[1][0] * totalScroll; // 0.24 × 3vh
+  const frame3Offset = wins[2][0] * totalScroll; // 0.50 × 3vh
+  const frame4Offset = wins[3][0] * totalScroll; // 0.76 × 3vh
 
+  // ── Estados iniciales ──────────────────────────────────────────────
+  gsap.set(label,       { opacity: 1, clipPath: "inset(0 100% 0 0)" });
+  gsap.set(wordEls[0],  { x: -180, skewX: -18, opacity: 0 });
+  if (wordEls[1]) gsap.set(wordEls[1], { scale: 2.8, opacity: 0 });
+  if (wordEls[2]) gsap.set(wordEls[2], { x: 180, skewX: 18, opacity: 0 });
+  wordEls.slice(3).forEach((el) => gsap.set(el, { y: 40, opacity: 0 }));
+  gsap.set(description, { y: 28, skewX: 5, opacity: 0 });
+  gsap.set(ctas,        { y: 20, opacity: 0 });
+
+  // ── Frame 2 → label + "Arango" ────────────────────────────────────
   ScrollTrigger.create({
     trigger: wrapper,
-    start: `top+=${titleTriggerStart} top`,
-    onEnter: () => {
-      const tl = gsap.timeline();
-
-      // Label entra desde arriba
-      tl.to(label, {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: "power3.out",
-      });
-
-      // Caracteres del título en cascada
-      tl.to(
-        chars,
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.out",
-          stagger: 0.03,
-        },
-        "-=0.3",
-      );
-
-      // Descripción
-      tl.to(
-        description,
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        "-=0.4",
-      );
-
-      // CTAs
-      tl.to(
-        ctas,
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          ease: "power2.out",
-        },
-        "-=0.5",
-      );
-    },
+    start: `top+=${frame2Offset} top`,
     once: true,
+    onEnter: () => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.to(label, { clipPath: "inset(0 0% 0 0)", duration: 0.9 });
+      tl.to(wordEls[0], { x: 0, skewX: 0, opacity: 1, duration: 0.85 }, "-=0.5");
+    },
+  });
+
+  // ── Frame 3 → "Dental" ────────────────────────────────────────────
+  ScrollTrigger.create({
+    trigger: wrapper,
+    start: `top+=${frame3Offset} top`,
+    once: true,
+    onEnter: () => {
+      if (wordEls[1]) {
+        gsap.to(wordEls[1], { scale: 1, opacity: 1, duration: 1, ease: "expo.out" });
+      }
+    },
+  });
+
+  // ── Frame 4 → "Clinic" + extra + descripción + CTAs ───────────────
+  ScrollTrigger.create({
+    trigger: wrapper,
+    start: `top+=${frame4Offset} top`,
+    once: true,
+    onEnter: () => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      if (wordEls[2]) {
+        tl.to(wordEls[2], { x: 0, skewX: 0, opacity: 1, duration: 0.85 });
+      }
+      if (wordEls.length > 3) {
+        tl.to(wordEls.slice(3), { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 }, "-=0.5");
+      }
+      tl.to(description, { y: 0, skewX: 0, opacity: 1, duration: 0.75, ease: "power2.out" }, "-=0.5");
+      tl.to(ctas,        { y: 0, opacity: 1, duration: 0.65, ease: "power2.out" }, "-=0.4");
+    },
   });
 
   // --- Ocultar indicador de scroll al hacer scroll ---
