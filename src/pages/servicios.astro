@@ -42,32 +42,34 @@ const servicios = [
 ---
 
 <Layout title="Servicios" description="Descubre todos los servicios dentales que ofrecemos en Arango Dental Clinic">
-  <!-- Header -->
-  <section class="py-24 px-4 lg:px-20 text-center transition-colors" style="background-color: var(--teal-700);">
-    <div class="container mx-auto">
-      <h1 class="text-5xl lg:text-6xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">Nuestros Servicios</h1>
-      <p class="text-lg max-w-2xl mx-auto leading-relaxed" style="color: var(--teal-200); line-height: 1.7;">
+
+  <!-- ── Hero ── -->
+  <section class="srv-hero">
+    <div class="srv-container srv-hero-inner">
+      <p class="srv-label">Arango Dental Clinic</p>
+      <h1 class="srv-hero-title">Nuestros Servicios</h1>
+      <p class="srv-hero-sub">
         Ofrecemos una amplia gama de tratamientos dentales con la mejor tecnología y profesionales certificados.
       </p>
     </div>
   </section>
 
-  <!-- Services Grid -->
-  <section class="py-24 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-primary);">
-    <div class="container mx-auto">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- ── Grid de servicios ── -->
+  <section class="srv-grid-section">
+    <div class="srv-container">
+      <div class="srv-grid">
         {servicios.map((servicio) => (
-          <div class="p-8 transition-all duration-300 hover:translate-y-[-4px]" style="background-color: var(--bg-secondary); border: 1px solid var(--border-primary);">
-            <h3 class="text-2xl font-semibold mb-4" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">{servicio.nombre}</h3>
-            <p class="mb-6 leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">{servicio.descripcion}</p>
-            <div class="flex items-center justify-between text-sm pt-4" style="border-top: 1px solid var(--border-primary);">
-              <span class="flex items-center gap-2" style="color: var(--text-secondary);">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <div class="srv-card">
+            <h3 class="srv-card-title">{servicio.nombre}</h3>
+            <p class="srv-card-desc">{servicio.descripcion}</p>
+            <div class="srv-card-footer">
+              <span class="srv-card-duration">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 {servicio.duracion}
               </span>
-              <span class="font-semibold" style="color: var(--teal-600);">{servicio.precio}</span>
+              <span class="srv-card-price">{servicio.precio}</span>
             </div>
           </div>
         ))}
@@ -75,23 +77,288 @@ const servicios = [
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-20 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-secondary);">
-    <div class="container mx-auto text-center max-w-2xl">
-      <h2 class="text-3xl font-normal mb-4" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">¿Necesitas Más Información?</h2>
-      <p class="mb-10 leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Contáctanos o reserva una consulta de valoración.</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contacto" class="px-8 py-4 text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-60" style="border: 1px solid var(--teal-600); color: var(--teal-600); letter-spacing: 0.05em;">
-          Contáctanos
-        </a>
-        <a
-          href="/reservar"
-          class="px-8 py-4 text-white text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-90"
-          style="background-color: var(--teal-600); letter-spacing: 0.05em;"
-        >
-          Reservar Cita
-        </a>
+  <!-- ── CTA ── -->
+  <section class="srv-cta-section">
+    <div class="srv-container srv-cta-inner">
+      <h2 class="srv-cta-title">¿Necesitas Más Información?</h2>
+      <p class="srv-cta-sub">Contáctanos o reserva una consulta de valoración.</p>
+      <div class="srv-cta-actions">
+        <a href="/contacto" class="srv-btn srv-btn-outline">Contáctanos</a>
+        <a href="/reservar"  class="srv-btn srv-btn-solid">Reservar Cita</a>
       </div>
     </div>
   </section>
+
+
 </Layout>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    function update() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const isScrolled = navbar.classList.contains('is-scrolled');
+      navbar.classList.toggle('is-light-hero', isDark && !isScrolled);
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    new MutationObserver(update).observe(navbar, { attributes: true, attributeFilter: ['class'] });
+    update();
+  }
+</script>
+
+<style>
+  /* ── Layout ── */
+  .srv-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* ── Hero ── */
+  .srv-hero {
+    background-color: #0d2219;
+    padding: 8rem 0 5rem;
+    text-align: center;
+  }
+
+  :global(html.dark) .srv-hero {
+    background-color: #d4ffea;
+  }
+
+  :global(html.dark) .srv-hero-title {
+    color: #1c1b1b;
+  }
+
+  :global(html.dark) .srv-hero-sub {
+    color: #414845;
+  }
+
+  .srv-hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .srv-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #C49B38;
+  }
+
+  :global(html.dark) .srv-label {
+    color: #D4AF55;
+  }
+
+  .srv-hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    color: rgba(244, 240, 235, 0.95);
+    margin: 0;
+  }
+
+  .srv-hero-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(244, 240, 235, 0.50);
+    max-width: 52ch;
+    margin: 0;
+  }
+
+  /* ── Grid ── */
+  .srv-grid-section {
+    background-color: var(--bg-primary);
+    padding: 5rem 0;
+  }
+
+  .srv-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .srv-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1024px) {
+    .srv-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .srv-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .srv-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-secondary);
+  }
+
+  .srv-card-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .srv-card-desc {
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
+    flex: 1;
+  }
+
+  .srv-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-primary);
+  }
+
+  .srv-card-duration {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+  }
+
+  .srv-card-price {
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--teal-600);
+  }
+
+  :global(html.dark) .srv-card-price {
+    color: var(--teal-600);
+  }
+
+  /* ── CTA ── */
+  .srv-cta-section {
+    background-color: var(--bg-secondary);
+    padding: 5rem 0;
+  }
+
+  .srv-cta-inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .srv-cta-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .srv-cta-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 1.5rem;
+  }
+
+  .srv-cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media (min-width: 480px) {
+    .srv-cta-actions {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  /* ── Botones — modo claro ── */
+  .srv-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.875rem 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .srv-btn-outline {
+    background-color: transparent;
+    color: #153328;
+    border: 1px solid rgba(21, 51, 40, 0.65);
+  }
+
+  .srv-btn-outline:hover {
+    background-color: #153328;
+    color: #ffffff;
+    border-color: #153328;
+  }
+
+  .srv-btn-solid {
+    background-color: #153328;
+    color: #ffffff;
+    border: 1px solid #153328;
+  }
+
+  .srv-btn-solid:hover {
+    background-color: transparent;
+    color: #153328;
+    border-color: rgba(21, 51, 40, 0.65);
+  }
+
+  /* ── Botones — modo oscuro ── */
+  :global(html.dark) .srv-btn-outline {
+    color: rgba(244, 240, 235, 0.85);
+    border-color: rgba(244, 240, 235, 0.30);
+  }
+
+  :global(html.dark) .srv-btn-outline:hover {
+    background-color: #D4AF55;
+    color: #141210;
+    border-color: #D4AF55;
+  }
+
+  :global(html.dark) .srv-btn-solid {
+    background-color: #D4AF55;
+    color: #141210;
+    border-color: #D4AF55;
+  }
+
+  :global(html.dark) .srv-btn-solid:hover {
+    background-color: transparent;
+    color: rgba(244, 240, 235, 0.85);
+    border-color: rgba(244, 240, 235, 0.30);
+  }
+</style>

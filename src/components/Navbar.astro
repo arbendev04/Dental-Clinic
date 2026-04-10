@@ -73,12 +73,15 @@ const currentPath = Astro.url.pathname;
   aria-modal="true"
   aria-label="Menú de navegación"
 >
-  <!-- Botón cerrar -->
-  <button id="nav-close" class="nav-overlay-close" aria-label="Cerrar menú">
-    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </button>
+  <!-- Barra superior: toggle + cerrar -->
+  <div class="nav-overlay-topbar">
+    <ThemeToggle />
+    <button id="nav-close" class="nav-overlay-close" aria-label="Cerrar menú">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
 
   <!-- Label -->
   <span class="nav-overlay-label">MENÚ</span>
@@ -164,16 +167,16 @@ const currentPath = Astro.url.pathname;
     opacity: 0.65;
   }
 
-  /* Logo blanco por defecto, oscuro solo en modo claro + scroll */
-  .logo-dark { display: none; }
-  .logo-white { display: block; }
+  /* Logo: .navbar-logo como padre sube la especificidad por encima de .navbar-logo img */
+  .navbar-logo .logo-dark  { display: none; }
+  .navbar-logo .logo-white { display: block; }
 
-  .navbar.is-scrolled .logo-dark  { display: block; }
-  .navbar.is-scrolled .logo-white { display: none; }
+  .navbar.is-scrolled .navbar-logo .logo-dark  { display: block; }
+  .navbar.is-scrolled .navbar-logo .logo-white { display: none; }
 
   /* Dark mode scrolled: vuelve al logo blanco */
-  :global(html.dark) .navbar.is-scrolled .logo-dark  { display: none; }
-  :global(html.dark) .navbar.is-scrolled .logo-white { display: block; }
+  :global(html.dark) .navbar.is-scrolled .navbar-logo .logo-dark  { display: none; }
+  :global(html.dark) .navbar.is-scrolled .navbar-logo .logo-white { display: block; }
 
   /* =============================================
      NAV CONTAINER + INDICADOR
@@ -369,15 +372,16 @@ const currentPath = Astro.url.pathname;
   .nav-overlay {
     --overlay-bg:           var(--bg-primary, #fcf9f8);
     --overlay-close:        var(--text-tertiary, #727974);
-    --overlay-close-hover:  var(--text-primary, #1c1b1b);
+    --overlay-close-hover:  #153328;
     --overlay-label:        var(--text-tertiary, #727974);
     --overlay-border:       rgba(28, 27, 27, 0.08);
     --overlay-link:         var(--text-secondary, #414845);
-    --overlay-link-hover:   var(--text-primary, #1c1b1b);
+    --overlay-link-hover:   #153328;
     --overlay-grain-op:     0.03;
-    --overlay-cta-bg:       var(--teal-700, #153328);
-    --overlay-cta-bg-hover: var(--teal-600, #2f4d41);
-    --overlay-cta-color:    #ffffff;
+    --overlay-cta-bg:       transparent;
+    --overlay-cta-bg-hover: #153328;
+    --overlay-cta-color:    #153328;
+    --overlay-cta-border:   rgba(21, 51, 40, 0.65);
 
     position: fixed;
     inset: 0;
@@ -398,15 +402,16 @@ const currentPath = Astro.url.pathname;
   :global(html.dark) .nav-overlay {
     --overlay-bg:           #0a0a0a;
     --overlay-close:        rgba(255, 255, 255, 0.4);
-    --overlay-close-hover:  #ffffff;
+    --overlay-close-hover:  #D4AF55;
     --overlay-label:        rgba(255, 255, 255, 0.2);
     --overlay-border:       rgba(255, 255, 255, 0.06);
     --overlay-link:         rgba(255, 255, 255, 0.7);
-    --overlay-link-hover:   #ffffff;
+    --overlay-link-hover:   #D4AF55;
     --overlay-grain-op:     0.04;
-    --overlay-cta-bg:       #ffffff;
-    --overlay-cta-bg-hover: rgba(255, 255, 255, 0.85);
-    --overlay-cta-color:    rgba(10, 10, 10, 0.9);
+    --overlay-cta-bg:       transparent;
+    --overlay-cta-bg-hover: #D4AF55;
+    --overlay-cta-color:    rgba(255, 255, 255, 0.85);
+    --overlay-cta-border:   rgba(255, 255, 255, 0.30);
   }
 
   .nav-overlay.is-open {
@@ -423,17 +428,24 @@ const currentPath = Astro.url.pathname;
     background-size: 300px 300px;
   }
 
-  .nav-overlay-close {
+  .nav-overlay-topbar {
     position: absolute;
-    top: 1.75rem;
+    top: 1.25rem;
+    left: 2.5rem;
     right: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+  }
+
+  .nav-overlay-close {
     background: none;
     border: none;
     cursor: pointer;
     color: var(--overlay-close);
     padding: 0.5rem;
     transition: color 0.3s ease, transform 0.3s ease;
-    z-index: 1;
   }
 
   .nav-overlay-close:hover {
@@ -508,14 +520,21 @@ const currentPath = Astro.url.pathname;
     text-transform: uppercase;
     color: var(--overlay-cta-color);
     background-color: var(--overlay-cta-bg);
+    border: 1px solid var(--overlay-cta-border);
     text-decoration: none;
     padding: 1rem 2rem;
     align-self: flex-start;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
 
   .nav-overlay-cta:hover {
     background-color: var(--overlay-cta-bg-hover);
+    color: #ffffff;
+    border-color: var(--overlay-cta-bg-hover);
+  }
+
+  :global(html.dark) .nav-overlay-cta:hover {
+    color: #141210;
   }
 
   /* =============================================
@@ -556,6 +575,36 @@ const currentPath = Astro.url.pathname;
     border-color: #153328;
   }
 
+  /* ── Hero claro en dark mode (clase añadida por JS por página) ── */
+  .navbar.is-light-hero .link-default {
+    color: rgba(28, 27, 27, 0.55);
+  }
+  .navbar.is-light-hero .link-hover {
+    color: #1c1b1b;
+  }
+  .navbar.is-light-hero .navbar-link:hover .link-default,
+  .navbar.is-light-hero .navbar-link.is-active .link-default {
+    color: #1c1b1b;
+  }
+  .navbar.is-light-hero .nav-indicator {
+    background-color: rgba(28, 27, 27, 0.35);
+  }
+  .navbar.is-light-hero .bar {
+    background-color: rgba(28, 27, 27, 0.65);
+  }
+  .navbar.is-light-hero .navbar-cta {
+    color: #153328;
+    background-color: transparent;
+    border-color: rgba(21, 51, 40, 0.65);
+  }
+  .navbar.is-light-hero .navbar-cta:hover {
+    background-color: #153328;
+    color: #ffffff;
+    border-color: #153328;
+  }
+  .navbar.is-light-hero .navbar-logo .logo-white { display: none; }
+  .navbar.is-light-hero .navbar-logo .logo-dark  { display: block; }
+
   /* MODO OSCURO + SCROLL — override de vuelta a blanco */
   :global(html.dark) .navbar.is-scrolled .link-default {
     color: rgba(255, 255, 255, 0.55);
@@ -579,9 +628,9 @@ const currentPath = Astro.url.pathname;
     border-color: rgba(255, 255, 255, 0.40);
   }
   :global(html.dark) .navbar.is-scrolled .navbar-cta:hover {
-    background-color: rgba(255, 255, 255, 0.95);
-    color: #0a0a0a;
-    border-color: rgba(255, 255, 255, 0.95);
+    background-color: #D4AF55;
+    color: #141210;
+    border-color: #D4AF55;
   }
 </style>
 

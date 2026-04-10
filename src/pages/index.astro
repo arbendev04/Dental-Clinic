@@ -190,7 +190,7 @@ const testimonials = [
   </section>
 
   <style>
-    /* CTA Banner — modo claro: tono ivory cálido */
+    /* CTA Banner — modo claro */
     .cta-banner {
       background-color: var(--bg-tertiary);
     }
@@ -201,29 +201,35 @@ const testimonials = [
       color: var(--text-secondary);
     }
     .cta-banner-btn {
-      background-color: var(--teal-700);
-      color: #ffffff;
+      background-color: transparent;
+      color: #153328;
+      border: 1px solid rgba(21, 51, 40, 0.65);
     }
     .cta-banner-btn:hover {
-      background-color: var(--teal-600);
+      background-color: #153328;
+      color: #ffffff;
+      border-color: #153328;
     }
 
-    /* Modo oscuro: similar al fondo pero con tinte forestal sutil */
+    /* Modo oscuro: fondo dark de la landing */
     :global(html.dark) .cta-banner {
-      background-color: var(--teal-300);  /* #1d3d2d — oscuro, matiz verde */
+      background-color: #141210;
     }
     :global(html.dark) .cta-banner-title {
-      color: #ffffff;
+      color: rgba(244, 240, 235, 0.95);
     }
     :global(html.dark) .cta-banner-sub {
-      color: var(--teal-300);
+      color: rgba(244, 240, 235, 0.55);
     }
     :global(html.dark) .cta-banner-btn {
-      background-color: var(--gold-500);
-      color: #ffffff;
+      background-color: transparent;
+      color: rgba(244, 240, 235, 0.85);
+      border: 1px solid rgba(244, 240, 235, 0.30);
     }
     :global(html.dark) .cta-banner-btn:hover {
-      background-color: var(--gold-600);
+      background-color: #D4AF55;
+      color: #141210;
+      border-color: #D4AF55;
     }
   </style>
 </Layout>

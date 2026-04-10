@@ -4,7 +4,6 @@
 ---
 
 <button
-  id="theme-toggle"
   class="theme-toggle"
   aria-label="Cambiar tema"
   title="Cambiar tema"
@@ -53,13 +52,19 @@
     color: rgba(28, 27, 27, 0.95);
     transform: rotate(15deg);
   }
+
+  /* Modo claro + overlay → icono oscuro sobre fondo ivory */
+  :global(html:not(.dark) .nav-overlay) .theme-toggle {
+    color: rgba(28, 27, 27, 0.55);
+  }
+  :global(html:not(.dark) .nav-overlay) .theme-toggle:hover {
+    color: rgba(28, 27, 27, 0.95);
+    transform: rotate(15deg);
+  }
 </style>
 
 <script is:inline>
   (function () {
-    const btn = document.getElementById("theme-toggle");
-    if (!btn) return;
-
     function applyTheme(theme) {
       if (theme === "dark") {
         document.documentElement.classList.add("dark");
@@ -69,9 +74,13 @@
       localStorage.setItem("theme", theme);
     }
 
-    btn.addEventListener("click", function () {
-      const isDark = document.documentElement.classList.contains("dark");
-      applyTheme(isDark ? "light" : "dark");
+    document.querySelectorAll(".theme-toggle").forEach(function (btn) {
+      if (btn.dataset.ready) return;
+      btn.dataset.ready = "1";
+      btn.addEventListener("click", function () {
+        const isDark = document.documentElement.classList.contains("dark");
+        applyTheme(isDark ? "light" : "dark");
+      });
     });
   })();
 </script>

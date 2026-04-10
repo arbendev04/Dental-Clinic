@@ -56,7 +56,14 @@ const servicios = [
           <img
             src="/img/logo/logo-blanco.png"
             alt="Arango Dental Clinic"
-            class="footer-logo"
+            class="footer-logo footer-logo-light"
+            width="140"
+            height="48"
+          />
+          <img
+            src="/img/logo/logo-oscuro.png"
+            alt="Arango Dental Clinic"
+            class="footer-logo footer-logo-dark"
             width="140"
             height="48"
           />
@@ -193,28 +200,34 @@ const servicios = [
 
   /* Colores del footer — modo CLARO: verde forestal profundo */
   .footer {
-    --f-bg:       #0d2219;
-    --f-band-bg:  #153328;
-    --f-gold:     #C49B38;
-    --f-text:     rgba(244, 240, 235, 0.90);
-    --f-muted:    rgba(244, 240, 235, 0.45);
-    --f-faint:    rgba(244, 240, 235, 0.20);
-    --f-border:   rgba(196, 155, 56, 0.15);
+    --f-bg:           #0d2219;
+    --f-band-bg:      #fcf9f8;
+    --f-band-border:  rgba(0, 0, 0, 0.07);
+    --f-band-text:    #1c1b1b;
+    --f-band-muted:   #414845;
+    --f-gold:         #C49B38;
+    --f-text:         rgba(244, 240, 235, 0.90);
+    --f-muted:        rgba(244, 240, 235, 0.45);
+    --f-faint:        rgba(244, 240, 235, 0.20);
+    --f-border:       rgba(196, 155, 56, 0.15);
 
     background-color: var(--f-bg);
     color: var(--f-text);
     transition: background-color 0.3s ease;
   }
 
-  /* Modo OSCURO: obsidiana cálida elevada — se distingue del fondo #141210 */
+  /* Modo OSCURO */
   :global(html.dark) .footer {
-    --f-bg:       #252118;   /* bg-tertiary dark — claramente más claro que la página */
-    --f-band-bg:  #302B23;   /* borde superior cálido */
-    --f-gold:     #D4AF55;   /* gold ligeramente más luminoso sobre oscuro */
-    --f-text:     rgba(244, 240, 235, 0.88);
-    --f-muted:    rgba(244, 240, 235, 0.42);
-    --f-faint:    rgba(244, 240, 235, 0.18);
-    --f-border:   rgba(212, 175, 85, 0.18);
+    --f-bg:           #d4ffea;
+    --f-band-bg:      #141210;
+    --f-band-border:  rgba(255, 255, 255, 0.08);
+    --f-band-text:    rgba(244, 240, 235, 0.95);
+    --f-band-muted:   rgba(244, 240, 235, 0.55);
+    --f-gold:         #C49B38;
+    --f-text:         #1c1b1b;
+    --f-muted:        #414845;
+    --f-faint:        #727974;
+    --f-border:       rgba(0, 0, 0, 0.12);
   }
 
   .footer-inner {
@@ -227,7 +240,7 @@ const servicios = [
   /* ── Franja CTA ── */
   .footer-cta-band {
     background-color: var(--f-band-bg);
-    border-bottom: 1px solid var(--f-border);
+    border-bottom: 1px solid var(--f-band-border);
   }
 
   .footer-cta-inner {
@@ -263,7 +276,7 @@ const servicios = [
     font-weight: 300;
     font-style: italic;
     line-height: 1.2;
-    color: var(--f-text);
+    color: var(--f-band-text);
     margin-bottom: 1rem;
   }
 
@@ -271,7 +284,7 @@ const servicios = [
     font-family: "Inter", sans-serif;
     font-size: 0.875rem;
     line-height: 1.7;
-    color: var(--f-muted);
+    color: var(--f-band-muted);
     max-width: 44ch;
   }
 
@@ -307,16 +320,31 @@ const servicios = [
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--f-bg);
-    background-color: var(--f-gold);
+    color: #153328;
+    background-color: transparent;
+    border: 1px solid rgba(21, 51, 40, 0.65);
     padding: 0.875rem 1.75rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     white-space: nowrap;
   }
 
   .footer-cta-btn:hover {
-    background-color: #A47E2E;
+    background-color: #153328;
     color: #ffffff;
+    border-color: #153328;
+  }
+
+  /* Modo oscuro: el band es #141210, el botón vuelve al estilo sólido blanco */
+  :global(html.dark) .footer-cta-btn {
+    color: rgba(244, 240, 235, 0.85);
+    background-color: transparent;
+    border-color: rgba(244, 240, 235, 0.30);
+  }
+
+  :global(html.dark) .footer-cta-btn:hover {
+    background-color: #D4AF55;
+    color: #141210;
+    border-color: #D4AF55;
   }
 
   /* Teléfono secundario */
@@ -328,12 +356,12 @@ const servicios = [
     font-size: 0.82rem;
     font-weight: 400;
     text-decoration: none;
-    color: var(--f-muted);
+    color: var(--f-band-muted);
     transition: color 0.3s ease;
   }
 
   .footer-cta-tel:hover {
-    color: var(--f-text);
+    color: var(--f-band-text);
   }
 
   /* ── Cuerpo del footer ── */
@@ -378,6 +406,18 @@ const servicios = [
 
   .footer-logo:hover {
     opacity: 1;
+  }
+
+  .footer-logo-dark {
+    display: none;
+  }
+
+  :global(html.dark) .footer-logo-light {
+    display: none;
+  }
+
+  :global(html.dark) .footer-logo-dark {
+    display: block;
   }
 
   .footer-tagline {
