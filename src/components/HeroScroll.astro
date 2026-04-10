@@ -60,8 +60,7 @@
 
       <!-- Descripción -->
       <p class="hero-description" id="hero-description">
-        Excelencia en cuidado dental. Tecnología avanzada y<br />
-        atención personalizada para tu sonrisa perfecta.
+        Excelencia en cuidado dental. Tecnología avanzada y atención personalizada para tu sonrisa perfecta.
       </p>
 
       <!-- CTAs -->
@@ -208,8 +207,18 @@
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.6);
     margin: 0 0 2.5rem 0;
+    max-width: 42ch;
     opacity: 0;
     will-change: opacity, transform;
+  }
+
+  @media (max-width: 640px) {
+    .hero-description {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      max-width: 32ch;
+      margin: 0 0 2rem 0;
+    }
   }
 
   /* CTAs */
