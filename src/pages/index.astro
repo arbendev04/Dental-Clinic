@@ -48,30 +48,28 @@ const testimonials = [
   <HeroScroll />
 
   <!-- Services Section -->
-  <section class="px-4 lg:px-20 py-24 lg:py-28 transition-colors" style="background-color: var(--bg-secondary);">
+  <section class="px-5 lg:px-20 py-16 md:py-24 lg:py-28 transition-colors" style="background-color: var(--bg-secondary);">
     <div class="container mx-auto">
       <!-- Section Header -->
-      <div class="text-center mb-16">
-        <!-- Label with gold lines -->
-        <div class="flex items-center justify-center gap-3 mb-5">
-          <div class="w-10 h-px" style="background-color: var(--gold-500);"></div>
-          <span class="text-xs tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
+      <div class="text-center mb-10 md:mb-16">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
+          <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
             Nuestros Servicios
           </span>
-          <div class="w-10 h-px" style="background-color: var(--gold-500);"></div>
+          <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
         </div>
-        <h2 class="text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">
           Cuidado Profesional a Tu Medida
         </h2>
       </div>
 
       <!-- Services Grid -->
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-3 gap-4 md:gap-6">
         {services.map((service) => (
-          <div class="p-10 transition-all duration-300 hover:translate-y-[-4px]" style="background-color: var(--bg-primary); border: 1px solid var(--border-primary);">
-            <!-- Icon -->
-            <div class="w-14 h-14 flex items-center justify-center mb-6" style="background-color: var(--teal-100);">
-              <svg class="w-7 h-7" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="p-6 md:p-10 transition-all duration-300 hover:translate-y-[-4px]" style="background-color: var(--bg-primary); border: 1px solid var(--border-primary);">
+            <div class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center mb-5" style="background-color: var(--teal-100);">
+              <svg class="w-6 h-6 md:w-7 md:h-7" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {service.icon === 'sparkles' && (
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 )}
@@ -83,10 +81,8 @@ const testimonials = [
                 )}
               </svg>
             </div>
-            <!-- Content -->
-            <h3 class="text-2xl font-semibold mb-6" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">{service.title}</h3>
-            <p class="text-[15px] mb-6 leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">{service.description}</p>
-            <!-- Link -->
+            <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-5" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">{service.title}</h3>
+            <p class="text-sm md:text-[15px] mb-5 md:mb-6" style="color: var(--text-secondary); line-height: 1.7;">{service.description}</p>
             <a href="/servicios" class="inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-60" style="color: var(--gold-600);">
               <span>Saber Más</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,31 +96,30 @@ const testimonials = [
   </section>
 
   <!-- Stats Section -->
-  <section class="px-4 lg:px-20 py-24 transition-colors" style="background-color: var(--bg-primary);">
+  <section class="px-5 lg:px-20 py-16 md:py-24 transition-colors" style="background-color: var(--bg-primary);">
     <div class="container mx-auto">
       <!-- Section Header -->
-      <div class="text-center mb-16">
-        <!-- Label with gold lines -->
-        <div class="flex items-center justify-center gap-3 mb-5">
-          <div class="w-10 h-px" style="background-color: var(--gold-500);"></div>
-          <span class="text-xs tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
+      <div class="text-center mb-10 md:mb-16">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
+          <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
             Excelencia en Números
           </span>
-          <div class="w-10 h-px" style="background-color: var(--gold-500);"></div>
+          <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
         </div>
-        <h2 class="text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">
           Un Legado de Excelencia
         </h2>
       </div>
 
-      <!-- Stats Row -->
-      <div class="flex flex-wrap justify-around gap-12">
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-2 md:flex md:flex-wrap md:justify-around gap-8 md:gap-12">
         {stats.map((stat) => (
-          <div class="flex flex-col items-center gap-2 min-w-[150px]">
-            <div class="text-5xl font-light" style="font-family: 'Cormorant Garamond', serif; color: var(--teal-600);">
+          <div class="flex flex-col items-center gap-2">
+            <div class="text-4xl md:text-5xl font-light" style="font-family: 'Cormorant Garamond', serif; color: var(--teal-600);">
               {stat.number}
             </div>
-            <div class="text-[13px] font-medium tracking-widest uppercase" style="color: var(--text-secondary); letter-spacing: 0.15em;">
+            <div class="text-[11px] md:text-[13px] font-medium uppercase text-center" style="color: var(--text-secondary); letter-spacing: 0.15em;">
               {stat.label}
             </div>
           </div>
@@ -134,33 +129,32 @@ const testimonials = [
   </section>
 
   <!-- Testimonials Section -->
-  <section class="px-4 lg:px-20 py-24 transition-colors" style="background-color: var(--bg-secondary);">
+  <section class="px-5 lg:px-20 py-16 md:py-24 transition-colors" style="background-color: var(--bg-secondary);">
     <div class="container mx-auto">
       <!-- Section Header -->
-      <div class="text-center mb-16">
-        <!-- Label with gold lines -->
-        <div class="flex items-center justify-center gap-3 mb-5">
-          <div class="w-10 h-px" style="background-color: var(--gold-500);"></div>
-          <span class="text-xs tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
+      <div class="text-center mb-10 md:mb-16">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
+          <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
             Testimonios
           </span>
-          <div class="w-10 h-px" style="background-color: var(--gold-500);"></div>
+          <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
         </div>
-        <h2 class="text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">
           Lo Que Dicen Nuestros Pacientes
         </h2>
       </div>
 
       <!-- Testimonials Grid -->
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-3 gap-4 md:gap-6">
         {testimonials.map((testimonial) => (
-          <div class="p-10 transition-all duration-300" style="background-color: var(--bg-primary); border: 1px solid var(--border-primary);">
-            <p class="text-lg italic mb-6 leading-relaxed" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary); line-height: 1.7;">
+          <div class="p-6 md:p-10 transition-all duration-300" style="background-color: var(--bg-primary); border: 1px solid var(--border-primary);">
+            <p class="text-base md:text-lg italic mb-5 md:mb-6" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary); line-height: 1.7;">
               "{testimonial.quote}"
             </p>
             <div class="flex items-center gap-3">
-              <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
-              <span class="text-[13px] font-medium tracking-wider" style="color: var(--text-secondary); letter-spacing: 0.08em;">
+              <div class="w-6 h-px" style="background-color: var(--gold-500);"></div>
+              <span class="text-[12px] md:text-[13px] font-medium tracking-wider" style="color: var(--text-secondary); letter-spacing: 0.08em;">
                 {testimonial.author}
               </span>
             </div>
@@ -171,18 +165,18 @@ const testimonials = [
   </section>
 
   <!-- CTA Banner Section -->
-  <section class="cta-banner px-4 lg:px-20 py-20 flex items-center justify-center transition-colors">
+  <section class="cta-banner px-5 lg:px-20 py-14 md:py-20 flex items-center justify-center transition-colors">
     <div class="container mx-auto text-center max-w-3xl">
-      <h2 class="cta-banner-title text-4xl lg:text-5xl font-normal mb-6" style="font-family: 'Cormorant Garamond', serif;">
+      <h2 class="cta-banner-title text-3xl md:text-4xl lg:text-5xl font-normal mb-5 md:mb-6" style="font-family: 'Cormorant Garamond', serif;">
         ¿Listo para Experimentar la Diferencia?
       </h2>
-      <p class="cta-banner-sub text-base mb-10 leading-relaxed" style="line-height: 1.7; max-width: 560px; margin-left: auto; margin-right: auto;">
+      <p class="cta-banner-sub text-sm md:text-base mb-7 md:mb-10" style="line-height: 1.75; max-width: 480px; margin-left: auto; margin-right: auto;">
         Reserva tu consulta hoy y descubre por qué los pacientes más exigentes eligen Aurum Dental.
       </p>
       <a
         href="/reservar"
-        class="cta-banner-btn inline-block px-10 py-4 text-[15px] font-medium tracking-wider transition-all duration-300"
-        style="letter-spacing: 0.05em;"
+        class="cta-banner-btn inline-block px-8 md:px-10 py-3.5 md:py-4 text-sm md:text-[15px] font-medium tracking-wider transition-all duration-300"
+        style="letter-spacing: 0.1em;"
       >
         Reservar Tu Cita
       </a>
