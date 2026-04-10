@@ -26,8 +26,6 @@ CLAUDE.md
 # Vídeos: no versionar binarios grandes
 public/video/
 
-# Imágenes del hero (webp pesados, se gestionan aparte)
-public/img/hero/
 
 # ─── Caché y temporales ───────────────────────────────
 .cache/
