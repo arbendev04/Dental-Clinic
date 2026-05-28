@@ -44,12 +44,12 @@ const servicios = [
 <Layout title="Servicios" description="Descubre todos los servicios dentales que ofrecemos en Arango Dental Clinic">
 
   <!-- ── Hero ── -->
-  <section class="srv-hero">
+  <section class="srv-hero" data-scroll-hero>
     <div class="srv-container srv-hero-inner">
       <p class="srv-label">Arango Dental Clinic</p>
-      <h1 class="srv-hero-title">Nuestros Servicios</h1>
+      <h1 class="srv-hero-title">Cuidamos tu Sonrisa,<br>Cuidamos tu Confianza</h1>
       <p class="srv-hero-sub">
-        Ofrecemos una amplia gama de tratamientos dentales con la mejor tecnología y profesionales certificados.
+        Tu sonrisa merece los mejores cuidados. En Arango Dental Clinic ofrecemos procedimientos especializados con tecnología de vanguardia y el trato cercano que mereces.
       </p>
     </div>
   </section>
@@ -57,6 +57,10 @@ const servicios = [
   <!-- ── Grid de servicios ── -->
   <section class="srv-grid-section">
     <div class="srv-container">
+      <div class="srv-section-header">
+        <p class="srv-label">Lo que ofrecemos</p>
+        <h2 class="srv-section-title">Nuestros servicios</h2>
+      </div>
       <div class="srv-grid">
         {servicios.map((servicio) => (
           <div class="srv-card">
@@ -80,8 +84,8 @@ const servicios = [
   <!-- ── CTA ── -->
   <section class="srv-cta-section">
     <div class="srv-container srv-cta-inner">
-      <h2 class="srv-cta-title">¿Necesitas Más Información?</h2>
-      <p class="srv-cta-sub">Contáctanos o reserva una consulta de valoración.</p>
+      <h2 class="srv-cta-title">Somos Arango Dental Clinic, comprometidos con tu excelencia dental</h2>
+      <p class="srv-cta-sub">Agenda tu valoración sin costo y empieza a transformar tu sonrisa.</p>
       <div class="srv-cta-actions">
         <a href="/contacto" class="srv-btn srv-btn-outline">Contáctanos</a>
         <a href="/reservar"  class="srv-btn srv-btn-solid">Reservar Cita</a>
@@ -92,21 +96,6 @@ const servicios = [
 
 </Layout>
 
-<script>
-  const navbar = document.getElementById('navbar');
-  if (navbar) {
-    function update() {
-      const isDark = document.documentElement.classList.contains('dark');
-      const isScrolled = navbar.classList.contains('is-scrolled');
-      navbar.classList.toggle('is-light-hero', isDark && !isScrolled);
-    }
-
-    window.addEventListener('scroll', update, { passive: true });
-    new MutationObserver(update).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    new MutationObserver(update).observe(navbar, { attributes: true, attributeFilter: ['class'] });
-    update();
-  }
-</script>
 
 <style>
   /* ── Layout ── */
@@ -125,15 +114,7 @@ const servicios = [
   }
 
   :global(html.dark) .srv-hero {
-    background-color: #d4ffea;
-  }
-
-  :global(html.dark) .srv-hero-title {
-    color: #1c1b1b;
-  }
-
-  :global(html.dark) .srv-hero-sub {
-    color: #414845;
+    background-color: #0d2219;
   }
 
   .srv-hero-inner {
@@ -179,6 +160,24 @@ const servicios = [
   .srv-grid-section {
     background-color: var(--bg-primary);
     padding: 5rem 0;
+  }
+
+  .srv-section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .srv-section-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary);
+    margin: 0;
   }
 
   .srv-grid {

@@ -646,10 +646,22 @@ const currentPath = Astro.url.pathname;
     // =============================================
     // SCROLL: fondo oscuro al salir del hero
     // =============================================
-    const hero = document.querySelector(".hero-scroll-wrapper");
+    // home: hero con scroll de 400vh
+    const heroScroll = document.querySelector(".hero-scroll-wrapper");
+    // otras páginas: hero estático con data-scroll-hero
+    const heroStatic = document.querySelector("[data-scroll-hero]");
 
     function onScroll() {
-      const threshold = hero ? hero.offsetHeight - window.innerHeight : 60;
+      var threshold;
+      if (heroScroll) {
+        // El hero de home es 400vh sticky — el navbar cambia cuando sale del wrapper
+        threshold = heroScroll.offsetHeight - window.innerHeight;
+      } else if (heroStatic) {
+        // Hero normal — el navbar cambia cuando el hero sale del viewport
+        threshold = heroStatic.offsetHeight - (window.innerHeight * 0.15);
+      } else {
+        threshold = 60;
+      }
       navbar.classList.toggle("is-scrolled", window.scrollY > threshold);
     }
 

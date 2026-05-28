@@ -2,71 +2,106 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contacto" description="Contáctanos para más información o para programar una cita">
+<Layout title="Contacto" description="Agenda tu cita en Arango Dental Clinic, Benidorm">
   <!-- Header -->
-  <section class="py-24 px-4 lg:px-20 text-center transition-colors" style="background-color: var(--teal-700);">
-    <div class="container mx-auto">
-      <h1 class="text-5xl lg:text-6xl font-normal text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">Contacto</h1>
-      <p class="text-lg max-w-2xl mx-auto leading-relaxed" style="color: var(--teal-200); line-height: 1.7;">
-        Estamos aquí para ayudarte. Contáctanos por cualquier medio.
+  <section class="ctt-hero" data-scroll-hero>
+    <div class="ctt-container ctt-hero-inner">
+      <p class="ctt-label">Arango Dental Clinic</p>
+      <h1 class="ctt-hero-title">Da el primer paso hacia<br>tu mejor sonrisa</h1>
+      <p class="ctt-hero-sub">
+        Agenda tu cita hoy y descubre cómo podemos transformar tu sonrisa.
       </p>
+      <div class="ctt-hero-actions">
+        <a href="tel:+34965088282" class="ctt-btn ctt-btn-outline">Llamar ahora</a>
+        <a href="https://wa.me/34665886439" target="_blank" rel="noopener" class="ctt-btn ctt-btn-solid">WhatsApp</a>
+      </div>
     </div>
   </section>
 
-  <section class="py-24 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-primary);">
+  <!-- Info + Form -->
+  <section class="py-16 md:py-24 px-4 lg:px-20 transition-colors" style="background-color: var(--bg-primary);">
     <div class="container mx-auto">
       <div class="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
+
         <!-- Contact Info -->
         <div>
+          <p class="ctt-label" style="margin-bottom: 0.75rem;">Tu mejor aliado dental</p>
           <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Información de Contacto</h2>
 
-          <div class="space-y-8">
+          <div class="space-y-7">
+            <!-- Dirección -->
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" style="background-color: var(--teal-100);">
+              <div class="ctt-icon-box">
                 <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
               <div>
-                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Dirección</h3>
-                <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Avd. Alfonso Puchades 22<br>Benidorm, Alicante 03501</p>
+                <h3 class="ctt-info-label">Dirección</h3>
+                <p class="ctt-info-text">Avda. Alfonso Puchades 22<br>Benidorm, Alicante 03501</p>
               </div>
             </div>
 
+            <!-- Teléfono -->
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" style="background-color: var(--teal-100);">
+              <div class="ctt-icon-box">
                 <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
               <div>
-                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Teléfono</h3>
-                <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">96 508 82 82</p>
+                <h3 class="ctt-info-label">Teléfono</h3>
+                <a href="tel:+34965088282" class="ctt-info-text ctt-link">+34 965 088 282</a>
               </div>
             </div>
 
+            <!-- Email -->
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" style="background-color: var(--teal-100);">
+              <div class="ctt-icon-box">
                 <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
               <div>
-                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Email</h3>
-                <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Arangodentalclinic@gmail.com</p>
+                <h3 class="ctt-info-label">Email</h3>
+                <a href="mailto:Arangodentalclinic@gmail.com" class="ctt-info-text ctt-link">Arangodentalclinic@gmail.com</a>
               </div>
             </div>
 
+            <!-- Horario -->
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 flex items-center justify-center flex-shrink-0" style="background-color: var(--teal-100);">
+              <div class="ctt-icon-box">
                 <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <div>
-                <h3 class="font-semibold mb-2" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Horario</h3>
-                <p class="leading-relaxed" style="color: var(--text-secondary); line-height: 1.7;">Lun - Vie: 9:00 - 19:00<br>Sáb: 9:00 - 14:00</p>
+                <h3 class="ctt-info-label">Horario</h3>
+                <p class="ctt-info-text">Lun – Vie: 9:00 – 19:00<br>Sáb: 9:00 – 14:00</p>
+              </div>
+            </div>
+
+            <!-- Redes -->
+            <div class="flex items-start gap-4">
+              <div class="ctt-icon-box">
+                <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="ctt-info-label">Síguenos</h3>
+                <div class="flex flex-col gap-1 mt-1">
+                  <a href="https://www.instagram.com/arangodentalclinic" target="_blank" rel="noopener" class="ctt-social-link">
+                    Instagram · @arangodentalclinic
+                  </a>
+                  <a href="https://www.facebook.com/p/Arango-Dental-Clinic-61574405870200/" target="_blank" rel="noopener" class="ctt-social-link">
+                    Facebook · Arango Dental Clinic
+                  </a>
+                  <a href="https://wa.me/34665886439" target="_blank" rel="noopener" class="ctt-social-link">
+                    WhatsApp · +34 665 886 439
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -74,65 +109,299 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- Contact Form -->
         <div>
-          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Envíanos un Mensaje</h2>
-          <form class="space-y-6" action={`mailto:Arangodentalclinic@gmail.com`} method="POST" enctype="text/plain">
+          <p class="ctt-label" style="margin-bottom: 0.75rem;">Valoración sin costo</p>
+          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Empieza tu tratamiento</h2>
+          <form class="space-y-6" action="mailto:Arangodentalclinic@gmail.com" method="POST" enctype="text/plain">
             <div>
-              <label for="nombre" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Nombre</label>
+              <label for="nombre" class="ctt-field-label">Nombre completo</label>
               <input
                 type="text"
                 id="nombre"
                 name="nombre"
-                class="w-full px-4 py-3 outline-none transition-colors"
-                style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
-                placeholder="Tu nombre"
+                class="ctt-input"
+                placeholder="Tu nombre y apellidos"
                 required
               />
             </div>
             <div>
-              <label for="email" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Email</label>
+              <label for="email" class="ctt-field-label">Email</label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                class="w-full px-4 py-3 outline-none transition-colors"
-                style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
+                class="ctt-input"
                 placeholder="tu@email.com"
                 required
               />
             </div>
             <div>
-              <label for="telefono" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Teléfono</label>
+              <label for="telefono" class="ctt-field-label">Teléfono</label>
               <input
                 type="tel"
                 id="telefono"
                 name="telefono"
-                class="w-full px-4 py-3 outline-none transition-colors"
-                style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
-                placeholder="600 000 000"
+                class="ctt-input"
+                placeholder="+34 600 000 000"
               />
             </div>
             <div>
-              <label for="mensaje" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Mensaje</label>
+              <label for="mensaje" class="ctt-field-label">¿Cómo podemos ayudarte?</label>
               <textarea
                 id="mensaje"
                 name="mensaje"
                 rows="4"
-                class="w-full px-4 py-3 outline-none transition-colors resize-none"
-                style="border: 1px solid var(--border-primary); background-color: var(--bg-secondary); color: var(--text-primary);"
-                placeholder="¿En qué podemos ayudarte?"
+                class="ctt-input ctt-textarea"
+                placeholder="Cuéntanos sobre tu consulta o el tratamiento que te interesa"
                 required
               ></textarea>
             </div>
-            <button
-              type="submit"
-              class="w-full py-4 text-white text-[15px] font-medium tracking-wider transition-all duration-300 hover:opacity-90"
-              style="background-color: var(--teal-600); letter-spacing: 0.05em;"
-            >
-              Enviar Mensaje
+            <div>
+              <label for="fecha" class="ctt-field-label">¿Cuándo prefieres tu cita?</label>
+              <input
+                type="text"
+                id="fecha"
+                name="fecha"
+                class="ctt-input"
+                placeholder="Ej: martes por la mañana, cualquier día por la tarde…"
+              />
+            </div>
+            <button type="submit" class="ctt-submit">
+              Solicitar Valoración Gratuita
             </button>
           </form>
         </div>
+
       </div>
     </div>
   </section>
+
 </Layout>
+
+<style>
+  /* ── Hero ── */
+  .ctt-hero {
+    background-color: #0d2219;
+    padding: 8rem 0 5rem;
+    text-align: center;
+  }
+
+  :global(html.dark) .ctt-hero {
+    background-color: #0d2219;
+  }
+
+  .ctt-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .ctt-hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .ctt-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #C49B38;
+  }
+
+  :global(html.dark) .ctt-label {
+    color: #D4AF55;
+  }
+
+  .ctt-hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.15;
+    color: rgba(244, 240, 235, 0.95);
+    margin: 0;
+  }
+
+  .ctt-hero-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(244, 240, 235, 0.50);
+    max-width: 48ch;
+    margin: 0;
+  }
+
+  .ctt-hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  @media (min-width: 480px) {
+    .ctt-hero-actions { flex-direction: row; }
+  }
+
+  /* ── Botones hero ── */
+  .ctt-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.875rem 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .ctt-btn-outline {
+    background-color: transparent;
+    color: rgba(244, 240, 235, 0.85);
+    border: 1px solid rgba(244, 240, 235, 0.35);
+  }
+
+  .ctt-btn-outline:hover {
+    background-color: rgba(244, 240, 235, 0.1);
+    border-color: rgba(244, 240, 235, 0.6);
+  }
+
+  .ctt-btn-solid {
+    background-color: #C49B38;
+    color: #0d2219;
+    border: 1px solid #C49B38;
+  }
+
+  .ctt-btn-solid:hover {
+    background-color: transparent;
+    color: rgba(244, 240, 235, 0.85);
+    border-color: rgba(244, 240, 235, 0.35);
+  }
+
+  :global(html.dark) .ctt-btn-solid {
+    background-color: #D4AF55;
+    color: #141210;
+    border-color: #D4AF55;
+  }
+
+  :global(html.dark) .ctt-btn-solid:hover {
+    background-color: transparent;
+    color: #1c1b1b;
+    border-color: rgba(21, 51, 40, 0.5);
+  }
+
+  /* ── Info bloque ── */
+  .ctt-icon-box {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: var(--teal-100);
+  }
+
+  .ctt-info-label {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .ctt-info-text {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: block;
+  }
+
+  .ctt-link:hover {
+    color: var(--teal-600);
+  }
+
+  .ctt-social-link {
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .ctt-social-link:hover {
+    color: var(--teal-600);
+  }
+
+  /* ── Formulario ── */
+  .ctt-field-label {
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .ctt-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    outline: none;
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+    border: 1px solid var(--border-primary);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  .ctt-input:focus {
+    border-color: var(--teal-500);
+  }
+
+  .ctt-textarea {
+    resize: none;
+  }
+
+  .ctt-submit {
+    width: 100%;
+    padding: 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #153328;
+    border: 1px solid #153328;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .ctt-submit:hover {
+    background-color: transparent;
+    color: #153328;
+  }
+
+  :global(html.dark) .ctt-submit {
+    background-color: #D4AF55;
+    color: #141210;
+    border-color: #D4AF55;
+  }
+
+  :global(html.dark) .ctt-submit:hover {
+    background-color: transparent;
+    color: rgba(244, 240, 235, 0.85);
+    border-color: rgba(244, 240, 235, 0.30);
+  }
+</style>
+
