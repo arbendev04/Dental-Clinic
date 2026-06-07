@@ -29,7 +29,7 @@ const stats = [
 
 const testimonials = [
   {
-    quote: 'El cuidado y la atención al detalle en Aurum Dental es verdaderamente excepcional. Mi sonrisa nunca había lucido mejor.',
+    quote: 'El cuidado y la atención al detalle en Arango Dental Clinic es verdaderamente excepcional. Mi sonrisa nunca había lucido mejor.',
     author: 'María García'
   },
   {
@@ -43,7 +43,7 @@ const testimonials = [
 ];
 ---
 
-<Layout title="Inicio">
+<Layout title="Inicio" preloadHero={true}>
   <!-- Hero Section -->
   <HeroScroll />
 
@@ -116,7 +116,7 @@ const testimonials = [
       <div class="grid grid-cols-2 md:flex md:flex-wrap md:justify-around gap-8 md:gap-12">
         {stats.map((stat) => (
           <div class="flex flex-col items-center gap-2">
-            <div class="text-4xl md:text-5xl font-light" style="font-family: 'Cormorant Garamond', serif; color: var(--teal-600);">
+            <div class="text-4xl md:text-5xl font-light stat-number" style="font-family: 'Cormorant Garamond', serif; color: var(--teal-600);" data-target={stat.number}>
               {stat.number}
             </div>
             <div class="text-[11px] md:text-[13px] font-medium uppercase text-center" style="color: var(--text-secondary); letter-spacing: 0.15em;">
@@ -145,10 +145,10 @@ const testimonials = [
         </h2>
       </div>
 
-      <!-- Testimonials Grid -->
-      <div class="grid md:grid-cols-3 gap-4 md:gap-6">
+      <!-- Testimonials Grid — horizontal scroll on mobile -->
+      <div class="testimonials-track">
         {testimonials.map((testimonial) => (
-          <div class="p-6 md:p-10 transition-all duration-300" style="background-color: var(--bg-primary); border: 1px solid var(--border-primary);">
+          <div class="testimonial-card p-6 md:p-10 transition-all duration-300" style="background-color: var(--bg-primary); border: 1px solid var(--border-primary);">
             <p class="text-base md:text-lg italic mb-5 md:mb-6" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary); line-height: 1.7;">
               "{testimonial.quote}"
             </p>
@@ -171,7 +171,7 @@ const testimonials = [
         ¿Listo para Experimentar la Diferencia?
       </h2>
       <p class="cta-banner-sub text-sm md:text-base mb-7 md:mb-10" style="line-height: 1.75; max-width: 480px; margin-left: auto; margin-right: auto;">
-        Reserva tu consulta hoy y descubre por qué los pacientes más exigentes eligen Aurum Dental.
+        Reserva tu consulta hoy y descubre por qué los pacientes más exigentes eligen Arango Dental Clinic.
       </p>
       <a
         href="/reservar"
@@ -184,6 +184,50 @@ const testimonials = [
   </section>
 
   <style>
+    /* Testimonials carousel — mobile scroll-snap */
+    .testimonials-track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 1.25rem;
+      padding-bottom: 1rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .testimonials-track::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    .testimonials-track::-webkit-scrollbar-track {
+      background: var(--border-primary);
+    }
+
+    .testimonials-track::-webkit-scrollbar-thumb {
+      background: var(--gold-500);
+      border-radius: 2px;
+    }
+
+    .testimonial-card {
+      flex: 0 0 85%;
+      scroll-snap-align: start;
+    }
+
+    @media (min-width: 768px) {
+      .testimonials-track {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        overflow-x: visible;
+        scroll-snap-type: none;
+        padding-bottom: 0;
+      }
+
+      .testimonial-card {
+        flex: none;
+      }
+    }
+
     /* CTA Banner — modo claro */
     .cta-banner {
       background-color: var(--bg-tertiary);
@@ -196,13 +240,13 @@ const testimonials = [
     }
     .cta-banner-btn {
       background-color: transparent;
-      color: #1c1b1b;
-      border: 1px solid rgba(28, 27, 27, 0.65);
+      color: #153328;
+      border: 1px solid rgba(21, 51, 40, 0.65);
     }
     .cta-banner-btn:hover {
-      background-color: #1c1b1b;
+      background-color: #153328;
       color: #ffffff;
-      border-color: #1c1b1b;
+      border-color: #153328;
     }
 
     /* Modo oscuro: fondo dark de la landing */
@@ -226,4 +270,50 @@ const testimonials = [
       border-color: #D4AF55;
     }
   </style>
+
+  <script>
+    (function () {
+      const els = document.querySelectorAll('.stat-number');
+      if (!els.length) return;
+
+      function animateCounter(el) {
+        const target = el.getAttribute('data-target') || '';
+        const prefix = target.match(/^[^\d]*/)?.[0] || '';
+        const suffix = target.match(/[^\d]*$/)?.[0] || '';
+        const numStr = target.replace(/[^\d]/g, '');
+        const end = parseInt(numStr, 10);
+        if (isNaN(end)) return;
+
+        const duration = 1600;
+        const start = performance.now();
+        el.textContent = prefix + '0' + suffix;
+
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(end * eased);
+          const formatted = current.toLocaleString('es-ES');
+          el.textContent = prefix + formatted + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              animateCounter(e.target);
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      els.forEach((el) => io.observe(el));
+    })();
+  </script>
 </Layout>

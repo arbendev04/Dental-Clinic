@@ -920,26 +920,26 @@ const valores = [
 
 .nos-btn-outline {
   background-color: transparent;
-  color: #1c1b1b;
-  border: 1px solid rgba(28, 27, 27, 0.65);
+  color: #153328;
+  border: 1px solid rgba(21, 51, 40, 0.65);
 }
 
 .nos-btn-outline:hover {
-  background-color: #1c1b1b;
+  background-color: #153328;
   color: #ffffff;
-  border-color: #1c1b1b;
+  border-color: #153328;
 }
 
 .nos-btn-solid {
-  background-color: #1c1b1b;
+  background-color: #153328;
   color: #ffffff;
-  border: 1px solid #1c1b1b;
+  border: 1px solid #153328;
 }
 
 .nos-btn-solid:hover {
   background-color: transparent;
-  color: #1c1b1b;
-  border-color: rgba(28, 27, 27, 0.65);
+  color: #153328;
+  border-color: rgba(21, 51, 40, 0.65);
 }
 
 :global(html.dark) .nos-btn-outline {
@@ -982,6 +982,51 @@ const valores = [
       },
       { threshold: 0.12 }
     );
+    els.forEach((el) => io.observe(el));
+  })();
+
+  /* ── Counter animation ── */
+  (function () {
+    const els = document.querySelectorAll('.nos-stat-valor');
+    if (!els.length) return;
+
+    function animateCounter(el) {
+      const target = el.getAttribute('data-target') || '';
+      const prefix = target.match(/^[^\d]*/)?.[0] || '';
+      const suffix = target.match(/[^\d]*$/)?.[0] || '';
+      const numStr = target.replace(/[^\d]/g, '');
+      const end = parseInt(numStr, 10);
+      if (isNaN(end)) return;
+
+      const duration = 1600;
+      const start = performance.now();
+      el.textContent = prefix + '0' + suffix;
+
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(end * eased);
+        const formatted = current.toLocaleString('es-ES');
+        el.textContent = prefix + formatted + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            animateCounter(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
     els.forEach((el) => io.observe(el));
   })();
 </script>

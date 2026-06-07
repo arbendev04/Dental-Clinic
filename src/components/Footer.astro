@@ -7,44 +7,14 @@ const navLinks = [
 ];
 
 const servicios = [
-  { href: '/servicios#blanqueamiento', label: 'Blanqueamiento Dental' },
-  { href: '/servicios#implantes',      label: 'Implantes Dentales'    },
-  { href: '/servicios#ortodoncia',     label: 'Ortodoncia'            },
-  { href: '/servicios#general',        label: 'Odontología General'   },
+  { href: '/servicios', label: 'Odontología Digital'  },
+  { href: '/servicios', label: 'Implantología'        },
+  { href: '/servicios', label: 'Estética Dental'      },
+  { href: '/servicios', label: 'Ortodoncia'           },
 ];
 ---
 
 <footer class="footer">
-
-  <!-- ── Franja editorial CTA ── -->
-  <div class="footer-cta-band">
-    <div class="footer-inner footer-cta-inner">
-      <div class="footer-cta-text">
-        <p class="footer-cta-label">Arango Dental Clinic · Benidorm</p>
-        <h2 class="footer-cta-headline">
-          La sonrisa que imaginas está<br />a una consulta de distancia.
-        </h2>
-        <p class="footer-cta-sub">
-          Visítanos en Benidorm o escríbenos. Nuestro equipo te dedica
-          el tiempo y la atención que mereces.
-        </p>
-      </div>
-      <div class="footer-cta-actions">
-        <a href="/reservar" class="footer-cta-btn">
-          Reservar consulta
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
-        <a href="tel:+34965088282" class="footer-cta-tel">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-          </svg>
-          96 508 82 82
-        </a>
-      </div>
-    </div>
-  </div>
 
   <!-- ── Cuerpo principal ── -->
   <div class="footer-inner footer-body">
@@ -76,6 +46,10 @@ const servicios = [
           <p class="footer-schedule-row">
             <span class="footer-schedule-label">Lun – Vie</span>
             <span>9:00 – 19:00</span>
+          </p>
+          <p class="footer-schedule-row">
+            <span class="footer-schedule-label">Sábado</span>
+            <span>9:00 – 14:00</span>
           </p>
         </div>
       </div>
@@ -113,7 +87,7 @@ const servicios = [
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
             </svg>
-            <span>Avd. Alfonso Puchades 22,<br />Benidorm, Alicante 03501</span>
+            <a href="https://maps.google.com/?q=Avd+Alfonso+Puchades+22,+Benidorm,+Alicante+03501" target="_blank" rel="noopener noreferrer" class="footer-link">Avd. Alfonso Puchades 22,<br />Benidorm, Alicante 03501</a>
           </li>
           <li>
             <a href="tel:+34965088282" class="footer-link footer-link-icon">
@@ -198,17 +172,13 @@ const servicios = [
      FOOTER — siempre oscuro (fondo forestal profundo)
      ================================================ */
 
-  /* Colores del footer — modo CLARO: verde forestal profundo */
+  /* Colores del footer — modo CLARO: negro forestal profundo */
   .footer {
-    --f-bg:           #0d2219;
-    --f-band-bg:      #fcf9f8;
-    --f-band-border:  rgba(0, 0, 0, 0.07);
-    --f-band-text:    #1c1b1b;
-    --f-band-muted:   #414845;
+    --f-bg:           #1c1b1b;
     --f-gold:         #C49B38;
     --f-text:         rgba(244, 240, 235, 0.90);
-    --f-muted:        rgba(244, 240, 235, 0.45);
-    --f-faint:        rgba(244, 240, 235, 0.20);
+    --f-muted:        rgba(245, 242, 238, 0.86);
+    --f-faint:        rgba(245, 242, 238, 0.86);
     --f-border:       rgba(196, 155, 56, 0.15);
 
     background-color: var(--f-bg);
@@ -219,10 +189,6 @@ const servicios = [
   /* Modo OSCURO — linen cálido con acento verde forestal */
   :global(html.dark) .footer {
     --f-bg:           #f6f3f2;
-    --f-band-bg:      #141210;
-    --f-band-border:  rgba(196, 155, 56, 0.18);
-    --f-band-text:    rgba(244, 240, 235, 0.95);
-    --f-band-muted:   rgba(244, 240, 235, 0.52);
     --f-gold:         #2f4d41;
     --f-text:         #1c1b1b;
     --f-muted:        #414845;
@@ -235,133 +201,6 @@ const servicios = [
     margin: 0 auto;
     padding-left: 2.5rem;
     padding-right: 2.5rem;
-  }
-
-  /* ── Franja CTA ── */
-  .footer-cta-band {
-    background-color: var(--f-band-bg);
-    border-bottom: 1px solid var(--f-band-border);
-  }
-
-  .footer-cta-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-
-  @media (min-width: 768px) {
-    .footer-cta-inner {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 4rem;
-    }
-  }
-
-  .footer-cta-label {
-    font-family: "Inter", sans-serif;
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--f-gold);
-    margin-bottom: 1rem;
-  }
-
-  .footer-cta-headline {
-    font-family: "Cormorant Garamond", serif;
-    font-size: clamp(1.9rem, 3.5vw, 3rem);
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.2;
-    color: var(--f-band-text);
-    margin-bottom: 1rem;
-  }
-
-  .footer-cta-sub {
-    font-family: "Inter", sans-serif;
-    font-size: 0.875rem;
-    line-height: 1.7;
-    color: var(--f-band-muted);
-    max-width: 44ch;
-  }
-
-  .footer-cta-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex-shrink: 0;
-  }
-
-  @media (min-width: 480px) {
-    .footer-cta-actions {
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .footer-cta-actions {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-
-  /* Botón CTA principal */
-  .footer-cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: "Inter", sans-serif;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #153328;
-    background-color: transparent;
-    border: 1px solid rgba(21, 51, 40, 0.65);
-    padding: 0.875rem 1.75rem;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .footer-cta-btn:hover {
-    background-color: #153328;
-    color: #ffffff;
-    border-color: #153328;
-  }
-
-  /* Dark mode: band verde oscuro, botón estilo crema */
-  :global(html.dark) .footer-cta-btn {
-    color: rgba(244, 240, 235, 0.85);
-    background-color: transparent;
-    border-color: rgba(244, 240, 235, 0.30);
-  }
-
-  :global(html.dark) .footer-cta-btn:hover {
-    background-color: #C49B38;
-    color: #0d2219;
-    border-color: #C49B38;
-  }
-
-  /* Teléfono secundario */
-  .footer-cta-tel {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: "Inter", sans-serif;
-    font-size: 0.82rem;
-    font-weight: 400;
-    text-decoration: none;
-    color: var(--f-band-muted);
-    transition: color 0.3s ease;
-  }
-
-  .footer-cta-tel:hover {
-    color: var(--f-band-text);
   }
 
   /* ── Cuerpo del footer ── */
@@ -434,7 +273,6 @@ const servicios = [
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
-    padding-top: 0.25rem;
     border-top: 1px solid var(--f-border);
     padding-top: 1rem;
     margin-top: 0.25rem;
@@ -444,7 +282,7 @@ const servicios = [
     display: flex;
     gap: 0.75rem;
     font-family: "Inter", sans-serif;
-    font-size: 0.78rem;
+    font-size: 0.80rem;
     color: var(--f-muted);
   }
 
@@ -481,7 +319,7 @@ const servicios = [
 
   .footer-link {
     font-family: "Inter", sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 400;
     line-height: 1.4;
     color: var(--f-muted);

@@ -7,12 +7,14 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  preloadHero?: boolean;
 }
 
 const {
   title,
   description = 'Aurum Dental - Clínica odontológica de alta gama en Benidorm. Blanqueamiento dental, implantes, ortodoncia y más. Tu sonrisa merece excelencia.',
-  image = '/img/og-image.jpg'
+  image = '/img/og-image.jpg',
+  preloadHero = false
 } = Astro.props;
 
 const siteUrl = 'https://aurumdental.es';
@@ -137,6 +139,11 @@ const schemaData = {
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Aurum Dental" />
     <meta name="theme-color" content="#1A8070" />
+
+    <!-- Preload hero image (LCP) -->
+    {preloadHero && (
+      <link rel="preload" as="image" type="image/webp" href="/img/hero/instrumentos-odontologicos-esterilizados.webp" fetchpriority="high" />
+    )}
 
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -57,13 +57,13 @@ const servicios = [
   <!-- ── Grid de servicios ── -->
   <section class="srv-grid-section">
     <div class="srv-container">
-      <div class="srv-section-header">
+      <div class="srv-section-header reveal-up">
         <p class="srv-label">Lo que ofrecemos</p>
         <h2 class="srv-section-title">Nuestros servicios</h2>
       </div>
       <div class="srv-grid">
-        {servicios.map((servicio) => (
-          <div class="srv-card">
+        {servicios.map((servicio, i) => (
+          <div class="srv-card reveal-up" style={`--reveal-delay: ${i * 80}ms`}>
             <h3 class="srv-card-title">{servicio.nombre}</h3>
             <p class="srv-card-desc">{servicio.descripcion}</p>
             <div class="srv-card-footer">
@@ -83,7 +83,7 @@ const servicios = [
 
   <!-- ── CTA ── -->
   <section class="srv-cta-section">
-    <div class="srv-container srv-cta-inner">
+    <div class="srv-container srv-cta-inner reveal-up">
       <h2 class="srv-cta-title">Somos Arango Dental Clinic, comprometidos con tu excelencia dental</h2>
       <p class="srv-cta-sub">Agenda tu valoración sin costo y empieza a transformar tu sonrisa.</p>
       <div class="srv-cta-actions">
@@ -360,4 +360,36 @@ const servicios = [
     color: rgba(244, 240, 235, 0.85);
     border-color: rgba(244, 240, 235, 0.30);
   }
+
+  /* ── Reveal animations ── */
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 </style>
+
+<script>
+  (function () {
+    const els = document.querySelectorAll('.reveal-up');
+    if (!els.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    els.forEach((el) => io.observe(el));
+  })();
+</script>
