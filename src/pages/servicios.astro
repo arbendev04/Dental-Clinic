@@ -41,10 +41,21 @@ const servicios = [
 ];
 ---
 
-<Layout title="Servicios" description="Descubre todos los servicios dentales que ofrecemos en Arango Dental Clinic">
+<Layout title="Servicios Dentales" description="Implantes desde 800€, ortodoncia invisible, estética dental y odontología digital en Benidorm. Tecnología 3D y atención personalizada en Arango Dental Clinic.">
 
   <!-- ── Hero ── -->
   <section class="srv-hero" data-scroll-hero>
+    <img
+      src="/img/servicios/servicios.webp"
+      alt="Instrumental odontológico profesional en Arango Dental Clinic"
+      class="srv-hero-img"
+      width="1536"
+      height="1024"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="srv-hero-overlay" aria-hidden="true"></div>
     <div class="srv-container srv-hero-inner">
       <p class="srv-label">Arango Dental Clinic</p>
       <h1 class="srv-hero-title">Cuidamos tu Sonrisa,<br>Cuidamos tu Confianza</h1>
@@ -108,8 +119,12 @@ const servicios = [
 
   /* ── Hero ── */
   .srv-hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
     background-color: #0d2219;
-    padding: 8rem 0 5rem;
     text-align: center;
   }
 
@@ -117,11 +132,47 @@ const servicios = [
     background-color: #0d2219;
   }
 
+  .srv-hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+  }
+
+  .srv-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(6, 18, 10, 0.72) 0%,
+        rgba(6, 18, 10, 0.48) 50%,
+        rgba(6, 18, 10, 0.72) 100%
+      );
+  }
+
+  :global(html.dark) .srv-hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(4, 12, 7, 0.82) 0%,
+        rgba(4, 12, 7, 0.55) 50%,
+        rgba(4, 12, 7, 0.82) 100%
+      );
+  }
+
   .srv-hero-inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
+    padding-top: 7rem;
+    padding-bottom: 6rem;
   }
 
   .srv-label {

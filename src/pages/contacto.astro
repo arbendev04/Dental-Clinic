@@ -2,9 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contacto" description="Agenda tu cita en Arango Dental Clinic, Benidorm">
+<Layout title="Contacto" description="Contacta con Arango Dental Clinic en Benidorm. Llámanos al 965 088 282, escríbenos por WhatsApp o visítanos en Avd. Alfonso Puchades 22. Lun–Vie 9–19h.">
   <!-- Header -->
   <section class="ctt-hero" data-scroll-hero>
+    <img
+      src="/img/contacto/contacto.webp"
+      alt="Interior de Arango Dental Clinic en Benidorm"
+      class="ctt-hero-img"
+      width="1717"
+      height="916"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="ctt-hero-overlay" aria-hidden="true"></div>
     <div class="ctt-container ctt-hero-inner">
       <p class="ctt-label">Arango Dental Clinic</p>
       <h1 class="ctt-hero-title">Da el primer paso hacia<br>tu mejor sonrisa</h1>
@@ -199,13 +210,49 @@ import Layout from '../layouts/Layout.astro';
 <style>
   /* ── Hero ── */
   .ctt-hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
     background-color: #0d2219;
-    padding: 8rem 0 5rem;
     text-align: center;
   }
 
   :global(html.dark) .ctt-hero {
     background-color: #0d2219;
+  }
+
+  .ctt-hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+  }
+
+  .ctt-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(6, 18, 10, 0.72) 0%,
+        rgba(6, 18, 10, 0.48) 50%,
+        rgba(6, 18, 10, 0.72) 100%
+      );
+  }
+
+  :global(html.dark) .ctt-hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(4, 12, 7, 0.82) 0%,
+        rgba(4, 12, 7, 0.55) 50%,
+        rgba(4, 12, 7, 0.82) 100%
+      );
   }
 
   .ctt-container {
@@ -216,10 +263,14 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .ctt-hero-inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
+    padding-top: 7rem;
+    padding-bottom: 6rem;
   }
 
   .ctt-label {

@@ -13,7 +13,7 @@ interface Props {
 const {
   title,
   description = 'Aurum Dental - Clínica odontológica de alta gama en Benidorm. Blanqueamiento dental, implantes, ortodoncia y más. Tu sonrisa merece excelencia.',
-  image = '/img/og-image.jpg',
+  image = '/img/hero/instrumentos-odontologicos-esterilizados.webp',
   preloadHero = false
 } = Astro.props;
 
@@ -29,8 +29,8 @@ const schemaData = {
   "alternateName": "Arango Dental Clinic",
   "description": "Clínica odontológica de alta gama especializada en blanqueamiento dental, implantes, ortodoncia y odontología estética.",
   "url": siteUrl,
-  "logo": `${siteUrl}/img/logo-oscuro.png`,
-  "image": `${siteUrl}/img/hero-dental.jpg`,
+  "logo": `${siteUrl}/img/logo/logo-oscuro.png`,
+  "image": `${siteUrl}/img/hero/instrumentos-odontologicos-esterilizados.webp`,
   "telephone": "+34 965 088 282",
   "email": "Arangodentalclinic@gmail.com",
   "address": {
@@ -117,7 +117,7 @@ const schemaData = {
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/logo/logo-oscuro.png" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -138,17 +138,19 @@ const schemaData = {
     <!-- Otros meta tags útiles -->
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Aurum Dental" />
-    <meta name="theme-color" content="#1A8070" />
+    <meta name="theme-color" content="#153328" />
 
     <!-- Preload hero image (LCP) -->
     {preloadHero && (
       <link rel="preload" as="image" type="image/webp" href="/img/hero/instrumentos-odontologicos-esterilizados.webp" fetchpriority="high" />
     )}
 
-    <!-- Fuentes -->
+    <!-- Fuentes (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400&family=Inter:wght@300;400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
