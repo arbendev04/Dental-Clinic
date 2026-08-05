@@ -6,39 +6,37 @@ const servicios = [
     nombre: 'Odontología Digital',
     descripcion: 'Diagnóstico y planificación con tecnología de última generación: escáner intraoral 3D, radiografía digital y diseño de sonrisa asistido por ordenador para resultados precisos y predecibles.',
     duracion: 'Consulta inicial',
-    precio: 'Consultar',
   },
   {
     nombre: 'Implantología',
     descripcion: 'Reemplazo de piezas perdidas con implantes de titanio de alta calidad. Recupera la función y la estética de tu sonrisa con soluciones duraderas y de resultado natural.',
     duracion: 'Múltiples sesiones',
-    precio: 'Desde 800€',
   },
   {
     nombre: 'Estética Dental',
     descripcion: 'Carillas de porcelana, blanqueamiento profesional y diseño de sonrisa personalizado para transformar tu imagen con resultados armoniosos y naturales.',
     duracion: 'Desde 1 sesión',
-    precio: 'Desde 300€',
   },
   {
     nombre: 'Rehabilitación Oral',
     descripcion: 'Restauración completa de la función masticatoria y estética mediante prótesis, coronas, puentes y tratamientos combinados adaptados a cada paciente.',
     duracion: 'Plan personalizado',
-    precio: 'Consultar',
   },
   {
     nombre: 'Periodoncia',
     descripcion: 'Diagnóstico y tratamiento de enfermedades de las encías. Mantenimiento periodontal para preservar la salud de los tejidos que sostienen tus dientes.',
     duracion: '45–60 min',
-    precio: 'Desde 80€',
   },
   {
     nombre: 'Ortodoncia',
     descripcion: 'Corrección de la posición dental con brackets de última generación o alineadores invisibles, para una sonrisa funcional y estéticamente equilibrada.',
     duracion: 'Consulta inicial',
-    precio: 'Desde 1.500€',
   },
 ];
+
+const WHATSAPP_PHONE = '34665886439';
+const whatsappHref = (nombreServicio: string) =>
+  `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(`Hola, quiero más información de ${nombreServicio}`)}`;
 ---
 
 <Layout title="Servicios Dentales" description="Implantes desde 800€, ortodoncia invisible, estética dental y odontología digital en Benidorm. Tecnología 3D y atención personalizada en Arango Dental Clinic.">
@@ -84,7 +82,18 @@ const servicios = [
                 </svg>
                 {servicio.duracion}
               </span>
-              <span class="srv-card-price">{servicio.precio}</span>
+              <a
+                href={whatsappHref(servicio.nombre)}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="srv-card-link"
+                aria-label={`Más información de ${servicio.nombre} por WhatsApp`}
+              >
+                Más información
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
             </div>
           </div>
         ))}
@@ -294,15 +303,30 @@ const servicios = [
     color: var(--text-tertiary);
   }
 
-  .srv-card-price {
+  .srv-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
     font-family: "Inter", sans-serif;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--teal-600);
+    text-decoration: none;
+    transition: color 0.2s ease;
   }
 
-  :global(html.dark) .srv-card-price {
-    color: var(--teal-600);
+  .srv-card-link svg {
+    transition: transform 0.25s ease;
+  }
+
+  .srv-card-link:hover,
+  .srv-card-link:focus-visible {
+    color: var(--gold-600);
+  }
+
+  .srv-card-link:hover svg,
+  .srv-card-link:focus-visible svg {
+    transform: translateX(3px);
   }
 
   /* ── CTA ── */
