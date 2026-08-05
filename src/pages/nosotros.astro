@@ -204,18 +204,6 @@ const valores = [
       <div class="nos-team-grid">
         <!-- Ana Deltell -->
         <div class="nos-member-card reveal-up" style="--reveal-delay: 0ms">
-          <div class="nos-member-img-wrap">
-            <img
-              src="/img/nosotros/Ana-Deltell.webp"
-              alt="Ana Deltell, higienista dental"
-              class="nos-member-img"
-              width="1080"
-              height="898"
-              style="object-position: center top;"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
           <div class="nos-member-info">
             <p class="nos-member-role">Higienista Dental · Periodoncia</p>
             <h3 class="nos-member-name">Ana Deltell</h3>
@@ -225,18 +213,6 @@ const valores = [
 
         <!-- Natalia Svetlozarova -->
         <div class="nos-member-card reveal-up" style="--reveal-delay: 80ms">
-          <div class="nos-member-img-wrap">
-            <img
-              src="/img/nosotros/Natalia_Svetlozarova.webp"
-              alt="Natalia Svetlozarova, estética dental"
-              class="nos-member-img"
-              width="1887"
-              height="1327"
-              style="object-position: center 15%;"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
           <div class="nos-member-info">
             <p class="nos-member-role">Estética Dental</p>
             <h3 class="nos-member-name">Natalia Svetlozarova</h3>
@@ -246,18 +222,6 @@ const valores = [
 
         <!-- Sandra Romero -->
         <div class="nos-member-card reveal-up" style="--reveal-delay: 160ms">
-          <div class="nos-member-img-wrap">
-            <img
-              src="/img/nosotros/Sandra_Romero.webp"
-              alt="Sandra Romero, ortodoncia"
-              class="nos-member-img"
-              width="2560"
-              height="1707"
-              style="object-position: center 10%;"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
           <div class="nos-member-info">
             <p class="nos-member-role">Ortodoncia</p>
             <h3 class="nos-member-name">Sandra Romero</h3>
@@ -811,28 +775,8 @@ const valores = [
   transform: translateY(-4px);
 }
 
-.nos-member-img-wrap {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  flex-shrink: 0;
-  background-color: var(--teal-100);
-}
-
-.nos-member-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nos-member-card:hover .nos-member-img {
-  transform: scale(1.05);
-}
-
 .nos-member-info {
-  padding: 1.5rem 1.75rem 2rem;
+  padding: 2rem 1.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
