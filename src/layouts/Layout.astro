@@ -142,7 +142,10 @@ const schemaData = {
 
     <!-- Preload hero image (LCP) -->
     {preloadHero && (
-      <link rel="preload" as="image" type="image/webp" href="/img/hero/instrumentos-odontologicos-esterilizados.webp" fetchpriority="high" />
+      <>
+        <link rel="preload" as="image" type="image/webp" href="/img/hero/1-mobile.webp" media="(max-width: 640px)" fetchpriority="high" />
+        <link rel="preload" as="image" type="image/webp" href="/img/hero/instrumentos-odontologicos-esterilizados.webp" media="(min-width: 641px)" fetchpriority="high" />
+      </>
     )}
 
     <!-- Fuentes (non-blocking) -->
