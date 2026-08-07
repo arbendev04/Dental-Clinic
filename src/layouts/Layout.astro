@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
   title: string;
@@ -110,6 +111,49 @@ const schemaData = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Google Consent Mode v2 — denegado por defecto (debe cargar antes de GTM) -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500
+      });
+    </script>
+
+    <!-- Restaurar decisión previa (si el usuario ya eligió en una visita anterior) -->
+    <script is:inline>
+      (function () {
+        try {
+          var raw = localStorage.getItem('cookie_consent');
+          if (!raw) return;
+          var consent = JSON.parse(raw);
+          if (typeof consent.analytics !== 'boolean' || typeof consent.marketing !== 'boolean') return;
+          gtag('consent', 'update', {
+            'ad_storage': consent.marketing ? 'granted' : 'denied',
+            'ad_user_data': consent.marketing ? 'granted' : 'denied',
+            'ad_personalization': consent.marketing ? 'granted' : 'denied',
+            'analytics_storage': consent.analytics ? 'granted' : 'denied'
+          });
+        } catch (e) {
+          /* localStorage no disponible — se mantiene todo denegado por defecto */
+        }
+      })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5C8KVVJL');
+    </script>
+    <!-- End Google Tag Manager -->
+
     <!-- SEO básico -->
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -167,6 +211,11 @@ const schemaData = {
     </script>
   </head>
   <body class="min-h-screen flex flex-col transition-colors" style="background-color: var(--bg-primary); color: var(--text-primary);">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5C8KVVJL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <!-- Skip to main content (Accesibilidad) -->
     <a
       href="#main-content"
@@ -181,5 +230,6 @@ const schemaData = {
       <slot />
     </main>
     <Footer />
+    <CookieConsent />
   </body>
 </html>

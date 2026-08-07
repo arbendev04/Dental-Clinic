@@ -27,20 +27,6 @@ const stats = [
   { number: '24/7', label: 'Atención de Emergencias' },
 ];
 
-const testimonials = [
-  {
-    quote: 'El cuidado y la atención al detalle en Arango Dental Clinic es verdaderamente excepcional. Mi sonrisa nunca había lucido mejor.',
-    author: 'María García'
-  },
-  {
-    quote: 'Profesionales, corteses y genuinamente atentos. Hicieron que lo que pensé sería un proceso difícil fuera completamente libre de estrés.',
-    author: 'Carlos Martínez'
-  },
-  {
-    quote: 'Desde el momento en que entré, supe que estaba en manos expertas. Los resultados superaron todas mis expectativas.',
-    author: 'Laura Fernández'
-  },
-];
 ---
 
 <Layout title="Clínica Dental en Benidorm" description="Arango Dental Clinic — clínica odontológica de alta gama en Benidorm. Implantes, estética dental, ortodoncia y odontología digital con tecnología avanzada." preloadHero={true}>
@@ -145,22 +131,82 @@ const testimonials = [
         </h2>
       </div>
 
-      <!-- Testimonials Grid — horizontal scroll on mobile -->
-      <div class="testimonials-track">
-        {testimonials.map((testimonial) => (
-          <div class="testimonial-card p-6 md:p-10 transition-all duration-300" style="background-color: var(--bg-primary); border: 1px solid var(--border-primary);">
-            <p class="text-base md:text-lg italic mb-5 md:mb-6" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary); line-height: 1.7;">
-              "{testimonial.quote}"
-            </p>
-            <div class="flex items-center gap-3">
-              <div class="w-6 h-px" style="background-color: var(--gold-500);"></div>
-              <span class="text-[12px] md:text-[13px] font-medium tracking-wider" style="color: var(--text-secondary); letter-spacing: 0.08em;">
-                {testimonial.author}
-              </span>
-            </div>
-          </div>
-        ))}
+      <!-- Reseñas de Google (EmbedSocial) — un widget por tema, solo uno visible -->
+      <div class="reviews-widget reviews-widget-light">
+        <div class="embedsocial-hashtag" data-ref="ce0db3de6c56bf3c7a637ce470f75bef38fa2ee0">
+          <a
+            class="feed-powered-by-es feed-powered-by-es-feed-img es-widget-branding"
+            href="https://embedsocial.com/"
+            target="_blank"
+            title="Widget by EmbedSocial"
+          >
+            <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial" />
+            <div class="es-widget-branding-text">Widget by EmbedSocial</div>
+          </a>
+        </div>
       </div>
+      <div class="reviews-widget reviews-widget-dark">
+        <div class="embedsocial-hashtag" data-ref="23f82d3fea76f664349985cb3ed7d64ef9e26cab">
+          <a
+            class="feed-powered-by-es feed-powered-by-es-feed-img es-widget-branding"
+            href="https://embedsocial.com/"
+            target="_blank"
+            title="Widget by EmbedSocial"
+          >
+            <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial" />
+            <div class="es-widget-branding-text">Widget by EmbedSocial</div>
+          </a>
+        </div>
+      </div>
+      <script is:inline>
+        (function (d, s, id) {
+          var js;
+          if (d.getElementById(id)) { return; }
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://embedsocial.com/cdn/ht.js";
+          d.getElementsByTagName("head")[0].appendChild(js);
+        })(document, "script", "EmbedSocialHashtagScript");
+      </script>
+      <script>
+        (function () {
+          function activeWrapper() {
+            const light = document.querySelector('.reviews-widget-light');
+            const dark = document.querySelector('.reviews-widget-dark');
+            return getComputedStyle(light).display !== 'none' ? light : dark;
+          }
+
+          function isProperlySized(iframe) {
+            return /^[1-9]\d*px$/.test(iframe.style.height);
+          }
+
+          function reloadIframe(wrapper) {
+            const iframe = wrapper?.querySelector('iframe');
+            if (iframe) iframe.src = iframe.src;
+          }
+
+          // El widget que arranca oculto (display: none) nunca llega a reportar
+          // su altura real al iframe padre. Al volverse visible (cambio de tema
+          // en vivo, sin recargar la página), forzamos un reload de su src para
+          // que EmbedSocial vuelva a medirlo correctamente.
+          let lastActive = activeWrapper();
+
+          const observer = new MutationObserver(() => {
+            const current = activeWrapper();
+            if (current !== lastActive) {
+              lastActive = current;
+              reloadIframe(current);
+            }
+          });
+          observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+          // Red de seguridad por si el widget inicial tampoco llegó a medirse.
+          setTimeout(() => {
+            const iframe = lastActive?.querySelector('iframe');
+            if (iframe && !isProperlySized(iframe)) reloadIframe(lastActive);
+          }, 1500);
+        })();
+      </script>
     </div>
   </section>
 
@@ -184,48 +230,17 @@ const testimonials = [
   </section>
 
   <style>
-    /* Testimonials carousel — mobile scroll-snap */
-    .testimonials-track {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-padding-left: 1.25rem;
-      padding-bottom: 1rem;
-      -webkit-overflow-scrolling: touch;
+    /* Widget de reseñas — uno por tema, solo uno visible a la vez */
+    .reviews-widget-dark {
+      display: none;
     }
 
-    .testimonials-track::-webkit-scrollbar {
-      height: 3px;
+    :global(html.dark) .reviews-widget-light {
+      display: none;
     }
 
-    .testimonials-track::-webkit-scrollbar-track {
-      background: var(--border-primary);
-    }
-
-    .testimonials-track::-webkit-scrollbar-thumb {
-      background: var(--gold-500);
-      border-radius: 2px;
-    }
-
-    .testimonial-card {
-      flex: 0 0 85%;
-      scroll-snap-align: start;
-    }
-
-    @media (min-width: 768px) {
-      .testimonials-track {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-        overflow-x: visible;
-        scroll-snap-type: none;
-        padding-bottom: 0;
-      }
-
-      .testimonial-card {
-        flex: none;
-      }
+    :global(html.dark) .reviews-widget-dark {
+      display: block;
     }
 
     /* CTA Banner — modo claro */
