@@ -58,9 +58,31 @@ const valores = [
     texto: 'Entendemos tus miedos y tus expectativas. Te acompañamos en cada paso del tratamiento con cercanía, paciencia y cuidado real.',
   },
 ];
+// Person schema para el director y el equipo — mismos textos que aparecen
+// visibles en la página, sin datos nuevos.
+const equipoSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "Dr. Sebastián Arango",
+      "jobTitle": "Director · Implantología · Rehabilitación Oral",
+      "worksFor": { "@type": "Dentist", "name": "Aurum Dental" },
+      "description": "Fundador y director de Arango Dental Clinic. Especialista en implantología y rehabilitación oral, con formación en las técnicas más avanzadas de odontología digital.",
+    },
+    ...equipo.map((persona) => ({
+      "@type": "Person",
+      "name": persona.nombre,
+      "jobTitle": persona.especialidad,
+      "worksFor": { "@type": "Dentist", "name": "Aurum Dental" },
+      "description": persona.descripcion,
+    })),
+  ],
+};
 ---
 
 <Layout title="Sobre Nosotros" description="Conoce al Dr. Sebastián Arango y su equipo de especialistas en implantología, rehabilitación oral, ortodoncia y endodoncia en Benidorm." image="/img/banner/banner-arango.webp">
+  <script type="application/ld+json" set:html={JSON.stringify(equipoSchema)} />
 
   <!-- ── HERO ── -->
   <section class="nos-hero" data-scroll-hero>
