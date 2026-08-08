@@ -1,8 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const faqs = [
+  {
+    pregunta: '¿Cuál es el horario de atención?',
+    respuesta: 'Atendemos de lunes a jueves de 10:00 a 14:00 y de 15:00 a 19:00, y los viernes de 10:00 a 14:00. Permanecemos cerrados los fines de semana.',
+  },
+  {
+    pregunta: '¿Dónde está ubicada la clínica?',
+    respuesta: 'Arango Dental Clinic está en Avd. Alfonso Puchades 22, Benidorm, Alicante 03501.',
+  },
+  {
+    pregunta: '¿La primera consulta es gratuita?',
+    respuesta: 'Sí. La primera valoración es gratuita y sin compromiso: evaluamos tu caso y te explicamos las opciones de tratamiento antes de que decidas nada.',
+  },
+  {
+    pregunta: '¿Cómo puedo reservar una cita?',
+    respuesta: 'Podés llamarnos al 965 088 282, escribirnos por WhatsApp al 665 886 439, o completar el formulario de esta página. Respondemos en menos de 24 horas.',
+  },
+  {
+    pregunta: '¿Qué servicios ofrece Arango Dental Clinic?',
+    respuesta: 'Ofrecemos Odontología Digital, Implantología, Estética Dental, Rehabilitación Oral, Periodoncia y Ortodoncia, con tecnología de escáner intraoral 3D y radiografía digital.',
+  },
+  {
+    pregunta: '¿Cuánto cuesta un implante dental?',
+    respuesta: 'Los implantes dentales tienen un precio desde 800€, según el caso de cada paciente.',
+  },
+  {
+    pregunta: '¿Cuánto cuesta la ortodoncia?',
+    respuesta: 'El tratamiento de ortodoncia (brackets o alineadores invisibles) tiene un precio desde 1.500€.',
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.pregunta,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.respuesta,
+    },
+  })),
+};
 ---
 
 <Layout title="Contacto" description="Contacta con Arango Dental Clinic en Benidorm: llámanos al 965 088 282, escríbenos por WhatsApp o visítanos en Avd. Alfonso Puchades 22, Benidorm." image="/img/contacto/contacto.webp">
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <!-- Header -->
   <section class="ctt-hero" data-scroll-hero>
     <img
@@ -190,6 +235,24 @@ import Layout from '../layouts/Layout.astro';
           <p id="contact-form-status" class="ctt-form-status" role="status" aria-live="polite" hidden></p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="ctt-faq-section">
+    <div class="ctt-container">
+      <div class="ctt-faq-header">
+        <p class="ctt-label">Resolvemos tus dudas</p>
+        <h2 class="ctt-faq-title">Preguntas frecuentes</h2>
+      </div>
+      <div class="ctt-faq-list">
+        {faqs.map((faq) => (
+          <details class="ctt-faq-item">
+            <summary class="ctt-faq-question">{faq.pregunta}</summary>
+            <p class="ctt-faq-answer">{faq.respuesta}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -510,6 +573,78 @@ import Layout from '../layouts/Layout.astro';
   .ctt-form-status-error {
     border-color: #b3423a;
     color: #b3423a;
+  }
+
+  /* ── FAQ ── */
+  .ctt-faq-section {
+    background-color: var(--bg-primary);
+    padding: 5rem 0;
+  }
+
+  .ctt-faq-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ctt-faq-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 300;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .ctt-faq-list {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .ctt-faq-item {
+    border-bottom: 1px solid var(--border-primary);
+    padding: 1.25rem 0;
+  }
+
+  .ctt-faq-question {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .ctt-faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .ctt-faq-question::after {
+    content: '+';
+    flex-shrink: 0;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--teal-600);
+    transition: transform 0.25s ease;
+  }
+
+  .ctt-faq-item[open] .ctt-faq-question::after {
+    transform: rotate(45deg);
+  }
+
+  .ctt-faq-answer {
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0.75rem 0 0;
   }
 
   /* ── Mapa ── */
