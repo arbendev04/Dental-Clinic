@@ -380,12 +380,6 @@
   const SCALE_IDLE = 1.0;   // reposo: imagen a tamaño normal
   const SCALE_OUT  = 0.75;  // salida: imagen se encoge al alejarse
 
-  // Estado inicial: frame1 visible, el resto muy zoomed-in (dentro del túnel)
-  gsap.set(frameEls[0], { opacity: 1,  scale: SCALE_IDLE, filter: "blur(0px)" });
-  gsap.set(frameEls[1], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
-  gsap.set(frameEls[2], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
-  gsap.set(frameEls[3], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
-
   // Ventanas de transición [fadeInStart, fullVisible, fadeOutStart, fullyGone]
   const wins = [
     [0,    0,    0.24, 0.40],
@@ -395,6 +389,62 @@
   ];
 
   const remap = gsap.utils.mapRange;
+
+  const label          = document.getElementById("hero-label")       as HTMLElement;
+  const description    = document.getElementById("hero-description") as HTMLElement;
+  const ctas           = document.getElementById("hero-ctas")        as HTMLElement;
+  const charsContainer = document.getElementById("hero-chars")       as HTMLElement;
+  const scrollIndicator = document.getElementById("scroll-indicator") as HTMLElement;
+
+  // Distancia total de scroll del wrapper (400vh - 100vh = 300vh)
+  const totalScroll = 3 * window.innerHeight;
+
+  // Offsets exactos: cuándo empieza a aparecer cada frame
+  const frame2Offset = wins[1][0] * totalScroll; // 0.24 × 3vh
+  const frame3Offset = wins[2][0] * totalScroll; // 0.50 × 3vh
+  const frame4Offset = wins[3][0] * totalScroll; // 0.76 × 3vh
+
+  // ─────────────────────────────────────────────────────────────────
+  // Todas las escrituras al DOM primero (gsap.set + reconstrucción del
+  // H1 en spans). ScrollTrigger.create() lee layout del wrapper para
+  // calcular sus posiciones — si se intercala con escrituras, cada
+  // create() fuerza un reflow síncrono. Agrupando todo el "write" acá
+  // y todo el "read" (los create) después, el navegador solo recalcula
+  // layout una vez.
+  // ─────────────────────────────────────────────────────────────────
+
+  // Estado inicial: frame1 visible, el resto muy zoomed-in (dentro del túnel)
+  gsap.set(frameEls[0], { opacity: 1,  scale: SCALE_IDLE, filter: "blur(0px)" });
+  gsap.set(frameEls[1], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
+  gsap.set(frameEls[2], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
+  gsap.set(frameEls[3], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
+
+  // --- Kinetic Typography: split por palabras ---
+  const titleText = charsContainer.textContent?.trim() || "";
+  charsContainer.textContent = "";
+  charsContainer.style.cssText =
+    "display:flex; flex-wrap:wrap; gap:0.3em; align-items:baseline;";
+
+  const words = titleText.split(" ");
+  const wordEls: HTMLElement[] = words.map((word) => {
+    const span = document.createElement("span");
+    span.classList.add("hero-word");
+    span.textContent = word;
+    charsContainer.appendChild(span);
+    return span;
+  });
+
+  gsap.set(label,       { opacity: 1, clipPath: "inset(0 100% 0 0)" });
+  gsap.set(wordEls[0],  { x: -180, skewX: -18, opacity: 0 });
+  if (wordEls[1]) gsap.set(wordEls[1], { scale: 2.8, opacity: 0 });
+  if (wordEls[2]) gsap.set(wordEls[2], { x: 180, skewX: 18, opacity: 0 });
+  wordEls.slice(3).forEach((el) => gsap.set(el, { y: 40, opacity: 0 }));
+  gsap.set(description, { y: 28, skewX: 5, opacity: 0 });
+  gsap.set(ctas,        { y: 20, opacity: 0 });
+
+  // ─────────────────────────────────────────────────────────────────
+  // Lecturas de layout agrupadas: los 5 ScrollTrigger.create()
+  // ─────────────────────────────────────────────────────────────────
 
   ScrollTrigger.create({
     trigger: wrapper,
@@ -459,43 +509,6 @@
     },
   });
 
-  // --- Kinetic Typography: split por palabras ---
-  const charsContainer = document.getElementById("hero-chars") as HTMLElement;
-  const titleText = charsContainer.textContent?.trim() || "";
-  charsContainer.textContent = "";
-  charsContainer.style.cssText =
-    "display:flex; flex-wrap:wrap; gap:0.3em; align-items:baseline;";
-
-  const words = titleText.split(" ");
-  const wordEls: HTMLElement[] = words.map((word) => {
-    const span = document.createElement("span");
-    span.classList.add("hero-word");
-    span.textContent = word;
-    charsContainer.appendChild(span);
-    return span;
-  });
-
-  const label       = document.getElementById("hero-label")       as HTMLElement;
-  const description = document.getElementById("hero-description") as HTMLElement;
-  const ctas        = document.getElementById("hero-ctas")        as HTMLElement;
-
-  // Distancia total de scroll del wrapper (400vh - 100vh = 300vh)
-  const totalScroll = 3 * window.innerHeight;
-
-  // Offsets exactos: cuándo empieza a aparecer cada frame
-  const frame2Offset = wins[1][0] * totalScroll; // 0.24 × 3vh
-  const frame3Offset = wins[2][0] * totalScroll; // 0.50 × 3vh
-  const frame4Offset = wins[3][0] * totalScroll; // 0.76 × 3vh
-
-  // ── Estados iniciales ──────────────────────────────────────────────
-  gsap.set(label,       { opacity: 1, clipPath: "inset(0 100% 0 0)" });
-  gsap.set(wordEls[0],  { x: -180, skewX: -18, opacity: 0 });
-  if (wordEls[1]) gsap.set(wordEls[1], { scale: 2.8, opacity: 0 });
-  if (wordEls[2]) gsap.set(wordEls[2], { x: 180, skewX: 18, opacity: 0 });
-  wordEls.slice(3).forEach((el) => gsap.set(el, { y: 40, opacity: 0 }));
-  gsap.set(description, { y: 28, skewX: 5, opacity: 0 });
-  gsap.set(ctas,        { y: 20, opacity: 0 });
-
   // ── Frame 2 → label + "Arango" ────────────────────────────────────
   ScrollTrigger.create({
     trigger: wrapper,
@@ -540,10 +553,6 @@
   });
 
   // --- Ocultar indicador de scroll al hacer scroll ---
-  const scrollIndicator = document.getElementById(
-    "scroll-indicator",
-  ) as HTMLElement;
-
   ScrollTrigger.create({
     trigger: wrapper,
     start: "top+=100 top",
