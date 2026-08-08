@@ -82,21 +82,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Cormorant Garamond', serif;
 }
 
-/* Hero Section Styles */
-.hero-section video {
-  filter: brightness(0.9);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-section video {
-    display: none;
-  }
-
-  .hero-section {
-    background: linear-gradient(135deg, var(--teal-600) 0%, var(--teal-800) 100%);
-  }
-}
-
 /* ==========================================
    Navbar Styles
    ========================================== */
