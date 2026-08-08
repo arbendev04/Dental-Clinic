@@ -564,6 +564,15 @@ import Layout from '../layouts/Layout.astro';
         status.textContent = '¡Gracias! Hemos recibido tu solicitud, te contactaremos muy pronto.';
         status.classList.add('ctt-form-status-success');
         status.hidden = false;
+
+        // Evento de conversión para GTM. El envío es AJAX (preventDefault + fetch),
+        // así que el trigger nativo "Form Submission" de GTM nunca dispara solo:
+        // hay que empujar el evento explícitamente al dataLayer.
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({
+          event: 'form_submit_success',
+          form_name: 'contacto',
+        });
         return;
       }
 
