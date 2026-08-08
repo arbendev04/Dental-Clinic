@@ -3,28 +3,34 @@ import Layout from '../layouts/Layout.astro';
 
 const equipo = [
   {
-    nombre: 'Dr. Sebastián Arango',
-    especialidad: 'Director · Implantología',
-    descripcion: 'Fundador y director de Arango Dental Clinic. Especialista en implantología y rehabilitación oral, con formación en las técnicas más avanzadas de odontología digital.',
-    principal: true,
+    nombre: 'Barbara Abella',
+    especialidad: 'Ortodoncia',
+    descripcion: 'Especialista en ortodoncia con brackets y alineadores invisibles. Diseña sonrisas alineadas y funcionales con un seguimiento cercano en cada fase del tratamiento.',
   },
   {
-    nombre: 'Ana Delheil',
-    especialidad: 'Higienista Dental · Periodoncia',
-    descripcion: 'Especialista en higiene bucodental y periodoncia. Comprometida con la prevención y el mantenimiento de la salud oral de cada paciente.',
-    principal: false,
-  },
-  {
-    nombre: 'Natalia Svetlozarova',
-    especialidad: 'Estética Dental',
-    descripcion: 'Experta en odontología estética y rehabilitadora. Especializada en diseño de sonrisa, carillas y tratamientos de composite de alta precisión.',
-    principal: false,
+    nombre: 'Magdalena Ruslanova',
+    especialidad: 'Endodoncia',
+    descripcion: 'Especialista en endodoncia y tratamiento de conducto. Combina precisión técnica y control del dolor para procedimientos cómodos y de máxima eficacia.',
   },
   {
     nombre: 'Sandra Romero',
-    especialidad: 'Ortodoncia',
-    descripcion: 'Especialista en ortodoncia con brackets y alineadores invisibles. Transforma sonrisas con planificación personalizada para cada paciente.',
-    principal: false,
+    especialidad: 'Higienista',
+    descripcion: 'Especialista en higiene bucodental y profilaxis. Cuida la salud de tus encías y dientes con limpiezas profesionales y pautas de mantenimiento diario.',
+  },
+  {
+    nombre: 'Sara Montoro',
+    especialidad: 'Higienista',
+    descripcion: 'Especialista en higiene bucodental y prevención. Acompaña a cada paciente en el cuidado de su sonrisa entre visita y visita a la clínica.',
+  },
+  {
+    nombre: 'Ana Deltell',
+    especialidad: 'Recepción',
+    descripcion: 'Primer contacto de Arango Dental Clinic. Organiza tu cita y resuelve tus dudas con calidez, para que tu experiencia empiece de la mejor manera.',
+  },
+  {
+    nombre: 'Natalia Svetlozarova',
+    especialidad: 'Asesora Comercial',
+    descripcion: 'Te acompaña en la planificación de tu tratamiento y presupuesto. Resuelve tus dudas con transparencia y un trato cercano en cada consulta.',
   },
 ];
 
@@ -54,7 +60,7 @@ const valores = [
 ];
 ---
 
-<Layout title="Sobre Nosotros" description="Conoce al Dr. Sebastián Arango y su equipo de especialistas en implantología, estética dental, periodoncia y ortodoncia en Benidorm.">
+<Layout title="Sobre Nosotros" description="Conoce al Dr. Sebastián Arango y su equipo de especialistas en implantología, rehabilitación oral, ortodoncia y endodoncia en Benidorm." image="/img/banner/banner-arango.webp">
 
   <!-- ── HERO ── -->
   <section class="nos-hero" data-scroll-hero>
@@ -167,8 +173,8 @@ const valores = [
           src="/img/nosotros/sebas.webp"
           alt="Dr. Sebastián Arango, director de Arango Dental Clinic"
           class="nos-director-img"
-          width="1080"
-          height="1350"
+          width="1179"
+          height="1415"
           loading="lazy"
           decoding="async"
         />
@@ -179,7 +185,7 @@ const valores = [
       <div class="nos-director-text">
         <p class="nos-label">Director de la clínica</p>
         <h2 class="nos-director-heading">Dr. Sebastián<br>Arango</h2>
-        <p class="nos-director-role-tag">Implantología · Rehabilitación Oral · Odontología Digital</p>
+        <p class="nos-director-role-tag">Implantología · Rehabilitación Oral</p>
         <p class="nos-director-bio">
           Fundador y director de Arango Dental Clinic. Especialista en implantología y rehabilitación oral, con formación en las técnicas más avanzadas de odontología digital.
         </p>
@@ -193,7 +199,7 @@ const valores = [
     </div>
   </section>
 
-  <!-- Equipo — las 3 compañeras -->
+  <!-- Equipo -->
   <section class="nos-equipo-section">
     <div class="nos-container">
       <div class="nos-equipo-header reveal-up">
@@ -202,32 +208,15 @@ const valores = [
       </div>
 
       <div class="nos-team-grid">
-        <!-- Ana Deltell -->
-        <div class="nos-member-card reveal-up" style="--reveal-delay: 0ms">
-          <div class="nos-member-info">
-            <p class="nos-member-role">Higienista Dental · Periodoncia</p>
-            <h3 class="nos-member-name">Ana Deltell</h3>
-            <p class="nos-member-bio">Especialista en higiene bucodental y periodoncia. Comprometida con la prevención y el mantenimiento de la salud oral de cada paciente.</p>
+        {equipo.map((persona, i) => (
+          <div class="nos-member-card reveal-up" style={`--reveal-delay: ${i * 80}ms`}>
+            <div class="nos-member-info">
+              <p class="nos-member-role">{persona.especialidad}</p>
+              <h3 class="nos-member-name">{persona.nombre}</h3>
+              <p class="nos-member-bio">{persona.descripcion}</p>
+            </div>
           </div>
-        </div>
-
-        <!-- Natalia Svetlozarova -->
-        <div class="nos-member-card reveal-up" style="--reveal-delay: 80ms">
-          <div class="nos-member-info">
-            <p class="nos-member-role">Estética Dental</p>
-            <h3 class="nos-member-name">Natalia Svetlozarova</h3>
-            <p class="nos-member-bio">Experta en odontología estética y rehabilitadora. Especializada en diseño de sonrisa, carillas y tratamientos de composite de alta precisión.</p>
-          </div>
-        </div>
-
-        <!-- Sandra Romero -->
-        <div class="nos-member-card reveal-up" style="--reveal-delay: 160ms">
-          <div class="nos-member-info">
-            <p class="nos-member-role">Ortodoncia</p>
-            <h3 class="nos-member-name">Sandra Romero</h3>
-            <p class="nos-member-bio">Especialista en ortodoncia con brackets y alineadores invisibles. Transforma sonrisas con planificación personalizada para cada paciente.</p>
-          </div>
-        </div>
+        ))}
       </div>
 
     </div>
