@@ -230,7 +230,13 @@ const stats = [
   </section>
 
   <style>
-    /* Widget de reseñas — uno por tema, solo uno visible a la vez */
+    /* Widget de reseñas — uno por tema, solo uno visible a la vez.
+       min-height reserva espacio hasta que el iframe de EmbedSocial
+       termine de medirse, para evitar salto de layout (CLS). */
+    .reviews-widget {
+      min-height: 420px;
+    }
+
     .reviews-widget-dark {
       display: none;
     }
