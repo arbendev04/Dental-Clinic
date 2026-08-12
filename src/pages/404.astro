@@ -16,7 +16,9 @@ const links = [
   noindex
 >
   <section class="err-hero">
-    <p class="err-code" aria-hidden="true">404</p>
+    <p class="err-code" aria-hidden="true">
+      <span class="err-code-char">4</span><span class="err-code-char">0</span><span class="err-code-char">4</span>
+    </p>
     <div class="err-container">
       <p class="err-label">Arango Dental Clinic</p>
       <h1 class="err-title">Esta página no existe</h1>
@@ -96,27 +98,40 @@ const links = [
     margin: 0;
     pointer-events: none;
     user-select: none;
+  }
 
-    /* Entrada única, sin loop: opacity 0 / scale 0.85 / y+40px
-       → opacity 0.04 / scale 1 / y 0, en 1.2s con easing premium. */
-    opacity: 0;
-    transform: translateY(40px) scale(0.85);
-    animation: err-code-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  @media (min-width: 1024px) {
+    .err-code {
+      font-size: clamp(30rem, 46vw, 50rem);
+    }
   }
 
   :global(html.dark) .err-code {
     color: #D4AF55;
   }
 
-  @keyframes err-code-reveal {
+  /* Cada dígito entra por separado desde la derecha, de a uno,
+     cada 0.3s — sin loop, queda estático al terminar. */
+  .err-code-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(120px);
+    animation: err-code-char-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .err-code-char:nth-child(1) { animation-delay: 0s; }
+  .err-code-char:nth-child(2) { animation-delay: 0.3s; }
+  .err-code-char:nth-child(3) { animation-delay: 0.6s; }
+
+  @keyframes err-code-char-reveal {
     to {
       opacity: 0.04;
-      transform: translateY(0) scale(1);
+      transform: translateX(0);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .err-code {
+    .err-code-char {
       animation: none;
       opacity: 0.04;
       transform: none;
