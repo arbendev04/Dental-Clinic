@@ -42,14 +42,11 @@ const links = [
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-color: #0d2219;
+    background-color: var(--bg-primary);
     padding: 8rem 0 5rem;
     text-align: center;
     overflow: hidden;
-  }
-
-  :global(html.dark) .err-hero {
-    background-color: #0d2219;
+    transition: background-color 0.3s ease;
   }
 
   .err-container {
@@ -129,7 +126,7 @@ const links = [
     font-weight: 300;
     font-style: italic;
     line-height: 1.15;
-    color: rgba(244, 240, 235, 0.95);
+    color: var(--text-primary);
     margin: 0;
   }
 
@@ -137,7 +134,7 @@ const links = [
     font-family: "Inter", sans-serif;
     font-size: 1rem;
     line-height: 1.7;
-    color: rgba(244, 240, 235, 0.50);
+    color: var(--text-secondary);
     max-width: 46ch;
     margin: 0;
   }
@@ -171,15 +168,15 @@ const links = [
   }
 
   .err-btn-solid {
-    background-color: #C49B38;
-    color: #0d2219;
-    border: 1px solid #C49B38;
+    background-color: #153328;
+    color: #ffffff;
+    border: 1px solid #153328;
   }
 
   .err-btn-solid:hover {
     background-color: transparent;
-    color: rgba(244, 240, 235, 0.85);
-    border-color: rgba(244, 240, 235, 0.35);
+    color: #153328;
+    border-color: rgba(21, 51, 40, 0.65);
   }
 
   :global(html.dark) .err-btn-solid {
@@ -191,18 +188,30 @@ const links = [
   :global(html.dark) .err-btn-solid:hover {
     background-color: transparent;
     color: rgba(244, 240, 235, 0.85);
-    border-color: rgba(244, 240, 235, 0.35);
+    border-color: rgba(244, 240, 235, 0.30);
   }
 
   .err-btn-outline {
     background-color: transparent;
-    color: rgba(244, 240, 235, 0.85);
-    border: 1px solid rgba(244, 240, 235, 0.35);
+    color: #153328;
+    border: 1px solid rgba(21, 51, 40, 0.65);
   }
 
   .err-btn-outline:hover {
-    background-color: rgba(244, 240, 235, 0.1);
-    border-color: rgba(244, 240, 235, 0.6);
+    background-color: #153328;
+    color: #ffffff;
+    border-color: #153328;
+  }
+
+  :global(html.dark) .err-btn-outline {
+    color: rgba(244, 240, 235, 0.85);
+    border-color: rgba(244, 240, 235, 0.30);
+  }
+
+  :global(html.dark) .err-btn-outline:hover {
+    background-color: #D4AF55;
+    color: #141210;
+    border-color: #D4AF55;
   }
 
   .err-links {
@@ -212,19 +221,19 @@ const links = [
     gap: 0.5rem 1.5rem;
     margin-top: 1.5rem;
     padding-top: 1.5rem;
-    border-top: 1px solid rgba(244, 240, 235, 0.15);
+    border-top: 1px solid var(--border-primary);
     width: 100%;
   }
 
   .err-link {
     font-family: "Inter", sans-serif;
     font-size: 0.8rem;
-    color: rgba(244, 240, 235, 0.55);
+    color: var(--text-tertiary);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   .err-link:hover {
-    color: rgba(244, 240, 235, 0.9);
+    color: var(--text-primary);
   }
 </style>
