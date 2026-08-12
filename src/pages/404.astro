@@ -16,9 +16,9 @@ const links = [
   noindex
 >
   <section class="err-hero">
+    <p class="err-code" aria-hidden="true">404</p>
     <div class="err-container">
       <p class="err-label">Arango Dental Clinic</p>
-      <p class="err-code" aria-hidden="true">404</p>
       <h1 class="err-title">Esta página no existe</h1>
       <p class="err-sub">
         Puede que el enlace esté roto o que la página se haya movido. Probá con el inicio o con alguno de estos accesos.
@@ -38,12 +38,14 @@ const links = [
 
 <style>
   .err-hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     background-color: #0d2219;
     padding: 8rem 0 5rem;
     text-align: center;
+    overflow: hidden;
   }
 
   :global(html.dark) .err-hero {
@@ -51,6 +53,8 @@ const links = [
   }
 
   .err-container {
+    position: relative;
+    z-index: 1;
     max-width: 720px;
     margin: 0 auto;
     padding: 0 2rem;
@@ -74,19 +78,49 @@ const links = [
     color: #D4AF55;
   }
 
+  /* Tipografía cinética de fondo: pieza gigante, no contenido —
+     decorativa, detrás del contenido real (aria-hidden). */
   .err-code {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: "Cormorant Garamond", serif;
-    font-size: clamp(5rem, 14vw, 9rem);
+    font-size: clamp(14rem, 42vw, 34rem);
     font-weight: 300;
     font-style: italic;
     line-height: 1;
     color: #C49B38;
-    opacity: 0.35;
     margin: 0;
+    pointer-events: none;
+    user-select: none;
+
+    /* Entrada única, sin loop: opacity 0 / scale 0.85 / y+40px
+       → opacity 0.04 / scale 1 / y 0, en 1.2s con easing premium. */
+    opacity: 0;
+    transform: translateY(40px) scale(0.85);
+    animation: err-code-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   :global(html.dark) .err-code {
     color: #D4AF55;
+  }
+
+  @keyframes err-code-reveal {
+    to {
+      opacity: 0.04;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .err-code {
+      animation: none;
+      opacity: 0.04;
+      transform: none;
+    }
   }
 
   .err-title {
