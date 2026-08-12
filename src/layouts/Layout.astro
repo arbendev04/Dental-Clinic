@@ -9,13 +9,15 @@ interface Props {
   description?: string;
   image?: string;
   preloadHero?: boolean;
+  noindex?: boolean;
 }
 
 const {
   title,
   description = 'Aurum Dental - Clínica odontológica de alta gama en Benidorm. Blanqueamiento dental, implantes, ortodoncia y más. Tu sonrisa merece excelencia.',
   image = '/img/hero/instrumentos-odontologicos-esterilizados.webp',
-  preloadHero = false
+  preloadHero = false,
+  noindex = false
 } = Astro.props;
 
 const siteUrl = 'https://arangodentalclinic.es';
@@ -232,7 +234,7 @@ const breadcrumbSchema = Astro.url.pathname === '/' ? null : {
     <meta name="twitter:image" content={`${siteUrl}${image}`} />
 
     <!-- Otros meta tags útiles -->
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     <meta name="author" content="Aurum Dental" />
     <meta name="theme-color" content="#153328" />
 
