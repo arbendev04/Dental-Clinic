@@ -51,7 +51,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://arangodentalclinic.es/sitemap.xml
+Sitemap: https://arangodentalclinic.es/sitemap-index.xml
 
 # Contexto adicional para modelos de lenguaje (LLMs / GEO)
 # No es una directiva estándar de robots.txt, se incluye como referencia.

@@ -1,7 +1,11 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
+
+const LEGAL_PAGES_PENDING_NOINDEX = ['/aviso-legal', '/politica-privacidad', '/terminos-condiciones'];
 
 export default defineConfig({
+  site: 'https://arangodentalclinic.es',
   // El CSS de cada página es específico de esa página (estilos con scope
   // por componente, no un bundle global compartido), así que inlinearlo
   // siempre evita el <link rel="stylesheet"> render-blocking sin costo real:
@@ -11,5 +15,14 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+  integrations: [
+    sitemap({
+      // Excluye la 404 y las páginas legales mientras tengan noindex en Layout.astro
+      // (sacarlas de esta lista cuando se les quite el noindex).
+      filter: (page) =>
+        !page.includes('/404') &&
+        !LEGAL_PAGES_PENDING_NOINDEX.some((path) => page.includes(path)),
+    }),
+  ],
 });
