@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/terminos-y-condiciones-de-uso",
+      "destination": "/terminos-condiciones",
+      "permanent": true
+    },
+    {
+      "source": "/terminos-y-condiciones-de-uso/",
+      "destination": "/terminos-condiciones",
+      "permanent": true
+    }
+  ]
+}
