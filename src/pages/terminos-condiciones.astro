@@ -1,0 +1,191 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Términos y Condiciones" description="Términos y condiciones de uso del sitio web de Arango Dental Clinic: carácter informativo del contenido, reservas de cita, precios y responsabilidad." noindex={true}>
+
+  <!-- ── Header ── -->
+  <section class="lgl-hero">
+    <div class="lgl-container">
+      <p class="lgl-label">Arango Dental Clinic</p>
+      <h1 class="lgl-hero-title">Términos y Condiciones</h1>
+    </div>
+  </section>
+
+  <!-- ── Contenido ── -->
+  <section class="lgl-content-section">
+    <div class="lgl-container lgl-prose">
+
+      <h2>1. Objeto</h2>
+      <p>
+        Los presentes Términos y Condiciones regulan el acceso y uso del sitio web arangodentalclinic.es,
+        titularidad de Arango Dental Clinic (en adelante, "la Clínica"), cuyos datos identificativos completos
+        figuran en el <a href="/aviso-legal">Aviso Legal</a>. El acceso y uso del Sitio Web atribuye la condición
+        de usuario e implica la aceptación de estos Términos y Condiciones.
+      </p>
+
+      <h2>2. Carácter informativo del Sitio Web</h2>
+      <p>
+        La información contenida en este Sitio Web, incluidas las descripciones de servicios y tratamientos
+        dentales, tiene carácter meramente informativo y divulgativo. No constituye diagnóstico, prescripción ni
+        recomendación de tratamiento individualizado. Todo tratamiento dental requiere una valoración presencial
+        previa por parte de un profesional colegiado.
+      </p>
+
+      <h2>3. Reservas de cita</h2>
+      <p>
+        La solicitud de cita a través del formulario, llamada telefónica o WhatsApp no implica su confirmación
+        automática. La cita se entenderá confirmada únicamente cuando la Clínica lo comunique expresamente al
+        usuario. La Clínica se reserva el derecho a reprogramar citas por causas justificadas, informando al
+        paciente con la mayor antelación posible.
+      </p>
+
+      <h2>4. Precios</h2>
+      <p>
+        Los precios orientativos que puedan mostrarse en el Sitio Web tienen carácter informativo y están
+        sujetos a valoración individualizada tras la consulta presencial. El presupuesto definitivo se
+        entregará por escrito antes del inicio de cualquier tratamiento.
+      </p>
+
+      <h2>5. Propiedad intelectual</h2>
+      <p>
+        Los contenidos del Sitio Web están protegidos por derechos de propiedad intelectual e industrial
+        titularidad de Arango Dental Clinic o de terceros licenciantes, en los términos descritos en el
+        <a href="/aviso-legal">Aviso Legal</a>.
+      </p>
+
+      <h2>6. Responsabilidad del usuario</h2>
+      <p>
+        El usuario se compromete a utilizar el Sitio Web y sus formularios de contacto de forma diligente,
+        aportando información veraz, y a no utilizarlos con fines fraudulentos, ilícitos o contrarios a estos
+        Términos y Condiciones.
+      </p>
+
+      <h2>7. Limitación de responsabilidad</h2>
+      <p>
+        Arango Dental Clinic no será responsable de los daños o perjuicios derivados de un uso indebido del
+        Sitio Web, de la falta de disponibilidad del mismo, ni de decisiones adoptadas por el usuario en base a
+        la información divulgativa contenida en el Sitio Web sin haber realizado la correspondiente consulta
+        profesional presencial.
+      </p>
+
+      <h2>8. Enlaces externos</h2>
+      <p>
+        El Sitio Web puede contener enlaces a redes sociales y otros sitios web de terceros (Facebook,
+        Instagram, WhatsApp, Google Maps, etc.). Arango Dental Clinic no controla ni se hace responsable del
+        contenido de dichos sitios.
+      </p>
+
+      <h2>9. Modificación de los términos</h2>
+      <p>
+        Arango Dental Clinic podrá modificar estos Términos y Condiciones en cualquier momento. Los cambios se
+        publicarán en esta misma página, indicando la fecha de la última actualización.
+      </p>
+
+      <h2>10. Legislación aplicable y jurisdicción</h2>
+      <p>
+        Los presentes Términos y Condiciones se rigen por la legislación española. Cualquier controversia se
+        someterá a los Juzgados y Tribunales que correspondan conforme a la normativa de protección de
+        consumidores y usuarios aplicable.
+      </p>
+
+      <h2>11. Contacto</h2>
+      <p>
+        Para cualquier duda relacionada con estos Términos y Condiciones, puede contactar con nosotros en
+        <a href="mailto:Arangodentalclinic@gmail.com">Arangodentalclinic@gmail.com</a> o en el
+        <a href="tel:+34965088282">+34 965 08 82 82</a>.
+      </p>
+
+      <p class="lgl-updated">Última actualización: 22 de agosto de 2026</p>
+
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .lgl-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* ── Header ── */
+  .lgl-hero {
+    background-color: #0d2219;
+    padding: 8rem 0 3.5rem;
+    text-align: center;
+  }
+
+  :global(html.dark) .lgl-hero {
+    background-color: #0d2219;
+  }
+
+  .lgl-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #C49B38;
+    margin: 0 0 1rem;
+  }
+
+  :global(html.dark) .lgl-label {
+    color: #D4AF55;
+  }
+
+  .lgl-hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.4rem, 4.5vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(244, 240, 235, 0.95);
+    margin: 0;
+  }
+
+  /* ── Prose ── */
+  .lgl-content-section {
+    background-color: var(--bg-primary);
+    padding: 4.5rem 0 6rem;
+  }
+
+  .lgl-prose {
+    max-width: 760px;
+  }
+
+  .lgl-prose h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+  }
+
+  .lgl-prose h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .lgl-prose p {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin: 0 0 1.1rem;
+  }
+
+  .lgl-prose a {
+    color: var(--teal-600);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .lgl-updated {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-primary);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+  }
+</style>
