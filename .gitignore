@@ -13,6 +13,7 @@ dist/
 # ─── Herramientas de desarrollo ───────────────────────
 .claude/
 .agents/
+.atl/
 skills-lock.json
 
 # ─── Archivos de diseño (Pencil / Stitch) ─────────────
