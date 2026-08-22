@@ -163,8 +163,8 @@ Hero de **400vh** con scroll-driven. La sección sticky ocupa 100vh y hace cross
 | Campo | Valor |
 |---|---|
 | Nombre comercial | Arango Dental Clinic |
-| Dirección | Avd. Alfonso Puchades 22, Benidorm, Alicante 03501 |
-| Teléfono | +34 965 088 282 |
+| Dirección | Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante 03501 |
+| Teléfono | +34 965 08 82 82 |
 | WhatsApp | +34 665 886 439 |
 | Email | Arangodentalclinic@gmail.com |
 | Horario | Lun–Vie 9:00–19:00 · Sáb 9:00–14:00 |

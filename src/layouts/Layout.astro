@@ -14,7 +14,7 @@ interface Props {
 
 const {
   title,
-  description = 'Aurum Dental - Clínica odontológica de alta gama en Benidorm. Blanqueamiento dental, implantes, ortodoncia y más. Tu sonrisa merece excelencia.',
+  description = 'Arango Dental Clinic - Clínica dental en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implantes, ortodoncia, estética dental y odontología digital.',
   image = '/img/hero/instrumentos-odontologicos-esterilizados.webp',
   preloadHero = false,
   noindex = false
@@ -22,23 +22,22 @@ const {
 
 const siteUrl = 'https://arangodentalclinic.es';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
-const fullTitle = `${title} | Aurum Dental`;
+const fullTitle = `${title} | Arango Dental Clinic`;
 
 // Schema.org structured data for Dentist
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "Dentist",
-  "name": "Aurum Dental",
-  "alternateName": "Arango Dental Clinic",
-  "description": "Clínica odontológica de alta gama especializada en blanqueamiento dental, implantes, ortodoncia y odontología estética.",
+  "name": "Arango Dental Clinic",
+  "description": "Clínica dental en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implantes, ortodoncia, estética dental y odontología digital.",
   "url": siteUrl,
   "logo": `${siteUrl}/img/logo/logo-oscuro.webp`,
   "image": `${siteUrl}/img/hero/instrumentos-odontologicos-esterilizados.webp`,
-  "telephone": "+34 965 088 282",
+  "telephone": "+34 965 08 82 82",
   "email": "Arangodentalclinic@gmail.com",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Avd. Alfonso Puchades 22",
+    "streetAddress": "Avinguda Alfonso Puchades, 22, bajo",
     "addressLocality": "Benidorm",
     "addressRegion": "Alicante",
     "postalCode": "03501",
@@ -46,8 +45,8 @@ const schemaData = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": "38.5411",
-    "longitude": "-0.1225"
+    "latitude": 38.5419187,
+    "longitude": -0.1254604
   },
   "openingHoursSpecification": [
     {
@@ -130,8 +129,7 @@ const schemaData = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Aurum Dental",
-  "alternateName": "Arango Dental Clinic",
+  "name": "Arango Dental Clinic",
   "url": siteUrl,
 };
 
@@ -224,7 +222,7 @@ const breadcrumbSchema = Astro.url.pathname === '/' ? null : {
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`${siteUrl}${image}`} />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:site_name" content="Aurum Dental" />
+    <meta property="og:site_name" content="Arango Dental Clinic" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -235,7 +233,7 @@ const breadcrumbSchema = Astro.url.pathname === '/' ? null : {
 
     <!-- Otros meta tags útiles -->
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
-    <meta name="author" content="Aurum Dental" />
+    <meta name="author" content="Arango Dental Clinic" />
     <meta name="theme-color" content="#153328" />
 
     <!-- Preload hero image (LCP) -->
