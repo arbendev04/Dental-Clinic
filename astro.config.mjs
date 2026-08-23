@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-const LEGAL_PAGES_PENDING_NOINDEX = ['/aviso-legal', '/politica-privacidad', '/terminos-condiciones'];
+const LEGAL_PAGES_PENDING_NOINDEX = ['/terminos-condiciones'];
 
 export default defineConfig({
   site: 'https://arangodentalclinic.es',
