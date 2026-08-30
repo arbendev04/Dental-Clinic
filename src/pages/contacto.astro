@@ -177,12 +177,12 @@ const faqSchema = {
           <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Empieza tu tratamiento</h2>
           <form
             id="contact-form"
-            class="space-y-6"
+            class="space-y-5"
             action="https://formspree.io/f/xqpzklag"
             method="POST"
           >
             <input type="hidden" name="_subject" value="Nueva solicitud de contacto — Arango Dental Clinic" />
-            <input type="text" name="_gotcha" class="ctt-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input type="text" id="gotcha" name="_gotcha" class="ctt-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <div>
               <label for="nombre" class="ctt-field-label">Nombre completo</label>
               <input
@@ -195,17 +195,6 @@ const faqSchema = {
               />
             </div>
             <div>
-              <label for="email" class="ctt-field-label">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="ctt-input"
-                placeholder="tu@email.com"
-                required
-              />
-            </div>
-            <div>
               <label for="telefono" class="ctt-field-label">Teléfono</label>
               <input
                 type="tel"
@@ -213,32 +202,67 @@ const faqSchema = {
                 name="telefono"
                 class="ctt-input"
                 placeholder="+34 600 000 000"
-              />
-            </div>
-            <div>
-              <label for="mensaje" class="ctt-field-label">¿Cómo podemos ayudarte?</label>
-              <textarea
-                id="mensaje"
-                name="mensaje"
-                rows="4"
-                class="ctt-input ctt-textarea"
-                placeholder="Cuéntanos sobre tu consulta o el tratamiento que te interesa"
                 required
-              ></textarea>
-            </div>
-            <div>
-              <label for="fecha" class="ctt-field-label">¿Cuándo prefieres tu cita?</label>
-              <input
-                type="text"
-                id="fecha"
-                name="fecha"
-                class="ctt-input"
-                placeholder="Ej: martes por la mañana, cualquier día por la tarde…"
               />
             </div>
-            <button type="submit" id="contact-submit" class="ctt-submit">
-              Solicitar Valoración Gratuita
-            </button>
+            <div>
+              <label for="email" class="ctt-field-label">Email <span class="ctt-optional">(opcional)</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="ctt-input"
+                placeholder="tu@email.com"
+              />
+            </div>
+            <div>
+              <p class="ctt-field-label" id="ctt-tratamiento-label">¿Qué tratamiento te interesa? <span class="ctt-optional">(opcional)</span></p>
+              <div class="ctt-dropdown" id="ctt-dropdown">
+                <button
+                  type="button"
+                  class="ctt-dropdown-toggle"
+                  id="ctt-dropdown-toggle"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-labelledby="ctt-tratamiento-label ctt-dropdown-summary"
+                >
+                  <span id="ctt-dropdown-summary">Selecciona uno o varios</span>
+                  <svg class="ctt-dropdown-chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+                <div class="ctt-dropdown-panel" id="ctt-dropdown-panel" role="listbox" aria-multiselectable="true" hidden>
+                  {['Odontología Digital', 'Implantología', 'Estética Dental', 'Rehabilitación Oral', 'Periodoncia', 'Ortodoncia', 'Endodoncia', 'Otro'].map((servicio) => (
+                    <label class="ctt-dropdown-option">
+                      <input type="checkbox" name="servicios[]" value={servicio} />
+                      <span class="ctt-dropdown-check" aria-hidden="true"></span>
+                      <span>{servicio}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+              <div id="ctt-otro-wrapper" class="ctt-otro-wrapper" hidden>
+                <input
+                  type="text"
+                  id="servicio_otro"
+                  name="servicio_otro"
+                  class="ctt-input"
+                  placeholder="Cuéntanos brevemente qué necesitas"
+                />
+              </div>
+            </div>
+            <div class="ctt-consent">
+              <label class="ctt-consent-label">
+                <input type="checkbox" id="consentimiento" name="consentimiento" required />
+                <span>He leído y acepto la <a href="/politica-privacidad" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
+              </label>
+            </div>
+            <div>
+              <button type="submit" id="contact-submit" class="ctt-submit">
+                Solicitar Valoración Gratuita
+              </button>
+              <p class="ctt-trust-line">Sin compromiso · Te contactamos en menos de 24h</p>
+            </div>
           </form>
           <p id="contact-form-status" class="ctt-form-status" role="status" aria-live="polite" hidden></p>
         </div>
@@ -425,9 +449,9 @@ const faqSchema = {
   }
 
   .ctt-btn-solid:hover {
-    background-color: transparent;
-    color: rgba(244, 240, 235, 0.85);
-    border-color: rgba(244, 240, 235, 0.35);
+    background-color: rgba(196, 155, 56, 0.12);
+    color: rgba(244, 240, 235, 0.9);
+    border-color: #C49B38;
   }
 
   :global(html.dark) .ctt-btn-solid {
@@ -437,9 +461,9 @@ const faqSchema = {
   }
 
   :global(html.dark) .ctt-btn-solid:hover {
-    background-color: transparent;
-    color: #1c1b1b;
-    border-color: rgba(21, 51, 40, 0.5);
+    background-color: rgba(212, 175, 85, 0.12);
+    color: rgba(244, 240, 235, 0.9);
+    border-color: #D4AF55;
   }
 
   /* ── Info bloque ── */
@@ -501,8 +525,168 @@ const faqSchema = {
     font-size: 0.8rem;
     font-weight: 500;
     color: var(--text-secondary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     letter-spacing: 0.02em;
+  }
+
+  .ctt-optional {
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--text-tertiary);
+  }
+
+  /* ── Dropdown multi-select de tratamientos ── */
+  .ctt-dropdown {
+    position: relative;
+  }
+
+  .ctt-dropdown-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    text-align: left;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+
+  .ctt-dropdown-toggle:focus-visible {
+    border-color: var(--teal-500);
+    outline: none;
+  }
+
+  .ctt-dropdown-chevron {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .ctt-dropdown-toggle[aria-expanded="true"] .ctt-dropdown-chevron {
+    transform: rotate(180deg);
+  }
+
+  .ctt-dropdown-panel {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    max-height: 16rem;
+    overflow-y: auto;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  }
+
+  .ctt-dropdown-option {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .ctt-dropdown-option:hover {
+    background-color: var(--bg-tertiary);
+  }
+
+  .ctt-dropdown-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .ctt-dropdown-check {
+    flex-shrink: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-secondary);
+    background-color: transparent;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .ctt-dropdown-option input:checked + .ctt-dropdown-check {
+    background-color: #C49B38;
+    border-color: #C49B38;
+  }
+
+  .ctt-dropdown-option input:checked + .ctt-dropdown-check::after {
+    content: '✓';
+    font-size: 0.7rem;
+    line-height: 1;
+    color: #0d2219;
+  }
+
+  :global(html.dark) .ctt-dropdown-option input:checked + .ctt-dropdown-check {
+    background-color: #D4AF55;
+    border-color: #D4AF55;
+  }
+
+  :global(html.dark) .ctt-dropdown-option input:checked + .ctt-dropdown-check::after {
+    color: #141210;
+  }
+
+  .ctt-dropdown-option input:focus-visible + .ctt-dropdown-check {
+    outline: 2px solid var(--teal-500);
+    outline-offset: 2px;
+  }
+
+  .ctt-otro-wrapper {
+    margin-top: 0.75rem;
+  }
+
+  .ctt-consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+
+  .ctt-consent-label input[type="checkbox"] {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    accent-color: var(--teal-500);
+    cursor: pointer;
+  }
+
+  .ctt-consent-label a {
+    color: var(--teal-600);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .ctt-trust-line {
+    margin-top: 0.85rem;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C49B38;
+  }
+
+  :global(html.dark) .ctt-trust-line {
+    color: #D4AF55;
   }
 
   .ctt-input {
@@ -686,6 +870,61 @@ const faqSchema = {
   const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
   const status = document.getElementById('contact-form-status') as HTMLElement | null;
 
+  const dropdown = document.getElementById('ctt-dropdown');
+  const dropdownToggle = document.getElementById('ctt-dropdown-toggle') as HTMLButtonElement | null;
+  const dropdownPanel = document.getElementById('ctt-dropdown-panel') as HTMLElement | null;
+  const dropdownSummary = document.getElementById('ctt-dropdown-summary') as HTMLElement | null;
+  const dropdownCheckboxes = dropdownPanel?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+  const otroCheckbox = dropdownPanel?.querySelector<HTMLInputElement>('input[value="Otro"]');
+  const otroWrapper = document.getElementById('ctt-otro-wrapper') as HTMLElement | null;
+
+  function closeDropdown() {
+    if (!dropdownPanel || !dropdownToggle) return;
+    dropdownPanel.hidden = true;
+    dropdownToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  function updateDropdownSummary() {
+    if (!dropdownCheckboxes || !dropdownSummary) return;
+    const selected = Array.from(dropdownCheckboxes).filter((cb) => cb.checked).map((cb) => cb.value);
+    if (selected.length === 0) {
+      dropdownSummary.textContent = 'Selecciona uno o varios';
+    } else if (selected.length <= 2) {
+      dropdownSummary.textContent = selected.join(', ');
+    } else {
+      dropdownSummary.textContent = `${selected.length} tratamientos seleccionados`;
+    }
+  }
+
+  dropdownToggle?.addEventListener('click', () => {
+    if (!dropdownPanel) return;
+    const isOpen = !dropdownPanel.hidden;
+    dropdownPanel.hidden = isOpen;
+    dropdownToggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  document.addEventListener('click', (event) => {
+    if (dropdown && !dropdown.contains(event.target as Node)) {
+      closeDropdown();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeDropdown();
+      dropdownToggle?.focus();
+    }
+  });
+
+  dropdownCheckboxes?.forEach((checkbox) => {
+    checkbox.addEventListener('change', () => {
+      updateDropdownSummary();
+      if (checkbox === otroCheckbox && otroWrapper) {
+        otroWrapper.hidden = !checkbox.checked;
+      }
+    });
+  });
+
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!submitBtn || !status) return;
@@ -695,16 +934,37 @@ const faqSchema = {
     status.hidden = true;
     status.className = 'ctt-form-status';
 
+    const nombre = (document.getElementById('nombre') as HTMLInputElement | null)?.value ?? '';
+    const telefono = (document.getElementById('telefono') as HTMLInputElement | null)?.value ?? '';
+    const email = (document.getElementById('email') as HTMLInputElement | null)?.value ?? '';
+
+    // Junta los tratamientos seleccionados en el desplegable en un solo texto
+    // legible para el campo Description del Lead (si eligió "Otro", reemplaza
+    // ese chip por el detalle que haya escrito).
+    const tratamientos = dropdownCheckboxes
+      ? Array.from(dropdownCheckboxes).filter((cb) => cb.checked).map((cb) => cb.value)
+      : [];
+    const otroTexto = (document.getElementById('servicio_otro') as HTMLInputElement | null)?.value.trim();
+    if (otroTexto) {
+      const otroIndex = tratamientos.indexOf('Otro');
+      if (otroIndex !== -1) tratamientos[otroIndex] = `Otro: ${otroTexto}`;
+    }
+    const tratamiento = tratamientos.join(', ');
+    const consentimiento = (document.getElementById('consentimiento') as HTMLInputElement | null)?.checked ?? false;
+    const _gotcha = (document.getElementById('gotcha') as HTMLInputElement | null)?.value ?? '';
+
     try {
-      const response = await fetch(form.action, {
+      const response = await fetch('/api/lead', {
         method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, telefono, email, tratamiento, consentimiento, _gotcha }),
       });
 
-      if (response.ok) {
+      const data = await response.json().catch(() => null);
+
+      if (response.ok && data?.success) {
         form.hidden = true;
-        status.textContent = '¡Gracias! Hemos recibido tu solicitud, te contactaremos muy pronto.';
+        status.textContent = '¡Gracias! Te contactaremos pronto.';
         status.classList.add('ctt-form-status-success');
         status.hidden = false;
 
@@ -719,9 +979,7 @@ const faqSchema = {
         return;
       }
 
-      const data = await response.json().catch(() => null);
-      const message = data?.errors?.map((err: { message: string }) => err.message).join(', ');
-      status.textContent = message || 'No hemos podido enviar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.';
+      status.textContent = data?.error || 'No hemos podido enviar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.';
       status.classList.add('ctt-form-status-error');
       status.hidden = false;
     } catch {
