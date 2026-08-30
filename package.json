@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/vercel": "^9.0.5",
     "astro": "^5.0.0",
     "gsap": "^3.14.2"
   },
