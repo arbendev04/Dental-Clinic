@@ -17,6 +17,7 @@ interface CachedToken {
 }
 
 const ZOHO_ACCOUNTS_URL = 'https://accounts.zoho.eu/oauth/v2/token';
+const CALLMEBOT_URL = 'https://api.callmebot.com/whatsapp.php';
 const ALLOWED_ORIGIN_HOSTS = ['arangodentalclinic.es', 'localhost', '127.0.0.1'];
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutos
 const RATE_LIMIT_MAX_SUBMISSIONS = 3;
@@ -93,6 +94,38 @@ async function getAccessToken(): Promise<string> {
   };
 
   return cachedToken.accessToken;
+}
+
+// Aviso por WhatsApp vía CallMeBot (gratuito, solo se envía a un número ya
+// vinculado por el propio destinatario). Si falla, no debe romper la
+// respuesta al usuario — el Lead ya quedó guardado en Zoho de todas formas.
+async function sendWhatsAppNotification(nombre: string, telefono: string, tratamiento: string): Promise<void> {
+  const phone = import.meta.env.CALLMEBOT_PHONE;
+  const apiKey = import.meta.env.CALLMEBOT_APIKEY;
+
+  if (!phone || !apiKey) {
+    console.error('CallMeBot: faltan CALLMEBOT_PHONE o CALLMEBOT_APIKEY, se omite el aviso por WhatsApp.');
+    return;
+  }
+
+  const mensaje = [
+    '🦷 Nuevo Lead - Arango Dental Clinic',
+    `Nombre: ${nombre}`,
+    `Teléfono: ${telefono}`,
+    `Tratamiento: ${tratamiento || 'No especificado'}`,
+    'Revisá tu email o el CRM para más detalles.',
+  ].join('\n');
+
+  const params = new URLSearchParams({ phone, apikey: apiKey, text: mensaje });
+
+  try {
+    const response = await fetch(`${CALLMEBOT_URL}?${params.toString()}`);
+    if (!response.ok) {
+      console.error('CallMeBot: respuesta no OK al enviar el aviso:', response.status, await response.text());
+    }
+  } catch (error) {
+    console.error('CallMeBot: error al enviar el aviso por WhatsApp:', error);
+  }
 }
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
@@ -178,6 +211,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         502,
       );
     }
+
+    await sendWhatsAppNotification(nombre, telefono, tratamiento ?? '');
 
     return jsonResponse({ success: true }, 200);
   } catch (error) {
