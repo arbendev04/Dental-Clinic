@@ -1,43 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const servicios = [
-  {
-    nombre: 'Diagnóstico Dental',
-    descripcion: 'Evaluamos tu salud bucal con tecnología digital avanzada para detectar problemas y planificar tu tratamiento con precisión.',
-    duracion: 'Consulta inicial',
-  },
-  {
-    nombre: 'Implantes Dentales',
-    descripcion: 'Reemplazamos dientes perdidos mediante implantología dental para recuperar la función y apariencia natural de tu sonrisa.',
-    duracion: 'Múltiples sesiones',
-  },
-  {
-    nombre: 'Diseño de Sonrisa',
-    descripcion: 'Mejoramos la apariencia de tus dientes mediante tratamientos de estética dental como carillas y blanqueamiento.',
-    duracion: 'Desde 1 sesión',
-  },
-  {
-    nombre: 'Coronas y Prótesis Dentales',
-    descripcion: 'Restauramos dientes dañados o perdidos mediante rehabilitación oral, con coronas, puentes y prótesis adaptadas a ti.',
-    duracion: 'Plan personalizado',
-  },
-  {
-    nombre: 'Tratamiento de Encías',
-    descripcion: 'Tratamos el sangrado, inflamación y enfermedades de las encías mediante tratamientos de periodoncia.',
-    duracion: '45–60 min',
-  },
-  {
-    nombre: 'Ortodoncia y Alineadores',
-    descripcion: 'Alineamos tus dientes y corregimos problemas de mordida mediante ortodoncia, brackets y alineadores transparentes.',
-    duracion: 'Consulta inicial',
-  },
-  {
-    nombre: 'Tratamiento de Conducto',
-    descripcion: 'Tratamos infecciones y daños internos del diente mediante endodoncia para intentar conservar la pieza dental.',
-    duracion: '60–90 min',
-  },
-];
+import { servicios } from '../data/servicios';
 
 const WHATSAPP_PHONE = '34665886439';
 const whatsappHref = (nombreServicio: string) =>
@@ -63,7 +26,9 @@ const serviciosSchema = {
         "@type": "City",
         "name": "Benidorm",
       },
-      "url": "https://arangodentalclinic.es/servicios",
+      "url": s.landingHref
+        ? `https://arangodentalclinic.es${s.landingHref}`
+        : "https://arangodentalclinic.es/servicios",
     },
   })),
 };
@@ -113,18 +78,31 @@ const serviciosSchema = {
                 </svg>
                 {servicio.duracion}
               </span>
-              <a
-                href={whatsappHref(servicio.nombre)}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="srv-card-link"
-                aria-label={`Más información de ${servicio.nombre} por WhatsApp`}
-              >
-                Más información
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
+              {servicio.landingHref ? (
+                <a
+                  href={servicio.landingHref}
+                  class="srv-card-link"
+                  aria-label={`Más información de ${servicio.nombre}`}
+                >
+                  Más información
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              ) : (
+                <a
+                  href={whatsappHref(servicio.nombre)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="srv-card-link"
+                  aria-label={`Más información de ${servicio.nombre} por WhatsApp`}
+                >
+                  Más información
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         ))}

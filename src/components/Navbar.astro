@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+import { servicios } from '../data/servicios';
 
 const navLinks = [
   { href: "/",          label: "Inicio"    },
@@ -28,7 +29,7 @@ const currentPath = Astro.url.pathname;
 
       <ul class="navbar-links">
         {navLinks.map((link) => (
-          <li>
+          <li class={link.href === "/servicios" ? "has-submenu" : ""}>
             <a
               href={link.href}
               class={`navbar-link ${currentPath === link.href ? "is-active" : ""}`}
@@ -39,6 +40,17 @@ const currentPath = Astro.url.pathname;
               <!-- Copia que sube al hacer hover -->
               <span class="link-hover" aria-hidden="true">{link.label}</span>
             </a>
+            {link.href === "/servicios" && (
+              <div class="navbar-submenu">
+                <ul class="navbar-submenu-inner" role="menu" aria-label="Servicios">
+                  {servicios.map((s) => (
+                    <li role="none">
+                      <a role="menuitem" href={s.landingHref || "/servicios"}>{s.nombre}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </li>
         ))}
       </ul>
@@ -90,9 +102,24 @@ const currentPath = Astro.url.pathname;
   <nav aria-label="Navegación móvil">
     <ul class="nav-overlay-links">
       {navLinks.map((link, i) => (
-        <li style={`--i: ${i}`}>
-          <a href={link.href} class="nav-overlay-link">{link.label}</a>
-        </li>
+        link.href === "/servicios" ? (
+          <li style={`--i: ${i}`}>
+            <details class="nav-overlay-details">
+              <summary class="nav-overlay-link nav-overlay-summary">{link.label}</summary>
+              <ul class="nav-overlay-sublist">
+                {servicios.map((s) => (
+                  <li>
+                    <a href={s.landingHref || "/servicios"} class="nav-overlay-sublink">{s.nombre}</a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </li>
+        ) : (
+          <li style={`--i: ${i}`}>
+            <a href={link.href} class="nav-overlay-link">{link.label}</a>
+          </li>
+        )
       ))}
     </ul>
   </nav>
@@ -631,6 +658,141 @@ const currentPath = Astro.url.pathname;
     background-color: #D4AF55;
     color: #141210;
     border-color: #D4AF55;
+  }
+
+  /* =============================================
+     SUBMENÚ DESKTOP — "Servicios"
+     ============================================= */
+  .has-submenu {
+    position: relative;
+  }
+
+  .navbar-submenu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Padding (no gap posicional) para que el mouse no "pierda" el hover
+       entre el link y el panel. */
+    padding-top: 1.1rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+
+  .has-submenu:hover .navbar-submenu,
+  .has-submenu:focus-within .navbar-submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Y=0 (navbar transparente sobre el hero, siempre oscuro): panel de vidrio
+     semi-transparente. Al hacer scroll (.is-scrolled) pasa a sólido con los
+     colores del tema — mismo hook que ya usa el resto del navbar. */
+  .navbar-submenu-inner {
+    list-style: none;
+    margin: 0;
+    padding: 0.6rem 0;
+    min-width: 280px;
+    background-color: rgba(13, 20, 16, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(244, 240, 235, 0.14);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+  }
+
+  .navbar-submenu-inner a {
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.01em;
+    color: rgba(244, 240, 235, 0.75);
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    white-space: nowrap;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .navbar-submenu-inner a:hover,
+  .navbar-submenu-inner a:focus-visible {
+    color: rgba(244, 240, 235, 1);
+    background-color: rgba(244, 240, 235, 0.08);
+  }
+
+  /* Con scroll: panel sólido, del color del tema (claro u oscuro) */
+  .navbar.is-scrolled .navbar-submenu-inner {
+    background-color: var(--bg-primary);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: var(--border-primary);
+  }
+
+  .navbar.is-scrolled .navbar-submenu-inner a {
+    color: var(--text-secondary);
+  }
+
+  .navbar.is-scrolled .navbar-submenu-inner a:hover,
+  .navbar.is-scrolled .navbar-submenu-inner a:focus-visible {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+  }
+
+  /* =============================================
+     SUBMENÚ MOBILE — dentro del overlay
+     ============================================= */
+  .nav-overlay-details > summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .nav-overlay-details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-overlay-details > summary::after {
+    content: '+';
+    flex-shrink: 0;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--overlay-link);
+    transition: transform 0.25s ease;
+  }
+
+  .nav-overlay-details[open] > summary::after {
+    transform: rotate(45deg);
+  }
+
+  .nav-overlay-sublist {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-overlay-sublink {
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    color: var(--overlay-link);
+    opacity: 0.8;
+    text-decoration: none;
+    padding: 0.55rem 0;
+    transition: color 0.25s ease, opacity 0.25s ease, padding-left 0.25s ease;
+  }
+
+  .nav-overlay-sublink:hover {
+    color: var(--overlay-link-hover);
+    opacity: 1;
+    padding-left: 0.5rem;
   }
 </style>
 

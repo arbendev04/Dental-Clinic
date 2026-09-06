@@ -1,0 +1,587 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const WHATSAPP_PHONE = '34665886439';
+const whatsappHref = (texto: string) =>
+  `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(texto)}`;
+
+const pasos = [
+  {
+    titulo: 'Valoración inicial y escáner 3D',
+    descripcion: 'Evaluamos tu caso sin coste con un escáner intraoral 3D y te explicamos si eres candidato a un implante dental.',
+  },
+  {
+    titulo: 'Planificación digital',
+    descripcion: 'Diseñamos la posición exacta del implante antes de la intervención, con la información real de tu hueso maxilar o mandibular.',
+  },
+  {
+    titulo: 'Colocación del implante',
+    descripcion: 'Se coloca con anestesia local en la propia clínica. La mayoría de los pacientes vuelve a su rutina el mismo día.',
+  },
+  {
+    titulo: 'Oseointegración',
+    descripcion: 'Durante las semanas siguientes, el hueso se une al implante de titanio hasta quedar completamente integrado.',
+  },
+  {
+    titulo: 'Colocación de la corona',
+    descripcion: 'Completamos el tratamiento con la corona definitiva, ajustada a la forma y función de tu dentadura natural.',
+  },
+];
+
+const faqs = [
+  {
+    pregunta: '¿Duele ponerse un implante dental?',
+    respuesta: 'La colocación se realiza con anestesia local, por lo que no deberías sentir dolor durante la intervención. Es normal notar molestias leves los días posteriores, similares a las de una extracción dental, que se controlan con la pauta que te indiquemos.',
+  },
+  {
+    pregunta: '¿Cuánto dura un implante dental?',
+    respuesta: 'Un implante dental bien cuidado, con revisiones periódicas y buena higiene bucal, puede durar muchos años. La duración exacta depende de la salud bucal de cada paciente y del mantenimiento posterior.',
+  },
+  {
+    pregunta: '¿Cuánto cuesta un implante dental?',
+    respuesta: 'El precio de un implante dental se evalúa según las necesidades de cada paciente, tras una valoración inicial gratuita en la que definimos el plan de tratamiento más adecuado.',
+  },
+  {
+    pregunta: '¿Necesito un injerto de hueso para colocarme un implante?',
+    respuesta: 'No siempre. Si no hay suficiente hueso en la zona donde se va a colocar el implante, puede ser necesario un injerto óseo previo. Lo valoramos con tu escáner 3D durante la primera consulta.',
+  },
+  {
+    pregunta: '¿Cuántas visitas necesito para completar el tratamiento?',
+    respuesta: 'El número de visitas varía según cada caso: la valoración inicial, la colocación del implante, el periodo de oseointegración y la colocación de la corona final. Te explicamos el plan completo antes de empezar.',
+  },
+  {
+    pregunta: '¿Qué pasa si he perdido varios dientes o toda una arcada?',
+    respuesta: "Existen protocolos que permiten apoyar una prótesis fija sobre un número reducido de implantes, a veces conocidos como carga inmediata o \"All-on-4\". Coméntanoslo en la valoración inicial para revisar si es tu caso.",
+  },
+  {
+    pregunta: '¿Ofrecen financiación para implantes dentales?',
+    respuesta: 'Sí. Ofrecemos opciones de financiación para que puedas empezar tu tratamiento sin que el coste sea un obstáculo. Te damos los detalles en tu valoración inicial gratuita.',
+  },
+  {
+    pregunta: '¿Qué cuidados necesita un implante dental?',
+    respuesta: 'Un implante se cuida igual que un diente natural: cepillado dos veces al día, uso de cepillo interdental o irrigador, y revisiones periódicas en la clínica para comprobar que la encía y el hueso que lo sostienen están sanos.',
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.pregunta,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.respuesta,
+    },
+  })),
+};
+
+// Sin `@id` al Dentist todavía (pendiente Tarea 9 del Plan SEO) — se declara
+// la clínica en línea, igual que ya hace el schema ItemList de /servicios/.
+const procedureSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  "name": "Implantes dentales",
+  "url": "https://arangodentalclinic.es/implantes-dentales-benidorm/",
+  "procedureType": "https://schema.org/SurgicalProcedure",
+  "bodyLocation": "Maxilar y mandíbula",
+  "howPerformed": "Planificación digital con escáner intraoral 3D, colocación del implante de titanio con anestesia local y, tras el periodo de oseointegración, colocación de la corona definitiva.",
+  "provider": {
+    "@type": "Dentist",
+    "name": "Arango Dental Clinic",
+    "url": "https://arangodentalclinic.es",
+  },
+};
+---
+
+<Layout title="Implantes Dentales en Benidorm | Precio y Financiación" description="Implantes dentales en Benidorm con planificación 3D y implantes de titanio. Valoración inicial sin coste y financiación a medida. Pide cita hoy." image="/img/servicios/servicios.webp">
+  <script type="application/ld+json" set:html={JSON.stringify(procedureSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- ── Hero ── -->
+  <section class="trt-hero" data-scroll-hero>
+    <img
+      src="/img/servicios/servicios.webp"
+      alt="Instrumental odontológico profesional en Arango Dental Clinic"
+      class="trt-hero-img"
+      width="1536"
+      height="1024"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="trt-hero-overlay" aria-hidden="true"></div>
+    <div class="trt-container trt-hero-inner">
+      <p class="trt-label">Arango Dental Clinic</p>
+      <h1 class="trt-hero-title">Implantes dentales en Benidorm</h1>
+      <p class="trt-hero-sub">
+        Si has perdido una o varias piezas dentales, un implante dental te permite recuperar la función y la estética de tu sonrisa sin afectar a los dientes vecinos. En Arango Dental Clinic evaluamos tu caso con planificación digital 3D y te ofrecemos una valoración inicial sin coste en Benidorm.
+      </p>
+      <div class="trt-hero-actions">
+        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Pide tu valoración sin coste</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contenido ── -->
+  <section class="trt-content-section">
+    <div class="trt-container trt-prose">
+
+      <h2>¿Qué es un implante dental y cuándo se necesita?</h2>
+      <p>
+        Un implante dental es una pieza de titanio que sustituye la raíz de un diente perdido y se integra en el hueso maxilar o mandibular. Sobre ella se coloca una corona que recupera la forma y la función del diente natural, sin necesidad de tallar ni apoyarse en los dientes vecinos, a diferencia de un puente tradicional.
+      </p>
+      <p>
+        En términos sencillos, un implante tiene tres partes: el tornillo de titanio que hace de raíz artificial, un pilar intermedio que conecta esa raíz con la parte visible, y la corona final, fabricada a medida para que combine con el resto de tu dentadura en color y forma.
+      </p>
+      <p>
+        Se recomienda cuando falta una o varias piezas dentales, ya sea por una extracción, un traumatismo o una enfermedad periodontal avanzada. Sustituir la pieza cuanto antes evita dos problemas frecuentes: que los dientes vecinos se desplacen hacia el hueco vacío y que el hueso de la zona se reabsorba con el tiempo por falta de estímulo.
+      </p>
+      <p>
+        A diferencia de una prótesis removible, el implante no se quita ni se apoya sobre las encías: queda fijo, como una pieza más de tu dentadura. Y a diferencia de un puente dental, no requiere desgastar los dientes sanos de al lado para sujetarlo, porque tiene su propio soporte en el hueso.
+      </p>
+      <p>
+        No todos los pacientes son candidatos inmediatos: algunas enfermedades sistémicas no controladas, el tabaquismo intenso o una higiene bucal muy descuidada pueden condicionar el tratamiento. Lo revisamos en tu historial clínico durante la primera visita, junto con el estado del hueso en el escáner 3D.
+      </p>
+
+      <h2>Cómo lo hacemos en Arango Dental Clinic</h2>
+      <p>
+        Empezamos con un escáner intraoral 3D que nos permite ver con precisión el estado de tu hueso en Benidorm, antes de proponerte ningún tratamiento. Esa información se traduce en una planificación digital: sabemos de antemano dónde y con qué angulación se va a colocar cada implante, en lugar de decidirlo durante la intervención.
+      </p>
+      <p>
+        Utilizamos implantes de titanio de alta calidad, colocados con anestesia local en la propia clínica.
+        <!-- PENDIENTE CLÍNICA: marca y origen exactos del sistema de implantes que utiliza la clínica -->
+        Si no hay suficiente hueso para alojar el implante con garantías, te lo explicamos en la valoración inicial y evaluamos si hace falta un injerto óseo previo.
+      </p>
+      <p>
+        Durante los días posteriores a la colocación es normal cierta inflamación leve, que suele controlarse con la pauta que te indicamos. La mayoría de los pacientes retoma su rutina habitual al día siguiente, evitando alimentos duros en la zona tratada hasta la revisión.
+      </p>
+
+      <h2>El proceso, paso a paso</h2>
+      <ol class="trt-steps">
+        {pasos.map((paso, i) => (
+          <li class="trt-step">
+            <span class="trt-step-num">{i + 1}</span>
+            <div>
+              <h3 class="trt-step-title">{paso.titulo}</h3>
+              <p class="trt-step-desc">{paso.descripcion}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <h2>Precio y financiación</h2>
+      <p>
+        El precio de un implante dental depende de varios factores: el número de piezas a reemplazar, si hace falta un injerto óseo previo y el tipo de corona elegida. Por eso no damos una cifra cerrada sin antes valorar tu caso en persona.
+      </p>
+      <!-- PENDIENTE CLÍNICA: tarifas orientativas de implantes dentales; enlazar a /precios/ cuando esa página exista -->
+      <p>
+        Ofrecemos financiación para que puedas empezar tu tratamiento sin que el coste sea un obstáculo. Te damos los detalles concretos en tu valoración inicial, que es gratuita y sin compromiso.
+      </p>
+      <p>
+        Preferimos ser claros sobre esto: cualquier cifra que veas antes de una valoración presencial es solo orientativa. El presupuesto real se cierra después de ver tu escáner 3D y de decidir juntos el plan de tratamiento, para que sepas exactamente qué vas a pagar y por qué.
+      </p>
+
+      <h2>Preguntas frecuentes</h2>
+      <div class="trt-faq-list">
+        {faqs.map((faq) => (
+          <details class="trt-faq-item">
+            <summary class="trt-faq-question">{faq.pregunta}</summary>
+            <p class="trt-faq-answer">{faq.respuesta}</p>
+          </details>
+        ))}
+      </div>
+
+      <h2>Pide tu valoración sin coste</h2>
+      <p>
+        La primera consulta es gratuita y sin compromiso. Evaluamos tu caso con nuestro escáner 3D y te explicamos las opciones de tratamiento antes de que decidas nada. Atendemos en Benidorm y su comarca — La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea y Polop — y también recibimos pacientes de otros puntos de la provincia de Alicante que buscan una clínica de implantes dentales de confianza.
+      </p>
+      <p>
+        Puedes escribirnos por WhatsApp, llamarnos por teléfono o acercarte directamente a la clínica en Avinguda Alfonso Puchades. Te atendemos en español, inglés y francés, y respondemos por WhatsApp en menos de 24 horas.
+      </p>
+      <p>
+        Consulta también nuestros <a href="/servicios/">demás servicios dentales</a> si además del implante quieres resolver otras necesidades de tu sonrisa.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ── CTA final ── -->
+  <section class="trt-cta-section">
+    <div class="trt-container trt-cta-inner">
+      <h2 class="trt-cta-title">Arango Dental Clinic, tu clínica de implantes en Benidorm</h2>
+      <p class="trt-cta-sub">Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante 03501</p>
+      <div class="trt-cta-actions">
+        <a href="tel:+34965088282" class="trt-btn trt-btn-outline">Llamar: 965 08 82 82</a>
+        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* ── Layout ── */
+  .trt-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* ── Hero ── */
+  .trt-hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: #0d2219;
+    text-align: center;
+  }
+
+  :global(html.dark) .trt-hero {
+    background-color: #0d2219;
+  }
+
+  .trt-hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+  }
+
+  .trt-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(6, 18, 10, 0.72) 0%,
+        rgba(6, 18, 10, 0.48) 50%,
+        rgba(6, 18, 10, 0.72) 100%
+      );
+  }
+
+  :global(html.dark) .trt-hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(4, 12, 7, 0.82) 0%,
+        rgba(4, 12, 7, 0.55) 50%,
+        rgba(4, 12, 7, 0.82) 100%
+      );
+  }
+
+  .trt-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    padding-top: 7rem;
+    padding-bottom: 4rem;
+  }
+
+  .trt-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #C49B38;
+  }
+
+  :global(html.dark) .trt-label {
+    color: #D4AF55;
+  }
+
+  .trt-hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.15;
+    color: rgba(244, 240, 235, 0.95);
+    margin: 0;
+  }
+
+  .trt-hero-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(244, 240, 235, 0.65);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .trt-hero-actions {
+    margin-top: 0.5rem;
+  }
+
+  /* ── Prose ── */
+  .trt-content-section {
+    background-color: var(--bg-primary);
+    padding: 4.5rem 0 5rem;
+  }
+
+  .trt-prose {
+    max-width: 760px;
+  }
+
+  .trt-prose h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 3rem 0 1.1rem;
+  }
+
+  .trt-prose h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .trt-prose p {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin: 0 0 1.1rem;
+  }
+
+  .trt-prose a {
+    color: var(--teal-600);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* ── Pasos ── */
+  .trt-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .trt-step {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+  }
+
+  .trt-step-num {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--border-secondary);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.1rem;
+    color: var(--teal-600);
+  }
+
+  .trt-step-title {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0.3rem 0 0.35rem;
+  }
+
+  .trt-step-desc {
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* ── FAQ ── */
+  .trt-faq-list {
+    margin: 0;
+  }
+
+  .trt-faq-item {
+    border-bottom: 1px solid var(--border-primary);
+    padding: 1.25rem 0;
+  }
+
+  .trt-faq-question {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .trt-faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .trt-faq-question::after {
+    content: '+';
+    flex-shrink: 0;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--teal-600);
+    transition: transform 0.25s ease;
+  }
+
+  .trt-faq-item[open] .trt-faq-question::after {
+    transform: rotate(45deg);
+  }
+
+  .trt-faq-answer {
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0.75rem 0 0;
+  }
+
+  /* ── CTA final ── */
+  .trt-cta-section {
+    background-color: var(--bg-secondary);
+    padding: 4.5rem 0;
+  }
+
+  .trt-cta-inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .trt-cta-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .trt-cta-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin: 0 0 1.5rem;
+  }
+
+  .trt-cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media (min-width: 480px) {
+    .trt-cta-actions {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  /* ── Botones — modo claro ── */
+  .trt-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.875rem 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .trt-btn-outline {
+    background-color: transparent;
+    color: #153328;
+    border: 1px solid rgba(21, 51, 40, 0.65);
+  }
+
+  .trt-btn-outline:hover {
+    background-color: #153328;
+    color: #ffffff;
+    border-color: #153328;
+  }
+
+  .trt-btn-solid {
+    background-color: #153328;
+    color: #ffffff;
+    border: 1px solid #153328;
+  }
+
+  .trt-btn-solid:hover {
+    background-color: transparent;
+    color: #153328;
+    border-color: rgba(21, 51, 40, 0.65);
+  }
+
+  :global(html.dark) .trt-btn-outline {
+    color: rgba(244, 240, 235, 0.85);
+    border-color: rgba(244, 240, 235, 0.30);
+  }
+
+  :global(html.dark) .trt-btn-outline:hover {
+    background-color: #D4AF55;
+    color: #141210;
+    border-color: #D4AF55;
+  }
+
+  :global(html.dark) .trt-btn-solid {
+    background-color: #D4AF55;
+    color: #141210;
+    border-color: #D4AF55;
+  }
+
+  :global(html.dark) .trt-btn-solid:hover {
+    background-color: transparent;
+    color: rgba(244, 240, 235, 0.85);
+    border-color: rgba(244, 240, 235, 0.30);
+  }
+
+  /* ── Botón sólido sobre el hero oscuro (#0d2219) — mismo patrón que .hero-btn-primary ── */
+  .trt-btn-solid-hero {
+    background-color: #C49B38;
+    color: #0d2219;
+    border: 1px solid #C49B38;
+  }
+
+  .trt-btn-solid-hero:hover {
+    background-color: transparent;
+    color: rgba(244, 240, 235, 0.9);
+    border-color: rgba(244, 240, 235, 0.5);
+  }
+
+  :global(html.dark) .trt-btn-solid-hero {
+    background-color: #D4AF55;
+    color: #141210;
+    border-color: #D4AF55;
+  }
+
+  :global(html.dark) .trt-btn-solid-hero:hover {
+    background-color: transparent;
+    color: rgba(244, 240, 235, 0.85);
+    border-color: rgba(244, 240, 235, 0.35);
+  }
+</style>
