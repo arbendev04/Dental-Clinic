@@ -102,6 +102,25 @@ import { servicios } from '../data/servicios';
       </ul>
     </div>
 
+    <!-- Formulario — a propósito FUERA de .hero-content y sin ningún gsap.set
+    de opacidad: debe verse siempre en el hero, sin depender del scroll. -->
+    <div class="hero-form-panel" id="hero-form-panel">
+      <p class="hero-form-eyebrow">Valoración sin coste</p>
+      <h2 class="hero-form-title">Da el primer paso</h2>
+      <form id="hero-lead-form" class="hero-form" novalidate>
+        <input type="text" id="hero-gotcha" name="_gotcha" class="hero-form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <input type="text" id="hero-nombre" name="nombre" class="hero-form-input" placeholder="Nombre completo" required />
+        <input type="tel" id="hero-telefono" name="telefono" class="hero-form-input" placeholder="Teléfono" required />
+        <input type="email" id="hero-email" name="email" class="hero-form-input" placeholder="Email (opcional)" />
+        <label class="hero-form-consent">
+          <input type="checkbox" id="hero-consentimiento" name="consentimiento" required />
+          <span>Acepto la <a href="/politica-privacidad" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
+        </label>
+        <button type="submit" id="hero-form-submit" class="hero-form-submit">Enviar</button>
+      </form>
+      <p id="hero-form-status" class="hero-form-status" role="status" aria-live="polite" hidden></p>
+    </div>
+
     <!-- Indicador de scroll -->
     <div class="scroll-indicator" id="scroll-indicator">
       <div class="scroll-line"></div>
@@ -172,9 +191,30 @@ import { servicios } from '../data/servicios';
     position: absolute;
     top: 50%;
     left: 6%;
+    right: 6%;
     transform: translateY(-50%);
     z-index: 20;
     max-width: 680px;
+  }
+
+  /* Desktop: el formulario ocupa el 35% derecho del hero, con margen antes
+     del borde (ver .hero-form-panel) — se acota el texto para dejarle aire
+     de sobra y que no se pisen. */
+  @media (min-width: 768px) {
+    .hero-content {
+      right: 40%;
+    }
+  }
+
+  /* En mobile el formulario ocupa la mitad inferior del hero (siempre
+     visible) — el texto se ancla arriba en vez de centrarse, para que no
+     compitan por el mismo espacio vertical. */
+  @media (max-width: 640px) {
+    .hero-content {
+      top: 5.5rem;
+      transform: none;
+      right: 6%;
+    }
   }
 
   /* Label superior */
@@ -199,7 +239,11 @@ import { servicios } from '../data/servicios';
      de 680px de .hero-content (que sí aplica a descripción y CTAs) */
   .hero-title {
     font-family: "Cormorant Garamond", serif;
-    font-size: clamp(1.6rem, 5.2vw, 4.5rem);
+    /* Tope bajado de 4.5rem a 3.1rem: desde que el panel del formulario
+       ocupa el 50% del hero (ver .hero-form-panel), la columna de texto
+       es más angosta y el título necesita ser más chico para no pisarlo
+       (sigue en una sola línea, ver .hero-chars). */
+    font-size: clamp(1.6rem, 4vw, 3.1rem);
     font-weight: 300;
     color: #ffffff;
     line-height: 1.05;
@@ -401,6 +445,193 @@ import { servicios } from '../data/servicios';
       opacity: 1;
       transform: scaleY(1);
     }
+  }
+
+  /* --- Formulario del hero: siempre visible, sin animación de scroll --- */
+  .hero-form-panel {
+    position: absolute;
+    z-index: 21;
+    left: 50%;
+    bottom: 1.1rem;
+    transform: translateX(-50%);
+    width: calc(100% - 2.5rem);
+    max-width: 300px;
+    padding: 1.1rem 1.25rem 1.3rem;
+    background-color: rgba(13, 20, 16, 0.62);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(244, 240, 235, 0.14);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ~35% del ancho del hero, sin llegar al borde derecho (right:4%) — no
+     debe dominar la sección. .hero-content (ver "right: 40%" arriba) deja
+     de sobra el resto del espacio libre. Padding vertical generoso: la
+     tarjeta debe leerse alta/proporcionada, no ancha y plana. */
+  @media (min-width: 768px) {
+    .hero-form-panel {
+      left: auto;
+      bottom: auto;
+      right: 4%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 35%;
+      max-width: none;
+      padding: 3.25rem 2.75rem;
+    }
+  }
+
+  /* En mobile el panel compite por espacio vertical con el título/CTAs
+     (ver media query de .hero-content más arriba) — se saca el campo de
+     email (opcional, no lo pide la API) para que ocupe menos alto. */
+  @media (max-width: 640px) {
+    #hero-email {
+      display: none;
+    }
+  }
+
+  .hero-form-eyebrow {
+    font-family: "Inter", sans-serif;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #C49B38;
+    margin: 0 0 0.35rem;
+  }
+
+  /* Más grande y llamativa en desktop — mismo dorado, más peso y tamaño. */
+  @media (min-width: 768px) {
+    .hero-form-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      margin-bottom: 0.6rem;
+    }
+  }
+
+  .hero-form-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: rgba(244, 240, 235, 0.95);
+    margin: 0 0 0.85rem;
+  }
+
+  @media (min-width: 768px) {
+    .hero-form-title {
+      font-size: 1.6rem;
+      margin-bottom: 1.1rem;
+    }
+  }
+
+  .hero-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  /* Los campos ocupan todo el ancho útil del panel (100% menos el padding
+     horizontal de .hero-form-panel) — sin tope propio, para que abarquen
+     más ancho en escritorio. */
+  @media (min-width: 768px) {
+    .hero-form {
+      gap: 1.1rem;
+    }
+  }
+
+  .hero-form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .hero-form-input {
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    color: rgba(244, 240, 235, 0.95);
+    background-color: rgba(244, 240, 235, 0.06);
+    border: 1px solid rgba(244, 240, 235, 0.2);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  /* Campos más grandes en desktop — que no se vean pequeños/aplastados
+     dentro de una tarjeta ahora más alta. */
+  @media (min-width: 768px) {
+    .hero-form-input {
+      padding: 0.85rem 1rem;
+      font-size: 0.92rem;
+    }
+  }
+
+  .hero-form-input::placeholder {
+    color: rgba(244, 240, 235, 0.45);
+  }
+
+  .hero-form-input:focus {
+    outline: none;
+    border-color: #D4AF55;
+    background-color: rgba(244, 240, 235, 0.1);
+  }
+
+  .hero-form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    color: rgba(244, 240, 235, 0.6);
+    cursor: pointer;
+  }
+
+  .hero-form-consent input {
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+  }
+
+  .hero-form-consent a {
+    color: rgba(244, 240, 235, 0.85);
+    text-decoration: underline;
+  }
+
+  .hero-form-submit {
+    margin-top: 0.2rem;
+    padding: 0.7rem 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0d2219;
+    background-color: #C49B38;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+
+  .hero-form-submit:hover:not(:disabled) {
+    background-color: #D4AF55;
+  }
+
+  .hero-form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .hero-form-status {
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    margin-top: 0.7rem;
+    color: rgba(244, 240, 235, 0.85);
+  }
+
+  .hero-form-status-error {
+    color: #e5a3a3;
   }
 </style>
 
@@ -708,4 +939,63 @@ import { servicios } from '../data/servicios';
       },
     });
   }
+</script>
+
+<!-- Envío del formulario del hero — script aparte, sin relación con GSAP.
+Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
+<script>
+  const heroForm      = document.getElementById("hero-lead-form")   as HTMLFormElement | null;
+  const heroSubmitBtn = document.getElementById("hero-form-submit") as HTMLButtonElement | null;
+  const heroStatus    = document.getElementById("hero-form-status") as HTMLElement | null;
+
+  heroForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!heroSubmitBtn || !heroStatus) return;
+
+    heroSubmitBtn.disabled = true;
+    heroSubmitBtn.textContent = "Enviando…";
+    heroStatus.hidden = true;
+    heroStatus.className = "hero-form-status";
+
+    const nombre = (document.getElementById("hero-nombre") as HTMLInputElement | null)?.value ?? "";
+    const telefono = (document.getElementById("hero-telefono") as HTMLInputElement | null)?.value ?? "";
+    const email = (document.getElementById("hero-email") as HTMLInputElement | null)?.value ?? "";
+    const consentimiento = (document.getElementById("hero-consentimiento") as HTMLInputElement | null)?.checked ?? false;
+    const _gotcha = (document.getElementById("hero-gotcha") as HTMLInputElement | null)?.value ?? "";
+
+    try {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, telefono, email, consentimiento, _gotcha }),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (response.ok && data?.success) {
+        heroForm.hidden = true;
+        heroStatus.textContent = "¡Gracias! Te contactaremos pronto.";
+        heroStatus.classList.add("hero-form-status-success");
+        heroStatus.hidden = false;
+
+        // Mismo evento que el formulario de /contacto — el trigger de GTM
+        // "Formulario de contacto" escucha form_submit_success sin importar
+        // form_name, así que este envío también cuenta como conversión.
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "hero" });
+        return;
+      }
+
+      heroStatus.textContent = data?.error || "No hemos podido enviar tu solicitud. Escríbenos por WhatsApp.";
+      heroStatus.classList.add("hero-form-status-error");
+      heroStatus.hidden = false;
+    } catch {
+      heroStatus.textContent = "No hemos podido enviar tu solicitud. Revisa tu conexión o escríbenos por WhatsApp.";
+      heroStatus.classList.add("hero-form-status-error");
+      heroStatus.hidden = false;
+    } finally {
+      heroSubmitBtn.disabled = false;
+      heroSubmitBtn.textContent = "Enviar";
+    }
+  });
 </script>

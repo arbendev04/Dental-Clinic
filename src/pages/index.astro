@@ -85,6 +85,19 @@ const stats = [
           </div>
         ))}
       </div>
+
+      <!-- Franja de contacto rápido -->
+      <div class="quick-contact-strip">
+        <a href="/contacto#contact-form" class="quick-contact-btn quick-contact-btn-solid">Agenda tu Cita</a>
+        <a href="https://wa.me/34665886439" target="_blank" rel="noopener" class="quick-contact-btn quick-contact-btn-outline">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+          WhatsApp
+        </a>
+        <a href="tel:+34965088282" class="quick-contact-btn quick-contact-btn-outline">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 3H6.22a1 1 0 01.948.684L8.665 8.18a1 1 0 01-.25 1.033l-1.204 1.204a11.05 11.05 0 005.373 5.373l1.204-1.204a1 1 0 011.033-.25l4.492 1.498a1 1 0 01.684.949V19.5a2.5 2.5 0 01-2.5 2.5h-1C7.888 22 2 16.112 2 8.5v-1z" /></svg>
+          965 08 82 82
+        </a>
+      </div>
     </div>
   </section>
 
@@ -238,13 +251,24 @@ const stats = [
       <p class="cta-banner-sub text-sm md:text-base mb-7 md:mb-10" style="line-height: 1.75; max-width: 480px; margin-left: auto; margin-right: auto;">
         Reserva tu consulta hoy y descubre por qué los pacientes más exigentes eligen Arango Dental Clinic.
       </p>
-      <a
-        href="/contacto#contact-form"
-        class="cta-banner-btn inline-block px-8 md:px-10 py-3.5 md:py-4 text-sm md:text-[15px] font-medium tracking-wider transition-all duration-300"
-        style="letter-spacing: 0.1em;"
-      >
-        Quiero Mi Valoración Gratuita
-      </a>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="/contacto#contact-form"
+          class="cta-banner-btn inline-block px-8 md:px-10 py-3.5 md:py-4 text-sm md:text-[15px] font-medium tracking-wider transition-all duration-300"
+          style="letter-spacing: 0.1em;"
+        >
+          Quiero Mi Valoración Gratuita
+        </a>
+        <a
+          href="https://wa.me/34665886439"
+          target="_blank"
+          rel="noopener"
+          class="cta-banner-btn-solid inline-block px-8 md:px-10 py-3.5 md:py-4 text-sm md:text-[15px] font-medium tracking-wider transition-all duration-300"
+          style="letter-spacing: 0.1em;"
+        >
+          Escríbenos por WhatsApp
+        </a>
+      </div>
     </div>
   </section>
 
@@ -329,6 +353,84 @@ const stats = [
       background-color: #D4AF55;
       color: #141210;
       border-color: #D4AF55;
+    }
+
+    /* Segundo botón del CTA final (WhatsApp) — sólido, mismo patrón que
+       .hero-btn-primary/.srv-btn-solid en el resto del sitio. */
+    .cta-banner-btn-solid {
+      background-color: #153328;
+      color: #ffffff;
+      border: 1px solid #153328;
+    }
+    .cta-banner-btn-solid:hover {
+      background-color: transparent;
+      color: #153328;
+      border-color: rgba(21, 51, 40, 0.65);
+    }
+    :global(html.dark) .cta-banner-btn-solid {
+      background-color: #D4AF55;
+      color: #141210;
+      border-color: #D4AF55;
+    }
+    :global(html.dark) .cta-banner-btn-solid:hover {
+      background-color: transparent;
+      color: rgba(244, 240, 235, 0.85);
+      border-color: rgba(244, 240, 235, 0.30);
+    }
+
+    /* Franja de contacto rápido — después del grid de servicios */
+    .quick-contact-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .quick-contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      font-family: "Inter", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .quick-contact-btn-solid {
+      background-color: #153328;
+      color: #ffffff;
+      border: 1px solid #153328;
+    }
+    .quick-contact-btn-solid:hover {
+      background-color: transparent;
+      color: #153328;
+      border-color: rgba(21, 51, 40, 0.65);
+    }
+    :global(html.dark) .quick-contact-btn-solid {
+      background-color: #D4AF55;
+      color: #141210;
+      border-color: #D4AF55;
+    }
+    :global(html.dark) .quick-contact-btn-solid:hover {
+      background-color: transparent;
+      color: rgba(244, 240, 235, 0.85);
+      border-color: rgba(244, 240, 235, 0.30);
+    }
+
+    .quick-contact-btn-outline {
+      background-color: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-secondary);
+    }
+    .quick-contact-btn-outline:hover {
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
     }
   </style>
 
