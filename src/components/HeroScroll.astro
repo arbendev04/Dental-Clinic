@@ -5,23 +5,32 @@
 
 <div class="hero-scroll-wrapper">
   <div class="hero-scroll-inner">
-    <!-- Frames apilados. Sin `src` a propósito: `<picture><source media>` termina
-    bajando igual la imagen desktop en mobile (939 KB de más, ver auditoría SEO).
-    El script inline de abajo asigna la única URL correcta antes que corra nada más. -->
-    <img id="hero-frame1" class="hero-frame" alt="Instrumentos odontológicos esterilizados" style="opacity: 1;" />
+    <!-- Frame 1 es el candidato a LCP: se mantiene con <picture> nativo para que
+    el navegador lo descubra y pinte sin esperar a ningún script (probado: pasar
+    esta imagen por JS retrasaba el LCP en mobile de 3.2s a 3.8s bajo CPU
+    throttling). Frames 2-4 no son críticos para el LCP (recién se ven al hacer
+    scroll), así que sí van sin `src` — evitan la doble descarga desktop+mobile
+    que `<picture>` hace en algunos casos (ver auditoría SEO, 939 KB de más). -->
+    <picture>
+      <source media="(max-width: 640px)" srcset="/img/hero/1-mobile.webp" />
+      <img
+        id="hero-frame1"
+        class="hero-frame"
+        src="/img/hero/instrumentos-odontologicos-esterilizados.webp"
+        alt="Instrumentos odontológicos esterilizados"
+        width="1376"
+        height="768"
+        style="opacity: 1;"
+      />
+    </picture>
     <img id="hero-frame2" class="hero-frame" alt="Kit instrumental odontológico" style="opacity: 0;" />
     <img id="hero-frame3" class="hero-frame" alt="Modelo dental con sonda exploradora" style="opacity: 0;" />
     <img id="hero-frame4" class="hero-frame" alt="Pieza de mano dental de alta velocidad" style="opacity: 0;" />
-
-    <noscript>
-      <img class="hero-frame" src="/img/hero/instrumentos-odontologicos-esterilizados.webp" alt="Instrumentos odontológicos esterilizados" width="1376" height="768" style="opacity: 1;" />
-    </noscript>
 
     <script is:inline>
       (function () {
         var isMobile = window.matchMedia("(max-width: 640px)").matches;
         var frames = [
-          { id: "hero-frame1", desktop: "/img/hero/instrumentos-odontologicos-esterilizados.webp", mobile: "/img/hero/1-mobile.webp", dw: 1376, dh: 768, mw: 863, mh: 1823 },
           { id: "hero-frame2", desktop: "/img/hero/kit-instrumental-odontologico.webp", mobile: "/img/hero/2-mobile.webp", dw: 1376, dh: 768, mw: 853, mh: 1844 },
           { id: "hero-frame3", desktop: "/img/hero/modelo-dental-sonda-exploradora.webp", mobile: "/img/hero/3-mobile.webp", dw: 1376, dh: 768, mw: 853, mh: 1844 },
           { id: "hero-frame4", desktop: "/img/hero/pieza-mano-dental-alta-velocidad.webp", mobile: "/img/hero/4-mobile.webp", dw: 1376, dh: 768, mw: 853, mh: 1844 },
