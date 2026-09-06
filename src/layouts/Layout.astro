@@ -275,8 +275,7 @@ const breadcrumbSchema = Astro.url.pathname === '/' ? null : {
     <!-- Skip to main content (Accesibilidad) -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:text-white focus:outline-none"
-      style="background-color: var(--teal-600);"
+      class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:outline-none"
     >
       Saltar al contenido principal
     </a>
@@ -289,3 +288,18 @@ const breadcrumbSchema = Astro.url.pathname === '/' ? null : {
     <CookieConsent />
   </body>
 </html>
+
+<style>
+  /* Par fijo bg/texto (no usa --teal-600: esa variable se invierte a un verde
+     claro en dark mode y el link quedaba con 1.88:1 de contraste). Mismo
+     patrón que .hero-btn-primary: siempre alto contraste en los dos temas. */
+  .skip-link {
+    background-color: #1c1b1b;
+    color: #ffffff;
+  }
+
+  :global(html.dark) .skip-link {
+    background-color: #D4AF55;
+    color: #141210;
+  }
+</style>
