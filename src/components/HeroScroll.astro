@@ -5,55 +5,36 @@
 
 <div class="hero-scroll-wrapper">
   <div class="hero-scroll-inner">
-    <!-- Frames apilados -->
-    <picture>
-      <source media="(max-width: 640px)" srcset="/img/hero/1-mobile.webp" width="863" height="1823" />
-      <img
-        id="hero-frame1"
-        class="hero-frame"
-        src="/img/hero/instrumentos-odontologicos-esterilizados.webp"
-        alt="Instrumentos odontológicos esterilizados"
-        width="1376"
-        height="768"
-        style="opacity: 1;"
-      />
-    </picture>
-    <picture>
-      <source media="(max-width: 640px)" srcset="/img/hero/2-mobile.webp" width="853" height="1844" />
-      <img
-        id="hero-frame2"
-        class="hero-frame"
-        src="/img/hero/kit-instrumental-odontologico.webp"
-        alt="Kit instrumental odontológico"
-        width="1376"
-        height="768"
-        style="opacity: 0;"
-      />
-    </picture>
-    <picture>
-      <source media="(max-width: 640px)" srcset="/img/hero/3-mobile.webp" width="853" height="1844" />
-      <img
-        id="hero-frame3"
-        class="hero-frame"
-        src="/img/hero/modelo-dental-sonda-exploradora.webp"
-        alt="Modelo dental con sonda exploradora"
-        width="1376"
-        height="768"
-        style="opacity: 0;"
-      />
-    </picture>
-    <picture>
-      <source media="(max-width: 640px)" srcset="/img/hero/4-mobile.webp" width="853" height="1844" />
-      <img
-        id="hero-frame4"
-        class="hero-frame"
-        src="/img/hero/pieza-mano-dental-alta-velocidad.webp"
-        alt="Pieza de mano dental de alta velocidad"
-        width="1376"
-        height="768"
-        style="opacity: 0;"
-      />
-    </picture>
+    <!-- Frames apilados. Sin `src` a propósito: `<picture><source media>` termina
+    bajando igual la imagen desktop en mobile (939 KB de más, ver auditoría SEO).
+    El script inline de abajo asigna la única URL correcta antes que corra nada más. -->
+    <img id="hero-frame1" class="hero-frame" alt="Instrumentos odontológicos esterilizados" style="opacity: 1;" />
+    <img id="hero-frame2" class="hero-frame" alt="Kit instrumental odontológico" style="opacity: 0;" />
+    <img id="hero-frame3" class="hero-frame" alt="Modelo dental con sonda exploradora" style="opacity: 0;" />
+    <img id="hero-frame4" class="hero-frame" alt="Pieza de mano dental de alta velocidad" style="opacity: 0;" />
+
+    <noscript>
+      <img class="hero-frame" src="/img/hero/instrumentos-odontologicos-esterilizados.webp" alt="Instrumentos odontológicos esterilizados" width="1376" height="768" style="opacity: 1;" />
+    </noscript>
+
+    <script is:inline>
+      (function () {
+        var isMobile = window.matchMedia("(max-width: 640px)").matches;
+        var frames = [
+          { id: "hero-frame1", desktop: "/img/hero/instrumentos-odontologicos-esterilizados.webp", mobile: "/img/hero/1-mobile.webp", dw: 1376, dh: 768, mw: 863, mh: 1823 },
+          { id: "hero-frame2", desktop: "/img/hero/kit-instrumental-odontologico.webp", mobile: "/img/hero/2-mobile.webp", dw: 1376, dh: 768, mw: 853, mh: 1844 },
+          { id: "hero-frame3", desktop: "/img/hero/modelo-dental-sonda-exploradora.webp", mobile: "/img/hero/3-mobile.webp", dw: 1376, dh: 768, mw: 853, mh: 1844 },
+          { id: "hero-frame4", desktop: "/img/hero/pieza-mano-dental-alta-velocidad.webp", mobile: "/img/hero/4-mobile.webp", dw: 1376, dh: 768, mw: 853, mh: 1844 },
+        ];
+        frames.forEach(function (f) {
+          var img = document.getElementById(f.id);
+          if (!img) return;
+          img.src = isMobile ? f.mobile : f.desktop;
+          img.width = isMobile ? f.mw : f.dw;
+          img.height = isMobile ? f.mh : f.dh;
+        });
+      })();
+    </script>
 
     <!-- Overlay oscuro base -->
     <div class="hero-overlay"></div>
@@ -425,12 +406,18 @@
   charsContainer.style.cssText =
     "display:flex; flex-wrap:wrap; gap:0.3em; align-items:baseline;";
 
+  // Un nodo de texto con espacio real entre cada span: el `gap` de arriba
+  // separa visualmente las palabras pero no inserta ningún espacio en el
+  // textContent, así que sin esto Google indexa "ArangoDentalClinic" pegado.
   const words = titleText.split(" ");
-  const wordEls: HTMLElement[] = words.map((word) => {
+  const wordEls: HTMLElement[] = words.map((word, i) => {
     const span = document.createElement("span");
     span.classList.add("hero-word");
     span.textContent = word;
     charsContainer.appendChild(span);
+    if (i < words.length - 1) {
+      charsContainer.appendChild(document.createTextNode(" "));
+    }
     return span;
   });
 
