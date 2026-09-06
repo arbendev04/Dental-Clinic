@@ -1,6 +1,7 @@
 ---
 // Componente de hero con scroll-driven crossfade entre 4 frames
 // Estilo visual basado en diseño Stitch: viñeta cinemática, overlay oscuro, CTA
+import { servicios } from '../data/servicios';
 ---
 
 <div class="hero-scroll-wrapper">
@@ -58,9 +59,7 @@
     <div class="hero-content" id="hero-content">
       <!-- Label superior -->
       <div class="hero-label" id="hero-label">
-        <span>BENIDORM</span>
-        <div class="hero-label-dot"></div>
-        <span>PREMIUM DENTAL CARE</span>
+        <span>Clínica Dental en Benidorm</span>
       </div>
 
       <!-- Título principal -->
@@ -92,6 +91,15 @@
           </svg>
         </a>
       </div>
+
+      <!-- Lista de servicios: aparece/desaparece con el scroll, después del CTA -->
+      <ul class="hero-services-list" id="hero-services-list">
+        {servicios.map((s) => (
+          <li class="hero-service-item">
+            <a href={s.landingHref || "/servicios"}>{s.nombre}</a>
+          </li>
+        ))}
+      </ul>
     </div>
 
     <!-- Indicador de scroll -->
@@ -187,21 +195,17 @@
     text-transform: uppercase;
   }
 
-  .hero-label-dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.35);
-  }
-
-  /* Título principal */
+  /* Título principal — en una sola línea, por eso no hereda el max-width
+     de 680px de .hero-content (que sí aplica a descripción y CTAs) */
   .hero-title {
     font-family: "Cormorant Garamond", serif;
-    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-size: clamp(1.6rem, 5.2vw, 4.5rem);
     font-weight: 300;
     color: #ffffff;
     line-height: 1.05;
     margin: 0 0 1.5rem 0;
+    max-width: none;
+    white-space: nowrap;
   }
 
   /* Cada palabra se anima de forma independiente */
@@ -245,6 +249,56 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 1.25rem;
+    }
+  }
+
+  /* Lista de servicios — position:absolute a propósito: no debe sumar a la
+     altura de .hero-content (que se centra con top:50%/translateY(-50%)).
+     Si ocupara espacio en el flujo, el label/título se correrían hacia
+     arriba desde el primer frame, antes de que el usuario haga scroll. */
+  .hero-services-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    list-style: none;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 2rem;
+    row-gap: 0.55rem;
+  }
+
+  .hero-service-item {
+    will-change: opacity, transform;
+  }
+
+  .hero-service-item a {
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .hero-service-item a:hover,
+  .hero-service-item a:focus-visible {
+    color: rgba(255, 255, 255, 1);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 640px) {
+    .hero-services-list {
+      margin-top: 1.25rem;
+      column-gap: 1rem;
+      row-gap: 0.4rem;
+    }
+
+    .hero-service-item a {
+      font-size: 0.75rem;
     }
   }
 
@@ -380,19 +434,49 @@
 
   const remap = gsap.utils.mapRange;
 
+  // Remap con easing (en vez de lineal) para que el crossfade entre
+  // imágenes se sienta más fluido: acelera y desacelera en vez de
+  // moverse a velocidad constante durante la transición.
+  const crossfadeEase = gsap.parseEase("power1.inOut");
+  function erp(fi: number, fp: number, from: number, to: number, p: number): number {
+    const t = gsap.utils.clamp(0, 1, (p - fi) / (fp - fi));
+    return from + (to - from) * crossfadeEase(t);
+  }
+
   const label          = document.getElementById("hero-label")       as HTMLElement;
   const description    = document.getElementById("hero-description") as HTMLElement;
   const ctas           = document.getElementById("hero-ctas")        as HTMLElement;
   const charsContainer = document.getElementById("hero-chars")       as HTMLElement;
   const scrollIndicator = document.getElementById("scroll-indicator") as HTMLElement;
 
-  // Distancia total de scroll del wrapper (400vh - 100vh = 300vh)
+  // Distancia total de scroll de la fase 1 (frames + título): 400vh - 100vh = 300vh
   const totalScroll = 3 * window.innerHeight;
 
-  // Offsets exactos: cuándo empieza a aparecer cada frame
-  const frame2Offset = wins[1][0] * totalScroll; // 0.24 × 3vh
-  const frame3Offset = wins[2][0] * totalScroll; // 0.50 × 3vh
-  const frame4Offset = wins[3][0] * totalScroll; // 0.76 × 3vh
+  // Offsets del TEXTO — independientes de los frames de imagen, repartidos
+  // en todo el scroll para que algo nuevo siga apareciendo en cada tramo
+  // (antes todo el texto restante se apilaba junto al frame4, en el 76%).
+  const labelOffset  = 0.05 * totalScroll; // "Clínica Dental en Benidorm"
+  const arangoOffset = 0.10 * totalScroll; // "Arango" — justo después del label
+  const dentalOffset = 0.20 * totalScroll; // "Dental"
+  const clinicOffset = 0.32 * totalScroll; // "Clinic"
+  const descOffset   = 0.42 * totalScroll; // descripción
+  const ctasOffset   = 0.52 * totalScroll; // CTAs
+
+  // ── Fase 2: lista de servicios (2 columnas), después de la fase 1 ─────
+  // A diferencia de todo lo anterior (once:true, queda fijo), esta va con
+  // scrub: sigue el scroll en las dos direcciones, se revierte si el
+  // usuario vuelve hacia arriba. Se agrupan de a 2 (una fila del grid),
+  // así ambas columnas de la misma fila aparecen juntas.
+  const serviceEls = Array.from(
+    document.querySelectorAll(".hero-service-item"),
+  ) as HTMLElement[];
+  const serviceRows = Math.ceil(serviceEls.length / 2);
+  const scrollPerRow = 0.22 * window.innerHeight; // antes 0.4 por ítem (~el doble de scroll)
+  const phase2Scroll = serviceRows * scrollPerRow;
+
+  // El wrapper mide 400vh por CSS; se extiende en JS para darle espacio a
+  // la fase 2 sin tocar la duración/velocidad de la fase 1 ya existente.
+  wrapper.style.height = `${window.innerHeight + totalScroll + phase2Scroll}px`;
 
   // ─────────────────────────────────────────────────────────────────
   // Todas las escrituras al DOM primero (gsap.set + reconstrucción del
@@ -409,11 +493,13 @@
   gsap.set(frameEls[2], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
   gsap.set(frameEls[3], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
 
+  gsap.set(serviceEls, { opacity: 0, y: 14 });
+
   // --- Kinetic Typography: split por palabras ---
   const titleText = charsContainer.textContent?.trim() || "";
   charsContainer.textContent = "";
   charsContainer.style.cssText =
-    "display:flex; flex-wrap:wrap; gap:0.3em; align-items:baseline;";
+    "display:flex; flex-wrap:nowrap; gap:0.3em; align-items:baseline;";
 
   // Un nodo de texto con espacio real entre cada span: el `gap` de arriba
   // separa visualmente las palabras pero no inserta ningún espacio en el
@@ -445,8 +531,10 @@
   ScrollTrigger.create({
     trigger: wrapper,
     start: "top top",
-    end: "bottom bottom",
-    scrub: 1.5,
+    // Explícito (no "bottom bottom"): la fase 1 termina donde siempre
+    // terminó, sin estirarse por la altura extra que suma la fase 2.
+    end: `top+=${totalScroll} top`,
+    scrub: 2, // antes 1.5 — un poco más de suavizado al alcanzar el scroll
     onUpdate(self) {
       const p    = self.progress;
       const last = frameEls.length - 1;
@@ -457,14 +545,14 @@
         // ── Opacidad ──────────────────────────────────────────
         let opacity: number;
         if (i === 0) {
-          opacity = p < fo ? 1 : p < fg ? remap(fo, fg, 1, 0, p) : 0;
+          opacity = p < fo ? 1 : p < fg ? erp(fo, fg, 1, 0, p) : 0;
         } else if (i === last) {
-          opacity = p < fi ? 0 : p < fp ? remap(fi, fp, 0, 1, p) : 1;
+          opacity = p < fi ? 0 : p < fp ? erp(fi, fp, 0, 1, p) : 1;
         } else {
           if      (p < fi) opacity = 0;
-          else if (p < fp) opacity = remap(fi, fp, 0, 1, p);
+          else if (p < fp) opacity = erp(fi, fp, 0, 1, p);
           else if (p < fo) opacity = 1;
-          else if (p < fg) opacity = remap(fo, fg, 1, 0, p);
+          else if (p < fg) opacity = erp(fo, fg, 1, 0, p);
           else              opacity = 0;
         }
 
@@ -473,29 +561,29 @@
         if (i === 0) {
           // Primer frame: solo salida (se encoge)
           if      (p < fo) scale = SCALE_IDLE;
-          else if (p < fg) scale = remap(fo, fg, SCALE_IDLE, SCALE_OUT, p);
+          else if (p < fg) scale = erp(fo, fg, SCALE_IDLE, SCALE_OUT, p);
           else              scale = SCALE_OUT;
         } else if (i === last) {
           // Último frame: solo entrada (llega desde el fondo)
           if      (p < fi) scale = SCALE_IN;
-          else if (p < fp) scale = remap(fi, fp, SCALE_IN, SCALE_IDLE, p);
+          else if (p < fp) scale = erp(fi, fp, SCALE_IN, SCALE_IDLE, p);
           else              scale = SCALE_IDLE;
         } else {
           // Intermedios: llega del túnel → reposa → se encoge al salir
           if      (p < fi) scale = SCALE_IN;
-          else if (p < fp) scale = remap(fi, fp, SCALE_IN, SCALE_IDLE, p);
+          else if (p < fp) scale = erp(fi, fp, SCALE_IN, SCALE_IDLE, p);
           else if (p < fo) scale = SCALE_IDLE;
-          else if (p < fg) scale = remap(fo, fg, SCALE_IDLE, SCALE_OUT, p);
+          else if (p < fg) scale = erp(fo, fg, SCALE_IDLE, SCALE_OUT, p);
           else              scale = SCALE_OUT;
         }
 
         // ── Blur: suaviza el impacto de la transición ──────────
-        // Sube al 50% de la transición de entrada, luego baja a 0
+        // Sube al inicio de la entrada, baja a 0 con la misma curva
+        // (antes lineal) para que se sienta parte del mismo movimiento.
         let blur = 0;
         if (i !== 0 && p >= fi && p <= fp) {
-          const t = remap(fi, fp, 0, 1, p);       // 0→1 durante la entrada
-          blur = Math.sin(t * Math.PI * 0.5) * 6; // pico de 6px al inicio, baja a 0
-          blur = Math.max(0, 6 * (1 - t));         // 6px → 0px lineal
+          const t = erp(fi, fp, 0, 1, p); // 0→1 con easing durante la entrada
+          blur = Math.max(0, 6 * (1 - t));
         }
 
         setOpacity[i](opacity);
@@ -505,46 +593,71 @@
     },
   });
 
-  // ── Frame 2 → label + "Arango" ────────────────────────────────────
+  // ── 5% de scroll → label ("Clínica Dental en Benidorm") ────────────
   ScrollTrigger.create({
     trigger: wrapper,
-    start: `top+=${frame2Offset} top`,
+    start: `top+=${labelOffset} top`,
     once: true,
     onEnter: () => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.to(label, { clipPath: "inset(0 0% 0 0)", duration: 0.9 });
-      tl.to(wordEls[0], { x: 0, skewX: 0, opacity: 1, duration: 0.85 }, "-=0.5");
+      gsap.to(label, { clipPath: "inset(0 0% 0 0)", duration: 0.9, ease: "power3.out" });
     },
   });
 
-  // ── Frame 3 → "Dental" ────────────────────────────────────────────
+  // ── "Arango" — justo después del label, no espera al frame2 ──────────
   ScrollTrigger.create({
     trigger: wrapper,
-    start: `top+=${frame3Offset} top`,
+    start: `top+=${arangoOffset} top`,
+    once: true,
+    onEnter: () => {
+      gsap.to(wordEls[0], { x: 0, skewX: 0, opacity: 1, duration: 0.7, ease: "power3.out" });
+    },
+  });
+
+  // ── "Dental" ───────────────────────────────────────────────────────
+  ScrollTrigger.create({
+    trigger: wrapper,
+    start: `top+=${dentalOffset} top`,
     once: true,
     onEnter: () => {
       if (wordEls[1]) {
-        gsap.to(wordEls[1], { scale: 1, opacity: 1, duration: 1, ease: "expo.out" });
+        gsap.to(wordEls[1], { scale: 1, opacity: 1, duration: 0.9, ease: "expo.out" });
       }
     },
   });
 
-  // ── Frame 4 → "Clinic" + extra + descripción + CTAs ───────────────
+  // ── "Clinic" + resto de palabras extra (si el título tuviera más) ────
   ScrollTrigger.create({
     trigger: wrapper,
-    start: `top+=${frame4Offset} top`,
+    start: `top+=${clinicOffset} top`,
     once: true,
     onEnter: () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
       if (wordEls[2]) {
         tl.to(wordEls[2], { x: 0, skewX: 0, opacity: 1, duration: 0.85 });
       }
       if (wordEls.length > 3) {
         tl.to(wordEls.slice(3), { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 }, "-=0.5");
       }
-      tl.to(description, { y: 0, skewX: 0, opacity: 1, duration: 0.75, ease: "power2.out" }, "-=0.5");
-      tl.to(ctas,        { y: 0, opacity: 1, duration: 0.65, ease: "power2.out" }, "-=0.4");
+    },
+  });
+
+  // ── Descripción ────────────────────────────────────────────────────
+  ScrollTrigger.create({
+    trigger: wrapper,
+    start: `top+=${descOffset} top`,
+    once: true,
+    onEnter: () => {
+      gsap.to(description, { y: 0, skewX: 0, opacity: 1, duration: 0.75, ease: "power2.out" });
+    },
+  });
+
+  // ── CTAs ───────────────────────────────────────────────────────────
+  ScrollTrigger.create({
+    trigger: wrapper,
+    start: `top+=${ctasOffset} top`,
+    once: true,
+    onEnter: () => {
+      gsap.to(ctas, { y: 0, opacity: 1, duration: 0.65, ease: "power2.out" });
     },
   });
 
@@ -563,4 +676,36 @@
       gsap.to(scrollIndicator, { opacity: 1, duration: 0.4 });
     },
   });
+
+  // ── Fase 2: lista de servicios — con scrub, se revierte al subir ──────
+  if (serviceEls.length > 0) {
+    const setServiceOpacity = serviceEls.map((el) => gsap.quickSetter(el, "opacity"));
+    const setServiceY       = serviceEls.map((el) => gsap.quickSetter(el, "y", "px"));
+
+    // Cada FILA (2 servicios, una por columna) ocupa una porción igual de
+    // la fase 2; el 60% de esa porción es la transición de entrada, el
+    // resto queda visible (se van acumulando, no se reemplazan entre sí).
+    const slot = 1 / serviceRows;
+
+    ScrollTrigger.create({
+      trigger: wrapper,
+      start: `top+=${totalScroll} top`,
+      end: "bottom bottom",
+      scrub: 1.2,
+      onUpdate(self) {
+        const p2 = self.progress;
+        serviceEls.forEach((_, i) => {
+          const row = Math.floor(i / 2);
+          const fi = row * slot;
+          const fp = fi + slot * 0.6;
+          let t: number;
+          if      (p2 < fi) t = 0;
+          else if (p2 < fp) t = remap(fi, fp, 0, 1, p2);
+          else                t = 1;
+          setServiceOpacity[i](t);
+          setServiceY[i](14 * (1 - t));
+        });
+      },
+    });
+  }
 </script>
