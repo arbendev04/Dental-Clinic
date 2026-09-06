@@ -6,25 +6,32 @@ const services = [
   {
     icon: 'sparkles',
     title: 'Odontología Digital',
-    description: 'Escáner intraoral 3D, radiografía digital y diseño de sonrisa asistido por ordenador para diagnósticos precisos y tratamientos predecibles.'
+    description: 'Escáner intraoral 3D, radiografía digital y diseño de sonrisa asistido por ordenador para diagnósticos precisos y tratamientos predecibles.',
+    href: '/servicios',
+    anchor: 'Saber Más',
   },
   {
     icon: 'shield-check',
     title: 'Implantología',
-    description: 'Implantes de titanio de alta calidad para recuperar piezas perdidas con un resultado estético y funcional completamente natural.'
+    description: 'Implantes de titanio de alta calidad para recuperar piezas perdidas con un resultado estético y funcional completamente natural.',
+    href: '/implantes-dentales-benidorm/',
+    anchor: 'Implantes dentales en Benidorm',
   },
   {
     icon: 'smile',
     title: 'Estética Dental',
-    description: 'Carillas de porcelana, blanqueamiento profesional y diseño de sonrisa personalizado para transformar tu imagen con armonía y precisión.'
+    description: 'Carillas de porcelana, blanqueamiento profesional y diseño de sonrisa personalizado para transformar tu imagen con armonía y precisión.',
+    href: '/servicios',
+    anchor: 'Saber Más',
   },
 ];
 
 const stats = [
   { number: '15+', label: 'Años de Experiencia' },
-  { number: '5,000+', label: 'Pacientes Felices' },
-  { number: '98%', label: 'Tasa de Éxito' },
-  { number: '24/7', label: 'Atención de Emergencias' },
+  // Calificación real verificada en Google Maps (place_id ChIJrZfws2MFYg0RHzre1V7ThzY)
+  // el 2026-09-06. Google no expone el número de reseñas sin sesión iniciada
+  // ni sin la API de Places, así que no se muestra un conteo — ver CLAUDE.md.
+  { number: '4.9 ★', label: 'Calificación en Google' },
 ];
 
 ---
@@ -69,8 +76,8 @@ const stats = [
             </div>
             <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-5" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">{service.title}</h3>
             <p class="text-sm md:text-[15px] mb-5 md:mb-6" style="color: var(--text-secondary); line-height: 1.7;">{service.description}</p>
-            <a href="/servicios" class="inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-60" style="color: var(--gold-600);">
-              <span>Saber Más</span>
+            <a href={service.href} class="inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-60" style="color: var(--gold-600);">
+              <span>{service.anchor}</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -99,13 +106,13 @@ const stats = [
       </div>
 
       <!-- Stats Grid -->
-      <div class="grid grid-cols-2 md:flex md:flex-wrap md:justify-around gap-8 md:gap-12">
+      <div class="flex flex-wrap justify-center gap-12 md:gap-24">
         {stats.map((stat) => (
-          <div class="flex flex-col items-center gap-2">
-            <div class="text-4xl md:text-5xl font-light stat-number" style="font-family: 'Cormorant Garamond', serif; color: var(--teal-600);" data-target={stat.number}>
+          <div class="flex flex-col items-center gap-3">
+            <div class="text-6xl md:text-8xl font-light stat-number" style="font-family: 'Cormorant Garamond', serif; color: var(--teal-600);" data-target={stat.number}>
               {stat.number}
             </div>
-            <div class="text-[11px] md:text-[13px] font-medium uppercase text-center" style="color: var(--text-secondary); letter-spacing: 0.15em;">
+            <div class="text-xs md:text-sm font-medium uppercase text-center" style="color: var(--text-secondary); letter-spacing: 0.15em;">
               {stat.label}
             </div>
           </div>
@@ -332,23 +339,30 @@ const stats = [
 
       function animateCounter(el) {
         const target = el.getAttribute('data-target') || '';
-        const prefix = target.match(/^[^\d]*/)?.[0] || '';
-        const suffix = target.match(/[^\d]*$/)?.[0] || '';
-        const numStr = target.replace(/[^\d]/g, '');
-        const end = parseInt(numStr, 10);
+        // Núcleo numérico (admite coma de miles y un punto decimal, ej.
+        // "5,000+" o "4.9 ★"); todo lo de afuera es prefijo/sufijo literal.
+        const match = target.match(/-?\d[\d,]*\.?\d*/);
+        if (!match) return;
+        const core   = match[0];
+        const prefix = target.slice(0, match.index);
+        const suffix = target.slice((match.index || 0) + core.length);
+        const numStr = core.replace(/,/g, '');
+        const end = parseFloat(numStr);
         if (isNaN(end)) return;
+        const decimals = (numStr.split('.')[1] || '').length;
 
         const duration = 1600;
         const start = performance.now();
-        el.textContent = prefix + '0' + suffix;
+        const format = (n: number) =>
+          n.toLocaleString('es-ES', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+        el.textContent = prefix + format(0) + suffix;
 
-        function tick(now) {
+        function tick(now: number) {
           const elapsed = now - start;
           const progress = Math.min(elapsed / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
-          const current = Math.round(end * eased);
-          const formatted = current.toLocaleString('es-ES');
-          el.textContent = prefix + formatted + suffix;
+          const current = end * eased;
+          el.textContent = prefix + format(current) + suffix;
           if (progress < 1) requestAnimationFrame(tick);
         }
 
