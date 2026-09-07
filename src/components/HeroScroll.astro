@@ -1,7 +1,6 @@
 ---
 // Componente de hero con scroll-driven crossfade entre 4 frames
 // Estilo visual basado en diseño Stitch: viñeta cinemática, overlay oscuro, CTA
-import { servicios } from '../data/servicios';
 ---
 
 <div class="hero-scroll-wrapper">
@@ -91,15 +90,6 @@ import { servicios } from '../data/servicios';
           </svg>
         </a>
       </div>
-
-      <!-- Lista de servicios: aparece/desaparece con el scroll, después del CTA -->
-      <ul class="hero-services-list" id="hero-services-list">
-        {servicios.map((s) => (
-          <li class="hero-service-item">
-            <a href={s.landingHref || "/servicios"}>{s.nombre}</a>
-          </li>
-        ))}
-      </ul>
     </div>
 
     <!-- Formulario — a propósito FUERA de .hero-content y sin ningún gsap.set
@@ -330,56 +320,6 @@ import { servicios } from '../data/servicios';
     }
   }
 
-  /* Lista de servicios — position:absolute a propósito: no debe sumar a la
-     altura de .hero-content (que se centra con top:50%/translateY(-50%)).
-     Si ocupara espacio en el flujo, el label/título se correrían hacia
-     arriba desde el primer frame, antes de que el usuario haga scroll. */
-  .hero-services-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    list-style: none;
-    margin: 1.75rem 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    column-gap: 2rem;
-    row-gap: 0.55rem;
-  }
-
-  .hero-service-item {
-    will-change: opacity, transform;
-  }
-
-  .hero-service-item a {
-    font-family: "Inter", sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.75);
-    text-decoration: none;
-    transition: color 0.25s ease;
-  }
-
-  .hero-service-item a:hover,
-  .hero-service-item a:focus-visible {
-    color: rgba(255, 255, 255, 1);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  @media (max-width: 640px) {
-    .hero-services-list {
-      margin-top: 1.25rem;
-      column-gap: 1rem;
-      row-gap: 0.4rem;
-    }
-
-    .hero-service-item a {
-      font-size: 0.75rem;
-    }
-  }
-
   .hero-btn-primary {
     display: inline-block;
     padding: 0.875rem 2.25rem;
@@ -491,9 +431,12 @@ import { servicios } from '../data/servicios';
     width: calc(100% - 2.5rem);
     max-width: 300px;
     padding: 1.1rem 1.25rem 1.3rem;
-    background-color: rgba(13, 20, 16, 0.62);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    /* Solo el contenedor lleva transparencia (45%) — deja ver la imagen
+       de fondo sin perder legibilidad. Blur muy ligero, no el glassmorphism
+       pesado de antes: un acabado elegante, no un panel opaco de vidrio. */
+    background-color: rgba(13, 20, 16, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border: 1px solid rgba(244, 240, 235, 0.14);
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
   }
@@ -610,7 +553,9 @@ import { servicios } from '../data/servicios';
     font-family: "Inter", sans-serif;
     font-size: 0.8rem;
     color: rgba(244, 240, 235, 0.95);
-    background-color: rgba(244, 240, 235, 0.06);
+    /* Fondo propio, opaco (no transparencia heredada del panel) — el mismo
+       verde oscuro de la tarjeta, un tono más claro para distinguirse. */
+    background-color: #1c231f;
     border: 1px solid rgba(244, 240, 235, 0.2);
     transition: border-color 0.2s ease, background-color 0.2s ease;
   }
@@ -631,7 +576,7 @@ import { servicios } from '../data/servicios';
   .hero-form-input:focus {
     outline: none;
     border-color: #D4AF55;
-    background-color: rgba(244, 240, 235, 0.1);
+    background-color: #232f28;
   }
 
   .hero-form-consent {
@@ -719,8 +664,6 @@ import { servicios } from '../data/servicios';
     [0.76, 0.87, 1.0,  1.0 ],
   ];
 
-  const remap = gsap.utils.mapRange;
-
   // Remap con easing (en vez de lineal) para que el crossfade entre
   // imágenes se sienta más fluido: acelera y desacelera en vez de
   // moverse a velocidad constante durante la transición.
@@ -749,22 +692,6 @@ import { servicios } from '../data/servicios';
   const descOffset   = 0.42 * totalScroll; // descripción
   const ctasOffset   = 0.52 * totalScroll; // CTAs
 
-  // ── Fase 2: lista de servicios (2 columnas), después de la fase 1 ─────
-  // A diferencia de todo lo anterior (once:true, queda fijo), esta va con
-  // scrub: sigue el scroll en las dos direcciones, se revierte si el
-  // usuario vuelve hacia arriba. Se agrupan de a 2 (una fila del grid),
-  // así ambas columnas de la misma fila aparecen juntas.
-  const serviceEls = Array.from(
-    document.querySelectorAll(".hero-service-item"),
-  ) as HTMLElement[];
-  const serviceRows = Math.ceil(serviceEls.length / 2);
-  const scrollPerRow = 0.22 * window.innerHeight; // antes 0.4 por ítem (~el doble de scroll)
-  const phase2Scroll = serviceRows * scrollPerRow;
-
-  // El wrapper mide 400vh por CSS; se extiende en JS para darle espacio a
-  // la fase 2 sin tocar la duración/velocidad de la fase 1 ya existente.
-  wrapper.style.height = `${window.innerHeight + totalScroll + phase2Scroll}px`;
-
   // ─────────────────────────────────────────────────────────────────
   // Todas las escrituras al DOM primero (gsap.set + reconstrucción del
   // H1 en spans). ScrollTrigger.create() lee layout del wrapper para
@@ -779,8 +706,6 @@ import { servicios } from '../data/servicios';
   gsap.set(frameEls[1], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
   gsap.set(frameEls[2], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
   gsap.set(frameEls[3], { opacity: 0,  scale: SCALE_IN,   filter: "blur(0px)" });
-
-  gsap.set(serviceEls, { opacity: 0, y: 14 });
 
   // --- Kinetic Typography: split por palabras ---
   const titleText = charsContainer.textContent?.trim() || "";
@@ -963,38 +888,6 @@ import { servicios } from '../data/servicios';
       gsap.to(scrollIndicator, { opacity: 1, duration: 0.4 });
     },
   });
-
-  // ── Fase 2: lista de servicios — con scrub, se revierte al subir ──────
-  if (serviceEls.length > 0) {
-    const setServiceOpacity = serviceEls.map((el) => gsap.quickSetter(el, "opacity"));
-    const setServiceY       = serviceEls.map((el) => gsap.quickSetter(el, "y", "px"));
-
-    // Cada FILA (2 servicios, una por columna) ocupa una porción igual de
-    // la fase 2; el 60% de esa porción es la transición de entrada, el
-    // resto queda visible (se van acumulando, no se reemplazan entre sí).
-    const slot = 1 / serviceRows;
-
-    ScrollTrigger.create({
-      trigger: wrapper,
-      start: `top+=${totalScroll} top`,
-      end: "bottom bottom",
-      scrub: 1.2,
-      onUpdate(self) {
-        const p2 = self.progress;
-        serviceEls.forEach((_, i) => {
-          const row = Math.floor(i / 2);
-          const fi = row * slot;
-          const fp = fi + slot * 0.6;
-          let t: number;
-          if      (p2 < fi) t = 0;
-          else if (p2 < fp) t = remap(fi, fp, 0, 1, p2);
-          else                t = 1;
-          setServiceOpacity[i](t);
-          setServiceY[i](14 * (1 - t));
-        });
-      },
-    });
-  }
 </script>
 
 <!-- Envío del formulario del hero — script aparte, sin relación con GSAP.
