@@ -55,7 +55,7 @@ const services = [
 ];
 
 const stats = [
-  { number: '15+', label: 'Años de Experiencia' },
+  { number: '10+', label: 'Años de Experiencia' },
   // Calificación real verificada en Google Maps (place_id ChIJrZfws2MFYg0RHzre1V7ThzY)
   // el 2026-09-06. Google no expone el número de reseñas sin sesión iniciada
   // ni sin la API de Places, así que no se muestra un conteo — ver CLAUDE.md.
@@ -92,7 +92,7 @@ const stats = [
             const waText = encodeURIComponent(`Hola, quisiera más información sobre ${service.title}.`);
             const waHref = `https://api.whatsapp.com/send?phone=34665886439&text=${waText}`;
             return (
-              <div class="services-slide p-6 md:p-10 transition-all duration-300 hover:translate-y-[-4px]" style="background-color: var(--bg-primary); border: 1px solid var(--border-primary);">
+              <div class="services-slide p-6 md:p-10 transition-all duration-300 hover:translate-y-[-4px]" style="background-color: var(--bg-primary); border: 1px solid transparent;">
                 <div class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center mb-5" style="background-color: var(--teal-100);">
                   <svg class="w-6 h-6 md:w-7 md:h-7" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     {service.icon === 'sparkles' && (
@@ -183,7 +183,7 @@ const stats = [
       <div class="flex flex-wrap justify-center gap-12 md:gap-24">
         {stats.map((stat) => (
           <div class="flex flex-col items-center gap-3">
-            <div class="text-6xl md:text-8xl font-light stat-number" style="font-family: 'Cormorant Garamond', serif; color: var(--teal-600);" data-target={stat.number}>
+            <div class="text-6xl md:text-8xl font-light stat-number" style="font-family: 'Cormorant Garamond', serif;" data-target={stat.number}>
               {stat.number}
             </div>
             <div class="text-xs md:text-sm font-medium uppercase text-center" style="color: var(--text-secondary); letter-spacing: 0.15em;">
@@ -374,6 +374,15 @@ const stats = [
       }
     }
 
+    /* Números de "Excelencia en Números" — verde en claro, dorado en oscuro
+       (antes usaba var(--teal-600), que en oscuro da verde claro, no dorado). */
+    .stat-number {
+      color: var(--teal-600);
+    }
+    :global(html.dark) .stat-number {
+      color: #D4AF55;
+    }
+
     /* CTA Banner — modo claro */
     .cta-banner {
       background-color: var(--bg-tertiary);
@@ -527,8 +536,81 @@ const stats = [
     /* Ancho de cada tarjeta: siempre deja asomar la siguiente, para que se
        note que hay más para scrollear (no queda todo visible de una). */
     .services-slide {
+      position: relative;
       flex: 0 0 86%;
       scroll-snap-align: start;
+    }
+
+    /* Borde con resplandor móvil — adaptación en CSS puro (sin React ni
+       Framer Motion) del efecto "HoverBorderGradient" de Aceternity.
+       IMPORTANTE: animar la propiedad "background" completa vía @keyframes
+       (cambiando la posición de un radial-gradient) NO se interpola en los
+       navegadores reales — el valor queda congelado en el primer frame para
+       siempre (probado forzando la animación con !important: sin cambios en
+       3+ segundos). La técnica que sí anima de forma confiable es registrar
+       un ángulo con @property (queda "tipado" como <angle>, así el motor
+       sabe interpolarlo) y usarlo en un conic-gradient — el mismo mecanismo
+       ya verificado en la primera versión de este efecto. */
+    @property --services-border-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    .services-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 1.5px;
+      border-radius: inherit;
+      filter: blur(2px);
+      background: conic-gradient(
+        from var(--services-border-angle),
+        transparent 0deg,
+        transparent 240deg,
+        var(--teal-500) 300deg,
+        transparent 360deg
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      animation: services-border-rotate 5s linear infinite;
+    }
+
+    /* Verde en claro, dorado en oscuro (el resto del borde no cambia). */
+    :global(html.dark) .services-slide::before {
+      background: conic-gradient(
+        from var(--services-border-angle),
+        transparent 0deg,
+        transparent 240deg,
+        var(--gold-500) 300deg,
+        transparent 360deg
+      );
+    }
+
+    .services-slide:hover::before {
+      background: radial-gradient(75% 180% at 50% 50%, var(--gold-500) 0%, var(--teal-500) 55%, transparent 100%);
+      animation-play-state: paused;
+    }
+
+    @keyframes services-border-rotate {
+      to { --services-border-angle: 360deg; }
+    }
+
+    /* Ligero desfase por tarjeta para que no giren todas al mismo tiempo. */
+    .services-slide:nth-child(2)::before { animation-delay: -0.7s; }
+    .services-slide:nth-child(3)::before { animation-delay: -1.4s; }
+    .services-slide:nth-child(4)::before { animation-delay: -2.1s; }
+    .services-slide:nth-child(5)::before { animation-delay: -2.8s; }
+    .services-slide:nth-child(6)::before { animation-delay: -3.5s; }
+    .services-slide:nth-child(7)::before { animation-delay: -4.2s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .services-slide::before {
+        animation: none;
+      }
     }
 
     @media (min-width: 640px) {
