@@ -111,14 +111,36 @@ const procedureSchema = {
       decoding="async"
     />
     <div class="trt-hero-overlay" aria-hidden="true"></div>
-    <div class="trt-container trt-hero-inner">
-      <p class="trt-label">Arango Dental Clinic</p>
-      <h1 class="trt-hero-title">Implantes dentales en Benidorm</h1>
-      <p class="trt-hero-sub">
-        Si has perdido una o varias piezas dentales, un implante dental te permite recuperar la función y la estética de tu sonrisa sin afectar a los dientes vecinos. En Arango Dental Clinic evaluamos tu caso con planificación digital 3D y te ofrecemos una valoración inicial sin coste en Benidorm.
-      </p>
-      <div class="trt-hero-actions">
-        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Pide tu valoración sin coste</a>
+    <div class="trt-hero-inner">
+      <div class="trt-hero-text">
+        <p class="trt-label">Arango Dental Clinic</p>
+        <h1 class="trt-hero-title">Implantes dentales en Benidorm</h1>
+        <p class="trt-hero-sub">
+          Si has perdido una o varias piezas dentales, un implante dental te permite recuperar la función y la estética de tu sonrisa sin afectar a los dientes vecinos. En Arango Dental Clinic evaluamos tu caso con planificación digital 3D y te ofrecemos una valoración inicial sin coste en Benidorm.
+        </p>
+        <div class="trt-hero-actions">
+          <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Pide tu valoración sin coste</a>
+        </div>
+      </div>
+
+      <!-- Mismo formulario y mismo endpoint que el hero del home
+      (HeroScroll.astro → /api/lead) — clases propias con prefijo trt- para
+      no depender de los estilos de ese componente. -->
+      <div class="trt-hero-form-panel" id="trt-hero-form-panel">
+        <p class="trt-hero-form-eyebrow">Valoración sin coste</p>
+        <h2 class="trt-hero-form-title">Da el primer paso</h2>
+        <form id="trt-lead-form" class="trt-hero-form" novalidate>
+          <input type="text" id="trt-gotcha" name="_gotcha" class="trt-hero-form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="text" id="trt-nombre" name="nombre" class="trt-hero-form-input" placeholder="Nombre completo" required />
+          <input type="tel" id="trt-telefono" name="telefono" class="trt-hero-form-input" placeholder="Teléfono" required />
+          <input type="email" id="trt-email" name="email" class="trt-hero-form-input" placeholder="Email (opcional)" />
+          <label class="trt-hero-form-consent">
+            <input type="checkbox" id="trt-consentimiento" name="consentimiento" required />
+            <span>Acepto la <a href="/politica-privacidad" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
+          </label>
+          <button type="submit" id="trt-form-submit" class="trt-hero-form-submit">Enviar</button>
+        </form>
+        <p id="trt-form-status" class="trt-hero-form-status" role="status" aria-live="polite" hidden></p>
       </div>
     </div>
   </section>
@@ -276,15 +298,49 @@ const procedureSchema = {
       );
   }
 
+  /* Ya no usa .trt-container: el hero es full-bleed (como el del home),
+     con su propio padding lateral — así el 35% del formulario se calcula
+     sobre el ancho real de la pantalla, igual que en HeroScroll.astro,
+     en vez de sobre el max-width:1200px que sí aplica al resto del
+     contenido de la página. */
   .trt-hero-inner {
     position: relative;
     z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 7rem 2rem 4rem;
+    box-sizing: border-box;
+  }
+
+  .trt-hero-text {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
-    padding-top: 7rem;
-    padding-bottom: 4rem;
+  }
+
+  /* Desktop: texto a la izquierda, formulario a la derecha — ya no
+     centrado en una sola columna. */
+  @media (min-width: 900px) {
+    .trt-hero-inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      text-align: left;
+      padding-left: 6%;
+      padding-right: 4%;
+    }
+
+    .trt-hero-text {
+      align-items: flex-start;
+      text-align: left;
+      flex: 1 1 auto;
+      max-width: 560px;
+    }
   }
 
   .trt-label {
@@ -321,6 +377,150 @@ const procedureSchema = {
 
   .trt-hero-actions {
     margin-top: 0.5rem;
+  }
+
+  /* ── Formulario del hero — mismos campos y mismo endpoint que el hero
+     del home (HeroScroll.astro), con el mismo tratamiento visual (panel
+     semitransparente + blur ligero, campos con fondo propio opaco). Tonos
+     ajustados al verde de esta página (#0d2219) en vez del de la home. */
+  .trt-hero-form-panel {
+    width: 100%;
+    max-width: 380px;
+    padding: 1.5rem 1.5rem 1.75rem;
+    background-color: rgba(13, 34, 25, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(244, 240, 235, 0.14);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+    text-align: left;
+  }
+
+  /* Mismo ancho relativo que el panel del hero del home: 35% del hero,
+     no un ancho fijo — por eso también le sacamos el max-width. */
+  @media (min-width: 900px) {
+    .trt-hero-form-panel {
+      /* 39% acá da el mismo ancho en px que el 35% del hero del home
+         (~500px a 1440px de viewport) — la diferencia es porque este
+         panel resta su propio padding/gap del cálculo (border-box) y el
+         del home no, al ser position:absolute. Ajustado a ojo para que
+         coincida en píxeles reales, no solo en el número del porcentaje. */
+      flex: 0 0 39%;
+      max-width: none;
+      padding: 2.75rem 2.5rem;
+    }
+  }
+
+  .trt-hero-form-eyebrow {
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #C49B38;
+    margin: 0 0 0.5rem;
+  }
+
+  :global(html.dark) .trt-hero-form-eyebrow {
+    color: #D4AF55;
+  }
+
+  .trt-hero-form-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgba(244, 240, 235, 0.95);
+    margin: 0 0 1rem;
+  }
+
+  .trt-hero-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .trt-hero-form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .trt-hero-form-input {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.88rem;
+    color: rgba(244, 240, 235, 0.95);
+    background-color: #142720;
+    border: 1px solid rgba(244, 240, 235, 0.2);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .trt-hero-form-input::placeholder {
+    color: rgba(244, 240, 235, 0.45);
+  }
+
+  .trt-hero-form-input:focus {
+    outline: none;
+    border-color: #D4AF55;
+    background-color: #1b3229;
+  }
+
+  .trt-hero-form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    color: rgba(244, 240, 235, 0.6);
+    cursor: pointer;
+  }
+
+  .trt-hero-form-consent input {
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+  }
+
+  .trt-hero-form-consent a {
+    color: rgba(244, 240, 235, 0.85);
+    text-decoration: underline;
+  }
+
+  .trt-hero-form-submit {
+    margin-top: 0.2rem;
+    padding: 0.8rem 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0d2219;
+    background-color: #C49B38;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+
+  .trt-hero-form-submit:hover:not(:disabled) {
+    background-color: #D4AF55;
+  }
+
+  .trt-hero-form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .trt-hero-form-status {
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    margin-top: 0.8rem;
+    color: rgba(244, 240, 235, 0.85);
+  }
+
+  .trt-hero-form-status-error {
+    color: #e5a3a3;
   }
 
   /* ── Prose ── */
@@ -585,3 +785,63 @@ const procedureSchema = {
     border-color: rgba(244, 240, 235, 0.35);
   }
 </style>
+
+<!-- Envío del formulario del hero de esta landing — misma lógica y mismo
+endpoint que el hero del home (HeroScroll.astro) y /contacto (api/lead.ts). -->
+<script>
+  const trtForm      = document.getElementById("trt-lead-form")   as HTMLFormElement | null;
+  const trtSubmitBtn = document.getElementById("trt-form-submit") as HTMLButtonElement | null;
+  const trtStatus    = document.getElementById("trt-form-status") as HTMLElement | null;
+
+  trtForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!trtSubmitBtn || !trtStatus) return;
+
+    trtSubmitBtn.disabled = true;
+    trtSubmitBtn.textContent = "Enviando…";
+    trtStatus.hidden = true;
+    trtStatus.className = "trt-hero-form-status";
+
+    const nombre = (document.getElementById("trt-nombre") as HTMLInputElement | null)?.value ?? "";
+    const telefono = (document.getElementById("trt-telefono") as HTMLInputElement | null)?.value ?? "";
+    const email = (document.getElementById("trt-email") as HTMLInputElement | null)?.value ?? "";
+    const consentimiento = (document.getElementById("trt-consentimiento") as HTMLInputElement | null)?.checked ?? false;
+    const _gotcha = (document.getElementById("trt-gotcha") as HTMLInputElement | null)?.value ?? "";
+
+    try {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, telefono, email, consentimiento, _gotcha }),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (response.ok && data?.success) {
+        trtForm.hidden = true;
+        trtStatus.textContent = "¡Gracias! Te contactaremos pronto.";
+        trtStatus.classList.add("trt-hero-form-status-success");
+        trtStatus.hidden = false;
+
+        // Mismo evento que el resto de los formularios del sitio — el
+        // trigger de GTM "Formulario de contacto" escucha form_submit_success
+        // sin importar form_name, así que este envío también cuenta como
+        // conversión. form_name distinto solo para poder segmentar después.
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "implantes-landing" });
+        return;
+      }
+
+      trtStatus.textContent = data?.error || "No hemos podido enviar tu solicitud. Escríbenos por WhatsApp.";
+      trtStatus.classList.add("trt-hero-form-status-error");
+      trtStatus.hidden = false;
+    } catch {
+      trtStatus.textContent = "No hemos podido enviar tu solicitud. Revisa tu conexión o escríbenos por WhatsApp.";
+      trtStatus.classList.add("trt-hero-form-status-error");
+      trtStatus.hidden = false;
+    } finally {
+      trtSubmitBtn.disabled = false;
+      trtSubmitBtn.textContent = "Enviar";
+    }
+  });
+</script>
