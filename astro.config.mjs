@@ -19,6 +19,12 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
+  // URLs cortas para las landings de tratamiento — redirect 301 desde la
+  // ruta vieja (ya indexada) para no perder el posicionamiento acumulado.
+  redirects: {
+    '/implantes-dentales-benidorm': '/implantes/',
+    '/implantes-dentales-benidorm/': '/implantes/',
+  },
   vite: {
     plugins: [tailwindcss()]
   },

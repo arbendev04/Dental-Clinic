@@ -16,7 +16,7 @@ export const servicios: Servicio[] = [
     nombre: 'Implantes Dentales',
     descripcion: 'Reemplazamos dientes perdidos mediante implantología dental para recuperar la función y apariencia natural de tu sonrisa.',
     duracion: 'Múltiples sesiones',
-    landingHref: '/implantes-dentales-benidorm/',
+    landingHref: '/implantes/',
   },
   {
     nombre: 'Diseño de Sonrisa',
