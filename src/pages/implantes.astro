@@ -166,6 +166,56 @@ const procedureSchema = {
         No todos los pacientes son candidatos inmediatos: algunas enfermedades sistémicas no controladas, el tabaquismo intenso o una higiene bucal muy descuidada pueden condicionar el tratamiento. Lo revisamos en tu historial clínico durante la primera visita, junto con el estado del hueso en el escáner 3D.
       </p>
 
+      <figure class="trt-diagram">
+        <img
+          id="trt-diagram-img"
+          class="trt-diagram-img"
+          src="/img/implantes/partes-implante-claro.webp"
+          alt="Partes de un implante dental: corona, pilar, encía, hueso alveolar y el implante de titanio"
+          width="1407"
+          height="768"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="trt-diagram-caption">Estructura completa de un implante dental: corona, pilar y raíz de titanio integrada en el hueso.</figcaption>
+      </figure>
+      <script is:inline>
+        (function () {
+          var img = document.getElementById("trt-diagram-img");
+          if (!img) return;
+
+          var sources = {
+            light: { desktop: "/img/implantes/partes-implante-claro.webp", mobile: "/img/implantes/partes-implante-claro-mobile.webp" },
+            dark: { desktop: "/img/implantes/partes-implante-oscuro.webp", mobile: "/img/implantes/partes-implante-oscuro-mobile.webp" },
+          };
+          var dims = {
+            desktop: { w: 1407, h: 768 },
+            mobile: { w: 768, h: 1376 },
+          };
+
+          function applyDiagram() {
+            var isMobile = window.matchMedia("(max-width: 640px)").matches;
+            var isDark = document.documentElement.classList.contains("dark");
+            var theme = isDark ? sources.dark : sources.light;
+            var size = isMobile ? dims.mobile : dims.desktop;
+            img.src = isMobile ? theme.mobile : theme.desktop;
+            img.width = size.w;
+            img.height = size.h;
+          }
+
+          applyDiagram();
+          new MutationObserver(applyDiagram).observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+          });
+        })();
+      </script>
+
+      <div class="trt-inline-actions">
+        <a href="#trt-hero-form-panel" class="trt-btn trt-btn-outline">Ir al formulario</a>
+        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
+      </div>
+
       <h2>Cómo lo hacemos en Arango Dental Clinic</h2>
       <p>
         Empezamos con un escáner intraoral 3D que nos permite ver con precisión el estado de tu hueso en Benidorm, antes de proponerte ningún tratamiento. Esa información se traduce en una planificación digital: sabemos de antemano dónde y con qué angulación se va a colocar cada implante, en lugar de decidirlo durante la intervención.
@@ -180,17 +230,20 @@ const procedureSchema = {
       </p>
 
       <h2>El proceso, paso a paso</h2>
-      <ol class="trt-steps">
+      <div class="trt-steps" id="trt-steps">
         {pasos.map((paso, i) => (
-          <li class="trt-step">
-            <span class="trt-step-num">{i + 1}</span>
-            <div>
-              <h3 class="trt-step-title">{paso.titulo}</h3>
-              <p class="trt-step-desc">{paso.descripcion}</p>
-            </div>
-          </li>
+          <details class="trt-step-card" data-step={i} open={i === 0}>
+            <summary class="trt-step-card-summary">
+              <span class="trt-step-card-num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="trt-step-card-title">{paso.titulo}</span>
+            </summary>
+            <p class="trt-step-card-desc">{paso.descripcion}</p>
+            <span class="trt-step-card-progress" aria-hidden="true">
+              <span class="trt-step-card-progress-bar"></span>
+            </span>
+          </details>
         ))}
-      </ol>
+      </div>
 
       <h2>Precio y financiación</h2>
       <p>
@@ -559,50 +612,169 @@ const procedureSchema = {
     text-underline-offset: 2px;
   }
 
-  /* ── Pasos ── */
+  /* ── Diagrama "Partes de un implante" — imagen propia por tema (claro/oscuro),
+     con versión mobile/desktop resuelta por JS (mismo patrón que los frames
+     2-4 de HeroScroll) para no descargar las 4 variantes en cada visita. */
+  .trt-diagram {
+    margin: 2rem 0 2.5rem;
+  }
+
+  .trt-diagram-img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .trt-diagram-caption {
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+
+  /* ── Pasos — cards interactivas con auto-avance (ver script al final del
+     archivo). Cada paso es un <details> nativo (mismo elemento que el FAQ,
+     más abajo) para tener foco/teclado/semántica gratis; el script decide
+     cuál queda abierto y no depende de que el navegador maneje el acordeón
+     por sí solo, porque necesitamos que se abra una sola card a la vez. ── */
   .trt-steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.9rem;
   }
 
-  .trt-step {
+  .trt-step-card {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-left: 3px solid var(--border-primary);
+    padding: 1.1rem 1.35rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  /* Activa (abierta) o en hover: mismo tratamiento — un tinte del color del
+     tema (verde en claro, dorado en oscuro) a muy baja opacidad, para que
+     se note sin dominar la card. */
+  .trt-step-card[open],
+  .trt-step-card:hover {
+    border-left-color: var(--teal-600);
+    background-color: color-mix(in srgb, var(--teal-600) 15%, var(--bg-secondary));
+  }
+
+  :global(html.dark) .trt-step-card[open],
+  :global(html.dark) .trt-step-card:hover {
+    border-left-color: #D4AF55;
+    background-color: color-mix(in srgb, #D4AF55 15%, var(--bg-secondary));
+  }
+
+  .trt-step-card-summary {
+    cursor: pointer;
+    list-style: none;
     display: flex;
-    gap: 1.1rem;
-    align-items: flex-start;
+    align-items: center;
+    gap: 1rem;
   }
 
-  .trt-step-num {
+  .trt-step-card-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .trt-step-card-num {
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.35rem;
+    height: 2.35rem;
     border-radius: 50%;
     border: 1px solid var(--border-secondary);
     font-family: "Cormorant Garamond", serif;
-    font-size: 1.1rem;
-    color: var(--teal-600);
+    font-size: 1rem;
+    color: var(--text-tertiary);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   }
 
-  .trt-step-title {
+  .trt-step-card[open] .trt-step-card-num,
+  .trt-step-card:hover .trt-step-card-num {
+    background-color: var(--teal-600);
+    border-color: var(--teal-600);
+    color: var(--bg-primary);
+  }
+
+  :global(html.dark) .trt-step-card[open] .trt-step-card-num,
+  :global(html.dark) .trt-step-card:hover .trt-step-card-num {
+    background-color: #D4AF55;
+    border-color: #D4AF55;
+    color: #141210;
+  }
+
+  .trt-step-card-title {
     font-family: "Inter", sans-serif;
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin: 0.3rem 0 0.35rem;
   }
 
-  .trt-step-desc {
+  .trt-step-card-desc {
     font-family: "Inter", sans-serif;
     font-size: 0.875rem;
     line-height: 1.7;
     color: var(--text-secondary);
-    margin: 0;
+    margin: 0.9rem 0 0;
+    padding-left: calc(2.35rem + 1rem);
+  }
+
+  /* Cerrado: sin <p> visible (display:none nativo de <details>) — el script
+     solo alterna el atributo `open`, esta transición es puramente visual
+     para cuando SÍ está abierto. */
+  .trt-step-card:not([open]) .trt-step-card-summary {
+    opacity: 0.75;
+  }
+
+  /* Barra de progreso del auto-avance — solo la card abierta la anima
+     (ver .trt-step-card-progress-bar.is-animating en el script). Oculta
+     por completo si el usuario prefiere menos movimiento. */
+  .trt-step-card-progress {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: transparent;
+  }
+
+  .trt-step-card[open] .trt-step-card-progress {
+    background-color: var(--border-primary);
+  }
+
+  .trt-step-card-progress-bar {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background-color: var(--teal-600);
+  }
+
+  :global(html.dark) .trt-step-card-progress-bar {
+    background-color: #D4AF55;
+  }
+
+  .trt-step-card-progress-bar.is-animating {
+    animation: trt-step-progress linear forwards;
+    animation-duration: var(--trt-step-duration, 6s);
+  }
+
+  @keyframes trt-step-progress {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trt-step-card-progress {
+      display: none;
+    }
   }
 
   /* ── FAQ ── */
@@ -697,6 +869,70 @@ const procedureSchema = {
     }
   }
 
+  /* ── Botones intercalados en el contenido (antes de "Cómo lo hacemos") ── */
+  .trt-inline-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2.5rem 0;
+  }
+
+  @media (min-width: 480px) {
+    .trt-inline-actions {
+      flex-direction: row;
+    }
+  }
+
+  /* Estos botones viven dentro de `.trt-prose`, y `.trt-prose a` (más abajo)
+     tiene más especificidad que una sola clase (.trt-btn, .trt-btn-outline,
+     .trt-btn-solid) porque combina clase + elemento — por eso el color y el
+     subrayado de link de texto le ganaban al estilo de botón. Se pisa acá
+     con dos clases para asegurar la especificidad, en vez de duplicar todas
+     las reglas de .trt-btn.
+
+     OJO con el :hover: Astro le agrega el atributo de scope a CADA clase del
+     selector compuesto (".trt-inline-actions[data-astro-cid] .trt-btn-outline
+     [data-astro-cid]"), así que estas reglas de acá terminan con MÁS
+     especificidad que ".trt-btn-outline:hover" (que solo tiene una clase).
+     Sin el hover repetido acá abajo, el color en reposo le ganaba también al
+     hover y el texto se perdía contra el fondo — por eso hace falta declarar
+     el hover explícito con el mismo nivel de anidamiento. */
+  .trt-inline-actions .trt-btn {
+    text-decoration: none;
+  }
+
+  .trt-inline-actions .trt-btn-outline {
+    color: #153328;
+  }
+
+  .trt-inline-actions .trt-btn-outline:hover {
+    color: #ffffff;
+  }
+
+  .trt-inline-actions .trt-btn-solid {
+    color: #ffffff;
+  }
+
+  .trt-inline-actions .trt-btn-solid:hover {
+    color: #153328;
+  }
+
+  :global(html.dark) .trt-inline-actions .trt-btn-outline {
+    color: rgba(244, 240, 235, 0.85);
+  }
+
+  :global(html.dark) .trt-inline-actions .trt-btn-outline:hover {
+    color: #141210;
+  }
+
+  :global(html.dark) .trt-inline-actions .trt-btn-solid {
+    color: #141210;
+  }
+
+  :global(html.dark) .trt-inline-actions .trt-btn-solid:hover {
+    color: rgba(244, 240, 235, 0.85);
+  }
+
   /* ── Botones — modo claro ── */
   .trt-btn {
     display: inline-flex;
@@ -785,6 +1021,94 @@ const procedureSchema = {
     border-color: rgba(244, 240, 235, 0.35);
   }
 </style>
+
+<!-- Cards de "El proceso, paso a paso" — se abren solas en secuencia cada
+6s y se pueden abrir a mano en cualquier momento (clic reinicia el ciclo).
+Solo corre mientras la sección está en pantalla (IntersectionObserver) y
+se pausa con el mouse/foco encima; respeta prefers-reduced-motion
+desactivando el auto-avance por completo (el usuario sigue pudiendo abrir
+cada card a mano). -->
+<script>
+  const trtSteps = document.getElementById("trt-steps");
+  const trtStepCards = Array.from(
+    document.querySelectorAll<HTMLDetailsElement>(".trt-step-card")
+  );
+
+  if (trtSteps && trtStepCards.length > 1) {
+    const STEP_DURATION_MS = 6000;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let currentIndex = trtStepCards.findIndex((card) => card.open);
+    if (currentIndex < 0) currentIndex = 0;
+    let timerId: number | undefined;
+    let isProgrammaticToggle = false;
+
+    function playProgressBar(card: HTMLDetailsElement) {
+      const bar = card.querySelector<HTMLElement>(".trt-step-card-progress-bar");
+      if (!bar) return;
+      bar.classList.remove("is-animating");
+      // Fuerza reflow para poder reiniciar la animación desde 0% cada vez.
+      void bar.offsetWidth;
+      bar.style.setProperty("--trt-step-duration", `${STEP_DURATION_MS}ms`);
+      bar.classList.add("is-animating");
+    }
+
+    function goToStep(index: number) {
+      isProgrammaticToggle = true;
+      trtStepCards.forEach((card, i) => {
+        card.open = i === index;
+      });
+      isProgrammaticToggle = false;
+      currentIndex = index;
+      if (!prefersReducedMotion) playProgressBar(trtStepCards[index]);
+    }
+
+    function startAutoAdvance() {
+      if (prefersReducedMotion) return;
+      stopAutoAdvance();
+      timerId = window.setInterval(() => {
+        goToStep((currentIndex + 1) % trtStepCards.length);
+      }, STEP_DURATION_MS);
+    }
+
+    function stopAutoAdvance() {
+      if (timerId !== undefined) {
+        window.clearInterval(timerId);
+        timerId = undefined;
+      }
+    }
+
+    trtStepCards.forEach((card, i) => {
+      card.addEventListener("toggle", () => {
+        if (isProgrammaticToggle || !card.open) return;
+        // El usuario abrió esta card a mano: reinicia el ciclo desde acá.
+        goToStep(i);
+        startAutoAdvance();
+      });
+    });
+
+    trtSteps.addEventListener("mouseenter", stopAutoAdvance);
+    trtSteps.addEventListener("mouseleave", startAutoAdvance);
+    trtSteps.addEventListener("focusin", stopAutoAdvance);
+    trtSteps.addEventListener("focusout", startAutoAdvance);
+
+    if (!prefersReducedMotion) playProgressBar(trtStepCards[currentIndex]);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startAutoAdvance();
+          } else {
+            stopAutoAdvance();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(trtSteps);
+  }
+</script>
 
 <!-- Envío del formulario del hero de esta landing — misma lógica y mismo
 endpoint que el hero del home (HeroScroll.astro) y /contacto (api/lead.ts). -->
