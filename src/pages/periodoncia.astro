@@ -7,55 +7,55 @@ const whatsappHref = (texto: string) =>
 
 const pasos = [
   {
-    titulo: 'Valoración inicial y escáner 3D',
-    descripcion: 'Evaluamos tu caso sin coste con un escáner intraoral 3D y te explicamos si eres candidato a un implante dental.',
+    titulo: 'Valoración periodontal y sondaje de encías',
+    descripcion: 'Medimos la profundidad de las encías alrededor de cada diente y revisamos si hay sangrado, inflamación o pérdida de hueso.',
   },
   {
-    titulo: 'Planificación digital',
-    descripcion: 'Diseñamos la posición exacta del implante antes de la intervención, con la información real de tu hueso maxilar o mandibular.',
+    titulo: 'Limpieza profunda (raspado y alisado radicular)',
+    descripcion: 'Eliminamos la placa y el sarro acumulados por debajo de la línea de la encía, alisando la raíz para que la encía pueda volver a adherirse al diente.',
   },
   {
-    titulo: 'Colocación del implante',
-    descripcion: 'Se coloca con anestesia local en la propia clínica. La mayoría de los pacientes vuelve a su rutina el mismo día.',
+    titulo: 'Control de la inflamación y la infección',
+    descripcion: 'Revisamos la evolución de la encía tras la limpieza profunda y valoramos si hace falta algún tratamiento adicional para controlar la infección.',
   },
   {
-    titulo: 'Oseointegración',
-    descripcion: 'Durante las semanas siguientes, el hueso se une al implante de titanio hasta quedar completamente integrado.',
+    titulo: 'Revisiones de mantenimiento periodontal',
+    descripcion: 'Programamos revisiones periódicas para comprobar que la encía se mantiene sana y detectar cualquier recaída a tiempo.',
   },
   {
-    titulo: 'Colocación de la corona',
-    descripcion: 'Completamos el tratamiento con la corona definitiva, ajustada a la forma y función de tu dentadura natural.',
+    titulo: 'Cirugía periodontal, si es necesaria',
+    descripcion: 'En casos más avanzados, valoramos si hace falta un tratamiento quirúrgico para acceder a zonas más profundas o regenerar el tejido perdido.',
   },
 ];
 
 const faqs = [
   {
-    pregunta: '¿Duele ponerse un implante dental?',
-    respuesta: 'La colocación se realiza con anestesia local, por lo que no deberías sentir dolor durante la intervención. Es normal notar molestias leves los días posteriores, similares a las de una extracción dental, que se controlan con la pauta que te indiquemos.',
+    pregunta: '¿Por qué me sangran las encías al cepillarme?',
+    respuesta: 'El sangrado al cepillarte suele ser el primer signo de gingivitis, una inflamación de la encía causada por la acumulación de placa bacteriana. Si se trata a tiempo, es reversible con una buena limpieza e higiene diaria.',
   },
   {
-    pregunta: '¿Cuánto dura un implante dental?',
-    respuesta: 'Un implante dental bien cuidado, con revisiones periódicas y buena higiene bucal, puede durar muchos años. La duración exacta depende de la salud bucal de cada paciente y del mantenimiento posterior.',
+    pregunta: '¿Qué es la periodontitis?',
+    respuesta: 'La periodontitis es una fase más avanzada de la enfermedad de las encías, en la que la infección afecta también al hueso que sostiene el diente. Si no se trata, puede provocar que los dientes se muevan o incluso se pierdan.',
   },
   {
-    pregunta: '¿Cuánto cuesta un implante dental?',
-    respuesta: 'El precio de un implante dental se evalúa según las necesidades de cada paciente, tras una valoración inicial gratuita en la que definimos el plan de tratamiento más adecuado.',
+    pregunta: '¿Se puede curar la enfermedad de las encías?',
+    respuesta: 'La gingivitis, en su fase inicial, suele revertirse con limpieza profesional y buena higiene diaria. La periodontitis no se "cura" del todo una vez que hay pérdida de hueso, pero sí se puede controlar y detener su avance con tratamiento y mantenimiento periódico.',
   },
   {
-    pregunta: '¿Necesito un injerto de hueso para colocarme un implante?',
-    respuesta: 'No siempre. Si no hay suficiente hueso en la zona donde se va a colocar el implante, puede ser necesario un injerto óseo previo. Lo valoramos con tu escáner 3D durante la primera consulta.',
+    pregunta: '¿Duele el tratamiento periodontal?',
+    respuesta: 'La limpieza profunda se realiza con anestesia local cuando es necesario, por lo que no debería doler durante el procedimiento. Es normal notar cierta sensibilidad en la encía los días posteriores.',
   },
   {
-    pregunta: '¿Cuántas visitas necesito para completar el tratamiento?',
-    respuesta: 'El número de visitas varía según cada caso: la valoración inicial, la colocación del implante, el periodo de oseointegración y la colocación de la corona final. Te explicamos el plan completo antes de empezar.',
+    pregunta: '¿Con qué frecuencia debo hacer mantenimiento periodontal?',
+    respuesta: 'Depende de cómo evolucione tu caso, pero en general se recomienda una revisión cada tres a seis meses cuando ya has tenido enfermedad periodontal, frente a la revisión anual habitual de un paciente sin antecedentes.',
   },
   {
-    pregunta: '¿Qué pasa si he perdido varios dientes o toda una arcada?',
-    respuesta: "Existen protocolos que permiten apoyar una prótesis fija sobre un número reducido de implantes, a veces conocidos como carga inmediata o \"All-on-4\". Coméntanoslo en la valoración inicial para revisar si es tu caso.",
+    pregunta: '¿La periodontitis afecta a los implantes dentales?',
+    respuesta: 'Sí. Si las encías no están sanas antes de colocar un implante, aumenta el riesgo de que también se infecte el tejido alrededor del implante. Por eso, si tienes antecedentes de periodontitis, tratamos primero la encía antes de valorar cualquier implante.',
   },
   {
-    pregunta: '¿Qué cuidados necesita un implante dental?',
-    respuesta: 'Un implante se cuida igual que un diente natural: cepillado dos veces al día, uso de cepillo interdental o irrigador, y revisiones periódicas en la clínica para comprobar que la encía y el hueso que lo sostienen están sanos.',
+    pregunta: '¿Cuánto cuesta un tratamiento de periodoncia?',
+    respuesta: 'El precio depende de la fase de la enfermedad y del número de sesiones de limpieza profunda que necesites. Te damos una cifra concreta después de la valoración inicial, que es gratuita.',
   },
 ];
 
@@ -77,11 +77,11 @@ const faqSchema = {
 const procedureSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
-  "name": "Implantes dentales",
-  "url": "https://arangodentalclinic.es/implantes/",
-  "procedureType": "https://schema.org/SurgicalProcedure",
-  "bodyLocation": "Maxilar y mandíbula",
-  "howPerformed": "Planificación digital con escáner intraoral 3D, colocación del implante de titanio con anestesia local y, tras el periodo de oseointegración, colocación de la corona definitiva.",
+  "name": "Periodoncia",
+  "url": "https://arangodentalclinic.es/periodoncia/",
+  "procedureType": "https://schema.org/NoninvasiveProcedure",
+  "bodyLocation": "Encías y tejido periodontal",
+  "howPerformed": "Valoración con sondaje periodontal, limpieza profunda mediante raspado y alisado radicular, y revisiones de mantenimiento periódico para controlar la enfermedad de las encías.",
   "provider": {
     "@type": "Dentist",
     "name": "Arango Dental Clinic",
@@ -90,7 +90,7 @@ const procedureSchema = {
 };
 ---
 
-<Layout title="Implantes Dentales en Benidorm | Precio y Valoración" description="Implantes dentales en Benidorm con planificación 3D y implantes de titanio. Valoración inicial sin coste y presupuesto personalizado. Pide cita hoy." image="/img/servicios/servicios.webp">
+<Layout title="Periodoncia en Benidorm | Salud de tus Encías" description="Periodoncia en Benidorm para tratar el sangrado y la inflamación de encías. Valoración inicial sin coste y presupuesto personalizado. Pide cita hoy." image="/img/servicios/servicios.webp">
   <script type="application/ld+json" set:html={JSON.stringify(procedureSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
@@ -110,12 +110,12 @@ const procedureSchema = {
     <div class="trt-hero-inner">
       <div class="trt-hero-text">
         <p class="trt-label">Arango Dental Clinic</p>
-        <h1 class="trt-hero-title">Implantes dentales en Benidorm</h1>
+        <h1 class="trt-hero-title">Periodoncia en Benidorm</h1>
         <p class="trt-hero-sub">
-          Si has perdido una o varias piezas dentales, un implante dental te permite recuperar la función y la estética de tu sonrisa sin afectar a los dientes vecinos. En Arango Dental Clinic evaluamos tu caso con planificación digital 3D y te ofrecemos una valoración inicial sin coste en Benidorm.
+          Si tus encías sangran, están inflamadas o notas que se retraen con el tiempo, un tratamiento de periodoncia puede frenar el problema antes de que afecte a tus dientes. En Arango Dental Clinic evaluamos tus encías con una valoración inicial sin coste en Benidorm.
         </p>
         <div class="trt-hero-actions">
-          <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Pide tu valoración sin coste</a>
+          <a href={whatsappHref('Hola, quiero pedir una valoración gratuita de periodoncia')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Pide tu valoración sin coste</a>
         </div>
       </div>
 
@@ -145,84 +145,36 @@ const procedureSchema = {
   <section class="trt-content-section">
     <div class="trt-container trt-prose">
 
-      <h2>¿Qué es un implante dental y cuándo se necesita?</h2>
+      <h2>¿Qué es la periodoncia y cuándo se necesita?</h2>
       <p>
-        Un implante dental es una pieza de titanio que sustituye la raíz de un diente perdido y se integra en el hueso maxilar o mandibular. Sobre ella se coloca una corona que recupera la forma y la función del diente natural, sin necesidad de tallar ni apoyarse en los dientes vecinos, a diferencia de un puente tradicional.
+        La periodoncia es la parte de la odontología que se ocupa de la salud de las encías y del tejido que sostiene los dientes: el hueso y las fibras que los mantienen fijos en su sitio. Cuando ese tejido se inflama o se infecta, hablamos de enfermedad periodontal.
       </p>
       <p>
-        En términos sencillos, un implante tiene tres partes: el tornillo de titanio que hace de raíz artificial, un pilar intermedio que conecta esa raíz con la parte visible, y la corona final, fabricada a medida para que combine con el resto de tu dentadura en color y forma.
+        Tiene dos fases principales. La gingivitis es la más leve: la encía se inflama y puede sangrar, pero el hueso todavía no se ha visto afectado. Si no se trata, puede evolucionar a periodontitis, donde la infección llega también al hueso que sujeta el diente y puede hacer que este se mueva con el tiempo.
       </p>
       <p>
-        Se recomienda cuando falta una o varias piezas dentales, ya sea por una extracción, un traumatismo o una enfermedad periodontal avanzada. Sustituir la pieza cuanto antes evita dos problemas frecuentes: que los dientes vecinos se desplacen hacia el hueco vacío y que el hueso de la zona se reabsorba con el tiempo por falta de estímulo.
+        Se recomienda valorar tus encías cuando notas sangrado al cepillarte o al usar hilo dental, inflamación o enrojecimiento, mal aliento persistente, encías que se retraen dejando el diente más largo, o movilidad en alguna pieza. Cuanto antes se detecte, más fácil es controlarlo.
       </p>
       <p>
-        A diferencia de una prótesis removible, el implante no se quita ni se apoya sobre las encías: queda fijo, como una pieza más de tu dentadura. Y a diferencia de un puente dental, no requiere desgastar los dientes sanos de al lado para sujetarlo, porque tiene su propio soporte en el hueso.
+        La periodoncia no sustituye a la higiene diaria: la limpieza en casa y las revisiones profesionales trabajan juntas. Una buena rutina de cepillado e hilo dental reduce mucho el riesgo de que la enfermedad periodontal aparezca o vuelva a aparecer.
       </p>
-      <p>
-        No todos los pacientes son candidatos inmediatos: algunas enfermedades sistémicas no controladas, el tabaquismo intenso o una higiene bucal muy descuidada pueden condicionar el tratamiento. Lo revisamos en tu historial clínico durante la primera visita, junto con el estado del hueso en el escáner 3D.
-      </p>
-
-      <figure class="trt-diagram">
-        <img
-          id="trt-diagram-img"
-          class="trt-diagram-img"
-          src="/img/implantes/partes-implante-claro.webp"
-          alt="Partes de un implante dental: corona, pilar, encía, hueso alveolar y el implante de titanio"
-          width="1407"
-          height="768"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="trt-diagram-caption">Estructura completa de un implante dental: corona, pilar y raíz de titanio integrada en el hueso.</figcaption>
-      </figure>
-      <script is:inline>
-        (function () {
-          var img = document.getElementById("trt-diagram-img");
-          if (!img) return;
-
-          var sources = {
-            light: { desktop: "/img/implantes/partes-implante-claro.webp", mobile: "/img/implantes/partes-implante-claro-mobile.webp" },
-            dark: { desktop: "/img/implantes/partes-implante-oscuro.webp", mobile: "/img/implantes/partes-implante-oscuro-mobile.webp" },
-          };
-          var dims = {
-            desktop: { w: 1407, h: 768 },
-            mobile: { w: 768, h: 1376 },
-          };
-
-          function applyDiagram() {
-            var isMobile = window.matchMedia("(max-width: 640px)").matches;
-            var isDark = document.documentElement.classList.contains("dark");
-            var theme = isDark ? sources.dark : sources.light;
-            var size = isMobile ? dims.mobile : dims.desktop;
-            img.src = isMobile ? theme.mobile : theme.desktop;
-            img.width = size.w;
-            img.height = size.h;
-          }
-
-          applyDiagram();
-          new MutationObserver(applyDiagram).observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["class"],
-          });
-        })();
-      </script>
 
       <div class="trt-inline-actions">
         <a href="#trt-hero-form-panel" class="trt-btn trt-btn-outline">Ir al formulario</a>
-        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
+        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita de periodoncia')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
       </div>
 
       <h2>Cómo lo hacemos en Arango Dental Clinic</h2>
       <p>
-        Empezamos con un escáner intraoral 3D que nos permite ver con precisión el estado de tu hueso en Benidorm, antes de proponerte ningún tratamiento. Esa información se traduce en una planificación digital: sabemos de antemano dónde y con qué angulación se va a colocar cada implante, en lugar de decidirlo durante la intervención.
+        Empezamos con un sondaje periodontal que mide la profundidad de la encía alrededor de cada diente, en Benidorm, para saber exactamente en qué fase está la enfermedad antes de proponerte un tratamiento.
       </p>
       <p>
-        Utilizamos implantes de titanio de alta calidad, colocados con anestesia local en la propia clínica.
-        <!-- PENDIENTE CLÍNICA: marca y origen exactos del sistema de implantes que utiliza la clínica -->
-        Si no hay suficiente hueso para alojar el implante con garantías, te lo explicamos en la valoración inicial y evaluamos si hace falta un injerto óseo previo.
+        El tratamiento base es una limpieza profunda por debajo de la línea de la encía, conocida como raspado y alisado radicular, que elimina la placa y el sarro que la higiene diaria no alcanza a limpiar.
+        <!-- PENDIENTE CLÍNICA: protocolo o técnica concreta de mantenimiento periodontal que utiliza la clínica -->
+        Después evaluamos cómo responde la encía y decidimos junto contigo si hacen falta sesiones adicionales o revisiones de mantenimiento más frecuentes.
       </p>
       <p>
-        Durante los días posteriores a la colocación es normal cierta inflamación leve, que suele controlarse con la pauta que te indicamos. La mayoría de los pacientes retoma su rutina habitual al día siguiente, evitando alimentos duros en la zona tratada hasta la revisión.
+        En los casos más avanzados, donde ya hay pérdida de hueso importante, valoramos si es necesaria una intervención periodontal más específica para poder acceder a zonas más profundas.
       </p>
 
       <h2>El proceso, paso a paso</h2>
@@ -243,11 +195,11 @@ const procedureSchema = {
 
       <h2>Precio</h2>
       <p>
-        El precio de un implante dental depende de varios factores: el número de piezas a reemplazar, si hace falta un injerto óseo previo y el tipo de corona elegida. Por eso no damos una cifra cerrada sin antes valorar tu caso en persona.
+        El precio de un tratamiento periodontal depende de la fase de la enfermedad y del número de sesiones de limpieza profunda o revisiones que necesites. Por eso no damos una cifra cerrada sin antes valorar tu caso en persona.
       </p>
-      <!-- PENDIENTE CLÍNICA: tarifas orientativas de implantes dentales; enlazar a /precios/ cuando esa página exista -->
+      <!-- PENDIENTE CLÍNICA: tarifas orientativas de periodoncia; enlazar a /precios/ cuando esa página exista -->
       <p>
-        Preferimos ser claros sobre esto: cualquier cifra que veas antes de una valoración presencial es solo orientativa. En tu valoración inicial, que es gratuita y sin compromiso, vemos tu escáner 3D y te damos el presupuesto real, para que sepas exactamente qué necesitas, qué vas a pagar y por qué.
+        Preferimos ser claros sobre esto: cualquier cifra que veas antes de una valoración presencial es solo orientativa. En tu valoración inicial, que es gratuita y sin compromiso, hacemos el sondaje periodontal y te damos el presupuesto real, para que sepas exactamente qué necesitas, qué vas a pagar y por qué.
       </p>
 
       <h2>Preguntas frecuentes</h2>
@@ -262,13 +214,13 @@ const procedureSchema = {
 
       <h2>Pide tu valoración sin coste</h2>
       <p>
-        La primera consulta es gratuita y sin compromiso. Evaluamos tu caso con nuestro escáner 3D y te explicamos las opciones de tratamiento antes de que decidas nada. Atendemos en Benidorm y su comarca — La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea y Polop — y también recibimos pacientes de otros puntos de la provincia de Alicante que buscan una clínica de implantes dentales de confianza.
+        La primera consulta es gratuita y sin compromiso. Evaluamos el estado de tus encías con un sondaje periodontal y te explicamos el plan de tratamiento más adecuado antes de que decidas nada. Atendemos en Benidorm y su comarca — La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea y Polop — y también recibimos pacientes de otros puntos de la provincia de Alicante.
       </p>
       <p>
         Puedes escribirnos por WhatsApp, llamarnos por teléfono o acercarte directamente a la clínica en Avinguda Alfonso Puchades. Te atendemos en español, inglés y francés, y respondemos por WhatsApp en menos de 24 horas.
       </p>
       <p>
-        Consulta también nuestros <a href="/servicios/">demás servicios dentales</a> si además del implante quieres resolver otras necesidades de tu sonrisa.
+        Consulta también nuestros <a href="/servicios/">demás servicios dentales</a> si además de la periodoncia quieres resolver otras necesidades de tu sonrisa.
       </p>
 
     </div>
@@ -277,11 +229,11 @@ const procedureSchema = {
   <!-- ── CTA final ── -->
   <section class="trt-cta-section">
     <div class="trt-container trt-cta-inner">
-      <h2 class="trt-cta-title">Arango Dental Clinic, tu clínica de implantes en Benidorm</h2>
+      <h2 class="trt-cta-title">Arango Dental Clinic, tu clínica de periodoncia en Benidorm</h2>
       <p class="trt-cta-sub">Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante 03501</p>
       <div class="trt-cta-actions">
         <a href="tel:+34965088282" class="trt-btn trt-btn-outline">Llamar: 965 08 82 82</a>
-        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
+        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita de periodoncia')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
       </div>
     </div>
   </section>
@@ -603,27 +555,6 @@ const procedureSchema = {
     color: var(--teal-600);
     text-decoration: underline;
     text-underline-offset: 2px;
-  }
-
-  /* ── Diagrama "Partes de un implante" — imagen propia por tema (claro/oscuro),
-     con versión mobile/desktop resuelta por JS (mismo patrón que los frames
-     2-4 de HeroScroll) para no descargar las 4 variantes en cada visita. */
-  .trt-diagram {
-    margin: 2rem 0 2.5rem;
-  }
-
-  .trt-diagram-img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .trt-diagram-caption {
-    font-family: "Inter", sans-serif;
-    font-size: 0.8rem;
-    color: var(--text-tertiary);
-    text-align: center;
-    margin-top: 0.75rem;
   }
 
   /* ── Pasos — cards interactivas con auto-avance (ver script al final del
@@ -1145,7 +1076,7 @@ endpoint que el hero del home (HeroScroll.astro) y /contacto (api/lead.ts). -->
         // sin importar form_name, así que este envío también cuenta como
         // conversión. form_name distinto solo para poder segmentar después.
         (window as any).dataLayer = (window as any).dataLayer || [];
-        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "implantes-landing" });
+        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "periodoncia-landing" });
         return;
       }
 

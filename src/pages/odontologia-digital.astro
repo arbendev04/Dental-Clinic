@@ -7,55 +7,55 @@ const whatsappHref = (texto: string) =>
 
 const pasos = [
   {
-    titulo: 'Valoración inicial y escáner 3D',
-    descripcion: 'Evaluamos tu caso sin coste con un escáner intraoral 3D y te explicamos si eres candidato a un implante dental.',
+    titulo: 'Escaneo intraoral 3D',
+    descripcion: 'Un escáner digital recorre tu boca y genera un modelo 3D exacto de tus dientes y encías, sin necesidad de moldes de silicona.',
   },
   {
-    titulo: 'Planificación digital',
-    descripcion: 'Diseñamos la posición exacta del implante antes de la intervención, con la información real de tu hueso maxilar o mandibular.',
+    titulo: 'Diagnóstico digital',
+    descripcion: 'Con el modelo 3D y, si hace falta, una radiografía digital, analizamos con detalle el estado de tus dientes, tus encías y tu mordida.',
   },
   {
-    titulo: 'Colocación del implante',
-    descripcion: 'Se coloca con anestesia local en la propia clínica. La mayoría de los pacientes vuelve a su rutina el mismo día.',
+    titulo: 'Plan de tratamiento digital',
+    descripcion: 'A partir del diagnóstico, diseñamos el plan de tratamiento sobre el modelo digital, antes de tocar un solo diente.',
   },
   {
-    titulo: 'Oseointegración',
-    descripcion: 'Durante las semanas siguientes, el hueso se une al implante de titanio hasta quedar completamente integrado.',
+    titulo: 'Presentación del plan',
+    descripcion: 'Te mostramos el plan y, cuando es posible, una simulación de cómo quedaría el resultado, para que decidas con toda la información.',
   },
   {
-    titulo: 'Colocación de la corona',
-    descripcion: 'Completamos el tratamiento con la corona definitiva, ajustada a la forma y función de tu dentadura natural.',
+    titulo: 'Aplicación en el tratamiento elegido',
+    descripcion: 'Esa misma información digital guía el tratamiento real, ya sea un implante, una ortodoncia, una carilla o cualquier otro servicio de la clínica.',
   },
 ];
 
 const faqs = [
   {
-    pregunta: '¿Duele ponerse un implante dental?',
-    respuesta: 'La colocación se realiza con anestesia local, por lo que no deberías sentir dolor durante la intervención. Es normal notar molestias leves los días posteriores, similares a las de una extracción dental, que se controlan con la pauta que te indiquemos.',
+    pregunta: '¿Qué es un escáner intraoral 3D?',
+    respuesta: 'Es un dispositivo que recorre tu boca con una pequeña cámara y genera un modelo digital exacto de tus dientes y encías en pocos minutos, sin necesidad de los moldes de silicona tradicionales, que muchos pacientes encuentran incómodos.',
   },
   {
-    pregunta: '¿Cuánto dura un implante dental?',
-    respuesta: 'Un implante dental bien cuidado, con revisiones periódicas y buena higiene bucal, puede durar muchos años. La duración exacta depende de la salud bucal de cada paciente y del mantenimiento posterior.',
+    pregunta: '¿El escáner 3D sustituye a la radiografía dental?',
+    respuesta: 'No, son herramientas complementarias. El escáner 3D capta la forma exterior de tus dientes y encías; la radiografía digital muestra lo que hay por debajo: raíces, hueso y posibles infecciones internas. Usamos una u otra, o ambas, según lo que necesite tu diagnóstico.',
   },
   {
-    pregunta: '¿Cuánto cuesta un implante dental?',
-    respuesta: 'El precio de un implante dental se evalúa según las necesidades de cada paciente, tras una valoración inicial gratuita en la que definimos el plan de tratamiento más adecuado.',
+    pregunta: '¿Es incómodo el escaneo digital?',
+    respuesta: 'No debería serlo. El escáner es una pieza de mano pequeña que se desliza suavemente por la boca, sin el sabor ni la sensación de los moldes de silicona tradicionales. La mayoría de los pacientes lo encuentra más cómodo y más rápido.',
   },
   {
-    pregunta: '¿Necesito un injerto de hueso para colocarme un implante?',
-    respuesta: 'No siempre. Si no hay suficiente hueso en la zona donde se va a colocar el implante, puede ser necesario un injerto óseo previo. Lo valoramos con tu escáner 3D durante la primera consulta.',
+    pregunta: '¿Para qué tratamientos se usa la odontología digital?',
+    respuesta: 'Se usa como base de prácticamente todos nuestros tratamientos: implantes, ortodoncia, estética dental, rehabilitación oral y también en el diagnóstico general. Es la herramienta que nos permite planificar con precisión antes de intervenir.',
   },
   {
-    pregunta: '¿Cuántas visitas necesito para completar el tratamiento?',
-    respuesta: 'El número de visitas varía según cada caso: la valoración inicial, la colocación del implante, el periodo de oseointegración y la colocación de la corona final. Te explicamos el plan completo antes de empezar.',
+    pregunta: '¿La odontología digital reduce el número de visitas?',
+    respuesta: 'En muchos casos sí, porque el diagnóstico y la planificación son más rápidos y precisos desde el principio, lo que reduce imprevistos durante el tratamiento. El número exacto de visitas sigue dependiendo del tratamiento y de cada caso.',
   },
   {
-    pregunta: '¿Qué pasa si he perdido varios dientes o toda una arcada?',
-    respuesta: "Existen protocolos que permiten apoyar una prótesis fija sobre un número reducido de implantes, a veces conocidos como carga inmediata o \"All-on-4\". Coméntanoslo en la valoración inicial para revisar si es tu caso.",
+    pregunta: '¿La tecnología digital tiene un coste aparte?',
+    respuesta: 'No cobramos el escáner 3D ni el diagnóstico digital como un servicio aparte: forman parte de la valoración inicial de cualquier tratamiento. El coste que ves reflejado es el del tratamiento en sí, no el de la herramienta que usamos para planificarlo.',
   },
   {
-    pregunta: '¿Qué cuidados necesita un implante dental?',
-    respuesta: 'Un implante se cuida igual que un diente natural: cepillado dos veces al día, uso de cepillo interdental o irrigador, y revisiones periódicas en la clínica para comprobar que la encía y el hueso que lo sostienen están sanos.',
+    pregunta: '¿Es segura la radiografía digital?',
+    respuesta: 'Sí. La radiografía digital utiliza una dosis de radiación considerablemente menor que la radiografía tradicional, y solo se realiza cuando aporta información necesaria para tu diagnóstico.',
   },
 ];
 
@@ -77,11 +77,11 @@ const faqSchema = {
 const procedureSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
-  "name": "Implantes dentales",
-  "url": "https://arangodentalclinic.es/implantes/",
-  "procedureType": "https://schema.org/SurgicalProcedure",
-  "bodyLocation": "Maxilar y mandíbula",
-  "howPerformed": "Planificación digital con escáner intraoral 3D, colocación del implante de titanio con anestesia local y, tras el periodo de oseointegración, colocación de la corona definitiva.",
+  "name": "Odontología digital",
+  "url": "https://arangodentalclinic.es/odontologia-digital/",
+  "procedureType": "https://schema.org/NoninvasiveProcedure",
+  "bodyLocation": "Boca (maxilar y mandíbula)",
+  "howPerformed": "Escaneo intraoral 3D y radiografía digital para generar un modelo exacto de la boca del paciente, usado como base del diagnóstico y de la planificación de cualquier tratamiento posterior.",
   "provider": {
     "@type": "Dentist",
     "name": "Arango Dental Clinic",
@@ -90,7 +90,7 @@ const procedureSchema = {
 };
 ---
 
-<Layout title="Implantes Dentales en Benidorm | Precio y Valoración" description="Implantes dentales en Benidorm con planificación 3D y implantes de titanio. Valoración inicial sin coste y presupuesto personalizado. Pide cita hoy." image="/img/servicios/servicios.webp">
+<Layout title="Odontología Digital en Benidorm | Escáner 3D" description="Odontología digital en Benidorm: escáner intraoral 3D y diagnóstico digital de precisión. Valoración inicial sin coste. Pide cita hoy." image="/img/servicios/servicios.webp">
   <script type="application/ld+json" set:html={JSON.stringify(procedureSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
@@ -110,12 +110,12 @@ const procedureSchema = {
     <div class="trt-hero-inner">
       <div class="trt-hero-text">
         <p class="trt-label">Arango Dental Clinic</p>
-        <h1 class="trt-hero-title">Implantes dentales en Benidorm</h1>
+        <h1 class="trt-hero-title">Odontología digital en Benidorm</h1>
         <p class="trt-hero-sub">
-          Si has perdido una o varias piezas dentales, un implante dental te permite recuperar la función y la estética de tu sonrisa sin afectar a los dientes vecinos. En Arango Dental Clinic evaluamos tu caso con planificación digital 3D y te ofrecemos una valoración inicial sin coste en Benidorm.
+          El escáner intraoral 3D y el diagnóstico digital son la base de todos nuestros tratamientos: nos permiten ver con precisión el estado de tu boca antes de proponerte nada. En Arango Dental Clinic aplicamos esta tecnología en Benidorm, con una valoración inicial sin coste.
         </p>
         <div class="trt-hero-actions">
-          <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Pide tu valoración sin coste</a>
+          <a href={whatsappHref('Hola, quiero pedir más información sobre odontología digital')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Pide tu valoración sin coste</a>
         </div>
       </div>
 
@@ -145,84 +145,36 @@ const procedureSchema = {
   <section class="trt-content-section">
     <div class="trt-container trt-prose">
 
-      <h2>¿Qué es un implante dental y cuándo se necesita?</h2>
+      <h2>¿Qué es la odontología digital y cuándo se necesita?</h2>
       <p>
-        Un implante dental es una pieza de titanio que sustituye la raíz de un diente perdido y se integra en el hueso maxilar o mandibular. Sobre ella se coloca una corona que recupera la forma y la función del diente natural, sin necesidad de tallar ni apoyarse en los dientes vecinos, a diferencia de un puente tradicional.
+        La odontología digital es el conjunto de herramientas que nos permiten ver, medir y planificar tu boca con precisión antes de empezar cualquier tratamiento: principalmente el escáner intraoral 3D y la radiografía digital.
       </p>
       <p>
-        En términos sencillos, un implante tiene tres partes: el tornillo de titanio que hace de raíz artificial, un pilar intermedio que conecta esa raíz con la parte visible, y la corona final, fabricada a medida para que combine con el resto de tu dentadura en color y forma.
+        El escáner intraoral genera un modelo tridimensional exacto de tus dientes y encías en pocos minutos, sin necesidad de los moldes de silicona tradicionales. La radiografía digital, por su parte, muestra lo que no se ve a simple vista: raíces, hueso y posibles infecciones internas, con una dosis de radiación menor que la radiografía convencional.
       </p>
       <p>
-        Se recomienda cuando falta una o varias piezas dentales, ya sea por una extracción, un traumatismo o una enfermedad periodontal avanzada. Sustituir la pieza cuanto antes evita dos problemas frecuentes: que los dientes vecinos se desplacen hacia el hueco vacío y que el hueso de la zona se reabsorba con el tiempo por falta de estímulo.
+        No es un tratamiento en sí mismo, sino la base de todos los demás: se usa en la primera valoración de un implante, en la planificación de una ortodoncia, en el diseño de una sonrisa antes de colocar carillas, o en cualquier diagnóstico que requiera precisión.
       </p>
       <p>
-        A diferencia de una prótesis removible, el implante no se quita ni se apoya sobre las encías: queda fijo, como una pieza más de tu dentadura. Y a diferencia de un puente dental, no requiere desgastar los dientes sanos de al lado para sujetarlo, porque tiene su propio soporte en el hueso.
+        Se recomienda siempre que quieras empezar cualquier tratamiento dental con información real y objetiva de tu boca, en lugar de una estimación visual. Cuanto más preciso es el diagnóstico inicial, más predecible es el resultado final.
       </p>
-      <p>
-        No todos los pacientes son candidatos inmediatos: algunas enfermedades sistémicas no controladas, el tabaquismo intenso o una higiene bucal muy descuidada pueden condicionar el tratamiento. Lo revisamos en tu historial clínico durante la primera visita, junto con el estado del hueso en el escáner 3D.
-      </p>
-
-      <figure class="trt-diagram">
-        <img
-          id="trt-diagram-img"
-          class="trt-diagram-img"
-          src="/img/implantes/partes-implante-claro.webp"
-          alt="Partes de un implante dental: corona, pilar, encía, hueso alveolar y el implante de titanio"
-          width="1407"
-          height="768"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="trt-diagram-caption">Estructura completa de un implante dental: corona, pilar y raíz de titanio integrada en el hueso.</figcaption>
-      </figure>
-      <script is:inline>
-        (function () {
-          var img = document.getElementById("trt-diagram-img");
-          if (!img) return;
-
-          var sources = {
-            light: { desktop: "/img/implantes/partes-implante-claro.webp", mobile: "/img/implantes/partes-implante-claro-mobile.webp" },
-            dark: { desktop: "/img/implantes/partes-implante-oscuro.webp", mobile: "/img/implantes/partes-implante-oscuro-mobile.webp" },
-          };
-          var dims = {
-            desktop: { w: 1407, h: 768 },
-            mobile: { w: 768, h: 1376 },
-          };
-
-          function applyDiagram() {
-            var isMobile = window.matchMedia("(max-width: 640px)").matches;
-            var isDark = document.documentElement.classList.contains("dark");
-            var theme = isDark ? sources.dark : sources.light;
-            var size = isMobile ? dims.mobile : dims.desktop;
-            img.src = isMobile ? theme.mobile : theme.desktop;
-            img.width = size.w;
-            img.height = size.h;
-          }
-
-          applyDiagram();
-          new MutationObserver(applyDiagram).observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["class"],
-          });
-        })();
-      </script>
 
       <div class="trt-inline-actions">
         <a href="#trt-hero-form-panel" class="trt-btn trt-btn-outline">Ir al formulario</a>
-        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
+        <a href={whatsappHref('Hola, quiero pedir más información sobre odontología digital')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
       </div>
 
       <h2>Cómo lo hacemos en Arango Dental Clinic</h2>
       <p>
-        Empezamos con un escáner intraoral 3D que nos permite ver con precisión el estado de tu hueso en Benidorm, antes de proponerte ningún tratamiento. Esa información se traduce en una planificación digital: sabemos de antemano dónde y con qué angulación se va a colocar cada implante, en lugar de decidirlo durante la intervención.
+        En Benidorm, cada valoración inicial en Arango Dental Clinic empieza con un escáner intraoral 3D, sea cual sea el tratamiento que estés considerando. Ese modelo digital nos permite explicarte con claridad qué vemos en tu boca, en lugar de describirlo solo de palabra.
       </p>
       <p>
-        Utilizamos implantes de titanio de alta calidad, colocados con anestesia local en la propia clínica.
-        <!-- PENDIENTE CLÍNICA: marca y origen exactos del sistema de implantes que utiliza la clínica -->
-        Si no hay suficiente hueso para alojar el implante con garantías, te lo explicamos en la valoración inicial y evaluamos si hace falta un injerto óseo previo.
+        Cuando el caso lo requiere, complementamos el escáner con una radiografía digital para ver el estado de las raíces y el hueso.
+        <!-- PENDIENTE CLÍNICA: marca y modelo concretos del escáner intraoral y del sistema de radiografía digital que utiliza la clínica -->
+        Con toda esa información diseñamos el plan de tratamiento antes de tocar un solo diente, y te lo explicamos con calma para que entiendas cada paso.
       </p>
       <p>
-        Durante los días posteriores a la colocación es normal cierta inflamación leve, que suele controlarse con la pauta que te indicamos. La mayoría de los pacientes retoma su rutina habitual al día siguiente, evitando alimentos duros en la zona tratada hasta la revisión.
+        Esta misma tecnología es la que ya usamos como base de nuestra página de <a href="/implantes/">implantes dentales</a> y del resto de tratamientos de la clínica: no es una herramienta aislada, sino el punto de partida de todo lo que hacemos.
       </p>
 
       <h2>El proceso, paso a paso</h2>
@@ -243,11 +195,11 @@ const procedureSchema = {
 
       <h2>Precio</h2>
       <p>
-        El precio de un implante dental depende de varios factores: el número de piezas a reemplazar, si hace falta un injerto óseo previo y el tipo de corona elegida. Por eso no damos una cifra cerrada sin antes valorar tu caso en persona.
+        No cobramos el escáner 3D ni el diagnóstico digital como un servicio aparte: forman parte de la valoración inicial de cualquier tratamiento, que es gratuita. El coste que verás reflejado corresponde al tratamiento que decidas hacer después de esa valoración, no a la tecnología en sí.
       </p>
-      <!-- PENDIENTE CLÍNICA: tarifas orientativas de implantes dentales; enlazar a /precios/ cuando esa página exista -->
+      <!-- PENDIENTE CLÍNICA: enlazar a /precios/ cuando esa página exista, con las tarifas orientativas de cada tratamiento -->
       <p>
-        Preferimos ser claros sobre esto: cualquier cifra que veas antes de una valoración presencial es solo orientativa. En tu valoración inicial, que es gratuita y sin compromiso, vemos tu escáner 3D y te damos el presupuesto real, para que sepas exactamente qué necesitas, qué vas a pagar y por qué.
+        Preferimos ser claros sobre esto: el presupuesto de cualquier tratamiento se cierra después de ver tu escáner 3D o tu radiografía digital, y de decidir juntos el plan a seguir, en tu valoración inicial gratuita y sin compromiso, para que sepas exactamente qué necesitas, qué vas a pagar y por qué.
       </p>
 
       <h2>Preguntas frecuentes</h2>
@@ -262,13 +214,13 @@ const procedureSchema = {
 
       <h2>Pide tu valoración sin coste</h2>
       <p>
-        La primera consulta es gratuita y sin compromiso. Evaluamos tu caso con nuestro escáner 3D y te explicamos las opciones de tratamiento antes de que decidas nada. Atendemos en Benidorm y su comarca — La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea y Polop — y también recibimos pacientes de otros puntos de la provincia de Alicante que buscan una clínica de implantes dentales de confianza.
+        La primera consulta es gratuita y sin compromiso. Empezamos con un escáner intraoral 3D y, si hace falta, una radiografía digital, para darte un diagnóstico preciso antes de que decidas nada. Atendemos en Benidorm y su comarca — La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea y Polop — y también recibimos pacientes de otros puntos de la provincia de Alicante.
       </p>
       <p>
         Puedes escribirnos por WhatsApp, llamarnos por teléfono o acercarte directamente a la clínica en Avinguda Alfonso Puchades. Te atendemos en español, inglés y francés, y respondemos por WhatsApp en menos de 24 horas.
       </p>
       <p>
-        Consulta también nuestros <a href="/servicios/">demás servicios dentales</a> si además del implante quieres resolver otras necesidades de tu sonrisa.
+        Consulta también nuestros <a href="/servicios/">demás servicios dentales</a> para ver en qué tratamientos concretos aplicamos esta tecnología.
       </p>
 
     </div>
@@ -277,11 +229,11 @@ const procedureSchema = {
   <!-- ── CTA final ── -->
   <section class="trt-cta-section">
     <div class="trt-container trt-cta-inner">
-      <h2 class="trt-cta-title">Arango Dental Clinic, tu clínica de implantes en Benidorm</h2>
+      <h2 class="trt-cta-title">Arango Dental Clinic, odontología digital en Benidorm</h2>
       <p class="trt-cta-sub">Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante 03501</p>
       <div class="trt-cta-actions">
         <a href="tel:+34965088282" class="trt-btn trt-btn-outline">Llamar: 965 08 82 82</a>
-        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
+        <a href={whatsappHref('Hola, quiero pedir más información sobre odontología digital')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
       </div>
     </div>
   </section>
@@ -603,27 +555,6 @@ const procedureSchema = {
     color: var(--teal-600);
     text-decoration: underline;
     text-underline-offset: 2px;
-  }
-
-  /* ── Diagrama "Partes de un implante" — imagen propia por tema (claro/oscuro),
-     con versión mobile/desktop resuelta por JS (mismo patrón que los frames
-     2-4 de HeroScroll) para no descargar las 4 variantes en cada visita. */
-  .trt-diagram {
-    margin: 2rem 0 2.5rem;
-  }
-
-  .trt-diagram-img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .trt-diagram-caption {
-    font-family: "Inter", sans-serif;
-    font-size: 0.8rem;
-    color: var(--text-tertiary);
-    text-align: center;
-    margin-top: 0.75rem;
   }
 
   /* ── Pasos — cards interactivas con auto-avance (ver script al final del
@@ -1145,7 +1076,7 @@ endpoint que el hero del home (HeroScroll.astro) y /contacto (api/lead.ts). -->
         // sin importar form_name, así que este envío también cuenta como
         // conversión. form_name distinto solo para poder segmentar después.
         (window as any).dataLayer = (window as any).dataLayer || [];
-        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "implantes-landing" });
+        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "odontologia-digital-landing" });
         return;
       }
 

@@ -7,55 +7,55 @@ const whatsappHref = (texto: string) =>
 
 const pasos = [
   {
-    titulo: 'Valoración inicial y escáner 3D',
-    descripcion: 'Evaluamos tu caso sin coste con un escáner intraoral 3D y te explicamos si eres candidato a un implante dental.',
+    titulo: 'Valoración y radiografía digital',
+    descripcion: 'Evaluamos el diente afectado con una radiografía digital para confirmar el alcance de la infección o el daño interno antes de proponer el tratamiento.',
   },
   {
-    titulo: 'Planificación digital',
-    descripcion: 'Diseñamos la posición exacta del implante antes de la intervención, con la información real de tu hueso maxilar o mandibular.',
+    titulo: 'Anestesia local y apertura de la pieza',
+    descripcion: 'Con anestesia local, se abre una pequeña vía de acceso hasta la cámara pulpar del diente para poder trabajar sobre el interior de la pieza.',
   },
   {
-    titulo: 'Colocación del implante',
-    descripcion: 'Se coloca con anestesia local en la propia clínica. La mayoría de los pacientes vuelve a su rutina el mismo día.',
+    titulo: 'Limpieza y desinfección de los conductos',
+    descripcion: 'Se elimina el tejido dañado o infectado del interior del diente y se desinfectan los conductos radiculares con instrumental específico.',
   },
   {
-    titulo: 'Oseointegración',
-    descripcion: 'Durante las semanas siguientes, el hueso se une al implante de titanio hasta quedar completamente integrado.',
+    titulo: 'Sellado del conducto',
+    descripcion: 'Una vez limpio y desinfectado, el conducto se rellena y se sella para evitar que vuelva a infectarse.',
   },
   {
-    titulo: 'Colocación de la corona',
-    descripcion: 'Completamos el tratamiento con la corona definitiva, ajustada a la forma y función de tu dentadura natural.',
+    titulo: 'Restauración final del diente',
+    descripcion: 'Se restaura la pieza con un empaste o, si ha perdido mucha estructura, con una corona que la protege y le devuelve su función.',
   },
 ];
 
 const faqs = [
   {
-    pregunta: '¿Duele ponerse un implante dental?',
-    respuesta: 'La colocación se realiza con anestesia local, por lo que no deberías sentir dolor durante la intervención. Es normal notar molestias leves los días posteriores, similares a las de una extracción dental, que se controlan con la pauta que te indiquemos.',
+    pregunta: '¿Duele una endodoncia?',
+    respuesta: 'El tratamiento se realiza con anestesia local, por lo que no deberías sentir dolor durante la intervención. De hecho, la endodoncia suele aliviar el dolor que ya tenías por la infección, más que causarlo. Es normal notar cierta molestia leve los días posteriores.',
   },
   {
-    pregunta: '¿Cuánto dura un implante dental?',
-    respuesta: 'Un implante dental bien cuidado, con revisiones periódicas y buena higiene bucal, puede durar muchos años. La duración exacta depende de la salud bucal de cada paciente y del mantenimiento posterior.',
+    pregunta: '¿Cuánto dura el tratamiento de conducto?',
+    respuesta: 'Depende de la complejidad del diente y del número de conductos que tenga. En muchos casos se completa en una sola cita, aunque algunos casos requieren una segunda visita para asegurar una desinfección completa.',
   },
   {
-    pregunta: '¿Cuánto cuesta un implante dental?',
-    respuesta: 'El precio de un implante dental se evalúa según las necesidades de cada paciente, tras una valoración inicial gratuita en la que definimos el plan de tratamiento más adecuado.',
+    pregunta: '¿Se puede salvar un diente con una caries muy profunda?',
+    respuesta: 'En muchos casos sí. Si la caries ha llegado hasta el nervio pero la raíz sigue en buen estado, la endodoncia permite eliminar el tejido dañado y conservar el diente en su sitio, en lugar de extraerlo.',
   },
   {
-    pregunta: '¿Necesito un injerto de hueso para colocarme un implante?',
-    respuesta: 'No siempre. Si no hay suficiente hueso en la zona donde se va a colocar el implante, puede ser necesario un injerto óseo previo. Lo valoramos con tu escáner 3D durante la primera consulta.',
+    pregunta: '¿Qué pasa si no me hago la endodoncia?',
+    respuesta: 'Si el nervio del diente está dañado o infectado y no se trata, la infección puede extenderse al hueso de alrededor, provocar más dolor y, en muchos casos, terminar en la pérdida de la pieza. Cuanto antes se valore, más opciones hay de conservar el diente.',
   },
   {
-    pregunta: '¿Cuántas visitas necesito para completar el tratamiento?',
-    respuesta: 'El número de visitas varía según cada caso: la valoración inicial, la colocación del implante, el periodo de oseointegración y la colocación de la corona final. Te explicamos el plan completo antes de empezar.',
+    pregunta: '¿Necesito una corona después de la endodoncia?',
+    respuesta: 'No siempre, pero es habitual, sobre todo en dientes posteriores que reciben más fuerza al masticar. Un diente tratado con endodoncia queda más frágil que uno sano, y una corona ayuda a protegerlo de fracturas a largo plazo. Lo valoramos según cada caso.',
   },
   {
-    pregunta: '¿Qué pasa si he perdido varios dientes o toda una arcada?',
-    respuesta: "Existen protocolos que permiten apoyar una prótesis fija sobre un número reducido de implantes, a veces conocidos como carga inmediata o \"All-on-4\". Coméntanoslo en la valoración inicial para revisar si es tu caso.",
+    pregunta: '¿Cuánto cuesta una endodoncia?',
+    respuesta: 'El precio depende del diente afectado y del número de conductos que tenga, entre otros factores. Te damos una cifra concreta después de la valoración inicial con radiografía digital, que es gratuita.',
   },
   {
-    pregunta: '¿Qué cuidados necesita un implante dental?',
-    respuesta: 'Un implante se cuida igual que un diente natural: cepillado dos veces al día, uso de cepillo interdental o irrigador, y revisiones periódicas en la clínica para comprobar que la encía y el hueso que lo sostienen están sanos.',
+    pregunta: '¿Cuánto dura un diente después de una endodoncia?',
+    respuesta: 'Con una buena restauración final y revisiones periódicas, un diente tratado con endodoncia puede durar muchos años, en muchos casos toda la vida. La clave está en protegerlo bien después del tratamiento y mantener una buena higiene.',
   },
 ];
 
@@ -77,11 +77,11 @@ const faqSchema = {
 const procedureSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
-  "name": "Implantes dentales",
-  "url": "https://arangodentalclinic.es/implantes/",
-  "procedureType": "https://schema.org/SurgicalProcedure",
-  "bodyLocation": "Maxilar y mandíbula",
-  "howPerformed": "Planificación digital con escáner intraoral 3D, colocación del implante de titanio con anestesia local y, tras el periodo de oseointegración, colocación de la corona definitiva.",
+  "name": "Endodoncia",
+  "url": "https://arangodentalclinic.es/endodoncia/",
+  "procedureType": "https://schema.org/NoninvasiveProcedure",
+  "bodyLocation": "Diente afectado (conducto radicular)",
+  "howPerformed": "Diagnóstico con radiografía digital, limpieza y desinfección de los conductos radiculares con anestesia local, sellado del conducto y restauración final de la pieza con empaste o corona.",
   "provider": {
     "@type": "Dentist",
     "name": "Arango Dental Clinic",
@@ -90,7 +90,7 @@ const procedureSchema = {
 };
 ---
 
-<Layout title="Implantes Dentales en Benidorm | Precio y Valoración" description="Implantes dentales en Benidorm con planificación 3D y implantes de titanio. Valoración inicial sin coste y presupuesto personalizado. Pide cita hoy." image="/img/servicios/servicios.webp">
+<Layout title="Endodoncia en Benidorm | Tratamiento de Conducto" description="Endodoncia en Benidorm para salvar tu diente con tratamiento de conducto. Diagnóstico digital y valoración inicial sin coste. Pide cita hoy." image="/img/servicios/servicios.webp">
   <script type="application/ld+json" set:html={JSON.stringify(procedureSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
@@ -110,12 +110,12 @@ const procedureSchema = {
     <div class="trt-hero-inner">
       <div class="trt-hero-text">
         <p class="trt-label">Arango Dental Clinic</p>
-        <h1 class="trt-hero-title">Implantes dentales en Benidorm</h1>
+        <h1 class="trt-hero-title">Endodoncia en Benidorm</h1>
         <p class="trt-hero-sub">
-          Si has perdido una o varias piezas dentales, un implante dental te permite recuperar la función y la estética de tu sonrisa sin afectar a los dientes vecinos. En Arango Dental Clinic evaluamos tu caso con planificación digital 3D y te ofrecemos una valoración inicial sin coste en Benidorm.
+          Si tienes dolor persistente en un diente o una infección interna, una endodoncia puede salvar la pieza sin necesidad de extraerla. En Arango Dental Clinic diagnosticamos con radiografía digital y te ofrecemos una valoración inicial sin coste en Benidorm.
         </p>
         <div class="trt-hero-actions">
-          <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Pide tu valoración sin coste</a>
+          <a href={whatsappHref('Hola, quiero pedir una valoración gratuita de endodoncia')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Pide tu valoración sin coste</a>
         </div>
       </div>
 
@@ -145,84 +145,36 @@ const procedureSchema = {
   <section class="trt-content-section">
     <div class="trt-container trt-prose">
 
-      <h2>¿Qué es un implante dental y cuándo se necesita?</h2>
+      <h2>¿Qué es la endodoncia y cuándo se necesita?</h2>
       <p>
-        Un implante dental es una pieza de titanio que sustituye la raíz de un diente perdido y se integra en el hueso maxilar o mandibular. Sobre ella se coloca una corona que recupera la forma y la función del diente natural, sin necesidad de tallar ni apoyarse en los dientes vecinos, a diferencia de un puente tradicional.
+        La endodoncia, conocida popularmente como "tratamiento de conducto", elimina el nervio y el tejido dañado o infectado del interior de un diente para poder conservar la pieza en su sitio, en lugar de extraerla.
       </p>
       <p>
-        En términos sencillos, un implante tiene tres partes: el tornillo de titanio que hace de raíz artificial, un pilar intermedio que conecta esa raíz con la parte visible, y la corona final, fabricada a medida para que combine con el resto de tu dentadura en color y forma.
+        Cada diente tiene en su interior una cámara con nervio y vasos sanguíneos, llamada pulpa dental. Cuando una caries profunda, una fractura o un golpe llegan hasta esa pulpa, puede inflamarse o infectarse, y eso provoca dolor, sensibilidad al frío o al calor, o incluso hinchazón en la encía.
       </p>
       <p>
-        Se recomienda cuando falta una o varias piezas dentales, ya sea por una extracción, un traumatismo o una enfermedad periodontal avanzada. Sustituir la pieza cuanto antes evita dos problemas frecuentes: que los dientes vecinos se desplacen hacia el hueco vacío y que el hueso de la zona se reabsorba con el tiempo por falta de estímulo.
+        Se recomienda cuando ese daño ya ha alcanzado el nervio y no se puede resolver con un simple empaste. La alternativa a la endodoncia suele ser la extracción del diente, así que siempre que la raíz esté en condiciones, intentamos conservar la pieza natural antes de recurrir a extraerla.
       </p>
       <p>
-        A diferencia de una prótesis removible, el implante no se quita ni se apoya sobre las encías: queda fijo, como una pieza más de tu dentadura. Y a diferencia de un puente dental, no requiere desgastar los dientes sanos de al lado para sujetarlo, porque tiene su propio soporte en el hueso.
+        Algunos síntomas habituales que llevan a valorar una endodoncia son el dolor espontáneo o al masticar, la sensibilidad prolongada al frío o al calor, el oscurecimiento de un diente concreto, o un flemón repetido en la misma zona. Ante cualquiera de ellos, conviene revisarlo cuanto antes.
       </p>
-      <p>
-        No todos los pacientes son candidatos inmediatos: algunas enfermedades sistémicas no controladas, el tabaquismo intenso o una higiene bucal muy descuidada pueden condicionar el tratamiento. Lo revisamos en tu historial clínico durante la primera visita, junto con el estado del hueso en el escáner 3D.
-      </p>
-
-      <figure class="trt-diagram">
-        <img
-          id="trt-diagram-img"
-          class="trt-diagram-img"
-          src="/img/implantes/partes-implante-claro.webp"
-          alt="Partes de un implante dental: corona, pilar, encía, hueso alveolar y el implante de titanio"
-          width="1407"
-          height="768"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="trt-diagram-caption">Estructura completa de un implante dental: corona, pilar y raíz de titanio integrada en el hueso.</figcaption>
-      </figure>
-      <script is:inline>
-        (function () {
-          var img = document.getElementById("trt-diagram-img");
-          if (!img) return;
-
-          var sources = {
-            light: { desktop: "/img/implantes/partes-implante-claro.webp", mobile: "/img/implantes/partes-implante-claro-mobile.webp" },
-            dark: { desktop: "/img/implantes/partes-implante-oscuro.webp", mobile: "/img/implantes/partes-implante-oscuro-mobile.webp" },
-          };
-          var dims = {
-            desktop: { w: 1407, h: 768 },
-            mobile: { w: 768, h: 1376 },
-          };
-
-          function applyDiagram() {
-            var isMobile = window.matchMedia("(max-width: 640px)").matches;
-            var isDark = document.documentElement.classList.contains("dark");
-            var theme = isDark ? sources.dark : sources.light;
-            var size = isMobile ? dims.mobile : dims.desktop;
-            img.src = isMobile ? theme.mobile : theme.desktop;
-            img.width = size.w;
-            img.height = size.h;
-          }
-
-          applyDiagram();
-          new MutationObserver(applyDiagram).observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["class"],
-          });
-        })();
-      </script>
 
       <div class="trt-inline-actions">
         <a href="#trt-hero-form-panel" class="trt-btn trt-btn-outline">Ir al formulario</a>
-        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
+        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita de endodoncia')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
       </div>
 
       <h2>Cómo lo hacemos en Arango Dental Clinic</h2>
       <p>
-        Empezamos con un escáner intraoral 3D que nos permite ver con precisión el estado de tu hueso en Benidorm, antes de proponerte ningún tratamiento. Esa información se traduce en una planificación digital: sabemos de antemano dónde y con qué angulación se va a colocar cada implante, en lugar de decidirlo durante la intervención.
+        Empezamos con una radiografía digital que nos permite ver con claridad el estado de la raíz y del hueso alrededor del diente en Benidorm, antes de decidir si la endodoncia es la mejor opción para tu caso.
       </p>
       <p>
-        Utilizamos implantes de titanio de alta calidad, colocados con anestesia local en la propia clínica.
-        <!-- PENDIENTE CLÍNICA: marca y origen exactos del sistema de implantes que utiliza la clínica -->
-        Si no hay suficiente hueso para alojar el implante con garantías, te lo explicamos en la valoración inicial y evaluamos si hace falta un injerto óseo previo.
+        El tratamiento se realiza con anestesia local y con instrumental específico para limpiar y desinfectar cada conducto del diente.
+        <!-- PENDIENTE CLÍNICA: sistema o técnica concreta de endodoncia que utiliza la clínica -->
+        Una vez desinfectado y sellado el conducto, valoramos junto contigo si el diente necesita una restauración simple o una corona para protegerlo a largo plazo.
       </p>
       <p>
-        Durante los días posteriores a la colocación es normal cierta inflamación leve, que suele controlarse con la pauta que te indicamos. La mayoría de los pacientes retoma su rutina habitual al día siguiente, evitando alimentos duros en la zona tratada hasta la revisión.
+        Durante los días posteriores es normal notar cierta sensibilidad al morder, que suele ir desapareciendo a medida que la zona se recupera. Te damos indicaciones concretas para esos primeros días.
       </p>
 
       <h2>El proceso, paso a paso</h2>
@@ -243,11 +195,11 @@ const procedureSchema = {
 
       <h2>Precio</h2>
       <p>
-        El precio de un implante dental depende de varios factores: el número de piezas a reemplazar, si hace falta un injerto óseo previo y el tipo de corona elegida. Por eso no damos una cifra cerrada sin antes valorar tu caso en persona.
+        El precio de una endodoncia depende del diente afectado, del número de conductos que tenga y de si es necesaria una restauración adicional después del tratamiento. Por eso no damos una cifra cerrada sin antes valorar tu caso en persona.
       </p>
-      <!-- PENDIENTE CLÍNICA: tarifas orientativas de implantes dentales; enlazar a /precios/ cuando esa página exista -->
+      <!-- PENDIENTE CLÍNICA: tarifas orientativas de endodoncia; enlazar a /precios/ cuando esa página exista -->
       <p>
-        Preferimos ser claros sobre esto: cualquier cifra que veas antes de una valoración presencial es solo orientativa. En tu valoración inicial, que es gratuita y sin compromiso, vemos tu escáner 3D y te damos el presupuesto real, para que sepas exactamente qué necesitas, qué vas a pagar y por qué.
+        Preferimos ser claros sobre esto: cualquier cifra que veas antes de una valoración presencial es solo orientativa. En tu valoración inicial, que es gratuita y sin compromiso, vemos tu radiografía y te damos el presupuesto real, para que sepas exactamente qué necesitas, qué vas a pagar y por qué.
       </p>
 
       <h2>Preguntas frecuentes</h2>
@@ -262,13 +214,13 @@ const procedureSchema = {
 
       <h2>Pide tu valoración sin coste</h2>
       <p>
-        La primera consulta es gratuita y sin compromiso. Evaluamos tu caso con nuestro escáner 3D y te explicamos las opciones de tratamiento antes de que decidas nada. Atendemos en Benidorm y su comarca — La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea y Polop — y también recibimos pacientes de otros puntos de la provincia de Alicante que buscan una clínica de implantes dentales de confianza.
+        La primera consulta es gratuita y sin compromiso. Evaluamos tu diente con radiografía digital y te explicamos si la endodoncia es la mejor opción para tu caso antes de que decidas nada. Atendemos en Benidorm y su comarca — La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea y Polop — y también recibimos pacientes de otros puntos de la provincia de Alicante.
       </p>
       <p>
         Puedes escribirnos por WhatsApp, llamarnos por teléfono o acercarte directamente a la clínica en Avinguda Alfonso Puchades. Te atendemos en español, inglés y francés, y respondemos por WhatsApp en menos de 24 horas.
       </p>
       <p>
-        Consulta también nuestros <a href="/servicios/">demás servicios dentales</a> si además del implante quieres resolver otras necesidades de tu sonrisa.
+        Consulta también nuestros <a href="/servicios/">demás servicios dentales</a> si además de la endodoncia quieres resolver otras necesidades de tu sonrisa.
       </p>
 
     </div>
@@ -277,11 +229,11 @@ const procedureSchema = {
   <!-- ── CTA final ── -->
   <section class="trt-cta-section">
     <div class="trt-container trt-cta-inner">
-      <h2 class="trt-cta-title">Arango Dental Clinic, tu clínica de implantes en Benidorm</h2>
+      <h2 class="trt-cta-title">Arango Dental Clinic, tu clínica de endodoncia en Benidorm</h2>
       <p class="trt-cta-sub">Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante 03501</p>
       <div class="trt-cta-actions">
         <a href="tel:+34965088282" class="trt-btn trt-btn-outline">Llamar: 965 08 82 82</a>
-        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
+        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita de endodoncia')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
       </div>
     </div>
   </section>
@@ -603,27 +555,6 @@ const procedureSchema = {
     color: var(--teal-600);
     text-decoration: underline;
     text-underline-offset: 2px;
-  }
-
-  /* ── Diagrama "Partes de un implante" — imagen propia por tema (claro/oscuro),
-     con versión mobile/desktop resuelta por JS (mismo patrón que los frames
-     2-4 de HeroScroll) para no descargar las 4 variantes en cada visita. */
-  .trt-diagram {
-    margin: 2rem 0 2.5rem;
-  }
-
-  .trt-diagram-img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .trt-diagram-caption {
-    font-family: "Inter", sans-serif;
-    font-size: 0.8rem;
-    color: var(--text-tertiary);
-    text-align: center;
-    margin-top: 0.75rem;
   }
 
   /* ── Pasos — cards interactivas con auto-avance (ver script al final del
@@ -1145,7 +1076,7 @@ endpoint que el hero del home (HeroScroll.astro) y /contacto (api/lead.ts). -->
         // sin importar form_name, así que este envío también cuenta como
         // conversión. form_name distinto solo para poder segmentar después.
         (window as any).dataLayer = (window as any).dataLayer || [];
-        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "implantes-landing" });
+        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "endodoncia-landing" });
         return;
       }
 
