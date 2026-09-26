@@ -44,7 +44,7 @@ export const servicios: Servicio[] = [
     landingHref: '/ortodoncia/',
   },
   {
-    nombre: 'Tratamiento de Conducto',
+    nombre: 'Endodoncia',
     descripcion: 'Tratamos infecciones y daños internos del diente mediante endodoncia para intentar conservar la pieza dental.',
     duracion: '60–90 min',
     landingHref: '/endodoncia/',
