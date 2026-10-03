@@ -9,6 +9,12 @@ interface LeadPayload {
   tratamiento?: string;
   consentimiento?: boolean;
   _gotcha?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  utm_term?: string;
+  landing_url?: string;
 }
 
 interface CachedToken {
@@ -21,6 +27,25 @@ const CALLMEBOT_URL = 'https://api.callmebot.com/whatsapp.php';
 const ALLOWED_ORIGIN_HOSTS = ['arangodentalclinic.es', 'localhost', '127.0.0.1'];
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutos
 const RATE_LIMIT_MAX_SUBMISSIONS = 3;
+
+// El plan de Zoho CRM no admite campos personalizados nuevos en Leads, así que
+// la atribución va a campos estándar sin uso cuya etiqueta se renombró en Zoho
+// (ej. Skype_ID se ve como "UTM Source"). Los límites son los del campo.
+const MARKETING_FIELDS = {
+  utm_source: { zohoField: 'Skype_ID', maxLength: 50 },
+  utm_medium: { zohoField: 'Twitter', maxLength: 50 },
+  utm_campaign: { zohoField: 'Designation', maxLength: 100 },
+  utm_content: { zohoField: 'Company', maxLength: 200 },
+  utm_term: { zohoField: 'Fax', maxLength: 30 },
+  landing_url: { zohoField: 'Website', maxLength: 255 },
+} as const;
+
+const META_UTM_SOURCES = ['facebook', 'fb', 'instagram', 'ig'];
+const GOOGLE_PAID_MEDIUMS = ['cpc', 'ppc', 'paid'];
+const DEFAULT_LEAD_SOURCE = 'Sitio Web';
+const META_LEAD_SOURCE = 'Facebook Ads';
+const GOOGLE_LEAD_SOURCE = 'Google Ads';
+const MAX_ATTRIBUTION_RETRIES = 4;
 
 // Cacheado en memoria mientras el proceso serverless siga "caliente" — evita
 // pedir un token nuevo en cada invocación (el de Zoho dura ~1h).
@@ -44,6 +69,31 @@ function isRateLimited(ip: string): boolean {
   recent.push(now);
   submissionsByIp.set(ip, recent);
   return recent.length > RATE_LIMIT_MAX_SUBMISSIONS;
+}
+
+function cleanText(value: unknown, maxLength: number): string {
+  if (typeof value !== 'string') return '';
+  return value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, maxLength);
+}
+
+function resolveLeadSource(utmSource: string, utmMedium: string): string {
+  const source = utmSource.toLowerCase();
+  if (META_UTM_SOURCES.includes(source)) return META_LEAD_SOURCE;
+  if (source === 'google' && GOOGLE_PAID_MEDIUMS.includes(utmMedium.toLowerCase())) return GOOGLE_LEAD_SOURCE;
+  return DEFAULT_LEAD_SOURCE;
+}
+
+// Solo URLs http(s) de nuestro propio dominio: el campo se muestra como link en Zoho.
+function cleanLandingUrl(value: unknown, maxLength: number): string {
+  const text = cleanText(value, maxLength);
+  try {
+    const url = new URL(text);
+    const isHttp = url.protocol === 'https:' || url.protocol === 'http:';
+    const isOwnHost = ALLOWED_ORIGIN_HOSTS.some((host) => url.hostname === host || url.hostname.endsWith(`.${host}`));
+    return isHttp && isOwnHost ? text : '';
+  } catch {
+    return '';
+  }
 }
 
 function hasValidOrigin(request: Request): boolean {
@@ -99,7 +149,38 @@ async function getAccessToken(): Promise<string> {
 // Aviso por WhatsApp vía CallMeBot (gratuito, solo se envía a un número ya
 // vinculado por el propio destinatario). Si falla, no debe romper la
 // respuesta al usuario — el Lead ya quedó guardado en Zoho de todas formas.
-async function sendWhatsAppNotification(nombre: string, telefono: string, tratamiento: string): Promise<void> {
+// Zoho indica en `details.api_name` qué campo hizo fallar el alta.
+function getRejectedField(result: unknown): string | undefined {
+  const field = (result as { data?: { details?: { api_name?: unknown } }[] })?.data?.[0]?.details?.api_name;
+  return typeof field === 'string' ? field : undefined;
+}
+
+async function createZohoLead(
+  apiDomain: string,
+  accessToken: string,
+  leadData: Record<string, string>,
+): Promise<{ ok: boolean; result: unknown }> {
+  const response = await fetch(`${apiDomain}/crm/v6/Leads`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Zoho-oauthtoken ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ data: [leadData] }),
+  });
+
+  const result = await response.json();
+  const record = result?.data?.[0];
+  return { ok: response.ok && record?.status === 'success', result };
+}
+
+async function sendWhatsAppNotification(
+  nombre: string,
+  telefono: string,
+  tratamiento: string,
+  origen: string,
+  campana: string,
+): Promise<void> {
   const phone = import.meta.env.CALLMEBOT_PHONE;
   const apiKey = import.meta.env.CALLMEBOT_APIKEY;
 
@@ -113,6 +194,8 @@ async function sendWhatsAppNotification(nombre: string, telefono: string, tratam
     `Nombre: ${nombre}`,
     `Teléfono: ${telefono}`,
     `Tratamiento: ${tratamiento || 'No especificado'}`,
+    `Origen: ${origen}`,
+    ...(campana ? [`Campaña: ${campana}`] : []),
     'Revisá tu email o el CRM para más detalles.',
   ].join('\n');
 
@@ -183,36 +266,67 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   try {
     const accessToken = await getAccessToken();
 
-    const leadData: Record<string, string> = {
+    const baseLead: Record<string, string> = {
       Last_Name: nombre,
       Phone: telefono,
-      Lead_Source: 'Sitio Web',
+      Lead_Source: DEFAULT_LEAD_SOURCE,
     };
-    if (email) leadData.Email = email;
-    if (tratamiento) leadData.Description = tratamiento;
+    if (email) baseLead.Email = email;
+    if (tratamiento) baseLead.Description = tratamiento;
 
-    const zohoResponse = await fetch(`${apiDomain}/crm/v6/Leads`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Zoho-oauthtoken ${accessToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ data: [leadData] }),
-    });
+    const marketing: Record<string, string> = {};
+    for (const [key, { zohoField, maxLength }] of Object.entries(MARKETING_FIELDS)) {
+      const value =
+        key === 'landing_url'
+          ? cleanLandingUrl(body.landing_url, maxLength)
+          : cleanText(body[key as keyof LeadPayload], maxLength);
+      if (value) marketing[zohoField] = value;
+    }
 
-    const zohoResult = await zohoResponse.json();
-    const record = zohoResult?.data?.[0];
-    const isSuccess = zohoResponse.ok && record?.status === 'success';
+    const leadSource = resolveLeadSource(
+      cleanText(body.utm_source, MARKETING_FIELDS.utm_source.maxLength),
+      cleanText(body.utm_medium, MARKETING_FIELDS.utm_medium.maxLength),
+    );
+    const attributedLead: Record<string, string> = { ...baseLead, ...marketing, Lead_Source: leadSource };
 
-    if (!isSuccess) {
-      console.error('Zoho CRM: error creando el Lead:', JSON.stringify(zohoResult));
+    let savedLead = attributedLead;
+    let created = await createZohoLead(apiDomain, accessToken, attributedLead);
+
+    // Un campo de atribución que Zoho rechace (valor no válido, fuente fuera del
+    // picklist, campo renombrado) no debe costar un lead ni la atribución entera:
+    // se descarta solo ese campo y se reintenta; si no alcanza, se guarda sin atribución.
+    const attributionFields = new Set([...Object.keys(marketing), 'Lead_Source']);
+    for (let retry = 0; retry < MAX_ATTRIBUTION_RETRIES && !created.ok; retry++) {
+      const rejected = getRejectedField(created.result);
+      if (!rejected || !attributionFields.has(rejected) || !(rejected in savedLead)) break;
+      console.error(`Zoho CRM: se rechazó el campo ${rejected}, se reintenta sin él:`, JSON.stringify(created.result));
+      const { [rejected]: _dropped, ...rest } = savedLead;
+      savedLead = rejected === 'Lead_Source' ? { ...rest, Lead_Source: DEFAULT_LEAD_SOURCE } : rest;
+      created = await createZohoLead(apiDomain, accessToken, savedLead);
+    }
+
+    const hasAttribution = Object.keys(marketing).length > 0 || leadSource !== DEFAULT_LEAD_SOURCE;
+    if (!created.ok && hasAttribution) {
+      console.error('Zoho CRM: falló el alta con atribución, se reintenta sin ella:', JSON.stringify(created.result));
+      savedLead = baseLead;
+      created = await createZohoLead(apiDomain, accessToken, baseLead);
+    }
+
+    if (!created.ok) {
+      console.error('Zoho CRM: error creando el Lead:', JSON.stringify(created.result));
       return jsonResponse(
         { error: 'No hemos podido guardar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.' },
         502,
       );
     }
 
-    await sendWhatsAppNotification(nombre, telefono, tratamiento ?? '');
+    await sendWhatsAppNotification(
+      nombre,
+      telefono,
+      tratamiento ?? '',
+      savedLead.Lead_Source,
+      savedLead.Designation ?? '',
+    );
 
     return jsonResponse({ success: true }, 200);
   } catch (error) {

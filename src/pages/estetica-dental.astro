@@ -1037,6 +1037,8 @@ cada card a mano). -->
 <!-- Envío del formulario del hero de esta landing — misma lógica y mismo
 endpoint que el hero del home (HeroScroll.astro) y /contacto (api/lead.ts). -->
 <script>
+  import { getAttribution, tratamientoPorPagina } from "../scripts/attribution";
+
   const trtForm      = document.getElementById("trt-lead-form")   as HTMLFormElement | null;
   const trtSubmitBtn = document.getElementById("trt-form-submit") as HTMLButtonElement | null;
   const trtStatus    = document.getElementById("trt-form-status") as HTMLElement | null;
@@ -1060,7 +1062,7 @@ endpoint que el hero del home (HeroScroll.astro) y /contacto (api/lead.ts). -->
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, telefono, email, consentimiento, _gotcha }),
+        body: JSON.stringify({ nombre, telefono, email, tratamiento: tratamientoPorPagina(), consentimiento, _gotcha, ...getAttribution() }),
       });
 
       const data = await response.json().catch(() => null);

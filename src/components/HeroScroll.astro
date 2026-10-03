@@ -1065,6 +1065,8 @@ const tratamientosForm = [
 <!-- Envío del formulario del hero — script aparte, sin relación con GSAP.
 Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
 <script>
+  import { getAttribution, tratamientoPorPagina } from "../scripts/attribution";
+
   const heroForm      = document.getElementById("hero-lead-form")   as HTMLFormElement | null;
   const heroSubmitBtn = document.getElementById("hero-form-submit") as HTMLButtonElement | null;
   const heroStatus    = document.getElementById("hero-form-status") as HTMLElement | null;
@@ -1161,7 +1163,7 @@ Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, telefono, email, tratamiento, consentimiento, _gotcha }),
+        body: JSON.stringify({ nombre, telefono, email, tratamiento: tratamiento || tratamientoPorPagina(), consentimiento, _gotcha, ...getAttribution() }),
       });
 
       const data = await response.json().catch(() => null);

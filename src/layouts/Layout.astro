@@ -286,6 +286,11 @@ const breadcrumbSchema = Astro.url.pathname === '/' ? null : {
     </main>
     <Footer />
     <CookieConsent />
+
+    <script>
+      import { captureAttribution } from '../scripts/attribution';
+      captureAttribution();
+    </script>
   </body>
 </html>
 

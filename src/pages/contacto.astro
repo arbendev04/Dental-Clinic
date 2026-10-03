@@ -866,6 +866,8 @@ const faqSchema = {
 </style>
 
 <script>
+  import { getAttribution, tratamientoPorPagina } from '../scripts/attribution';
+
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
   const status = document.getElementById('contact-form-status') as HTMLElement | null;
@@ -957,7 +959,7 @@ const faqSchema = {
       const response = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, telefono, email, tratamiento, consentimiento, _gotcha }),
+        body: JSON.stringify({ nombre, telefono, email, tratamiento: tratamiento || tratamientoPorPagina(), consentimiento, _gotcha, ...getAttribution() }),
       });
 
       const data = await response.json().catch(() => null);
