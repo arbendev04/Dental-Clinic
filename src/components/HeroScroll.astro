@@ -1,6 +1,18 @@
 ---
 // Componente de hero con scroll-driven crossfade entre 4 frames
 // Estilo visual basado en diseño Stitch: viñeta cinemática, overlay oscuro, CTA
+
+// Mismas opciones que el desplegable de tratamientos de /contacto.
+const tratamientosForm = [
+  'Odontología Digital',
+  'Implantología',
+  'Estética Dental',
+  'Rehabilitación Oral',
+  'Periodoncia',
+  'Ortodoncia',
+  'Endodoncia',
+  'Otro',
+];
 ---
 
 <div class="hero-scroll-wrapper">
@@ -102,6 +114,33 @@
         <input type="text" id="hero-nombre" name="nombre" class="hero-form-input" placeholder="Nombre completo" required />
         <input type="tel" id="hero-telefono" name="telefono" class="hero-form-input" placeholder="Teléfono" required />
         <input type="email" id="hero-email" name="email" class="hero-form-input" placeholder="Email (opcional)" />
+        <div class="hero-dropdown" id="hero-dropdown">
+          <button
+            type="button"
+            class="hero-form-input hero-dropdown-toggle"
+            id="hero-dropdown-toggle"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="hero-dropdown-panel"
+            aria-labelledby="hero-tratamiento-label hero-dropdown-summary"
+          >
+            <span id="hero-tratamiento-label" class="sr-only">¿Qué tratamiento te interesa? (opcional)</span>
+            <span id="hero-dropdown-summary" class="hero-dropdown-summary is-placeholder">¿Qué tratamiento te interesa? (opcional)</span>
+            <svg class="hero-dropdown-chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          <div class="hero-dropdown-panel" id="hero-dropdown-panel" role="listbox" aria-multiselectable="true" hidden>
+            {tratamientosForm.map((tratamiento) => (
+              <label class="hero-dropdown-option">
+                <input type="checkbox" name="servicios[]" value={tratamiento} />
+                <span class="hero-dropdown-check" aria-hidden="true"></span>
+                <span>{tratamiento}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+        <input type="text" id="hero-servicio-otro" name="servicio_otro" class="hero-form-input" placeholder="Cuéntanos brevemente qué necesitas" hidden />
         <label class="hero-form-consent">
           <input type="checkbox" id="hero-consentimiento" name="consentimiento" required />
           <span>Acepto la <a href="/politica-privacidad" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
@@ -221,7 +260,7 @@
       transform: none;
       max-width: none;
       width: calc(100% - 12%);
-      margin: 1rem auto 0;
+      margin: 0.6rem auto 0;
     }
   }
 
@@ -241,7 +280,7 @@
      en pantallas chicas (probado en 375×667). */
   @media (max-width: 640px) {
     .hero-label {
-      margin-bottom: 1rem;
+      margin-bottom: 0.7rem;
     }
   }
 
@@ -272,7 +311,7 @@
 
   @media (max-width: 640px) {
     .hero-title {
-      margin-bottom: 1rem;
+      margin-bottom: 0.7rem;
     }
   }
 
@@ -299,7 +338,7 @@
       font-size: 0.875rem;
       line-height: 1.65;
       max-width: 32ch;
-      margin: 0 0 1rem 0;
+      margin: 0 0 0.7rem 0;
     }
   }
 
@@ -473,7 +512,7 @@
       width: calc(100% - 12%);
       max-width: none;
       margin: 5.5rem auto 0;
-      padding: 0.9rem 1.1rem 1.1rem;
+      padding: 0.75rem 1.1rem 0.9rem;
     }
   }
 
@@ -523,7 +562,7 @@
       margin-bottom: 0.2rem;
     }
     .hero-form-title {
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.45rem;
     }
     .hero-form {
       gap: 0.4rem;
@@ -569,6 +608,15 @@
     }
   }
 
+  /* Mobile: con el desplegable de tratamientos son 4 campos + consentimiento
+     + botón dentro de un hero de altura fija (100vh) — se compacta el padding
+     vertical para que el CTA de abajo no quede tapado en 375×667. */
+  @media (max-width: 640px) {
+    .hero-form-input {
+      padding: 0.4rem 0.75rem;
+    }
+  }
+
   .hero-form-input::placeholder {
     color: rgba(244, 240, 235, 0.45);
   }
@@ -577,6 +625,124 @@
     outline: none;
     border-color: #D4AF55;
     background-color: #232f28;
+  }
+
+  /* --- Desplegable multi-selección de tratamientos (mismo comportamiento
+     que el de /contacto). El hero es siempre oscuro (imágenes + overlay),
+     así que no necesita variante por tema: el panel lleva fondo opaco
+     propio para leerse bien sobre el vidrio del formulario. --- */
+  .hero-dropdown {
+    position: relative;
+  }
+
+  .hero-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .hero-dropdown-toggle[aria-expanded="true"] {
+    border-color: #D4AF55;
+  }
+
+  .hero-dropdown-summary {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hero-dropdown-summary.is-placeholder {
+    color: rgba(244, 240, 235, 0.45);
+  }
+
+  .hero-dropdown-chevron {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .hero-dropdown-toggle[aria-expanded="true"] .hero-dropdown-chevron {
+    transform: rotate(180deg);
+  }
+
+  .hero-dropdown-panel {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    right: 0;
+    z-index: 5;
+    max-height: 11rem;
+    overflow-y: auto;
+    background-color: #1c231f;
+    border: 1px solid rgba(244, 240, 235, 0.2);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  }
+
+  @media (min-width: 768px) {
+    .hero-dropdown-panel {
+      max-height: 15rem;
+    }
+  }
+
+  .hero-dropdown-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.75rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    color: rgba(244, 240, 235, 0.85);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  @media (min-width: 768px) {
+    .hero-dropdown-option {
+      padding: 0.65rem 1rem;
+      font-size: 0.88rem;
+    }
+  }
+
+  .hero-dropdown-option:hover {
+    background-color: #232f28;
+  }
+
+  .hero-dropdown-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .hero-dropdown-check {
+    flex-shrink: 0;
+    width: 1.05rem;
+    height: 1.05rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(244, 240, 235, 0.4);
+    background-color: transparent;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .hero-dropdown-option input:checked + .hero-dropdown-check {
+    background-color: #D4AF55;
+    border-color: #D4AF55;
+  }
+
+  .hero-dropdown-option input:checked + .hero-dropdown-check::after {
+    content: "✓";
+    font-size: 0.7rem;
+    line-height: 1;
+    color: #141210;
+  }
+
+  .hero-dropdown-option input:focus-visible + .hero-dropdown-check {
+    outline: 2px solid #D4AF55;
+    outline-offset: 2px;
   }
 
   .hero-form-consent {
@@ -613,6 +779,12 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.25s ease;
+  }
+
+  @media (max-width: 640px) {
+    .hero-form-submit {
+      padding: 0.6rem 1rem;
+    }
   }
 
   .hero-form-submit:hover:not(:disabled) {
@@ -897,6 +1069,66 @@ Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
   const heroSubmitBtn = document.getElementById("hero-form-submit") as HTMLButtonElement | null;
   const heroStatus    = document.getElementById("hero-form-status") as HTMLElement | null;
 
+  // Desplegable de tratamientos — misma lógica que el de /contacto.
+  const heroDropdown        = document.getElementById("hero-dropdown");
+  const heroDropdownToggle  = document.getElementById("hero-dropdown-toggle") as HTMLButtonElement | null;
+  const heroDropdownPanel   = document.getElementById("hero-dropdown-panel") as HTMLElement | null;
+  const heroDropdownSummary = document.getElementById("hero-dropdown-summary") as HTMLElement | null;
+  const heroDropdownChecks  = heroDropdownPanel?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+  const heroOtroCheck       = heroDropdownPanel?.querySelector<HTMLInputElement>('input[value="Otro"]');
+  const heroOtroInput       = document.getElementById("hero-servicio-otro") as HTMLInputElement | null;
+  const HERO_DROPDOWN_PLACEHOLDER = "¿Qué tratamiento te interesa? (opcional)";
+
+  function closeHeroDropdown() {
+    if (!heroDropdownPanel || !heroDropdownToggle) return;
+    heroDropdownPanel.hidden = true;
+    heroDropdownToggle.setAttribute("aria-expanded", "false");
+  }
+
+  function updateHeroDropdownSummary() {
+    if (!heroDropdownChecks || !heroDropdownSummary) return;
+    const selected = Array.from(heroDropdownChecks).filter((cb) => cb.checked).map((cb) => cb.value);
+    heroDropdownSummary.classList.toggle("is-placeholder", selected.length === 0);
+    if (selected.length === 0) {
+      heroDropdownSummary.textContent = HERO_DROPDOWN_PLACEHOLDER;
+    } else if (selected.length <= 2) {
+      heroDropdownSummary.textContent = selected.join(", ");
+    } else {
+      heroDropdownSummary.textContent = `${selected.length} tratamientos seleccionados`;
+    }
+  }
+
+  heroDropdownToggle?.addEventListener("click", () => {
+    if (!heroDropdownPanel) return;
+    const isOpen = !heroDropdownPanel.hidden;
+    heroDropdownPanel.hidden = isOpen;
+    heroDropdownToggle.setAttribute("aria-expanded", String(!isOpen));
+  });
+
+  document.addEventListener("click", (event) => {
+    if (heroDropdown && !heroDropdown.contains(event.target as Node)) {
+      closeHeroDropdown();
+    }
+  });
+
+  // Solo reacciona si el desplegable está abierto, para no robarle el foco
+  // a otros usos de Escape en la página (ej. cerrar el menú mobile).
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && heroDropdownPanel && !heroDropdownPanel.hidden) {
+      closeHeroDropdown();
+      heroDropdownToggle?.focus();
+    }
+  });
+
+  heroDropdownChecks?.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      updateHeroDropdownSummary();
+      if (checkbox === heroOtroCheck && heroOtroInput) {
+        heroOtroInput.hidden = !checkbox.checked;
+      }
+    });
+  });
+
   heroForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!heroSubmitBtn || !heroStatus) return;
@@ -909,6 +1141,19 @@ Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
     const nombre = (document.getElementById("hero-nombre") as HTMLInputElement | null)?.value ?? "";
     const telefono = (document.getElementById("hero-telefono") as HTMLInputElement | null)?.value ?? "";
     const email = (document.getElementById("hero-email") as HTMLInputElement | null)?.value ?? "";
+
+    // Junta los tratamientos elegidos en un solo texto para el campo
+    // Description del Lead (si marcó "Otro", reemplaza ese ítem por el
+    // detalle escrito) — igual que en /contacto.
+    const tratamientos = heroDropdownChecks
+      ? Array.from(heroDropdownChecks).filter((cb) => cb.checked).map((cb) => cb.value)
+      : [];
+    const otroTexto = heroOtroInput?.value.trim();
+    if (otroTexto) {
+      const otroIndex = tratamientos.indexOf("Otro");
+      if (otroIndex !== -1) tratamientos[otroIndex] = `Otro: ${otroTexto}`;
+    }
+    const tratamiento = tratamientos.join(", ");
     const consentimiento = (document.getElementById("hero-consentimiento") as HTMLInputElement | null)?.checked ?? false;
     const _gotcha = (document.getElementById("hero-gotcha") as HTMLInputElement | null)?.value ?? "";
 
@@ -916,7 +1161,7 @@ Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, telefono, email, consentimiento, _gotcha }),
+        body: JSON.stringify({ nombre, telefono, email, tratamiento, consentimiento, _gotcha }),
       });
 
       const data = await response.json().catch(() => null);
