@@ -1,70 +1,70 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import HeroScroll from '../components/HeroScroll.astro';
+import Layout from '../../layouts/Layout.astro';
+import HeroScroll from '../../components/HeroScroll.astro';
 
 const services = [
   {
-    icon: 'sparkles',
-    title: 'Odontología Digital',
-    description: 'Escáner intraoral 3D, radiografía digital y diseño de sonrisa asistido por ordenador para diagnósticos precisos y tratamientos predecibles.',
-    href: '/odontologia-digital/',
-    anchor: 'Odontología digital en Benidorm',
+    icon: "sparkles",
+    title: "Digital Dentistry",
+    description: "3D intraoral scanning, digital X-rays and computer-assisted smile design for precise diagnoses and predictable treatments.",
+    href: "/en/digital-dentistry/",
+    anchor: "Digital dentistry in Benidorm",
   },
   {
-    icon: 'shield-check',
-    title: 'Implantología',
-    description: 'Implantes de titanio de alta calidad para recuperar piezas perdidas con un resultado estético y funcional completamente natural.',
-    href: '/implantes/',
-    anchor: 'Implantes dentales en Benidorm',
+    icon: "shield-check",
+    title: "Dental Implants",
+    description: "High-quality titanium implants to replace missing teeth with a natural-looking, fully functional result.",
+    href: "/en/dental-implants/",
+    anchor: "Dental implants in Benidorm",
   },
   {
-    icon: 'smile',
-    title: 'Estética Dental',
-    description: 'Carillas de porcelana, blanqueamiento profesional y diseño de sonrisa personalizado para transformar tu imagen con armonía y precisión.',
-    href: '/estetica-dental/',
-    anchor: 'Estética dental en Benidorm',
+    icon: "smile",
+    title: "Cosmetic Dentistry",
+    description: "Porcelain veneers, professional whitening and personalised smile design to transform your look with harmony and precision.",
+    href: "/en/cosmetic-dentistry/",
+    anchor: "Cosmetic dentistry in Benidorm",
   },
   {
-    icon: 'cube',
-    title: 'Rehabilitación Oral',
-    description: 'Coronas, puentes y prótesis dentales para restaurar dientes dañados o perdidos, recuperando función y estética con un plan personalizado.',
-    href: '/rehabilitacion-oral/',
-    anchor: 'Rehabilitación oral en Benidorm',
+    icon: "cube",
+    title: "Oral Rehabilitation",
+    description: "Crowns, bridges and dentures to restore damaged or missing teeth, recovering function and appearance with a personalised plan.",
+    href: "/en/oral-rehabilitation/",
+    anchor: "Oral rehabilitation in Benidorm",
   },
   {
-    icon: 'heart',
-    title: 'Periodoncia',
-    description: 'Cuidamos la salud de tus encías, tratando el sangrado, la inflamación y otras enfermedades periodontales con un enfoque preventivo.',
-    href: '/periodoncia/',
-    anchor: 'Periodoncia en Benidorm',
+    icon: "heart",
+    title: "Gum Disease Treatment",
+    description: "We look after the health of your gums, treating bleeding, inflammation and other gum disease with a preventive approach.",
+    href: "/en/gum-treatment/",
+    anchor: "Gum disease treatment in Benidorm",
   },
   {
-    icon: 'adjustments',
-    title: 'Ortodoncia',
-    description: 'Alineamos tus dientes y corregimos problemas de mordida con brackets tradicionales o alineadores transparentes, según tu caso.',
-    href: '/ortodoncia/',
-    anchor: 'Ortodoncia en Benidorm',
+    icon: "adjustments",
+    title: "Orthodontics",
+    description: "We align your teeth and correct bite problems with traditional braces or clear aligners, depending on your case.",
+    href: "/en/orthodontics/",
+    anchor: "Orthodontics in Benidorm",
   },
   {
-    icon: 'magnifier',
-    title: 'Endodoncia',
-    description: 'Tratamos infecciones y daños internos del diente mediante endodoncia (tratamiento de conducto), para conservar la pieza dental original.',
-    href: '/endodoncia/',
-    anchor: 'Endodoncia en Benidorm',
+    icon: "magnifier",
+    title: "Root Canal Treatment",
+    description: "We treat infections and internal damage to the tooth with root canal treatment, to keep your original tooth.",
+    href: "/en/root-canal-treatment/",
+    anchor: "Root canal treatment in Benidorm",
   },
 ];
 
 const stats = [
-  { number: '8', label: 'Años de Experiencia' },
-  // Calificación real verificada en Google Maps (place_id ChIJrZfws2MFYg0RHzre1V7ThzY)
-  // el 2026-09-06. Google no expone el número de reseñas sin sesión iniciada
-  // ni sin la API de Places, así que no se muestra un conteo — ver CLAUDE.md.
-  { number: '4.9 ★', label: 'Calificación en Google' },
+  { number: '8', label: 'Years of Experience' },
+  // Real rating verified on Google Maps (place_id ChIJrZfws2MFYg0RHzre1V7ThzY)
+  // on 2026-09-06. Google does not expose the number of reviews without a
+  // signed-in session or the Places API, so no count is shown — see CLAUDE.md.
+  { number: '4.9 ★', label: 'Google Rating' },
 ];
 
 ---
 
-<Layout title="Dentista en Benidorm" description="Arango Dental Clinic, tu dentista de confianza en Benidorm. Implantes, estética dental, ortodoncia y odontología digital con tecnología avanzada." preloadHero={true}>
+<Layout title="English-Speaking Dentist in Benidorm" description="Arango Dental Clinic, your English-speaking dentist in Benidorm. Dental implants, cosmetic dentistry, orthodontics and digital dentistry with modern technology." preloadHero={true}>
   <!-- Hero Section -->
   <HeroScroll />
 
@@ -76,20 +76,20 @@ const stats = [
         <div class="flex items-center justify-center gap-3 mb-4">
           <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
           <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
-            Nuestros Servicios
+            Our Services
           </span>
           <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
         </div>
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary); text-wrap: balance;">
-          Cuidado Profesional a Tu Medida
+          Personalised Dental Care
         </h2>
       </div>
 
       <!-- Services Carousel -->
       <div class="services-carousel">
-        <div class="services-track" id="services-track" tabindex="0" role="region" aria-label="Carrusel de servicios">
+        <div class="services-track" id="services-track" tabindex="0" role="region" aria-label="Services carousel">
           {services.map((service) => {
-            const waText = encodeURIComponent(`Hola, quisiera más información sobre ${service.title}.`);
+            const waText = encodeURIComponent(`Hello, I'd like more information about ${service.title}.`);
             const waHref = `https://api.whatsapp.com/send?phone=34665886439&text=${waText}`;
             return (
               <div class="services-slide p-6 md:p-10 transition-all duration-300 hover:translate-y-[-4px]" style="background-color: var(--bg-primary); border: 1px solid transparent;">
@@ -127,9 +127,9 @@ const stats = [
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </a>
-                  <a href={waHref} target="_blank" rel="noopener" class="services-whatsapp-btn" aria-label={`Escríbenos por WhatsApp sobre ${service.title}`}>
+                  <a href={waHref} target="_blank" rel="noopener" class="services-whatsapp-btn" aria-label={`Message us on WhatsApp about ${service.title}`}>
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    <span>Contáctanos</span>
+                    <span>Contact us</span>
                   </a>
                 </div>
               </div>
@@ -138,21 +138,21 @@ const stats = [
         </div>
 
         <div class="services-carousel-nav">
-          <button type="button" class="services-arrow" id="services-prev" aria-label="Servicio anterior">
+          <button type="button" class="services-arrow" id="services-prev" aria-label="Previous service">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
           </button>
-          <button type="button" class="services-arrow" id="services-next" aria-label="Siguiente servicio">
+          <button type="button" class="services-arrow" id="services-next" aria-label="Next service">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
           </button>
         </div>
       </div>
 
-      <!-- Franja de contacto rápido -->
+      <!-- Quick contact strip -->
       <div class="quick-contact-strip">
-        <a href="/contacto#contact-form" class="quick-contact-btn quick-contact-btn-solid">Agenda tu Cita</a>
-        <a href="https://wa.me/34665886439" target="_blank" rel="noopener" class="quick-contact-btn quick-contact-btn-outline">
+        <a href="/en/contact/#contact-form" class="quick-contact-btn quick-contact-btn-solid">Book an Appointment</a>
+        <a href="https://wa.me/34665886439?text=Hello%2C%20I'd%20like%20to%20book%20an%20appointment%20at%20Arango%20Dental%20Clinic" target="_blank" rel="noopener" class="quick-contact-btn quick-contact-btn-outline">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Contáctanos
+          Contact us
         </a>
         <a href="tel:+34965088282" class="quick-contact-btn quick-contact-btn-outline">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 3H6.22a1 1 0 01.948.684L8.665 8.18a1 1 0 01-.25 1.033l-1.204 1.204a11.05 11.05 0 005.373 5.373l1.204-1.204a1 1 0 011.033-.25l4.492 1.498a1 1 0 01.684.949V19.5a2.5 2.5 0 01-2.5 2.5h-1C7.888 22 2 16.112 2 8.5v-1z" /></svg>
@@ -170,12 +170,12 @@ const stats = [
         <div class="flex items-center justify-center gap-3 mb-4">
           <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
           <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
-            Excelencia en Números
+            In Numbers
           </span>
           <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
         </div>
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">
-          Un Legado de Excelencia
+          A Legacy of Care
         </h2>
       </div>
 
@@ -203,20 +203,20 @@ const stats = [
         <div class="flex items-center justify-center gap-3 mb-4">
           <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
           <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
-            Testimonios
+            Testimonials
           </span>
           <div class="w-8 h-px" style="background-color: var(--gold-500);"></div>
         </div>
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-normal" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">
-          Lo Que Dicen Nuestros Pacientes
+          What Our Patients Say
         </h2>
       </div>
 
-      <!-- Reseñas de Google (EmbedSocial) — lazy load: recién se inyecta el
-           widget del tema activo cuando la sección entra al viewport. Antes
-           se montaban los dos (claro y oscuro) siempre, aunque uno quedara
-           en display:none — eso duplicaba cada script/iframe de EmbedSocial
-           desde la carga inicial de la página. -->
+      <!-- Google reviews (EmbedSocial) — lazy load: the widget for the active
+           theme is only injected when the section enters the viewport. Before,
+           both (light and dark) were always mounted, even if one stayed
+           display:none — which duplicated every EmbedSocial script/iframe
+           from the initial page load. -->
       <div id="reviews-container" class="reviews-widget">
         <div id="reviews-skeleton" class="reviews-skeleton" aria-hidden="true">
           <div class="reviews-skeleton-card"></div>
@@ -271,7 +271,7 @@ const stats = [
             loaded = true;
             loadedRef = ref;
 
-            // Red de seguridad: si el iframe no llega a medirse solo, forzamos un reload.
+            // Safety net: if the iframe does not size itself, force a reload.
             setTimeout(() => {
               const iframe = container.querySelector('iframe');
               if (iframe && !isProperlySized(iframe)) iframe.src = iframe.src;
@@ -289,9 +289,9 @@ const stats = [
 
           io.observe(container);
 
-          // Si el usuario cambia de tema en vivo después de que el widget ya
-          // cargó, quitamos el script/widget anterior antes de inyectar el
-          // nuevo — nunca los dos a la vez.
+          // If the user switches theme live after the widget has already
+          // loaded, we remove the previous script/widget before injecting the
+          // new one — never both at once.
           const themeObserver = new MutationObserver(() => {
             if (!loaded) return;
             const ref = activeRef();
@@ -307,36 +307,36 @@ const stats = [
   <section class="cta-banner px-5 lg:px-20 py-14 md:py-20 flex items-center justify-center transition-colors">
     <div class="container mx-auto text-center max-w-3xl">
       <h2 class="cta-banner-title text-3xl md:text-4xl lg:text-5xl font-normal mb-5 md:mb-6" style="font-family: 'Cormorant Garamond', serif;">
-        ¿Listo para Experimentar la Diferencia?
+        Ready to Take the First Step?
       </h2>
       <p class="cta-banner-sub text-sm md:text-base mb-7 md:mb-10" style="line-height: 1.75; max-width: 480px; margin-left: auto; margin-right: auto;">
-        Reserva tu consulta hoy y descubre por qué los pacientes más exigentes eligen Arango Dental Clinic.
+        Book your consultation today and meet the team behind your smile, in English, Spanish or French.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-4">
         <a
-          href="/contacto#contact-form"
+          href="/en/contact/#contact-form"
           class="cta-banner-btn inline-block px-8 md:px-10 py-3.5 md:py-4 text-sm md:text-[15px] font-medium tracking-wider transition-all duration-300"
           style="letter-spacing: 0.1em;"
         >
-          Quiero Mi Valoración Gratuita
+          Book My Free Assessment
         </a>
         <a
-          href="https://wa.me/34665886439"
+          href="https://wa.me/34665886439?text=Hello%2C%20I'd%20like%20to%20book%20an%20appointment%20at%20Arango%20Dental%20Clinic"
           target="_blank"
           rel="noopener"
           class="cta-banner-btn-solid inline-block px-8 md:px-10 py-3.5 md:py-4 text-sm md:text-[15px] font-medium tracking-wider transition-all duration-300"
           style="letter-spacing: 0.1em;"
         >
-          Escríbenos por WhatsApp
+          Message Us on WhatsApp
         </a>
       </div>
     </div>
   </section>
 
   <style>
-    /* Widget de reseñas — uno por tema, solo uno visible a la vez.
-       min-height reserva espacio para el skeleton y para el iframe de
-       EmbedSocial hasta que termine de medirse, evitando CLS. */
+    /* Reviews widget — one per theme, only one visible at a time.
+       min-height reserves space for the skeleton and for the EmbedSocial
+       iframe until it has finished measuring, avoiding CLS. */
     .reviews-widget {
       min-height: 420px;
     }
@@ -374,8 +374,8 @@ const stats = [
       }
     }
 
-    /* Números de "Excelencia en Números" — verde en claro, dorado en oscuro
-       (antes usaba var(--teal-600), que en oscuro da verde claro, no dorado). */
+    /* "In Numbers" figures — green in light, gold in dark
+       (it used var(--teal-600) before, which in dark gives light green, not gold). */
     .stat-number {
       color: var(--teal-600);
     }
@@ -383,7 +383,7 @@ const stats = [
       color: #D4AF55;
     }
 
-    /* CTA Banner — modo claro */
+    /* CTA Banner — light mode */
     .cta-banner {
       background-color: var(--bg-tertiary);
     }
@@ -404,7 +404,7 @@ const stats = [
       border-color: #153328;
     }
 
-    /* Modo oscuro: fondo dark de la landing */
+    /* Dark mode: dark background of the landing */
     :global(html.dark) .cta-banner {
       background-color: #141210;
     }
@@ -425,8 +425,8 @@ const stats = [
       border-color: #D4AF55;
     }
 
-    /* Segundo botón del CTA final (WhatsApp) — sólido, mismo patrón que
-       .hero-btn-primary/.srv-btn-solid en el resto del sitio. */
+    /* Second button of the final CTA (WhatsApp) — solid, same pattern as
+       .hero-btn-primary/.srv-btn-solid in the rest of the site. */
     .cta-banner-btn-solid {
       background-color: #153328;
       color: #ffffff;
@@ -448,7 +448,7 @@ const stats = [
       border-color: rgba(244, 240, 235, 0.30);
     }
 
-    /* Franja de contacto rápido — después del grid de servicios */
+    /* Quick contact strip — after the services grid */
     .quick-contact-strip {
       display: flex;
       flex-wrap: wrap;
@@ -497,8 +497,8 @@ const stats = [
       color: var(--text-primary);
       border: 1px solid var(--border-secondary);
     }
-    /* Hover: mismo color que el botón principal ("Agenda tu Cita") en su
-       tema — verde en claro, dorado en oscuro. */
+    /* Hover: same colour as the main button ("Book an Appointment") in its
+       theme — green in light, gold in dark. */
     .quick-contact-btn-outline:hover {
       background-color: #153328;
       color: #ffffff;
@@ -510,8 +510,8 @@ const stats = [
       border-color: #D4AF55;
     }
 
-    /* Carrusel de servicios — scroll-snap nativo (sin librerías), navegable
-       con flechas, arrastre táctil o teclado (el track es focuseable). */
+    /* Services carousel — native scroll-snap (no libraries), navigable
+       with arrows, touch drag or keyboard (the track is focusable). */
     .services-carousel {
       position: relative;
     }
@@ -533,24 +533,24 @@ const stats = [
       outline-offset: 4px;
     }
 
-    /* Ancho de cada tarjeta: siempre deja asomar la siguiente, para que se
-       note que hay más para scrollear (no queda todo visible de una). */
+    /* Width of each card: always lets the next one peek out, so it is
+       obvious there is more to scroll (not everything visible at once). */
     .services-slide {
       position: relative;
       flex: 0 0 86%;
       scroll-snap-align: start;
     }
 
-    /* Borde con resplandor móvil — adaptación en CSS puro (sin React ni
-       Framer Motion) del efecto "HoverBorderGradient" de Aceternity.
-       IMPORTANTE: animar la propiedad "background" completa vía @keyframes
-       (cambiando la posición de un radial-gradient) NO se interpola en los
-       navegadores reales — el valor queda congelado en el primer frame para
-       siempre (probado forzando la animación con !important: sin cambios en
-       3+ segundos). La técnica que sí anima de forma confiable es registrar
-       un ángulo con @property (queda "tipado" como <angle>, así el motor
-       sabe interpolarlo) y usarlo en un conic-gradient — el mismo mecanismo
-       ya verificado en la primera versión de este efecto. */
+    /* Moving glow border — pure CSS adaptation (no React or
+       Framer Motion) of Aceternity's "HoverBorderGradient" effect.
+       IMPORTANT: animating the whole "background" property via @keyframes
+       (changing the position of a radial-gradient) is NOT interpolated in
+       real browsers — the value stays frozen on the first frame
+       forever (tested by forcing the animation with !important: no change in
+       3+ seconds). The technique that does animate reliably is registering
+       an angle with @property (it becomes "typed" as <angle>, so the engine
+       knows how to interpolate it) and using it in a conic-gradient — the same
+       mechanism already verified in the first version of this effect. */
     @property --services-border-angle {
       syntax: '<angle>';
       initial-value: 0deg;
@@ -579,7 +579,7 @@ const stats = [
       animation: services-border-rotate 5s linear infinite;
     }
 
-    /* Verde en claro, dorado en oscuro (el resto del borde no cambia). */
+    /* Green in light, gold in dark (the rest of the border does not change). */
     :global(html.dark) .services-slide::before {
       background: conic-gradient(
         from var(--services-border-angle),
@@ -599,7 +599,7 @@ const stats = [
       to { --services-border-angle: 360deg; }
     }
 
-    /* Ligero desfase por tarjeta para que no giren todas al mismo tiempo. */
+    /* Slight offset per card so they do not all spin at the same time. */
     .services-slide:nth-child(2)::before { animation-delay: -0.7s; }
     .services-slide:nth-child(3)::before { animation-delay: -1.4s; }
     .services-slide:nth-child(4)::before { animation-delay: -2.1s; }
@@ -628,8 +628,8 @@ const stats = [
       }
     }
 
-    /* Link "Saber Más" de cada tarjeta — mismo esquema de color por tema
-       que el botón de WhatsApp: verde en claro, dorado en oscuro. */
+    /* "Learn more" link on each card — same colour scheme per theme
+       as the WhatsApp button: green in light, gold in dark. */
     .services-card-link {
       color: #153328;
       text-decoration: none;
@@ -642,9 +642,9 @@ const stats = [
       color: #D4AF55;
     }
 
-    /* Botón de WhatsApp por tarjeta — mismo ícono que el del header, con
-       texto "Contáctanos". Mismo patrón de color que .quick-contact-btn-solid
-       en el resto del sitio: verde sólido en claro, dorado en oscuro. */
+    /* WhatsApp button per card — same icon as the header one, with the
+       text "Contact us". Same colour pattern as .quick-contact-btn-solid
+       in the rest of the site: solid green in light, gold in dark. */
     .services-whatsapp-btn {
       display: inline-flex;
       align-items: center;
@@ -696,8 +696,8 @@ const stats = [
       cursor: pointer;
       transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
     }
-    /* Hover: mismo color que el botón principal de la sección — verde en
-       claro, dorado en oscuro (igual que .quick-contact-btn-outline). */
+    /* Hover: same colour as the section's main button — green in
+       light, gold in dark (same as .quick-contact-btn-outline). */
     .services-arrow:hover {
       background-color: #153328;
       color: #ffffff;
@@ -717,8 +717,8 @@ const stats = [
 
       function animateCounter(el) {
         const target = el.getAttribute('data-target') || '';
-        // Núcleo numérico (admite coma de miles y un punto decimal, ej.
-        // "5,000+" o "4.9 ★"); todo lo de afuera es prefijo/sufijo literal.
+        // Numeric core (accepts a thousands comma and one decimal point, e.g.
+        // "5,000+" or "4.9 ★"); everything outside is a literal prefix/suffix.
         const match = target.match(/-?\d[\d,]*\.?\d*/);
         if (!match) return;
         const core   = match[0];
@@ -732,7 +732,7 @@ const stats = [
         const duration = 1600;
         const start = performance.now();
         const format = (n: number) =>
-          n.toLocaleString('es-ES', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+          n.toLocaleString('en-GB', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
         el.textContent = prefix + format(0) + suffix;
 
         function tick(now: number) {
@@ -763,7 +763,7 @@ const stats = [
     })();
   </script>
 
-  <!-- Carrusel de servicios: flechas prev/next sobre scroll-snap nativo -->
+  <!-- Services carousel: prev/next arrows over native scroll-snap -->
   <script>
     (function () {
       const track = document.getElementById('services-track');

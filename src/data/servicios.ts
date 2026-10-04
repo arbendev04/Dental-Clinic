@@ -8,7 +8,7 @@ export interface Servicio {
 
 export const servicios: Servicio[] = [
   {
-    nombre: 'Diagnóstico Dental',
+    nombre: 'Odontología Digital',
     descripcion: 'Evaluamos tu salud bucal con tecnología digital avanzada para detectar problemas y planificar tu tratamiento con precisión.',
     duracion: 'Consulta inicial',
     landingHref: '/odontologia-digital/',
@@ -20,25 +20,25 @@ export const servicios: Servicio[] = [
     landingHref: '/implantes/',
   },
   {
-    nombre: 'Diseño de Sonrisa',
+    nombre: 'Estética Dental',
     descripcion: 'Mejoramos la apariencia de tus dientes mediante tratamientos de estética dental como carillas y blanqueamiento.',
     duracion: 'Desde 1 sesión',
     landingHref: '/estetica-dental/',
   },
   {
-    nombre: 'Coronas y Prótesis Dentales',
+    nombre: 'Rehabilitación Oral',
     descripcion: 'Restauramos dientes dañados o perdidos mediante rehabilitación oral, con coronas, puentes y prótesis adaptadas a ti.',
     duracion: 'Plan personalizado',
     landingHref: '/rehabilitacion-oral/',
   },
   {
-    nombre: 'Tratamiento de Encías',
+    nombre: 'Periodoncia',
     descripcion: 'Tratamos el sangrado, inflamación y enfermedades de las encías mediante tratamientos de periodoncia.',
     duracion: '45–60 min',
     landingHref: '/periodoncia/',
   },
   {
-    nombre: 'Ortodoncia y Alineadores',
+    nombre: 'Ortodoncia',
     descripcion: 'Alineamos tus dientes y corregimos problemas de mordida mediante ortodoncia, brackets y alineadores transparentes.',
     duracion: 'Consulta inicial',
     landingHref: '/ortodoncia/',

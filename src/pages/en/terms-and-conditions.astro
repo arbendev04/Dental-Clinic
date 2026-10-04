@@ -1,0 +1,214 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Terms and Conditions" description="Terms and conditions of use of the Arango Dental Clinic website: informational nature of the content, appointment requests, prices and liability.">
+
+  <!-- ── Header ── -->
+  <section class="lgl-hero">
+    <div class="lgl-container">
+      <p class="lgl-label">Arango Dental Clinic</p>
+      <h1 class="lgl-hero-title">Terms and Conditions</h1>
+    </div>
+  </section>
+
+  <!-- ── Content ── -->
+  <section class="lgl-content-section">
+    <div class="lgl-container lgl-prose">
+
+      <p class="lgl-note">
+        <em>This is a courtesy translation of the Spanish version; in case of any discrepancy, the Spanish version prevails.</em>
+        <a href="/terminos-condiciones/" hreflang="es" lang="es">Read the Spanish version</a>.
+      </p>
+
+      <h2>1. Purpose</h2>
+      <p>
+        These Terms and Conditions govern access to and use of the website arangodentalclinic.es, owned by
+        Arango Dental Clinic (hereinafter, "the Clinic"), whose full identification details are set out in the
+        <a href="/en/legal-notice/">Legal Notice</a>. Accessing and using the Website gives you the status of
+        user and implies acceptance of these Terms and Conditions.
+      </p>
+
+      <h2>2. Informational nature of the Website</h2>
+      <p>
+        The information on this Website, including the descriptions of dental services and treatments, is for
+        general information only. It does not constitute a diagnosis, a prescription or a recommendation for
+        individual treatment. All dental treatment requires a prior in-person assessment by a registered
+        professional.
+      </p>
+
+      <h2>3. Appointment requests</h2>
+      <p>
+        Requesting an appointment through the form, by phone or on WhatsApp does not mean it is automatically
+        confirmed. An appointment is only confirmed when the Clinic expressly tells the user so. The Clinic
+        reserves the right to reschedule appointments for justified reasons, informing the patient as far in
+        advance as possible.
+      </p>
+
+      <h2>4. Prices</h2>
+      <p>
+        Any guideline prices that may be shown on the Website are for information only and are subject to an
+        individual assessment after the in-person consultation. The final quote will be given in writing before
+        any treatment begins.
+      </p>
+
+      <h2>5. Intellectual property</h2>
+      <p>
+        The content of the Website is protected by intellectual and industrial property rights owned by Arango
+        Dental Clinic or by third-party licensors, on the terms described in the
+        <a href="/en/legal-notice/">Legal Notice</a>.
+      </p>
+
+      <h2>6. User's responsibility</h2>
+      <p>
+        The user agrees to use the Website and its contact forms diligently, providing truthful information, and
+        not to use them for fraudulent or unlawful purposes or in a way that is contrary to these Terms and
+        Conditions.
+      </p>
+
+      <h2>7. Limitation of liability</h2>
+      <p>
+        Arango Dental Clinic will not be liable for any damage or loss arising from improper use of the Website,
+        from its unavailability, or from decisions taken by the user on the basis of the general information on
+        the Website without having had the corresponding in-person professional consultation.
+      </p>
+
+      <h2>8. External links</h2>
+      <p>
+        The Website may contain links to social networks and other third-party websites (Facebook, Instagram,
+        WhatsApp, Google Maps, etc.). Arango Dental Clinic does not control and is not responsible for the
+        content of those sites.
+      </p>
+
+      <h2>9. Changes to the terms</h2>
+      <p>
+        Arango Dental Clinic may modify these Terms and Conditions at any time. Changes will be published on
+        this same page, stating the date of the last update.
+      </p>
+
+      <h2>10. Applicable law and jurisdiction</h2>
+      <p>
+        These Terms and Conditions are governed by Spanish law. Any dispute will be submitted to the courts
+        that have jurisdiction under the applicable consumer and user protection regulations.
+      </p>
+
+      <h2>11. Contact</h2>
+      <p>
+        If you have any questions about these Terms and Conditions, you can contact us at
+        <a href="mailto:Arangodentalclinic@gmail.com">Arangodentalclinic@gmail.com</a> or on
+        <a href="tel:+34965088282">+34 965 08 82 82</a>.
+      </p>
+
+      <p class="lgl-updated">Last updated: 22 August 2026</p>
+
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .lgl-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* ── Header ── */
+  .lgl-hero {
+    background-color: #0d2219;
+    padding: 8rem 0 3.5rem;
+    text-align: center;
+  }
+
+  :global(html.dark) .lgl-hero {
+    background-color: #0d2219;
+  }
+
+  .lgl-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #C49B38;
+    margin: 0 0 1rem;
+  }
+
+  :global(html.dark) .lgl-label {
+    color: #D4AF55;
+  }
+
+  .lgl-hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.4rem, 4.5vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(244, 240, 235, 0.95);
+    margin: 0;
+  }
+
+  /* ── Prose ── */
+  .lgl-content-section {
+    background-color: var(--bg-primary);
+    padding: 4.5rem 0 6rem;
+  }
+
+  .lgl-prose {
+    max-width: 760px;
+  }
+
+  .lgl-prose h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+  }
+
+  .lgl-prose h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .lgl-prose p {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin: 0 0 1.1rem;
+  }
+
+  .lgl-prose ul {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin: 0 0 1.1rem;
+    padding-left: 1.25rem;
+  }
+
+  .lgl-prose li {
+    margin-bottom: 0.35rem;
+  }
+
+  .lgl-prose a {
+    color: var(--teal-600);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .lgl-updated {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-primary);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+  }
+
+  .lgl-prose .lgl-note {
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1.75rem;
+    border-left: 2px solid var(--gold-500);
+    background-color: var(--bg-secondary);
+  }
+</style>

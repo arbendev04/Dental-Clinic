@@ -1,66 +1,80 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 
 const faqs = [
   {
-    pregunta: '¿Cuál es el horario de atención?',
-    respuesta: 'Atendemos de lunes a jueves de 10:00 a 14:00 y de 15:00 a 19:00, y los viernes de 10:00 a 14:00. Permanecemos cerrados los fines de semana.',
+    question: "What are your opening hours?",
+    answer: "We are open Monday to Thursday from 10:00 to 14:00 and from 15:00 to 19:00, and on Fridays from 10:00 to 14:00. We are closed at weekends.",
   },
   {
-    pregunta: '¿Dónde está ubicada la clínica?',
-    respuesta: 'Arango Dental Clinic está en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante 03501.',
+    question: "Where is the clinic located?",
+    answer: "Arango Dental Clinic is at Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante 03501.",
   },
   {
-    pregunta: '¿La primera consulta es gratuita?',
-    respuesta: 'Sí. La primera valoración es gratuita y sin compromiso: evaluamos tu caso y te explicamos las opciones de tratamiento antes de que decidas nada.',
+    question: "Is the first consultation free?",
+    answer: "Yes. The first assessment is free and without obligation: we assess your case and explain your treatment options before you decide anything.",
   },
   {
-    pregunta: '¿Cómo puedo reservar una cita?',
-    respuesta: 'Puedes llamarnos al 965 08 82 82, escribirnos por WhatsApp al 665 886 439, o completar el formulario de esta página. Respondemos en menos de 24 horas.',
+    question: "How can I book an appointment?",
+    answer: "You can call us on 965 08 82 82 (+34 965 08 82 82 from abroad), message us on WhatsApp on 665 886 439 (+34 665 886 439 from abroad), or fill in the form on this page. We reply within 24 hours.",
   },
   {
-    pregunta: '¿Qué servicios ofrece Arango Dental Clinic?',
-    respuesta: 'Ofrecemos Odontología Digital, Implantología, Estética Dental, Rehabilitación Oral, Periodoncia, Ortodoncia y Endodoncia, con tecnología de escáner intraoral 3D y radiografía digital.',
+    question: "Which services does Arango Dental Clinic offer?",
+    answer: "We offer Digital Dentistry, Dental Implants, Cosmetic Dentistry, Oral Rehabilitation, Gum Disease Treatment, Orthodontics and Root Canal Treatment, with 3D intraoral scanning and digital X-ray technology.",
   },
   {
-    pregunta: '¿Cuánto cuesta un implante dental?',
-    respuesta: 'El precio de un implante dental se evalúa según las necesidades de cada paciente, tras una valoración inicial gratuita en la que definimos el plan de tratamiento más adecuado.',
+    question: "How much does a dental implant cost?",
+    answer: "The price of a dental implant is determined by each patient's needs, after a free initial assessment in which we define the most suitable treatment plan.",
   },
   {
-    pregunta: '¿Cuánto cuesta la ortodoncia?',
-    respuesta: 'El precio de la ortodoncia (brackets o alineadores invisibles) se evalúa según las necesidades de cada paciente, tras una valoración inicial gratuita.',
+    question: "How much does orthodontics cost?",
+    answer: "The price of orthodontics (braces or clear aligners) is determined by each patient's needs, after a free initial assessment.",
   },
   {
-    pregunta: '¿Atienden a turistas o pacientes extranjeros?',
-    respuesta: 'Sí, recibimos habitualmente a turistas y residentes extranjeros en la zona. Nuestro equipo atiende en español, inglés y francés.',
+    question: "Do you see tourists and patients from abroad?",
+    answer: "Yes, we regularly see tourists and foreign residents in the area. Our team speaks English, Spanish and French.",
   },
   {
-    pregunta: '¿Trabajan con seguros dentales?',
-    respuesta: 'No trabajamos con seguros dentales; la atención es particular. En tu valoración inicial gratuita te damos un presupuesto exacto de lo que necesitas, para que sepas qué vas a pagar antes de decidir nada.',
+    question: "Do you work with dental insurance?",
+    answer: "We do not work with dental insurance; care is private. At your free initial assessment we give you an exact quote for what you need, so you know what you will pay before you decide anything.",
   },
+];
+
+// Visible labels are in English; the `value` is always the canonical Spanish name
+// (the CRM team reads Spanish and the script looks for input[value="Otro"]).
+const treatments = [
+  { value: "Odontología Digital", label: "Digital Dentistry" },
+  { value: "Implantología", label: "Dental Implants" },
+  { value: "Estética Dental", label: "Cosmetic Dentistry" },
+  { value: "Rehabilitación Oral", label: "Oral Rehabilitation" },
+  { value: "Periodoncia", label: "Gum Disease Treatment" },
+  { value: "Ortodoncia", label: "Orthodontics" },
+  { value: "Endodoncia", label: "Root Canal Treatment" },
+  { value: "Otro", label: "Other" },
 ];
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "inLanguage": "en",
   "mainEntity": faqs.map((f) => ({
     "@type": "Question",
-    "name": f.pregunta,
+    "name": f.question,
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": f.respuesta,
+      "text": f.answer,
     },
   })),
 };
 ---
 
-<Layout title="Contacto en Benidorm" description="Contacta con Arango Dental Clinic en Benidorm: llámanos al 965 08 82 82, escríbenos por WhatsApp o visítanos en Avinguda Alfonso Puchades, 22, bajo, Benidorm." image="/img/contacto/contacto.webp">
+<Layout title="Contact Your English-Speaking Dentist in Benidorm" description="Contact Arango Dental Clinic in Benidorm: call +34 965 08 82 82, message us on WhatsApp or visit us at Avinguda Alfonso Puchades, 22, bajo. English spoken." image="/img/contacto/contacto.webp">
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <!-- Header -->
   <section class="ctt-hero" data-scroll-hero>
     <img
       src="/img/contacto/contacto.webp"
-      alt="Interior de Arango Dental Clinic en Benidorm"
+      alt="Inside Arango Dental Clinic in Benidorm"
       class="ctt-hero-img"
       width="1717"
       height="916"
@@ -71,13 +85,13 @@ const faqSchema = {
     <div class="ctt-hero-overlay" aria-hidden="true"></div>
     <div class="ctt-container ctt-hero-inner">
       <p class="ctt-label">Arango Dental Clinic</p>
-      <h1 class="ctt-hero-title">Da el primer paso hacia<br>tu mejor sonrisa</h1>
+      <h1 class="ctt-hero-title">Take the first step towards <br>the smile you want</h1>
       <p class="ctt-hero-sub">
-        Agenda tu cita hoy y descubre cómo podemos transformar tu sonrisa.
+        Book your appointment today and find out how we can help with your smile.
       </p>
       <div class="ctt-hero-actions">
-        <a href="tel:+34965088282" class="ctt-btn ctt-btn-outline">Llamar ahora</a>
-        <a href="https://wa.me/34665886439" target="_blank" rel="noopener" class="ctt-btn ctt-btn-solid">WhatsApp</a>
+        <a href="tel:+34965088282" class="ctt-btn ctt-btn-outline">Call now</a>
+        <a href="https://wa.me/34665886439?text=Hello%2C%20I'd%20like%20to%20book%20an%20appointment%20at%20Arango%20Dental%20Clinic" target="_blank" rel="noopener" class="ctt-btn ctt-btn-solid">WhatsApp</a>
       </div>
     </div>
   </section>
@@ -89,11 +103,11 @@ const faqSchema = {
 
         <!-- Contact Info -->
         <div>
-          <p class="ctt-label" style="margin-bottom: 0.75rem;">Tu mejor aliado dental</p>
-          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Información de Contacto</h2>
+          <p class="ctt-label" style="margin-bottom: 0.75rem;">Your dental team</p>
+          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Contact Information</h2>
 
           <div class="space-y-7">
-            <!-- Dirección -->
+            <!-- Address -->
             <div class="flex items-start gap-4">
               <div class="ctt-icon-box">
                 <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,12 +116,12 @@ const faqSchema = {
                 </svg>
               </div>
               <div>
-                <h3 class="ctt-info-label">Dirección</h3>
+                <h3 class="ctt-info-label">Address</h3>
                 <p class="ctt-info-text">Avinguda Alfonso Puchades, 22, bajo<br>Benidorm, Alicante 03501</p>
               </div>
             </div>
 
-            <!-- Teléfono -->
+            <!-- Phone -->
             <div class="flex items-start gap-4">
               <div class="ctt-icon-box">
                 <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,7 +129,7 @@ const faqSchema = {
                 </svg>
               </div>
               <div>
-                <h3 class="ctt-info-label">Teléfono</h3>
+                <h3 class="ctt-info-label">Phone</h3>
                 <a href="tel:+34965088282" class="ctt-info-text ctt-link">+34 965 08 82 82</a>
               </div>
             </div>
@@ -133,7 +147,7 @@ const faqSchema = {
               </div>
             </div>
 
-            <!-- Horario -->
+            <!-- Opening hours -->
             <div class="flex items-start gap-4">
               <div class="ctt-icon-box">
                 <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -141,12 +155,12 @@ const faqSchema = {
                 </svg>
               </div>
               <div>
-                <h3 class="ctt-info-label">Horario</h3>
-                <p class="ctt-info-text">Lun – Jue: 10:00 – 14:00 y 15:00 – 19:00<br>Viernes: 10:00 – 14:00</p>
+                <h3 class="ctt-info-label">Opening hours</h3>
+                <p class="ctt-info-text">Mon – Thu: 10:00 – 14:00 and 15:00 – 19:00<br>Friday: 10:00 – 14:00</p>
               </div>
             </div>
 
-            <!-- Redes -->
+            <!-- Social -->
             <div class="flex items-start gap-4">
               <div class="ctt-icon-box">
                 <svg class="w-5 h-5" style="color: var(--teal-600);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -154,7 +168,7 @@ const faqSchema = {
                 </svg>
               </div>
               <div>
-                <h3 class="ctt-info-label">Síguenos</h3>
+                <h3 class="ctt-info-label">Follow us</h3>
                 <div class="flex flex-col gap-1 mt-1">
                   <a href="https://www.instagram.com/arangodentalclinic" target="_blank" rel="noopener" class="ctt-social-link">
                     Instagram · @arangodentalclinic
@@ -162,7 +176,7 @@ const faqSchema = {
                   <a href="https://www.facebook.com/p/Arango-Dental-Clinic-61574405870200/" target="_blank" rel="noopener" class="ctt-social-link">
                     Facebook · Arango Dental Clinic
                   </a>
-                  <a href="https://wa.me/34665886439" target="_blank" rel="noopener" class="ctt-social-link">
+                  <a href="https://wa.me/34665886439?text=Hello%2C%20I'd%20like%20to%20book%20an%20appointment%20at%20Arango%20Dental%20Clinic" target="_blank" rel="noopener" class="ctt-social-link">
                     WhatsApp · +34 665 886 439
                   </a>
                 </div>
@@ -173,50 +187,50 @@ const faqSchema = {
 
         <!-- Contact Form -->
         <div>
-          <p class="ctt-label" style="margin-bottom: 0.75rem;">Valoración sin costo</p>
-          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Empieza tu tratamiento</h2>
+          <p class="ctt-label" style="margin-bottom: 0.75rem;">Free assessment</p>
+          <h2 class="text-3xl font-normal mb-10" style="font-family: 'Cormorant Garamond', serif; color: var(--text-primary);">Start your treatment</h2>
           <form
             id="contact-form"
             class="space-y-5"
             action="https://formspree.io/f/xqpzklag"
             method="POST"
           >
-            <input type="hidden" name="_subject" value="Nueva solicitud de contacto — Arango Dental Clinic" />
+            <input type="hidden" name="_subject" value="New contact request (English site) — Arango Dental Clinic" />
             <input type="text" id="gotcha" name="_gotcha" class="ctt-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <div>
-              <label for="nombre" class="ctt-field-label">Nombre completo</label>
+              <label for="nombre" class="ctt-field-label">Full name</label>
               <input
                 type="text"
                 id="nombre"
                 name="nombre"
                 class="ctt-input"
-                placeholder="Tu nombre y apellidos"
+                placeholder="Your first name and surname"
                 required
               />
             </div>
             <div>
-              <label for="telefono" class="ctt-field-label">Teléfono</label>
+              <label for="telefono" class="ctt-field-label">Phone</label>
               <input
                 type="tel"
                 id="telefono"
                 name="telefono"
                 class="ctt-input"
-                placeholder="+34 600 000 000"
+                placeholder="Phone number with country code"
                 required
               />
             </div>
             <div>
-              <label for="email" class="ctt-field-label">Email <span class="ctt-optional">(opcional)</span></label>
+              <label for="email" class="ctt-field-label">Email <span class="ctt-optional">(optional)</span></label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 class="ctt-input"
-                placeholder="tu@email.com"
+                placeholder="you@email.com"
               />
             </div>
             <div>
-              <p class="ctt-field-label" id="ctt-tratamiento-label">¿Qué tratamiento te interesa? <span class="ctt-optional">(opcional)</span></p>
+              <p class="ctt-field-label" id="ctt-tratamiento-label">Which treatment are you interested in? <span class="ctt-optional">(optional)</span></p>
               <div class="ctt-dropdown" id="ctt-dropdown">
                 <button
                   type="button"
@@ -226,17 +240,17 @@ const faqSchema = {
                   aria-expanded="false"
                   aria-labelledby="ctt-tratamiento-label ctt-dropdown-summary"
                 >
-                  <span id="ctt-dropdown-summary">Selecciona uno o varios</span>
+                  <span id="ctt-dropdown-summary">Select one or more</span>
                   <svg class="ctt-dropdown-chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
                   </svg>
                 </button>
                 <div class="ctt-dropdown-panel" id="ctt-dropdown-panel" role="listbox" aria-multiselectable="true" hidden>
-                  {['Odontología Digital', 'Implantología', 'Estética Dental', 'Rehabilitación Oral', 'Periodoncia', 'Ortodoncia', 'Endodoncia', 'Otro'].map((servicio) => (
+                  {treatments.map((treatment) => (
                     <label class="ctt-dropdown-option">
-                      <input type="checkbox" name="servicios[]" value={servicio} />
+                      <input type="checkbox" name="servicios[]" value={treatment.value} data-label={treatment.label} />
                       <span class="ctt-dropdown-check" aria-hidden="true"></span>
-                      <span>{servicio}</span>
+                      <span>{treatment.label}</span>
                     </label>
                   ))}
                 </div>
@@ -247,21 +261,21 @@ const faqSchema = {
                   id="servicio_otro"
                   name="servicio_otro"
                   class="ctt-input"
-                  placeholder="Cuéntanos brevemente qué necesitas"
+                  placeholder="Tell us briefly what you need"
                 />
               </div>
             </div>
             <div class="ctt-consent">
               <label class="ctt-consent-label">
                 <input type="checkbox" id="consentimiento" name="consentimiento" required />
-                <span>He leído y acepto la <a href="/politica-privacidad" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
+                <span>I have read and accept the <a href="/en/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</span>
               </label>
             </div>
             <div>
               <button type="submit" id="contact-submit" class="ctt-submit">
-                Solicitar Valoración Gratuita
+                Request Free Assessment
               </button>
-              <p class="ctt-trust-line">Sin compromiso · Te contactamos en menos de 24h</p>
+              <p class="ctt-trust-line">No obligation · We get back to you within 24h</p>
             </div>
           </form>
           <p id="contact-form-status" class="ctt-form-status" role="status" aria-live="polite" hidden></p>
@@ -275,21 +289,21 @@ const faqSchema = {
   <section class="ctt-faq-section">
     <div class="ctt-container">
       <div class="ctt-faq-header">
-        <p class="ctt-label">Resolvemos tus dudas</p>
-        <h2 class="ctt-faq-title">Preguntas frecuentes</h2>
+        <p class="ctt-label">We answer your questions</p>
+        <h2 class="ctt-faq-title">Frequently asked questions</h2>
       </div>
       <div class="ctt-faq-list">
         {faqs.map((faq) => (
           <details class="ctt-faq-item">
-            <summary class="ctt-faq-question">{faq.pregunta}</summary>
-            <p class="ctt-faq-answer">{faq.respuesta}</p>
+            <summary class="ctt-faq-question">{faq.question}</summary>
+            <p class="ctt-faq-answer">{faq.answer}</p>
           </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Mapa -->
+  <!-- Map -->
   <section class="ctt-map-section">
     <iframe
       class="ctt-map"
@@ -300,7 +314,7 @@ const faqSchema = {
       allowfullscreen=""
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"
-      title="Ubicación de Arango Dental Clinic en Google Maps"
+      title="Location of Arango Dental Clinic on Google Maps"
     ></iframe>
   </section>
 
@@ -415,7 +429,7 @@ const faqSchema = {
     .ctt-hero-actions { flex-direction: row; }
   }
 
-  /* ── Botones hero ── */
+  /* ── Hero buttons ── */
   .ctt-btn {
     display: inline-flex;
     align-items: center;
@@ -466,7 +480,7 @@ const faqSchema = {
     border-color: #D4AF55;
   }
 
-  /* ── Info bloque ── */
+  /* ── Info block ── */
   .ctt-icon-box {
     width: 3rem;
     height: 3rem;
@@ -510,7 +524,7 @@ const faqSchema = {
     color: var(--teal-600);
   }
 
-  /* ── Formulario ── */
+  /* ── Form ── */
   .ctt-honeypot {
     position: absolute;
     left: -9999px;
@@ -536,7 +550,7 @@ const faqSchema = {
     color: var(--text-tertiary);
   }
 
-  /* ── Dropdown multi-select de tratamientos ── */
+  /* ── Multi-select treatment dropdown ── */
   .ctt-dropdown {
     position: relative;
   }
@@ -839,7 +853,7 @@ const faqSchema = {
     margin: 0.75rem 0 0;
   }
 
-  /* ── Mapa ── */
+  /* ── Map ── */
   .ctt-map-section {
     background-color: var(--bg-secondary);
   }
@@ -866,7 +880,7 @@ const faqSchema = {
 </style>
 
 <script>
-  import { getAttribution, tratamientoPorPagina } from '../scripts/attribution';
+  import { getAttribution, tratamientoPorPagina } from '../../scripts/attribution';
 
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
@@ -888,13 +902,14 @@ const faqSchema = {
 
   function updateDropdownSummary() {
     if (!dropdownCheckboxes || !dropdownSummary) return;
-    const selected = Array.from(dropdownCheckboxes).filter((cb) => cb.checked).map((cb) => cb.value);
+    // The visible summary uses the English label; the `value` stays the Spanish canonical name.
+    const selected = Array.from(dropdownCheckboxes).filter((cb) => cb.checked).map((cb) => cb.dataset.label ?? cb.value);
     if (selected.length === 0) {
-      dropdownSummary.textContent = 'Selecciona uno o varios';
+      dropdownSummary.textContent = 'Select one or more';
     } else if (selected.length <= 2) {
       dropdownSummary.textContent = selected.join(', ');
     } else {
-      dropdownSummary.textContent = `${selected.length} tratamientos seleccionados`;
+      dropdownSummary.textContent = `${selected.length} treatments selected`;
     }
   }
 
@@ -932,7 +947,7 @@ const faqSchema = {
     if (!submitBtn || !status) return;
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando…';
+    submitBtn.textContent = 'Sending…';
     status.hidden = true;
     status.className = 'ctt-form-status';
 
@@ -940,9 +955,10 @@ const faqSchema = {
     const telefono = (document.getElementById('telefono') as HTMLInputElement | null)?.value ?? '';
     const email = (document.getElementById('email') as HTMLInputElement | null)?.value ?? '';
 
-    // Junta los tratamientos seleccionados en el desplegable en un solo texto
-    // legible para el campo Description del Lead (si eligió "Otro", reemplaza
-    // ese chip por el detalle que haya escrito).
+    // Join the treatments selected in the dropdown into a single readable text
+    // for the Lead's Description field (if "Otro" (Other) was chosen, it replaces
+    // that item with the detail the visitor typed). The values stay in Spanish
+    // because that is what the CRM team reads.
     const tratamientos = dropdownCheckboxes
       ? Array.from(dropdownCheckboxes).filter((cb) => cb.checked).map((cb) => cb.value)
       : [];
@@ -959,39 +975,38 @@ const faqSchema = {
       const response = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, telefono, email, tratamiento: tratamiento || tratamientoPorPagina(), consentimiento, _gotcha, ...getAttribution() }),
+        body: JSON.stringify({ nombre, telefono, email, tratamiento: tratamiento || tratamientoPorPagina(), consentimiento, _gotcha, lang: 'en', ...getAttribution() }),
       });
 
       const data = await response.json().catch(() => null);
 
       if (response.ok && data?.success) {
         form.hidden = true;
-        status.textContent = '¡Gracias! Te contactaremos pronto.';
+        status.textContent = "Thank you! We'll be in touch soon.";
         status.classList.add('ctt-form-status-success');
         status.hidden = false;
 
-        // Evento de conversión para GTM. El envío es AJAX (preventDefault + fetch),
-        // así que el trigger nativo "Form Submission" de GTM nunca dispara solo:
-        // hay que empujar el evento explícitamente al dataLayer.
+        // Conversion event for GTM. The submission is AJAX (preventDefault + fetch),
+        // so GTM's native "Form Submission" trigger never fires by itself:
+        // the event has to be pushed to the dataLayer explicitly.
         (window as any).dataLayer = (window as any).dataLayer || [];
         (window as any).dataLayer.push({
           event: 'form_submit_success',
-          form_name: 'contacto',
+          form_name: 'contact-en',
         });
         return;
       }
 
-      status.textContent = data?.error || 'No hemos podido enviar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.';
+      status.textContent = data?.error || "We couldn't send your request. Please try again or message us on WhatsApp.";
       status.classList.add('ctt-form-status-error');
       status.hidden = false;
     } catch {
-      status.textContent = 'No hemos podido enviar tu solicitud. Revisa tu conexión o escríbenos por WhatsApp.';
+      status.textContent = "We couldn't send your request. Check your connection or message us on WhatsApp.";
       status.classList.add('ctt-form-status-error');
       status.hidden = false;
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Solicitar Valoración Gratuita';
+      submitBtn.textContent = 'Request Free Assessment';
     }
   });
 </script>
-

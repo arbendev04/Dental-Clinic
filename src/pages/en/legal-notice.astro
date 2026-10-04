@@ -1,0 +1,208 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Legal Notice" description="Legal notice of Arango Dental Clinic: identification details, conditions of access and use of the website, intellectual property and applicable jurisdiction.">
+
+  <!-- ── Header ── -->
+  <section class="lgl-hero">
+    <div class="lgl-container">
+      <p class="lgl-label">Arango Dental Clinic</p>
+      <h1 class="lgl-hero-title">Legal Notice</h1>
+    </div>
+  </section>
+
+  <!-- ── Content ── -->
+  <section class="lgl-content-section">
+    <div class="lgl-container lgl-prose">
+
+      <p class="lgl-note">
+        <em>This is a courtesy translation of the Spanish version; in case of any discrepancy, the Spanish version prevails.</em>
+        <a href="/aviso-legal/" hreflang="es" lang="es">Read the Spanish version</a>.
+      </p>
+
+      <p>
+        In compliance with the duty to provide information set out in Article 10 of Spanish Law 34/2002 of 11 July
+        on Information Society Services and Electronic Commerce (LSSI-CE), the identification details of the owner
+        of this website are set out below.
+      </p>
+
+      <h2>1. Identification details</h2>
+      <ul>
+        <li><strong>Trade name:</strong> Arango Dental Clinic</li>
+        <li><strong>Company name:</strong> Arango Dental SL</li>
+        <li><strong>Tax ID (CIF):</strong> B19375971</li>
+        <li><strong>Professional registration number:</strong> 03003716 (Ilustre Colegio Oficial de Odontólogos y Estomatólogos de Alicante — COEA, the Official College of Dentists and Stomatologists of Alicante)</li>
+        <li><strong>Health registration number:</strong> 11271 (Regional Register of Health Centres, Services and Establishments of the Valencian Community)</li>
+        <li><strong>Address:</strong> Avinguda Alfonso Puchades, 22, bajo, 03501 Benidorm (Alicante), Spain</li>
+        <li><strong>Email:</strong> <a href="mailto:Arangodentalclinic@gmail.com">Arangodentalclinic@gmail.com</a></li>
+        <li><strong>Phone:</strong> <a href="tel:+34965088282">+34 965 08 82 82</a></li>
+        <li><strong>Activity:</strong> private dental clinic</li>
+      </ul>
+
+      <h2>2. Purpose</h2>
+      <p>
+        This legal notice governs the use of the website arangodentalclinic.es (hereinafter, "the Website"), owned
+        by Arango Dental Clinic. Browsing the Website gives you the status of user and implies full acceptance of
+        the conditions set out in this Legal Notice.
+      </p>
+
+      <h2>3. Conditions of access and use</h2>
+      <p>
+        Access to the Website is free of charge, except for the cost of the connection through the
+        telecommunications network. The user agrees to make proper and lawful use of the Website and of its
+        content and services, in accordance with current legislation, good faith and public order. Use of the
+        Website for unlawful or harmful purposes, or in any way that may cause damage or prevent its normal
+        operation, is prohibited.
+      </p>
+
+      <h2>4. Intellectual and industrial property</h2>
+      <p>
+        All content on the Website (texts, photographs, graphics, images, logos, design, structure and source
+        code) is owned by Arango Dental Clinic or by third parties who have authorised its use, and is protected
+        by intellectual and industrial property law. Its reproduction, distribution, public communication or
+        transformation, in whole or in part, without the express authorisation of the owner is prohibited.
+      </p>
+
+      <h2>5. Exclusion of liability</h2>
+      <p>
+        Arango Dental Clinic does not guarantee the availability, continuity or error-free operation of the
+        Website, and accepts no liability for any damage that may result from its unavailability or lack of
+        continuity, nor for damage caused by viruses, technical faults or interference beyond its control.
+      </p>
+      <p>
+        The informational content and treatment descriptions on the Website are for general information only and
+        in no case replace an in-person professional consultation, diagnosis or assessment. Nothing on the
+        Website should be read as individual medical advice.
+      </p>
+      <p>
+        Links to third-party websites included on this Website are provided for information only. Arango Dental
+        Clinic is not responsible for the content of those sites or for any consequences of accessing them.
+      </p>
+
+      <h2>6. Applicable law and jurisdiction</h2>
+      <p>
+        These conditions are governed by Spanish law. For the resolution of any dispute arising from access to or
+        use of the Website, the parties submit to the courts of the user's place of residence, unless the
+        applicable regulations provide otherwise.
+      </p>
+
+      <h2>7. Changes</h2>
+      <p>
+        Arango Dental Clinic reserves the right to modify this Legal Notice at any time to adapt it to legislative
+        developments or changes to the Website. We recommend that you review it periodically.
+      </p>
+
+      <p class="lgl-updated">Last updated: 22 August 2026</p>
+
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .lgl-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* ── Header ── */
+  .lgl-hero {
+    background-color: #0d2219;
+    padding: 8rem 0 3.5rem;
+    text-align: center;
+  }
+
+  :global(html.dark) .lgl-hero {
+    background-color: #0d2219;
+  }
+
+  .lgl-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #C49B38;
+    margin: 0 0 1rem;
+  }
+
+  :global(html.dark) .lgl-label {
+    color: #D4AF55;
+  }
+
+  .lgl-hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.4rem, 4.5vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(244, 240, 235, 0.95);
+    margin: 0;
+  }
+
+  /* ── Prose ── */
+  .lgl-content-section {
+    background-color: var(--bg-primary);
+    padding: 4.5rem 0 6rem;
+  }
+
+  .lgl-prose {
+    max-width: 760px;
+  }
+
+  .lgl-prose h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+  }
+
+  .lgl-prose h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .lgl-prose p {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin: 0 0 1.1rem;
+  }
+
+  .lgl-prose ul {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin: 0 0 1.1rem;
+    padding-left: 1.25rem;
+  }
+
+  .lgl-prose li {
+    margin-bottom: 0.35rem;
+  }
+
+  .lgl-prose a {
+    color: var(--teal-600);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .lgl-updated {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-primary);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+  }
+
+  .lgl-prose .lgl-note {
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1.75rem;
+    border-left: 2px solid var(--gold-500);
+    background-color: var(--bg-secondary);
+  }
+</style>

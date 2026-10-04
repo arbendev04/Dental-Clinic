@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import { getLang, getAlternates, normalizePath, SITE_URL } from '../data/i18n';
 
 interface Props {
   title: string;
@@ -14,14 +15,24 @@ interface Props {
 
 const {
   title,
-  description = 'Arango Dental Clinic - Clínica dental en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implantes, ortodoncia, estética dental y odontología digital.',
+  description: descriptionProp,
   image = '/img/hero/instrumentos-odontologicos-esterilizados.webp',
   preloadHero = false,
   noindex = false
 } = Astro.props;
 
-const siteUrl = 'https://arangodentalclinic.es';
+const siteUrl = SITE_URL;
+const lang = getLang(Astro.url.pathname);
+const isEn = lang === 'en';
+const alternates = noindex ? null : getAlternates(Astro.url.pathname);
+const description = descriptionProp ?? (isEn
+  ? 'Arango Dental Clinic - Dental clinic at Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. English-speaking dentists: implants, orthodontics, cosmetic dentistry and digital dentistry.'
+  : 'Arango Dental Clinic - Clínica dental en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implantes, ortodoncia, estética dental y odontología digital.');
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+const offerNames = isEn
+  ? ['Digital Dentistry', 'Dental Implants', 'Cosmetic Dentistry', 'Oral Rehabilitation', 'Periodontics', 'Orthodontics', 'Endodontics']
+  : ['Odontología Digital', 'Implantología', 'Estética Dental', 'Rehabilitación Oral', 'Periodoncia', 'Ortodoncia', 'Endodoncia'];
 const fullTitle = `${title} | Arango Dental Clinic`;
 
 // Schema.org structured data for Dentist
@@ -29,7 +40,10 @@ const schemaData = {
   "@context": "https://schema.org",
   "@type": "Dentist",
   "name": "Arango Dental Clinic",
-  "description": "Clínica dental en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implantes, ortodoncia, estética dental y odontología digital.",
+  "description": isEn
+    ? "Dental clinic at Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. English-speaking dentists: implants, orthodontics, cosmetic dentistry and digital dentistry."
+    : "Clínica dental en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implantes, ortodoncia, estética dental y odontología digital.",
+  "knowsLanguage": ["es", "en", "fr"],
   "url": siteUrl,
   "logo": `${siteUrl}/img/logo/logo-oscuro.webp`,
   "image": `${siteUrl}/img/hero/instrumentos-odontologicos-esterilizados.webp`,
@@ -77,51 +91,11 @@ const schemaData = {
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Servicios Dentales",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Odontología Digital"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Implantología"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Estética Dental"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Rehabilitación Oral"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Periodoncia"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Ortodoncia"
-        }
-      }
-    ]
+    "name": isEn ? "Dental Services" : "Servicios Dentales",
+    "itemListElement": offerNames.map((name) => ({
+      "@type": "Offer",
+      "itemOffered": { "@type": "Service", "name": name },
+    })),
   }
 };
 
@@ -131,18 +105,20 @@ const websiteSchema = {
   "@type": "WebSite",
   "name": "Arango Dental Clinic",
   "url": siteUrl,
+  "inLanguage": lang,
 };
 
-// BreadcrumbList — Inicio > página actual (se omite en el home, no aporta ahí)
-const breadcrumbSchema = Astro.url.pathname === '/' ? null : {
+// BreadcrumbList — Inicio/Home > página actual (se omite en el home, no aporta ahí)
+const homePath = isEn ? '/en/' : '/';
+const breadcrumbSchema = normalizePath(Astro.url.pathname) === homePath ? null : {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Inicio",
-      "item": siteUrl + '/',
+      "name": isEn ? "Home" : "Inicio",
+      "item": siteUrl + homePath,
     },
     {
       "@type": "ListItem",
@@ -155,7 +131,7 @@ const breadcrumbSchema = Astro.url.pathname === '/' ? null : {
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -207,6 +183,13 @@ const breadcrumbSchema = Astro.url.pathname === '/' ? null : {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    {alternates && (
+      <>
+        <link rel="alternate" hreflang="es" href={siteUrl + alternates.es} />
+        <link rel="alternate" hreflang="en" href={siteUrl + alternates.en} />
+        <link rel="alternate" hreflang="x-default" href={siteUrl + alternates.es} />
+      </>
+    )}
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -221,7 +204,8 @@ const breadcrumbSchema = Astro.url.pathname === '/' ? null : {
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`${siteUrl}${image}`} />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content={isEn ? 'en_GB' : 'es_ES'} />
+    {alternates && <meta property="og:locale:alternate" content={isEn ? 'es_ES' : 'en_GB'} />}
     <meta property="og:site_name" content="Arango Dental Clinic" />
 
     <!-- Twitter Card -->

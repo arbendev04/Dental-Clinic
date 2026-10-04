@@ -2,8 +2,11 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
+import { PAGE_PAIRS, SITE_URL } from './src/data/i18n.ts';
 
-const LEGAL_PAGES_PENDING_NOINDEX = ['/terminos-condiciones'];
+// Páginas con noindex en Layout.astro que no deben aparecer en el sitemap
+// (hoy solo la 404; las páginas legales son indexables).
+const NOINDEX_PAGES = ['/404'];
 
 export default defineConfig({
   site: 'https://arangodentalclinic.es',
@@ -19,22 +22,30 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
-  // URLs cortas para las landings de tratamiento — redirect 301 desde la
-  // ruta vieja (ya indexada) para no perder el posicionamiento acumulado.
-  redirects: {
-    '/implantes-dentales-benidorm': '/implantes/',
-    '/implantes-dentales-benidorm/': '/implantes/',
-  },
+  // Los redirects 301 viven en vercel.json (rutas viejas ya indexadas → URLs
+  // cortas actuales). No declararlos también acá: Astro tomaba "/x" y "/x/"
+  // como la misma ruta y avisaba de una colisión que será error en el futuro.
   vite: {
     plugins: [tailwindcss()]
   },
   integrations: [
     sitemap({
-      // Excluye la 404 y las páginas legales mientras tengan noindex en Layout.astro
-      // (sacarlas de esta lista cuando se les quite el noindex).
-      filter: (page) =>
-        !page.includes('/404') &&
-        !LEGAL_PAGES_PENDING_NOINDEX.some((path) => page.includes(path)),
+      // Excluye las páginas con noindex (ver NOINDEX_PAGES arriba).
+      filter: (page) => !NOINDEX_PAGES.some((path) => page.includes(path)),
+      // Alternates es/en para cada par de src/data/i18n.ts (la opción `i18n` del
+      // plugin solo empareja URLs que difieren únicamente por el prefijo /en, y
+      // acá los slugs cambian). Tienen que coincidir con los <link hreflang> del <head>.
+      serialize(item) {
+        const path = new URL(item.url).pathname;
+        const pair = PAGE_PAIRS.find((p) => p.es === path || p.en === path);
+        if (pair) {
+          item.links = [
+            { url: SITE_URL + pair.es, lang: 'es' },
+            { url: SITE_URL + pair.en, lang: 'en' },
+          ];
+        }
+        return item;
+      },
     }),
   ],
 });

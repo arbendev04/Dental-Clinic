@@ -1,90 +1,91 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 
-const equipo = [
+const team = [
   {
-    nombre: 'Barbara Abella',
-    especialidad: 'Ortodoncia',
-    descripcion: 'Especialista en ortodoncia con brackets y alineadores invisibles. Diseña sonrisas alineadas y funcionales con un seguimiento cercano en cada fase del tratamiento.',
+    name: 'Barbara Abella',
+    specialty: 'Orthodontics',
+    description: 'Specialist in orthodontics with braces and clear aligners. She designs aligned, functional smiles with close follow-up at every stage of treatment.',
   },
   {
-    nombre: 'Magdalena Ruslanova',
-    especialidad: 'Endodoncia',
-    descripcion: 'Especialista en endodoncia y tratamiento de conducto. Combina precisión técnica y control del dolor para procedimientos cómodos y de máxima eficacia.',
+    name: 'Magdalena Ruslanova',
+    specialty: 'Root canal treatment',
+    description: 'Specialist in endodontics and root canal treatment. She combines technical precision with pain control for comfortable, highly effective procedures.',
   },
   {
-    nombre: 'Sandra Romero',
-    especialidad: 'Higienista',
-    descripcion: 'Especialista en higiene bucodental y profilaxis. Cuida la salud de tus encías y dientes con limpiezas profesionales y pautas de mantenimiento diario.',
+    name: 'Sandra Romero',
+    specialty: 'Dental hygienist',
+    description: 'Specialist in oral hygiene and prophylaxis. She looks after the health of your gums and teeth with professional cleanings and daily maintenance guidance.',
   },
   {
-    nombre: 'Sara Montoro',
-    especialidad: 'Higienista',
-    descripcion: 'Especialista en higiene bucodental y prevención. Acompaña a cada paciente en el cuidado de su sonrisa entre visita y visita a la clínica.',
+    name: 'Sara Montoro',
+    specialty: 'Dental hygienist',
+    description: 'Specialist in oral hygiene and prevention. She supports each patient in caring for their smile between visits to the clinic.',
   },
   {
-    nombre: 'Ana Deltell',
-    especialidad: 'Recepción',
-    descripcion: 'Primer contacto de Arango Dental Clinic. Organiza tu cita y resuelve tus dudas con calidez, para que tu experiencia empiece de la mejor manera.',
+    name: 'Ana Deltell',
+    specialty: 'Reception',
+    description: 'The first point of contact at Arango Dental Clinic. She organises your appointment and answers your questions warmly, so your experience starts in the best possible way.',
   },
   {
-    nombre: 'Natalia Svetlozarova',
-    especialidad: 'Asesora Comercial',
-    descripcion: 'Te acompaña en la planificación de tu tratamiento y presupuesto. Resuelve tus dudas con transparencia y un trato cercano en cada consulta.',
+    name: 'Natalia Svetlozarova',
+    specialty: 'Treatment advisor',
+    description: 'She guides you through planning your treatment and your quote. She answers your questions with transparency and a friendly approach at every consultation.',
   },
 ];
 
 const stats = [
-  { valor: '8', label: 'años de experiencia' },
-  // Calificación real verificada en Google Maps (place_id ChIJrZfws2MFYg0RHzre1V7ThzY)
-  // el 2026-09-06 — la misma que muestra el home.
-  { valor: '4.9 ★', label: 'calificación en Google' },
-  { valor: '7', label: 'especialidades' },
-  { valor: '3', label: 'idiomas de atención' },
+  { value: '8', label: 'years of experience' },
+  // Real rating verified on Google Maps (place_id ChIJrZfws2MFYg0RHzre1V7ThzY)
+  // on 2026-09-06 — the same one shown on the home page.
+  { value: '4.9 ★', label: 'Google rating' },
+  { value: '7', label: 'specialities' },
+  { value: '3', label: 'languages spoken' },
 ];
 
-const valores = [
+const values = [
   {
     num: '01',
-    titulo: 'Confianza',
-    texto: 'Construimos relaciones basadas en la transparencia y la honestidad. Cada diagnóstico y cada plan de tratamiento se explica con claridad antes de comenzar.',
+    title: 'Trust',
+    text: 'We build relationships based on transparency and honesty. Every diagnosis and every treatment plan is explained clearly before we begin.',
   },
   {
     num: '02',
-    titulo: 'Excelencia',
-    texto: 'Buscamos la perfección en cada procedimiento. Formación continua, tecnología de última generación y protocolos clínicos de máxima precisión.',
+    title: 'Excellence',
+    text: 'We aim for perfection in every procedure: ongoing training, state-of-the-art technology and clinical protocols of the highest precision.',
   },
   {
     num: '03',
-    titulo: 'Empatía',
-    texto: 'Entendemos tus miedos y tus expectativas. Te acompañamos en cada paso del tratamiento con cercanía, paciencia y cuidado real.',
+    title: 'Empathy',
+    text: 'We understand your fears and your expectations. We support you at every step of the treatment with warmth, patience and genuine care.',
   },
 ];
-// Person schema para el director y el equipo — mismos textos que aparecen
-// visibles en la página, sin datos nuevos.
-const equipoSchema = {
+
+// Person schema for the director and the team — same texts as shown on the
+// page, no new data.
+const teamSchema = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Person",
       "name": "Dr. Sebastián Arango",
-      "jobTitle": "Director · Implantología · Rehabilitación Oral",
+      "jobTitle": "Director · Implantology · Oral Rehabilitation",
       "worksFor": { "@type": "Dentist", "name": "Arango Dental Clinic" },
-      "description": "Fundador y director de Arango Dental Clinic. Especialista en implantología y rehabilitación oral, con formación en las técnicas más avanzadas de odontología digital.",
+      "description": "Founder and director of Arango Dental Clinic. Specialist in implantology and oral rehabilitation, trained in the most advanced digital dentistry techniques.",
     },
-    ...equipo.map((persona) => ({
+    ...team.map((person) => ({
       "@type": "Person",
-      "name": persona.nombre,
-      "jobTitle": persona.especialidad,
+      "name": person.name,
+      "jobTitle": person.specialty,
       "worksFor": { "@type": "Dentist", "name": "Arango Dental Clinic" },
-      "description": persona.descripcion,
+      "description": person.description,
     })),
   ],
 };
 ---
 
-<Layout title="Sobre Nosotros en Benidorm" description="Conoce al Dr. Sebastián Arango y su equipo de especialistas en implantología, rehabilitación oral, ortodoncia y endodoncia en Benidorm." image="/img/banner/banner-arango.webp">
-  <script type="application/ld+json" set:html={JSON.stringify(equipoSchema)} />
+<Layout title="About Us | Our Dental Team in Benidorm" description="Meet Dr Sebastián Arango and the team of specialists in implants, oral rehabilitation, orthodontics and root canal treatment at Arango Dental Clinic in Benidorm." image="/img/banner/banner-arango.webp">
+  <script type="application/ld+json" set:html={JSON.stringify(teamSchema)} />
 
   <!-- ── HERO ── -->
   <section class="nos-hero" data-scroll-hero>
@@ -92,7 +93,7 @@ const equipoSchema = {
       <source media="(max-width: 768px)" srcset="/img/banner/nosotros-mobile.webp" width="864" height="1821" />
       <img
         src="/img/banner/banner-arango.webp"
-        alt="Fachada de Arango Dental Clinic, Benidorm"
+        alt="Front of Arango Dental Clinic, Benidorm"
         class="nos-hero-img"
         width="1350"
         height="1080"
@@ -104,15 +105,15 @@ const equipoSchema = {
     <div class="nos-hero-overlay" aria-hidden="true"></div>
     <div class="nos-container nos-hero-inner">
       <div class="nos-hero-content reveal-up">
-        <p class="nos-label">El equipo</p>
+        <p class="nos-label">The team</p>
         <h1 class="nos-hero-title">
-          Detrás de cada<br>
-          <em>tratamiento,</em><br>
-          hay un gran equipo
+          Behind every<br>
+          <em>treatment,</em><br>
+          there is a great team
         </h1>
         <div class="nos-hero-line"></div>
         <p class="nos-hero-sub">
-          Profesionales apasionados por la salud bucal, comprometidos con tu bienestar y con la excelencia en cada tratamiento.
+          Professionals passionate about oral health, committed to your wellbeing and to excellence in every treatment.
         </p>
       </div>
     </div>
@@ -121,32 +122,32 @@ const equipoSchema = {
     </div>
   </section>
 
-  <!-- ── MANIFIESTO ── -->
+  <!-- ── MANIFESTO ── -->
   <section class="nos-manifiesto">
     <div class="nos-container">
       <div class="nos-quote reveal-up">
         <span class="nos-quote-mark" aria-hidden="true">"</span>
         <blockquote class="nos-quote-text">
-          Cada tratamiento es una promesa.<br>Cada paciente, una historia que merece el mejor cuidado.
+          Every treatment is a promise.<br>Every patient, a story that deserves the best care.
         </blockquote>
         <cite class="nos-quote-cite">— Dr. Sebastián Arango, Director</cite>
       </div>
     </div>
   </section>
 
-  <!-- ── HISTORIA + STATS ── -->
+  <!-- ── HISTORY + STATS ── -->
   <section class="nos-historia-section">
     <div class="nos-container nos-historia-grid">
 
-      <!-- Texto -->
+      <!-- Text -->
       <div class="nos-historia-text reveal-up">
-        <p class="nos-label" style="margin-bottom: 1rem;">Nuestra historia</p>
-        <h2 class="nos-section-title">Una clínica construida<br>sobre la confianza</h2>
+        <p class="nos-label" style="margin-bottom: 1rem;">Our story</p>
+        <h2 class="nos-section-title">A clinic built<br>on trust</h2>
         <p class="nos-body">
-          Arango Dental Clinic nació de la convicción de que cada paciente merece una atención personalizada, honesta y de la máxima calidad. Desde nuestra apertura en Benidorm, trabajamos para que cada paciente se sienta en las mejores manos, y la calificación de 4,9 sobre 5 que nos dan en Google refleja esa confianza.
+          Arango Dental Clinic was born from the conviction that every patient deserves personalised, honest, top-quality care. Since opening in Benidorm, we have worked to make every patient feel in the best hands, and the 4.9 out of 5 rating we receive on Google reflects that trust.
         </p>
         <p class="nos-body">
-          Contamos con tecnología de última generación —escáner intraoral 3D, radiografía digital de baja dosis y diseño de sonrisa digital— y un equipo de profesionales siempre actualizados con las últimas técnicas del sector.
+          We have state-of-the-art technology — 3D intraoral scanning, low-dose digital X-rays and digital smile design — and a team of professionals who keep up to date with the latest techniques in the field. Our team speaks English, Spanish and French.
         </p>
       </div>
 
@@ -154,7 +155,7 @@ const equipoSchema = {
       <div class="nos-stats reveal-up" style="--reveal-delay: 100ms;">
         {stats.map((s) => (
           <div class="nos-stat-item">
-            <span class="nos-stat-valor" data-target={s.valor}>{s.valor}</span>
+            <span class="nos-stat-valor" data-target={s.value}>{s.value}</span>
             <span class="nos-stat-label">{s.label}</span>
           </div>
         ))}
@@ -163,20 +164,20 @@ const equipoSchema = {
     </div>
   </section>
 
-  <!-- ── VALORES ── -->
+  <!-- ── VALUES ── -->
   <section class="nos-valores-section">
     <div class="nos-container">
       <div class="nos-valores-header reveal-up">
-        <p class="nos-label">Lo que nos mueve</p>
-        <h2 class="nos-section-title">Nuestros valores</h2>
+        <p class="nos-label">What drives us</p>
+        <h2 class="nos-section-title">Our values</h2>
       </div>
       <div class="nos-valores-list">
-        {valores.map((v, i) => (
+        {values.map((v, i) => (
           <div class="nos-valor-item reveal-up" style={`--reveal-delay: ${i * 80}ms`}>
             <span class="nos-valor-num">{v.num}</span>
             <div class="nos-valor-body">
-              <h3 class="nos-valor-title">{v.titulo}</h3>
-              <p class="nos-valor-texto">{v.texto}</p>
+              <h3 class="nos-valor-title">{v.title}</h3>
+              <p class="nos-valor-texto">{v.text}</p>
             </div>
             <div class="nos-valor-line"></div>
           </div>
@@ -185,17 +186,17 @@ const equipoSchema = {
     </div>
   </section>
 
-  <!-- ── EQUIPO ── -->
+  <!-- ── TEAM ── -->
 
-  <!-- Director — sección editorial propia -->
+  <!-- Director — editorial section of its own -->
   <section class="nos-director-section">
     <div class="nos-director-split reveal-up">
 
-      <!-- Imagen -->
+      <!-- Image -->
       <div class="nos-director-img-wrap">
         <img
           src="/img/nosotros/sebas.webp"
-          alt="Dr. Sebastián Arango, director de Arango Dental Clinic"
+          alt="Dr. Sebastián Arango, director of Arango Dental Clinic"
           class="nos-director-img"
           width="1179"
           height="1415"
@@ -205,39 +206,39 @@ const equipoSchema = {
         <div class="nos-director-img-overlay" aria-hidden="true"></div>
       </div>
 
-      <!-- Texto -->
+      <!-- Text -->
       <div class="nos-director-text">
-        <p class="nos-label">Director de la clínica</p>
+        <p class="nos-label">Clinic director</p>
         <h2 class="nos-director-heading">Dr. Sebastián<br>Arango</h2>
-        <p class="nos-director-role-tag">Implantología · Rehabilitación Oral</p>
+        <p class="nos-director-role-tag">Implantology · Oral Rehabilitation</p>
         <p class="nos-director-bio">
-          Fundador y director de Arango Dental Clinic. Especialista en implantología y rehabilitación oral, con formación en las técnicas más avanzadas de odontología digital.
+          Founder and director of Arango Dental Clinic. Specialist in implantology and oral rehabilitation, trained in the most advanced digital dentistry techniques.
         </p>
         <p class="nos-director-bio">
-          Su visión de una clínica cercana, honesta y de alta excelencia es la base de todo lo que hacemos cada día en Benidorm.
+          His vision of a close, honest and highly excellent clinic is the foundation of everything we do every day in Benidorm.
         </p>
         <div class="nos-director-divider" aria-hidden="true"></div>
-        <p class="nos-director-quote">"Cada paciente merece sentir que está en las mejores manos."</p>
+        <p class="nos-director-quote">"Every patient deserves to feel they are in the best hands."</p>
       </div>
 
     </div>
   </section>
 
-  <!-- Equipo -->
+  <!-- Team -->
   <section class="nos-equipo-section">
     <div class="nos-container">
       <div class="nos-equipo-header reveal-up">
-        <p class="nos-label">Nuestro equipo</p>
-        <h2 class="nos-section-title">Las personas detrás<br>de cada sonrisa</h2>
+        <p class="nos-label">Our team</p>
+        <h2 class="nos-section-title">The people behind<br>every smile</h2>
       </div>
 
       <div class="nos-team-grid">
-        {equipo.map((persona, i) => (
+        {team.map((person, i) => (
           <div class="nos-member-card reveal-up" style={`--reveal-delay: ${i * 80}ms`}>
             <div class="nos-member-info">
-              <p class="nos-member-role">{persona.especialidad}</p>
-              <h3 class="nos-member-name">{persona.nombre}</h3>
-              <p class="nos-member-bio">{persona.descripcion}</p>
+              <p class="nos-member-role">{person.specialty}</p>
+              <h3 class="nos-member-name">{person.name}</h3>
+              <p class="nos-member-bio">{person.description}</p>
             </div>
           </div>
         ))}
@@ -249,12 +250,12 @@ const equipoSchema = {
   <!-- ── CTA ── -->
   <section class="nos-cta-section">
     <div class="nos-container nos-cta-inner reveal-up">
-      <p class="nos-label nos-cta-label">Primer paso</p>
-      <h2 class="nos-cta-title">Empieza con una valoración<br><em>sin costo</em></h2>
-      <p class="nos-cta-sub">Agenda tu primera visita y descubre cómo podemos transformar tu sonrisa.</p>
+      <p class="nos-label nos-cta-label">First step</p>
+      <h2 class="nos-cta-title">Start with a free<br><em>assessment</em></h2>
+      <p class="nos-cta-sub">Book your first visit and find out how we can transform your smile.</p>
       <div class="nos-cta-actions">
-        <a href="/contacto" class="nos-btn nos-btn-outline">Contactar</a>
-        <a href="https://wa.me/34665886439" target="_blank" rel="noopener" class="nos-btn nos-btn-solid">Escríbenos</a>
+        <a href="/en/contact/" class="nos-btn nos-btn-outline">Contact us</a>
+        <a href="https://wa.me/34665886439?text=Hello%2C%20I%27d%20like%20to%20book%20a%20free%20assessment" target="_blank" rel="noopener" class="nos-btn nos-btn-solid">Message us</a>
       </div>
     </div>
   </section>
@@ -968,7 +969,7 @@ const equipoSchema = {
 
     function animateCounter(el) {
       const target = el.getAttribute('data-target') || '';
-      // Núcleo numérico (admite un punto decimal, ej. "4.9 ★"); lo de afuera es prefijo/sufijo literal.
+      // Numeric core (allows a decimal point, e.g. "4.9 ★"); anything outside is a literal prefix/suffix.
       const match = target.match(/-?\d[\d,]*\.?\d*/);
       if (!match) return;
       const core = match[0];
@@ -982,7 +983,7 @@ const equipoSchema = {
       const duration = 1600;
       const start = performance.now();
       const format = (n) =>
-        n.toLocaleString('es-ES', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+        n.toLocaleString('en-GB', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
       el.textContent = prefix + format(0) + suffix;
 
       function tick(now) {

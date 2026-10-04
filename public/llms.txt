@@ -24,7 +24,6 @@ Horario de atención: lunes a jueves de 10:00 a 14:00 y de 15:00 a 19:00; vierne
 - [Inicio](https://arangodentalclinic.es/): presentación general de la clínica y sus especialidades principales.
 - [Servicios](https://arangodentalclinic.es/servicios/): listado completo de tratamientos con precios orientativos.
 - [Nosotros](https://arangodentalclinic.es/nosotros/): equipo clínico, historia, valores y director de la clínica.
-- [Reservar cita](https://arangodentalclinic.es/reservar/): cómo agendar una primera valoración.
 - [Contacto](https://arangodentalclinic.es/contacto/): formulario de contacto, teléfono, dirección y mapa.
 
 ## Contacto

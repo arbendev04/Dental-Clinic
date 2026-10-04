@@ -2,8 +2,14 @@
 // Componente de hero con scroll-driven crossfade entre 4 frames
 // Estilo visual basado en diseño Stitch: viñeta cinemática, overlay oscuro, CTA
 
+import { getLang } from '../data/i18n';
+
+const lang = getLang(Astro.url.pathname);
+
 // Mismas opciones que el desplegable de tratamientos de /contacto.
-const tratamientosForm = [
+// `value` es SIEMPRE el nombre canónico en español (el CRM se lee en español y
+// el script busca input[value="Otro"]); solo `label` cambia según el idioma.
+const tratamientoValues = [
   'Odontología Digital',
   'Implantología',
   'Estética Dental',
@@ -13,6 +19,68 @@ const tratamientosForm = [
   'Endodoncia',
   'Otro',
 ];
+
+const dict = {
+  es: {
+    treatmentLabels: tratamientoValues,
+    frame1Alt: 'Instrumentos odontológicos esterilizados',
+    frame2Alt: 'Kit instrumental odontológico',
+    frame3Alt: 'Modelo dental con sonda exploradora',
+    frame4Alt: 'Pieza de mano dental de alta velocidad',
+    label: 'Clínica Dental en Benidorm',
+    description: 'Excelencia en cuidado dental. Tecnología avanzada y atención personalizada para tu sonrisa perfecta.',
+    ctaPrimaryHref: '/contacto#contact-form',
+    ctaPrimary: 'Quiero Mi Valoración Gratuita',
+    ctaSecondaryHref: '/servicios',
+    ctaSecondary: 'Nuestros Servicios',
+    formEyebrow: 'Valoración sin coste',
+    formTitle: 'Da el primer paso',
+    namePlaceholder: 'Nombre completo',
+    phonePlaceholder: 'Teléfono',
+    emailPlaceholder: 'Email (opcional)',
+    treatmentQuestion: '¿Qué tratamiento te interesa? (opcional)',
+    otherPlaceholder: 'Cuéntanos brevemente qué necesitas',
+    consentPrefix: 'Acepto la',
+    privacyHref: '/politica-privacidad',
+    privacyLabel: 'Política de Privacidad',
+    submit: 'Enviar',
+  },
+  en: {
+    treatmentLabels: [
+      'Digital Dentistry',
+      'Dental Implants',
+      'Cosmetic Dentistry',
+      'Oral Rehabilitation',
+      'Gum Disease Treatment',
+      'Orthodontics',
+      'Root Canal Treatment',
+      'Other',
+    ],
+    frame1Alt: 'Sterilised dental instruments',
+    frame2Alt: 'Dental instrument kit',
+    frame3Alt: 'Dental model with an exploratory probe',
+    frame4Alt: 'High-speed dental handpiece',
+    label: 'Dental Clinic in Benidorm',
+    description: 'Advanced technology and personalised care for your smile, from a team that speaks English, Spanish and French.',
+    ctaPrimaryHref: '/en/contact/#contact-form',
+    ctaPrimary: 'Book My Free Assessment',
+    ctaSecondaryHref: '/en/services/',
+    ctaSecondary: 'Our Services',
+    formEyebrow: 'Free assessment',
+    formTitle: 'Take the first step',
+    namePlaceholder: 'Full name',
+    phonePlaceholder: 'Phone',
+    emailPlaceholder: 'Email (optional)',
+    treatmentQuestion: 'Treatment of interest (optional)',
+    otherPlaceholder: 'Tell us briefly what you need',
+    consentPrefix: 'I accept the',
+    privacyHref: '/en/privacy-policy/',
+    privacyLabel: 'Privacy Policy',
+    submit: 'Send',
+  },
+}[lang];
+
+const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: dict.treatmentLabels[i] }));
 ---
 
 <div class="hero-scroll-wrapper">
@@ -29,15 +97,15 @@ const tratamientosForm = [
         id="hero-frame1"
         class="hero-frame"
         src="/img/hero/instrumentos-odontologicos-esterilizados.webp"
-        alt="Instrumentos odontológicos esterilizados"
+        alt={dict.frame1Alt}
         width="1376"
         height="768"
         style="opacity: 1;"
       />
     </picture>
-    <img id="hero-frame2" class="hero-frame" alt="Kit instrumental odontológico" style="opacity: 0;" />
-    <img id="hero-frame3" class="hero-frame" alt="Modelo dental con sonda exploradora" style="opacity: 0;" />
-    <img id="hero-frame4" class="hero-frame" alt="Pieza de mano dental de alta velocidad" style="opacity: 0;" />
+    <img id="hero-frame2" class="hero-frame" alt={dict.frame2Alt} style="opacity: 0;" />
+    <img id="hero-frame3" class="hero-frame" alt={dict.frame3Alt} style="opacity: 0;" />
+    <img id="hero-frame4" class="hero-frame" alt={dict.frame4Alt} style="opacity: 0;" />
 
     <script is:inline>
       (function () {
@@ -70,7 +138,7 @@ const tratamientosForm = [
     <div class="hero-content" id="hero-content">
       <!-- Label superior -->
       <div class="hero-label" id="hero-label">
-        <span>Clínica Dental en Benidorm</span>
+        <span>{dict.label}</span>
       </div>
 
       <!-- Título principal -->
@@ -80,14 +148,14 @@ const tratamientosForm = [
 
       <!-- Descripción -->
       <p class="hero-description" id="hero-description">
-        Excelencia en cuidado dental. Tecnología avanzada y atención personalizada para tu sonrisa perfecta.
+        {dict.description}
       </p>
 
       <!-- CTAs -->
       <div class="hero-ctas" id="hero-ctas">
-        <a href="/contacto#contact-form" class="hero-btn-primary"> Quiero Mi Valoración Gratuita </a>
-        <a href="/servicios" class="hero-btn-secondary">
-          <span>Nuestros Servicios</span>
+        <a href={dict.ctaPrimaryHref} class="hero-btn-primary"> {dict.ctaPrimary} </a>
+        <a href={dict.ctaSecondaryHref} class="hero-btn-secondary">
+          <span>{dict.ctaSecondary}</span>
           <svg
             class="hero-btn-icon"
             fill="none"
@@ -107,13 +175,13 @@ const tratamientosForm = [
     <!-- Formulario — a propósito FUERA de .hero-content y sin ningún gsap.set
     de opacidad: debe verse siempre en el hero, sin depender del scroll. -->
     <div class="hero-form-panel" id="hero-form-panel">
-      <p class="hero-form-eyebrow">Valoración sin coste</p>
-      <h2 class="hero-form-title">Da el primer paso</h2>
+      <p class="hero-form-eyebrow">{dict.formEyebrow}</p>
+      <h2 class="hero-form-title">{dict.formTitle}</h2>
       <form id="hero-lead-form" class="hero-form" novalidate>
         <input type="text" id="hero-gotcha" name="_gotcha" class="hero-form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <input type="text" id="hero-nombre" name="nombre" class="hero-form-input" placeholder="Nombre completo" required />
-        <input type="tel" id="hero-telefono" name="telefono" class="hero-form-input" placeholder="Teléfono" required />
-        <input type="email" id="hero-email" name="email" class="hero-form-input" placeholder="Email (opcional)" />
+        <input type="text" id="hero-nombre" name="nombre" class="hero-form-input" placeholder={dict.namePlaceholder} required />
+        <input type="tel" id="hero-telefono" name="telefono" class="hero-form-input" placeholder={dict.phonePlaceholder} required />
+        <input type="email" id="hero-email" name="email" class="hero-form-input" placeholder={dict.emailPlaceholder} />
         <div class="hero-dropdown" id="hero-dropdown">
           <button
             type="button"
@@ -124,8 +192,8 @@ const tratamientosForm = [
             aria-controls="hero-dropdown-panel"
             aria-labelledby="hero-tratamiento-label hero-dropdown-summary"
           >
-            <span id="hero-tratamiento-label" class="sr-only">¿Qué tratamiento te interesa? (opcional)</span>
-            <span id="hero-dropdown-summary" class="hero-dropdown-summary is-placeholder">¿Qué tratamiento te interesa? (opcional)</span>
+            <span id="hero-tratamiento-label" class="sr-only">{dict.treatmentQuestion}</span>
+            <span id="hero-dropdown-summary" class="hero-dropdown-summary is-placeholder">{dict.treatmentQuestion}</span>
             <svg class="hero-dropdown-chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
             </svg>
@@ -133,19 +201,19 @@ const tratamientosForm = [
           <div class="hero-dropdown-panel" id="hero-dropdown-panel" role="listbox" aria-multiselectable="true" hidden>
             {tratamientosForm.map((tratamiento) => (
               <label class="hero-dropdown-option">
-                <input type="checkbox" name="servicios[]" value={tratamiento} />
+                <input type="checkbox" name="servicios[]" value={tratamiento.value} data-label={tratamiento.label} />
                 <span class="hero-dropdown-check" aria-hidden="true"></span>
-                <span>{tratamiento}</span>
+                <span>{tratamiento.label}</span>
               </label>
             ))}
           </div>
         </div>
-        <input type="text" id="hero-servicio-otro" name="servicio_otro" class="hero-form-input" placeholder="Cuéntanos brevemente qué necesitas" hidden />
+        <input type="text" id="hero-servicio-otro" name="servicio_otro" class="hero-form-input" placeholder={dict.otherPlaceholder} hidden />
         <label class="hero-form-consent">
           <input type="checkbox" id="hero-consentimiento" name="consentimiento" required />
-          <span>Acepto la <a href="/politica-privacidad" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
+          <span>{dict.consentPrefix} <a href={dict.privacyHref} target="_blank" rel="noopener">{dict.privacyLabel}</a>.</span>
         </label>
-        <button type="submit" id="hero-form-submit" class="hero-form-submit">Enviar</button>
+        <button type="submit" id="hero-form-submit" class="hero-form-submit">{dict.submit}</button>
       </form>
       <p id="hero-form-status" class="hero-form-status" role="status" aria-live="polite" hidden></p>
     </div>
@@ -1079,7 +1147,31 @@ Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
   const heroDropdownChecks  = heroDropdownPanel?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
   const heroOtroCheck       = heroDropdownPanel?.querySelector<HTMLInputElement>('input[value="Otro"]');
   const heroOtroInput       = document.getElementById("hero-servicio-otro") as HTMLInputElement | null;
-  const HERO_DROPDOWN_PLACEHOLDER = "¿Qué tratamiento te interesa? (opcional)";
+
+  // Textos del formulario según el idioma de la página (<html lang>).
+  const isEn = document.documentElement.lang === "en";
+  const heroText = isEn
+    ? {
+        placeholder: "Treatment of interest (optional)",
+        selectedCount: (n: number) => `${n} treatments selected`,
+        sending: "Sending…",
+        send: "Send",
+        success: "Thank you! We'll be in touch soon.",
+        errorGeneric: "We couldn't send your request. Message us on WhatsApp.",
+        errorNetwork: "We couldn't send your request. Check your connection or message us on WhatsApp.",
+        formName: "hero-en",
+      }
+    : {
+        placeholder: "¿Qué tratamiento te interesa? (opcional)",
+        selectedCount: (n: number) => `${n} tratamientos seleccionados`,
+        sending: "Enviando…",
+        send: "Enviar",
+        success: "¡Gracias! Te contactaremos pronto.",
+        errorGeneric: "No hemos podido enviar tu solicitud. Escríbenos por WhatsApp.",
+        errorNetwork: "No hemos podido enviar tu solicitud. Revisa tu conexión o escríbenos por WhatsApp.",
+        formName: "hero",
+      };
+  const HERO_DROPDOWN_PLACEHOLDER = heroText.placeholder;
 
   function closeHeroDropdown() {
     if (!heroDropdownPanel || !heroDropdownToggle) return;
@@ -1089,14 +1181,15 @@ Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
 
   function updateHeroDropdownSummary() {
     if (!heroDropdownChecks || !heroDropdownSummary) return;
-    const selected = Array.from(heroDropdownChecks).filter((cb) => cb.checked).map((cb) => cb.value);
+    // El resumen visible usa la etiqueta del idioma; el `value` sigue siendo el nombre en español.
+    const selected = Array.from(heroDropdownChecks).filter((cb) => cb.checked).map((cb) => cb.dataset.label ?? cb.value);
     heroDropdownSummary.classList.toggle("is-placeholder", selected.length === 0);
     if (selected.length === 0) {
       heroDropdownSummary.textContent = HERO_DROPDOWN_PLACEHOLDER;
     } else if (selected.length <= 2) {
       heroDropdownSummary.textContent = selected.join(", ");
     } else {
-      heroDropdownSummary.textContent = `${selected.length} tratamientos seleccionados`;
+      heroDropdownSummary.textContent = heroText.selectedCount(selected.length);
     }
   }
 
@@ -1136,7 +1229,7 @@ Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
     if (!heroSubmitBtn || !heroStatus) return;
 
     heroSubmitBtn.disabled = true;
-    heroSubmitBtn.textContent = "Enviando…";
+    heroSubmitBtn.textContent = heroText.sending;
     heroStatus.hidden = true;
     heroStatus.className = "hero-form-status";
 
@@ -1163,14 +1256,14 @@ Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, telefono, email, tratamiento: tratamiento || tratamientoPorPagina(), consentimiento, _gotcha, ...getAttribution() }),
+        body: JSON.stringify({ nombre, telefono, email, tratamiento: tratamiento || tratamientoPorPagina(), consentimiento, _gotcha, ...(isEn ? { lang: "en" } : {}), ...getAttribution() }),
       });
 
       const data = await response.json().catch(() => null);
 
       if (response.ok && data?.success) {
         heroForm.hidden = true;
-        heroStatus.textContent = "¡Gracias! Te contactaremos pronto.";
+        heroStatus.textContent = heroText.success;
         heroStatus.classList.add("hero-form-status-success");
         heroStatus.hidden = false;
 
@@ -1178,20 +1271,20 @@ Misma lógica y mismo endpoint que el formulario de /contacto (api/lead.ts). -->
         // "Formulario de contacto" escucha form_submit_success sin importar
         // form_name, así que este envío también cuenta como conversión.
         (window as any).dataLayer = (window as any).dataLayer || [];
-        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "hero" });
+        (window as any).dataLayer.push({ event: "form_submit_success", form_name: heroText.formName });
         return;
       }
 
-      heroStatus.textContent = data?.error || "No hemos podido enviar tu solicitud. Escríbenos por WhatsApp.";
+      heroStatus.textContent = data?.error || heroText.errorGeneric;
       heroStatus.classList.add("hero-form-status-error");
       heroStatus.hidden = false;
     } catch {
-      heroStatus.textContent = "No hemos podido enviar tu solicitud. Revisa tu conexión o escríbenos por WhatsApp.";
+      heroStatus.textContent = heroText.errorNetwork;
       heroStatus.classList.add("hero-form-status-error");
       heroStatus.hidden = false;
     } finally {
       heroSubmitBtn.disabled = false;
-      heroSubmitBtn.textContent = "Enviar";
+      heroSubmitBtn.textContent = heroText.send;
     }
   });
 </script>

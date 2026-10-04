@@ -1,16 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { servicios } from '../data/servicios';
+import Layout from '../../layouts/Layout.astro';
+import { servicios } from '../../data/servicios-en';
 
 const WHATSAPP_PHONE = '34665886439';
-const whatsappHref = (nombreServicio: string) =>
-  `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(`Hola, quiero más información de ${nombreServicio}`)}`;
+const whatsappHref = (serviceName: string) =>
+  `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(`Hello, I'd like more information about ${serviceName}`)}`;
 
-// Service schema por cada tratamiento — sin precio: no está visible en esta página
-// (Google desaconseja marcar datos que no aparecen en el contenido visible).
+// One Service schema per treatment — without price: it is not visible on this page
+// (Google advises against marking up data that does not appear in the visible content).
 const serviciosSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
+  "inLanguage": "en",
   "itemListElement": servicios.map((s, i) => ({
     "@type": "ListItem",
     "position": i + 1,
@@ -28,20 +29,20 @@ const serviciosSchema = {
       },
       "url": s.landingHref
         ? `https://arangodentalclinic.es${s.landingHref}`
-        : "https://arangodentalclinic.es/servicios",
+        : "https://arangodentalclinic.es/en/services/",
     },
   })),
 };
 ---
 
-<Layout title="Servicios de Dentista en Benidorm" description="Descubre los servicios de nuestro dentista en Benidorm: implantes dentales, ortodoncia, estética dental, endodoncia y odontología digital con tecnología 3D." image="/img/servicios/servicios.webp">
+<Layout title="Dentist Services in Benidorm" description="Discover the services of our English-speaking dentist in Benidorm: dental implants, orthodontics, cosmetic dentistry and digital dentistry with 3D technology." image="/img/servicios/servicios.webp">
   <script type="application/ld+json" set:html={JSON.stringify(serviciosSchema)} />
 
   <!-- ── Hero ── -->
   <section class="srv-hero" data-scroll-hero>
     <img
       src="/img/servicios/servicios.webp"
-      alt="Instrumental odontológico profesional en Arango Dental Clinic"
+      alt="Professional dental instruments at Arango Dental Clinic"
       class="srv-hero-img"
       width="1536"
       height="1024"
@@ -52,19 +53,19 @@ const serviciosSchema = {
     <div class="srv-hero-overlay" aria-hidden="true"></div>
     <div class="srv-container srv-hero-inner">
       <p class="srv-label">Arango Dental Clinic</p>
-      <h1 class="srv-hero-title">Cuidamos tu Sonrisa, <br>Cuidamos tu Confianza</h1>
+      <h1 class="srv-hero-title">We care for your smile, <br>we care for your confidence</h1>
       <p class="srv-hero-sub">
-        Tu sonrisa merece los mejores cuidados. En Arango Dental Clinic ofrecemos procedimientos especializados con tecnología de vanguardia y el trato cercano que mereces.
+        Your smile deserves proper care. At Arango Dental Clinic we offer specialised treatments with modern technology and the close, personal attention you would expect, in English, Spanish or French.
       </p>
     </div>
   </section>
 
-  <!-- ── Grid de servicios ── -->
+  <!-- ── Services grid ── -->
   <section class="srv-grid-section">
     <div class="srv-container">
       <div class="srv-section-header reveal-up">
-        <p class="srv-label">Lo que ofrecemos</p>
-        <h2 class="srv-section-title">Nuestros servicios</h2>
+        <p class="srv-label">What we offer</p>
+        <h2 class="srv-section-title">Our services</h2>
       </div>
       <div class="srv-grid">
         {servicios.map((servicio, i) => (
@@ -82,9 +83,9 @@ const serviciosSchema = {
                 <a
                   href={servicio.landingHref}
                   class="srv-card-link"
-                  aria-label={`Más información de ${servicio.nombre}`}
+                  aria-label={`More information about ${servicio.nombre}`}
                 >
-                  Más información
+                  More information
                   <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -95,9 +96,9 @@ const serviciosSchema = {
                   target="_blank"
                   rel="noopener noreferrer"
                   class="srv-card-link"
-                  aria-label={`Más información de ${servicio.nombre} por WhatsApp`}
+                  aria-label={`More information about ${servicio.nombre} on WhatsApp`}
                 >
-                  Más información
+                  More information
                   <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -113,11 +114,11 @@ const serviciosSchema = {
   <!-- ── CTA ── -->
   <section class="srv-cta-section">
     <div class="srv-container srv-cta-inner reveal-up">
-      <h2 class="srv-cta-title">Somos Arango Dental Clinic, comprometidos con tu excelencia dental</h2>
-      <p class="srv-cta-sub">Agenda tu valoración sin costo y empieza a transformar tu sonrisa.</p>
+      <h2 class="srv-cta-title">We are Arango Dental Clinic, committed to your dental health</h2>
+      <p class="srv-cta-sub">Book your free assessment and start transforming your smile.</p>
       <div class="srv-cta-actions">
-        <a href="/contacto" class="srv-btn srv-btn-outline">Contáctanos</a>
-        <a href="https://wa.me/34665886439" target="_blank" rel="noopener" class="srv-btn srv-btn-solid">Escríbenos</a>
+        <a href="/en/contact/" class="srv-btn srv-btn-outline">Contact us</a>
+        <a href="https://wa.me/34665886439?text=Hello%2C%20I'd%20like%20to%20book%20an%20appointment%20at%20Arango%20Dental%20Clinic" target="_blank" rel="noopener" class="srv-btn srv-btn-solid">Message us</a>
       </div>
     </div>
   </section>
@@ -381,7 +382,7 @@ const serviciosSchema = {
     }
   }
 
-  /* ── Botones — modo claro ── */
+  /* ── Buttons — light mode ── */
   .srv-btn {
     display: inline-flex;
     align-items: center;
@@ -421,7 +422,7 @@ const serviciosSchema = {
     border-color: rgba(21, 51, 40, 0.65);
   }
 
-  /* ── Botones — modo oscuro ── */
+  /* ── Buttons — dark mode ── */
   :global(html.dark) .srv-btn-outline {
     color: rgba(244, 240, 235, 0.85);
     border-color: rgba(244, 240, 235, 0.30);

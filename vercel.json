@@ -9,6 +9,16 @@
       "source": "/terminos-y-condiciones-de-uso/",
       "destination": "/terminos-condiciones",
       "permanent": true
+    },
+    {
+      "source": "/implantes-dentales-benidorm",
+      "destination": "/implantes/",
+      "permanent": true
+    },
+    {
+      "source": "/implantes-dentales-benidorm/",
+      "destination": "/implantes/",
+      "permanent": true
     }
   ]
 }

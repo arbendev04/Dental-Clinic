@@ -3,29 +3,69 @@
 // Guarda la decisión en localStorage bajo "cookie_consent" y notifica a gtag.
 // Se reabre en modo "personalizar" al escuchar el evento "open-cookie-settings"
 // (disparado por el link "Configurar cookies" del Footer).
+import { getLang } from '../data/i18n';
+
+const t = {
+  es: {
+    region: 'Consentimiento de cookies',
+    title: 'Tu privacidad nos importa',
+    desc: 'Usamos cookies necesarias para el funcionamiento del sitio. Con tu permiso, también nos gustaría usar cookies de analítica y marketing para mejorar tu experiencia. Puedes cambiar tu decisión cuando quieras desde "Configurar cookies" en el pie de página.',
+    necessaryTitle: 'Necesarias',
+    necessaryDesc: 'Imprescindibles para el funcionamiento del sitio. Siempre activas.',
+    alwaysOn: 'Siempre activas',
+    analyticsTitle: 'Analíticas',
+    analyticsDesc: 'Nos ayudan a entender cómo se usa el sitio para poder mejorarlo.',
+    analyticsAria: 'Permitir cookies analíticas',
+    marketingTitle: 'Marketing / Publicidad',
+    marketingDesc: 'Permiten mostrarte anuncios relevantes en otras plataformas.',
+    marketingAria: 'Permitir cookies de marketing y publicidad',
+    reject: 'Rechazar',
+    customize: 'Personalizar',
+    save: 'Guardar preferencias',
+    accept: 'Aceptar todo',
+  },
+  en: {
+    region: 'Cookie consent',
+    title: 'Your privacy matters to us',
+    desc: 'We use cookies that are necessary for the site to work. With your permission, we would also like to use analytics and marketing cookies to improve your experience. You can change your decision at any time from "Cookie settings" in the footer.',
+    necessaryTitle: 'Necessary',
+    necessaryDesc: 'Essential for the site to work. Always active.',
+    alwaysOn: 'Always active',
+    analyticsTitle: 'Analytics',
+    analyticsDesc: 'They help us understand how the site is used so we can improve it.',
+    analyticsAria: 'Allow analytics cookies',
+    marketingTitle: 'Marketing / Advertising',
+    marketingDesc: 'They let us show you relevant ads on other platforms.',
+    marketingAria: 'Allow marketing and advertising cookies',
+    reject: 'Reject',
+    customize: 'Customise',
+    save: 'Save preferences',
+    accept: 'Accept all',
+  },
+}[getLang(Astro.url.pathname)];
 ---
 
 <div
   id="cookie-consent-banner"
   class="cookie-consent"
   role="region"
-  aria-label="Consentimiento de cookies"
+  aria-label={t.region}
   hidden
 >
   <div class="cookie-consent-inner">
     <div class="cookie-consent-main">
-      <p id="cookie-consent-title" class="cookie-consent-title">Tu privacidad nos importa</p>
+      <p id="cookie-consent-title" class="cookie-consent-title">{t.title}</p>
       <p class="cookie-consent-desc">
-        Usamos cookies necesarias para el funcionamiento del sitio. Con tu permiso, también nos gustaría usar cookies de analítica y marketing para mejorar tu experiencia. Puedes cambiar tu decisión cuando quieras desde "Configurar cookies" en el pie de página.
+        {t.desc}
       </p>
 
       <div id="cookie-consent-options" class="cookie-consent-options" hidden>
         <div class="cookie-option">
           <div class="cookie-option-text">
-            <span class="cookie-option-title">Necesarias</span>
-            <span class="cookie-option-desc">Imprescindibles para el funcionamiento del sitio. Siempre activas.</span>
+            <span class="cookie-option-title">{t.necessaryTitle}</span>
+            <span class="cookie-option-desc">{t.necessaryDesc}</span>
           </div>
-          <span class="cookie-option-locked" aria-label="Siempre activas">
+          <span class="cookie-option-locked" aria-label={t.alwaysOn}>
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
             </svg>
@@ -34,22 +74,22 @@
 
         <div class="cookie-option">
           <div class="cookie-option-text">
-            <span class="cookie-option-title">Analíticas</span>
-            <span class="cookie-option-desc">Nos ayudan a entender cómo se usa el sitio para poder mejorarlo.</span>
+            <span class="cookie-option-title">{t.analyticsTitle}</span>
+            <span class="cookie-option-desc">{t.analyticsDesc}</span>
           </div>
           <label class="cookie-toggle">
-            <input type="checkbox" id="cookie-toggle-analytics" aria-label="Permitir cookies analíticas" />
+            <input type="checkbox" id="cookie-toggle-analytics" aria-label={t.analyticsAria} />
             <span class="cookie-toggle-track" aria-hidden="true"></span>
           </label>
         </div>
 
         <div class="cookie-option">
           <div class="cookie-option-text">
-            <span class="cookie-option-title">Marketing / Publicidad</span>
-            <span class="cookie-option-desc">Permiten mostrarte anuncios relevantes en otras plataformas.</span>
+            <span class="cookie-option-title">{t.marketingTitle}</span>
+            <span class="cookie-option-desc">{t.marketingDesc}</span>
           </div>
           <label class="cookie-toggle">
-            <input type="checkbox" id="cookie-toggle-marketing" aria-label="Permitir cookies de marketing y publicidad" />
+            <input type="checkbox" id="cookie-toggle-marketing" aria-label={t.marketingAria} />
             <span class="cookie-toggle-track" aria-hidden="true"></span>
           </label>
         </div>
@@ -57,10 +97,10 @@
     </div>
 
     <div class="cookie-consent-actions">
-      <button type="button" id="cookie-btn-reject" class="cookie-btn cookie-btn-ghost">Rechazar</button>
-      <button type="button" id="cookie-btn-customize" class="cookie-btn cookie-btn-ghost">Personalizar</button>
-      <button type="button" id="cookie-btn-save" class="cookie-btn cookie-btn-solid" hidden>Guardar preferencias</button>
-      <button type="button" id="cookie-btn-accept" class="cookie-btn cookie-btn-solid">Aceptar todo</button>
+      <button type="button" id="cookie-btn-reject" class="cookie-btn cookie-btn-ghost">{t.reject}</button>
+      <button type="button" id="cookie-btn-customize" class="cookie-btn cookie-btn-ghost">{t.customize}</button>
+      <button type="button" id="cookie-btn-save" class="cookie-btn cookie-btn-solid" hidden>{t.save}</button>
+      <button type="button" id="cookie-btn-accept" class="cookie-btn cookie-btn-solid">{t.accept}</button>
     </div>
   </div>
 </div>

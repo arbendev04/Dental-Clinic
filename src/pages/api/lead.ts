@@ -15,6 +15,7 @@ interface LeadPayload {
   utm_content?: string;
   utm_term?: string;
   landing_url?: string;
+  lang?: string;
 }
 
 interface CachedToken {
@@ -46,6 +47,26 @@ const DEFAULT_LEAD_SOURCE = 'Sitio Web';
 const META_LEAD_SOURCE = 'Facebook Ads';
 const GOOGLE_LEAD_SOURCE = 'Google Ads';
 const MAX_ATTRIBUTION_RETRIES = 4;
+
+// Mensajes de error que ve el visitante según el idioma del sitio desde el que escribe.
+const MESSAGES = {
+  es: {
+    forbidden: 'Solicitud no permitida.',
+    rateLimited: 'Demasiadas solicitudes. Probá de nuevo más tarde o escribinos por WhatsApp.',
+    required: 'El nombre y el teléfono son obligatorios.',
+    consent: 'Debes aceptar la política de privacidad para continuar.',
+    config: 'Error de configuración del servidor.',
+    saveFailed: 'No hemos podido guardar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.',
+  },
+  en: {
+    forbidden: 'Request not allowed.',
+    rateLimited: 'Too many requests. Please try again later or message us on WhatsApp.',
+    required: 'Name and phone number are required.',
+    consent: 'You must accept the privacy policy to continue.',
+    config: 'Server configuration error.',
+    saveFailed: 'We could not save your request. Please try again or message us on WhatsApp.',
+  },
+} as const;
 
 // Cacheado en memoria mientras el proceso serverless siga "caliente" — evita
 // pedir un token nuevo en cada invocación (el de Zoho dura ~1h).
@@ -180,6 +201,7 @@ async function sendWhatsAppNotification(
   tratamiento: string,
   origen: string,
   campana: string,
+  idioma: string,
 ): Promise<void> {
   const phone = import.meta.env.CALLMEBOT_PHONE;
   const apiKey = import.meta.env.CALLMEBOT_APIKEY;
@@ -195,6 +217,7 @@ async function sendWhatsAppNotification(
     `Teléfono: ${telefono}`,
     `Tratamiento: ${tratamiento || 'No especificado'}`,
     `Origen: ${origen}`,
+    `Idioma del sitio: ${idioma}`,
     ...(campana ? [`Campaña: ${campana}`] : []),
     'Revisá tu email o el CRM para más detalles.',
   ].join('\n');
@@ -226,8 +249,11 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     return jsonResponse({ success: true }, 200);
   }
 
+  const lang: 'es' | 'en' = body.lang === 'en' ? 'en' : 'es';
+  const msg = MESSAGES[lang];
+
   if (!hasValidOrigin(request)) {
-    return jsonResponse({ error: 'Solicitud no permitida.' }, 403);
+    return jsonResponse({ error: msg.forbidden }, 403);
   }
 
   let ip: string | null = null;
@@ -239,7 +265,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   }
   if (ip && isRateLimited(ip)) {
     return jsonResponse(
-      { error: 'Demasiadas solicitudes. Probá de nuevo más tarde o escribinos por WhatsApp.' },
+      { error: msg.rateLimited },
       429,
     );
   }
@@ -250,17 +276,17 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   const tratamiento = body.tratamiento?.trim();
 
   if (!nombre || !telefono) {
-    return jsonResponse({ error: 'El nombre y el teléfono son obligatorios.' }, 400);
+    return jsonResponse({ error: msg.required }, 400);
   }
 
   if (!body.consentimiento) {
-    return jsonResponse({ error: 'Debes aceptar la política de privacidad para continuar.' }, 400);
+    return jsonResponse({ error: msg.consent }, 400);
   }
 
   const apiDomain = import.meta.env.ZOHO_API_DOMAIN;
   if (!apiDomain) {
     console.error('Falta la variable de entorno ZOHO_API_DOMAIN.');
-    return jsonResponse({ error: 'Error de configuración del servidor.' }, 500);
+    return jsonResponse({ error: msg.config }, 500);
   }
 
   try {
@@ -315,7 +341,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     if (!created.ok) {
       console.error('Zoho CRM: error creando el Lead:', JSON.stringify(created.result));
       return jsonResponse(
-        { error: 'No hemos podido guardar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.' },
+        { error: msg.saveFailed },
         502,
       );
     }
@@ -326,13 +352,14 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       tratamiento ?? '',
       savedLead.Lead_Source,
       savedLead.Designation ?? '',
+      lang === 'en' ? 'Inglés' : 'Español',
     );
 
     return jsonResponse({ success: true }, 200);
   } catch (error) {
     console.error('Error al crear el Lead en Zoho:', error);
     return jsonResponse(
-      { error: 'No hemos podido guardar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.' },
+      { error: msg.saveFailed },
       500,
     );
   }

@@ -1,87 +1,89 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 
 const WHATSAPP_PHONE = '34665886439';
-const whatsappHref = (texto: string) =>
-  `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(texto)}`;
+const whatsappHref = (text: string) =>
+  `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(text)}`;
 
-const pasos = [
+const steps = [
   {
-    titulo: 'Valoración inicial y escáner 3D',
-    descripcion: 'Evaluamos tu caso sin coste con un escáner intraoral 3D y te explicamos si eres candidato a un implante dental.',
+    title: "Initial assessment and digital smile design",
+    description: "We assess your smile with photographs and a 3D scan, and show you a digital simulation of how the result could look before we start.",
   },
   {
-    titulo: 'Planificación digital',
-    descripcion: 'Diseñamos la posición exacta del implante antes de la intervención, con la información real de tu hueso maxilar o mandibular.',
+    title: "Choosing the treatment",
+    description: "Depending on your case and goals, we decide whether whitening, composite veneers, porcelain veneers or a combination is the best fit.",
   },
   {
-    titulo: 'Colocación del implante',
-    descripcion: 'Se coloca con anestesia local en la propia clínica. La mayoría de los pacientes vuelve a su rutina en uno o dos días.',
+    title: "Preparing the teeth",
+    description: "For veneers, the tooth is prepared with minimal wear and the records needed to make them to measure are taken.",
   },
   {
-    titulo: 'Oseointegración',
-    descripcion: 'Durante las semanas siguientes, el hueso se une al implante de titanio hasta quedar completamente integrado.',
+    title: "Fitting veneers or applying the whitening",
+    description: "We fit the final veneers, adjusted to your mouth, or apply the whitening treatment following the indicated protocol.",
   },
   {
-    titulo: 'Colocación de la corona',
-    descripcion: 'Completamos el tratamiento con la corona definitiva, ajustada a la forma y función de tu dentadura natural.',
+    title: "Final adjustments and check-up",
+    description: "We review the result, adjust any detail of shape or shine, and give you aftercare guidance to keep it looking good over time.",
   },
 ];
 
 const faqs = [
   {
-    pregunta: '¿Duele ponerse un implante dental?',
-    respuesta: 'La colocación se realiza con anestesia local, por lo que no deberías sentir dolor durante la intervención. Es normal notar molestias leves los días posteriores, similares a las de una extracción dental, que se controlan con la pauta que te indiquemos.',
+    question: "Do veneers damage the tooth?",
+    answer: "Porcelain veneers require a minimal, controlled removal of enamel so that they fit well and look natural; composite veneers may need even less preparation, depending on the case. In both cases the aim is to preserve as much healthy tooth as possible.",
   },
   {
-    pregunta: '¿Cuánto dura un implante dental?',
-    respuesta: 'Un implante dental bien cuidado, con revisiones periódicas y buena higiene bucal, puede durar muchos años. La duración exacta depende de la salud bucal de cada paciente y del mantenimiento posterior.',
+    question: "How long do dental veneers last?",
+    answer: "With good hygiene and regular check-ups, porcelain veneers usually last more years than composite ones, which in turn are easier to repair or touch up if damaged. The real lifespan varies with each patient's daily care and habits.",
   },
   {
-    pregunta: '¿Cuánto cuesta un implante dental?',
-    respuesta: 'El precio de un implante dental se evalúa según las necesidades de cada paciente, tras una valoración inicial gratuita en la que definimos el plan de tratamiento más adecuado.',
+    question: "What is the difference between porcelain and composite veneers?",
+    answer: "Porcelain gives a very natural finish and resists staining better over time, but usually takes more than one appointment. Composite is applied and shaped directly on the tooth in a single session, at a lower cost, although it may need touching up sooner than porcelain. We help you choose according to your case and priorities.",
   },
   {
-    pregunta: '¿Necesito un injerto de hueso para colocarme un implante?',
-    respuesta: 'No siempre. Si no hay suficiente hueso en la zona donde se va a colocar el implante, puede ser necesario un injerto óseo previo. Lo valoramos con tu escáner 3D durante la primera consulta.',
+    question: "Is teeth whitening safe?",
+    answer: "Carried out at the clinic and supervised by a professional, teeth whitening is a safe procedure. It is normal to notice some temporary sensitivity in the first few days, which usually goes away on its own.",
   },
   {
-    pregunta: '¿Cuántas visitas necesito para completar el tratamiento?',
-    respuesta: 'El número de visitas varía según cada caso: la valoración inicial, la colocación del implante, el periodo de oseointegración y la colocación de la corona final. Te explicamos el plan completo antes de empezar.',
+    question: "Can I combine veneers and whitening?",
+    answer: "Yes, and it is quite common: the natural teeth are whitened first and, once the shade has settled, the veneers are made to match that colour. Doing it in this order avoids visible differences in shade between teeth.",
   },
   {
-    pregunta: '¿Qué pasa si he perdido varios dientes o toda una arcada?',
-    respuesta: "Existen protocolos que permiten apoyar una prótesis fija sobre un número reducido de implantes, a veces conocidos como carga inmediata o \"All-on-4\". Coméntanoslo en la valoración inicial para revisar si es tu caso.",
+    question: "How much does cosmetic dentistry cost?",
+    answer: "The price depends on the chosen treatment (whitening, composite or porcelain veneers) and on the number of teeth to be treated. We give you a specific figure after the initial assessment, which is free.",
   },
   {
-    pregunta: '¿Qué cuidados necesita un implante dental?',
-    respuesta: 'Un implante se cuida igual que un diente natural: cepillado dos veces al día, uso de cepillo interdental o irrigador, y revisiones periódicas en la clínica para comprobar que la encía y el hueso que lo sostienen están sanos.',
+    question: "Are veneer results permanent?",
+    answer: "Veneers are a long-lasting solution, though not everlasting: over time they may need replacing or maintenance, like any dental restoration. Whitening does need periodic touch-ups to maintain the shade achieved.",
   },
 ];
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "inLanguage": "en",
   "mainEntity": faqs.map((f) => ({
     "@type": "Question",
-    "name": f.pregunta,
+    "name": f.question,
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": f.respuesta,
+      "text": f.answer,
     },
   })),
 };
 
-// Sin `@id` al Dentist todavía (pendiente Tarea 9 del Plan SEO) — se declara
-// la clínica en línea, igual que ya hace el schema ItemList de /servicios/.
+// No `@id` to the Dentist yet (pending Task 9 of the SEO plan) — the clinic is
+// declared inline, same as the ItemList schema on /en/services/.
 const procedureSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
-  "name": "Implantes dentales",
-  "url": "https://arangodentalclinic.es/implantes/",
-  "procedureType": "https://schema.org/SurgicalProcedure",
-  "bodyLocation": "Maxilar y mandíbula",
-  "howPerformed": "Planificación digital con escáner intraoral 3D, colocación del implante de titanio con anestesia local y, tras el periodo de oseointegración, colocación de la corona definitiva.",
+  "inLanguage": "en",
+  "name": "Cosmetic dentistry",
+  "url": "https://arangodentalclinic.es/en/cosmetic-dentistry/",
+  "procedureType": "https://schema.org/NoninvasiveProcedure",
+  "bodyLocation": "Front teeth (smile)",
+  "howPerformed": "Digital smile design from photographs and a 3D scan, followed by teeth whitening, composite veneers or porcelain veneers depending on the case.",
   "provider": {
     "@type": "Dentist",
     "name": "Arango Dental Clinic",
@@ -90,7 +92,7 @@ const procedureSchema = {
 };
 ---
 
-<Layout title="Implantes Dentales en Benidorm | Precio y Valoración" description="Implantes dentales en Benidorm con planificación 3D y implantes de titanio. Valoración inicial sin coste y presupuesto personalizado. Pide cita hoy." image="/img/servicios/servicios.webp">
+<Layout title={"Cosmetic Dentistry in Benidorm | Veneers and Whitening"} description={"Cosmetic dentistry in Benidorm: veneers and teeth whitening with digital smile design. Free initial assessment and personalised quote. Book today."} image="/img/servicios/servicios.webp">
   <script type="application/ld+json" set:html={JSON.stringify(procedureSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
@@ -98,7 +100,7 @@ const procedureSchema = {
   <section class="trt-hero" data-scroll-hero>
     <img
       src="/img/servicios/servicios.webp"
-      alt="Instrumental odontológico profesional en Arango Dental Clinic"
+      alt="Professional dental instruments at Arango Dental Clinic"
       class="trt-hero-img"
       width="1536"
       height="1024"
@@ -110,130 +112,82 @@ const procedureSchema = {
     <div class="trt-hero-inner">
       <div class="trt-hero-text">
         <p class="trt-label">Arango Dental Clinic</p>
-        <h1 class="trt-hero-title">Implantes dentales en Benidorm</h1>
+        <h1 class="trt-hero-title">Cosmetic dentistry in Benidorm</h1>
         <p class="trt-hero-sub">
-          Si has perdido una o varias piezas dentales, un implante dental te permite recuperar la función y la estética de tu sonrisa sin afectar a los dientes vecinos. En Arango Dental Clinic evaluamos tu caso con planificación digital 3D y te ofrecemos una valoración inicial sin coste en Benidorm.
+          If you want to improve the colour, shape or overall look of your smile, cosmetic dentistry combines teeth whitening and veneers to give a natural result tailored to you. At Arango Dental Clinic we design your smile with 3D digital technology and offer a free initial assessment in Benidorm, with an English-speaking team.
         </p>
         <div class="trt-hero-actions">
-          <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Pide tu valoración sin coste</a>
+          <a href={whatsappHref("Hello, I'd like to book a free assessment for cosmetic dentistry")} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid-hero">Book your free assessment</a>
         </div>
       </div>
 
-      <!-- Mismo formulario y mismo endpoint que el hero del home
-      (HeroScroll.astro → /api/lead) — clases propias con prefijo trt- para
-      no depender de los estilos de ese componente. -->
+      <!-- Same form and same endpoint as the home hero
+      (HeroScroll.astro → /api/lead) — own classes with the trt- prefix so
+      it does not depend on that component's styles. -->
       <div class="trt-hero-form-panel" id="trt-hero-form-panel">
-        <p class="trt-hero-form-eyebrow">Valoración sin coste</p>
-        <h2 class="trt-hero-form-title">Da el primer paso</h2>
+        <p class="trt-hero-form-eyebrow">Free assessment</p>
+        <h2 class="trt-hero-form-title">Take the first step</h2>
         <form id="trt-lead-form" class="trt-hero-form" novalidate>
           <input type="text" id="trt-gotcha" name="_gotcha" class="trt-hero-form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
-          <input type="text" id="trt-nombre" name="nombre" class="trt-hero-form-input" placeholder="Nombre completo" required />
-          <input type="tel" id="trt-telefono" name="telefono" class="trt-hero-form-input" placeholder="Teléfono" required />
-          <input type="email" id="trt-email" name="email" class="trt-hero-form-input" placeholder="Email (opcional)" />
+          <input type="text" id="trt-nombre" name="nombre" class="trt-hero-form-input" placeholder="Full name" required />
+          <input type="tel" id="trt-telefono" name="telefono" class="trt-hero-form-input" placeholder="Phone" required />
+          <input type="email" id="trt-email" name="email" class="trt-hero-form-input" placeholder="Email (optional)" />
           <label class="trt-hero-form-consent">
             <input type="checkbox" id="trt-consentimiento" name="consentimiento" required />
-            <span>Acepto la <a href="/politica-privacidad" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
+            <span>I accept the <a href="/en/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</span>
           </label>
-          <button type="submit" id="trt-form-submit" class="trt-hero-form-submit">Enviar</button>
+          <button type="submit" id="trt-form-submit" class="trt-hero-form-submit">Send</button>
         </form>
         <p id="trt-form-status" class="trt-hero-form-status" role="status" aria-live="polite" hidden></p>
       </div>
     </div>
   </section>
 
-  <!-- ── Contenido ── -->
+  <!-- ── Content ── -->
   <section class="trt-content-section">
     <div class="trt-container trt-prose">
 
-      <h2>¿Qué es un implante dental y cuándo se necesita?</h2>
+      <h2>What is cosmetic dentistry and when is it needed?</h2>
       <p>
-        Un implante dental es una pieza de titanio que sustituye la raíz de un diente perdido y se integra en el hueso maxilar o mandibular. Sobre ella se coloca una corona que recupera la forma y la función del diente natural, sin necesidad de tallar ni apoyarse en los dientes vecinos, a diferencia de un puente tradicional.
+        Cosmetic dentistry covers the treatments that improve the look of your smile without needing to solve a serious functional problem: the colour of your teeth, small irregularities in shape or wear, or gaps between teeth you would like to close.
       </p>
       <p>
-        En términos sencillos, un implante tiene tres partes: el tornillo de titanio que hace de raíz artificial, un pilar intermedio que conecta esa raíz con la parte visible, y la corona final, fabricada a medida para que combine con el resto de tu dentadura en color y forma.
+        The two most common treatments are teeth whitening, which lightens the natural shade of the tooth, and veneers, thin shells placed on the visible surface of the tooth to change its shape, colour or apparent alignment without the need for orthodontics.
       </p>
       <p>
-        Se recomienda cuando falta una o varias piezas dentales, ya sea por una extracción, un traumatismo o una enfermedad periodontal avanzada. Sustituir la pieza cuanto antes evita dos problemas frecuentes: que los dientes vecinos se desplacen hacia el hueco vacío y que el hueso de la zona se reabsorba con el tiempo por falta de estímulo.
+        It is recommended when your teeth have darkened over the years because of coffee, tobacco or certain foods; when small chips, wear or irregular shapes bother you when you smile; or simply when you want a specific, visible cosmetic change without going through a long treatment.
       </p>
       <p>
-        A diferencia de una prótesis removible, el implante no se quita ni se apoya sobre las encías: queda fijo, como una pieza más de tu dentadura. Y a diferencia de un puente dental, no requiere desgastar los dientes sanos de al lado para sujetarlo, porque tiene su propio soporte en el hueso.
+        It does not replace orthodontic treatment if the main problem is the position of your teeth, nor oral rehabilitation if teeth are damaged or missing. We assess it together to make sure the chosen treatment solves what really bothers you about your smile.
       </p>
-      <p>
-        No todos los pacientes son candidatos inmediatos: algunas enfermedades sistémicas no controladas, el tabaquismo intenso o una higiene bucal muy descuidada pueden condicionar el tratamiento. Lo revisamos en tu historial clínico durante la primera visita, junto con el estado del hueso en el escáner 3D.
-      </p>
-
-      <figure class="trt-diagram">
-        <img
-          id="trt-diagram-img"
-          class="trt-diagram-img"
-          src="/img/implantes/partes-de-un-implante-dental-claro-desktop.webp"
-          alt="Partes de un implante dental: corona, pilar, encía, hueso alveolar y el implante de titanio"
-          width="1407"
-          height="768"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="trt-diagram-caption">Estructura completa de un implante dental: corona, pilar y raíz de titanio integrada en el hueso.</figcaption>
-      </figure>
-      <script is:inline>
-        (function () {
-          var img = document.getElementById("trt-diagram-img");
-          if (!img) return;
-
-          var sources = {
-            light: { desktop: "/img/implantes/partes-de-un-implante-dental-claro-desktop.webp", mobile: "/img/implantes/partes-de-un-implante-dental-claro-mobile.webp" },
-            dark: { desktop: "/img/implantes/partes-de-un-implante-dental-oscuro-desktop.webp", mobile: "/img/implantes/partes-de-un-implante-dental-oscuro-mobile.webp" },
-          };
-          var dims = {
-            desktop: { w: 1407, h: 768 },
-            mobile: { w: 768, h: 1376 },
-          };
-
-          function applyDiagram() {
-            var isMobile = window.matchMedia("(max-width: 640px)").matches;
-            var isDark = document.documentElement.classList.contains("dark");
-            var theme = isDark ? sources.dark : sources.light;
-            var size = isMobile ? dims.mobile : dims.desktop;
-            img.src = isMobile ? theme.mobile : theme.desktop;
-            img.width = size.w;
-            img.height = size.h;
-          }
-
-          applyDiagram();
-          new MutationObserver(applyDiagram).observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["class"],
-          });
-        })();
-      </script>
 
       <div class="trt-inline-actions">
-        <a href="#trt-hero-form-panel" class="trt-btn trt-btn-outline">Ir al formulario</a>
-        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
+        <a href="#trt-hero-form-panel" class="trt-btn trt-btn-outline">Go to the form</a>
+        <a href={whatsappHref("Hello, I'd like to book a free assessment for cosmetic dentistry")} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Message us on WhatsApp</a>
       </div>
 
-      <h2>Cómo lo hacemos en Arango Dental Clinic</h2>
+      <h2>How we do it at Arango Dental Clinic</h2>
       <p>
-        Empezamos con un escáner intraoral 3D que nos permite ver con precisión el estado de tu hueso en Benidorm, antes de proponerte ningún tratamiento. Esa información se traduce en una planificación digital: sabemos de antemano dónde y con qué angulación se va a colocar cada implante, en lugar de decidirlo durante la intervención.
+        We start with a digital smile design: using photographs and your 3D intraoral scan, we show you a simulation of how the result could look before you make any decision, here in Benidorm and without silicone impressions.
       </p>
       <p>
-        Utilizamos implantes de titanio de alta calidad, colocados con anestesia local en la propia clínica.
-        <!-- PENDIENTE CLÍNICA: marca y origen exactos del sistema de implantes que utiliza la clínica -->
-        Si no hay suficiente hueso para alojar el implante con garantías, te lo explicamos en la valoración inicial y evaluamos si hace falta un injerto óseo previo.
+        We work with professional whitening as well as composite or porcelain veneers, depending on the goal and the condition of your teeth.
+        <!-- CLINIC TO CONFIRM: exact brands and materials of veneers/whitening used by the clinic -->
+        We explain the differences between each option clearly before you decide which best fits what you are looking for.
       </p>
       <p>
-        Durante los días posteriores a la colocación es normal cierta inflamación leve, que suele controlarse con la pauta que te indicamos. La mayoría de los pacientes retoma su rutina habitual en uno o dos días, evitando alimentos duros en la zona tratada hasta la revisión.
+        When a tooth needs preparing for a veneer, we do it with the minimum wear necessary, keeping as much natural enamel as possible. The aim is always a result that looks natural, not artificial.
       </p>
 
-      <h2>El proceso, paso a paso</h2>
+      <h2>The process, step by step</h2>
       <div class="trt-steps" id="trt-steps">
-        {pasos.map((paso, i) => (
+        {steps.map((step, i) => (
           <details class="trt-step-card" data-step={i} open={i === 0}>
             <summary class="trt-step-card-summary">
               <span class="trt-step-card-num">{String(i + 1).padStart(2, '0')}</span>
-              <span class="trt-step-card-title">{paso.titulo}</span>
+              <span class="trt-step-card-title">{step.title}</span>
             </summary>
-            <p class="trt-step-card-desc">{paso.descripcion}</p>
+            <p class="trt-step-card-desc">{step.description}</p>
             <span class="trt-step-card-progress" aria-hidden="true">
               <span class="trt-step-card-progress-bar"></span>
             </span>
@@ -241,47 +195,47 @@ const procedureSchema = {
         ))}
       </div>
 
-      <h2>Precio</h2>
+      <h2>Price</h2>
       <p>
-        El precio de un implante dental depende de varios factores: el número de piezas a reemplazar, si hace falta un injerto óseo previo y el tipo de corona elegida. Por eso no damos una cifra cerrada sin antes valorar tu caso en persona.
+        The price of a cosmetic dentistry treatment depends on whether you choose whitening, composite veneers, porcelain veneers or a combination, and on the number of teeth involved. That is why we do not give a fixed figure without first assessing your case in person.
       </p>
-      <!-- PENDIENTE CLÍNICA: tarifas orientativas de implantes dentales; enlazar a /precios/ cuando esa página exista -->
+      <!-- CLINIC TO CONFIRM: guideline fees for cosmetic dentistry; link to /en/prices/ once that page exists -->
       <p>
-        Preferimos ser claros sobre esto: cualquier cifra que veas antes de una valoración presencial es solo orientativa. En tu valoración inicial, que es gratuita y sin compromiso, vemos tu escáner 3D y te damos el presupuesto real, para que sepas exactamente qué necesitas, qué vas a pagar y por qué.
+        We prefer to be clear about this: any figure you see before an in-person assessment is only a guide. At your initial assessment, which is free and without obligation, we look at your 3D scan and give you the real quote, so you know exactly what you need, what you will pay and why.
       </p>
 
-      <h2>Preguntas frecuentes</h2>
+      <h2>Frequently asked questions</h2>
       <div class="trt-faq-list">
         {faqs.map((faq) => (
           <details class="trt-faq-item">
-            <summary class="trt-faq-question">{faq.pregunta}</summary>
-            <p class="trt-faq-answer">{faq.respuesta}</p>
+            <summary class="trt-faq-question">{faq.question}</summary>
+            <p class="trt-faq-answer">{faq.answer}</p>
           </details>
         ))}
       </div>
 
-      <h2>Pide tu valoración sin coste</h2>
+      <h2>Book your free assessment</h2>
       <p>
-        La primera consulta es gratuita y sin compromiso. Evaluamos tu caso con nuestro escáner 3D y te explicamos las opciones de tratamiento antes de que decidas nada. Atendemos en Benidorm y su comarca — La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea y Polop — y también recibimos pacientes de otros puntos de la provincia de Alicante que buscan una clínica de implantes dentales de confianza.
+        The first consultation is free and without obligation. We assess your smile with our digital design and explain the cosmetic dentistry options available before you decide anything. We see patients in Benidorm and the surrounding area — La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea and Polop — and also welcome patients from elsewhere in the province of Alicante.
       </p>
       <p>
-        Puedes escribirnos por WhatsApp, llamarnos por teléfono o acercarte directamente a la clínica en Avinguda Alfonso Puchades. Te atendemos en español, inglés y francés, y respondemos por WhatsApp en menos de 24 horas.
+        You can message us on WhatsApp, call us or simply drop in at the clinic on Avinguda Alfonso Puchades. We speak English, Spanish and French, and reply to WhatsApp messages within 24 hours.
       </p>
       <p>
-        Consulta también nuestros <a href="/servicios/">demás servicios dentales</a> si además del implante quieres resolver otras necesidades de tu sonrisa.
+        See also our <a href="/en/services/">other dental services</a> if, besides cosmetic dentistry, you want to take care of other needs for your smile.
       </p>
 
     </div>
   </section>
 
-  <!-- ── CTA final ── -->
+  <!-- ── Final CTA ── -->
   <section class="trt-cta-section">
     <div class="trt-container trt-cta-inner">
-      <h2 class="trt-cta-title">Arango Dental Clinic, tu clínica de implantes en Benidorm</h2>
+      <h2 class="trt-cta-title">Arango Dental Clinic, your cosmetic dentistry clinic in Benidorm</h2>
       <p class="trt-cta-sub">Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante 03501</p>
       <div class="trt-cta-actions">
-        <a href="tel:+34965088282" class="trt-btn trt-btn-outline">Llamar: 965 08 82 82</a>
-        <a href={whatsappHref('Hola, quiero pedir una valoración gratuita para un implante dental')} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Escríbenos por WhatsApp</a>
+        <a href="tel:+34965088282" class="trt-btn trt-btn-outline">Call: 965 08 82 82</a>
+        <a href={whatsappHref("Hello, I'd like to book a free assessment for cosmetic dentistry")} target="_blank" rel="noopener noreferrer" class="trt-btn trt-btn-solid">Message us on WhatsApp</a>
       </div>
     </div>
   </section>
@@ -344,11 +298,10 @@ const procedureSchema = {
       );
   }
 
-  /* Ya no usa .trt-container: el hero es full-bleed (como el del home),
-     con su propio padding lateral — así el 35% del formulario se calcula
-     sobre el ancho real de la pantalla, igual que en HeroScroll.astro,
-     en vez de sobre el max-width:1200px que sí aplica al resto del
-     contenido de la página. */
+  /* The hero no longer uses .trt-container: it is full-bleed (like the home hero)
+     with its own side padding — so the form's 35% is calculated on the real
+     screen width, as in HeroScroll.astro, instead of on the max-width:1200px
+     that does apply to the rest of the page content. */
   .trt-hero-inner {
     position: relative;
     z-index: 1;
@@ -368,8 +321,8 @@ const procedureSchema = {
     gap: 1.25rem;
   }
 
-  /* Desktop: texto a la izquierda, formulario a la derecha — ya no
-     centrado en una sola columna. */
+  /* Desktop: text on the left, form on the right — no longer centred
+     in a single column. */
   @media (min-width: 900px) {
     .trt-hero-inner {
       flex-direction: row;
@@ -425,10 +378,10 @@ const procedureSchema = {
     margin-top: 0.5rem;
   }
 
-  /* ── Formulario del hero — mismos campos y mismo endpoint que el hero
-     del home (HeroScroll.astro), con el mismo tratamiento visual (panel
-     semitransparente + blur ligero, campos con fondo propio opaco). Tonos
-     ajustados al verde de esta página (#0d2219) en vez del de la home. */
+  /* ── Hero form — same fields and same endpoint as the home hero
+     (HeroScroll.astro), with the same visual treatment (semi-transparent
+     panel + light blur, fields with their own opaque background). Tones
+     adjusted to this page's green (#0d2219) instead of the home's. */
   .trt-hero-form-panel {
     width: 100%;
     max-width: 380px;
@@ -441,15 +394,15 @@ const procedureSchema = {
     text-align: left;
   }
 
-  /* Mismo ancho relativo que el panel del hero del home: 35% del hero,
-     no un ancho fijo — por eso también le sacamos el max-width. */
+  /* Same relative width as the home hero panel: 35% of the hero,
+     not a fixed width — hence the max-width is also removed. */
   @media (min-width: 900px) {
     .trt-hero-form-panel {
-      /* 39% acá da el mismo ancho en px que el 35% del hero del home
-         (~500px a 1440px de viewport) — la diferencia es porque este
-         panel resta su propio padding/gap del cálculo (border-box) y el
-         del home no, al ser position:absolute. Ajustado a ojo para que
-         coincida en píxeles reales, no solo en el número del porcentaje. */
+      /* 39% here gives the same pixel width as the home hero's 35%
+         (~500px at a 1440px viewport) — the difference is because this
+         panel subtracts its own padding/gap from the calculation (border-box)
+         and the home one does not, being position:absolute. Tuned by eye so
+         it matches in real pixels, not just in the percentage number. */
       flex: 0 0 39%;
       max-width: none;
       padding: 2.75rem 2.5rem;
@@ -605,32 +558,11 @@ const procedureSchema = {
     text-underline-offset: 2px;
   }
 
-  /* ── Diagrama "Partes de un implante" — imagen propia por tema (claro/oscuro),
-     con versión mobile/desktop resuelta por JS (mismo patrón que los frames
-     2-4 de HeroScroll) para no descargar las 4 variantes en cada visita. */
-  .trt-diagram {
-    margin: 2rem 0 2.5rem;
-  }
-
-  .trt-diagram-img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .trt-diagram-caption {
-    font-family: "Inter", sans-serif;
-    font-size: 0.8rem;
-    color: var(--text-tertiary);
-    text-align: center;
-    margin-top: 0.75rem;
-  }
-
-  /* ── Pasos — cards interactivas con auto-avance (ver script al final del
-     archivo). Cada paso es un <details> nativo (mismo elemento que el FAQ,
-     más abajo) para tener foco/teclado/semántica gratis; el script decide
-     cuál queda abierto y no depende de que el navegador maneje el acordeón
-     por sí solo, porque necesitamos que se abra una sola card a la vez. ── */
+  /* ── Steps — interactive cards with auto-advance (see the script at the end
+     of the file). Each step is a native <details> (the same element the FAQ
+     uses, further down) to get focus/keyboard/semantics for free; the script
+     decides which one stays open and does not rely on the browser handling
+     the accordion by itself, because only one card must be open at a time. ── */
   .trt-steps {
     display: flex;
     flex-direction: column;
@@ -647,9 +579,9 @@ const procedureSchema = {
     transition: border-color 0.3s ease, background-color 0.3s ease;
   }
 
-  /* Activa (abierta) o en hover: mismo tratamiento — un tinte del color del
-     tema (verde en claro, dorado en oscuro) a muy baja opacidad, para que
-     se note sin dominar la card. */
+  /* Active (open) or hovered: same treatment — a tint of the theme colour
+     (green in light, gold in dark) at very low opacity, so it is noticeable
+     without dominating the card. */
   .trt-step-card[open],
   .trt-step-card:hover {
     border-left-color: var(--teal-600);
@@ -719,16 +651,16 @@ const procedureSchema = {
     padding-left: calc(2.35rem + 1rem);
   }
 
-  /* Cerrado: sin <p> visible (display:none nativo de <details>) — el script
-     solo alterna el atributo `open`, esta transición es puramente visual
-     para cuando SÍ está abierto. */
+  /* Closed: no visible <p> (native display:none of <details>) — the script
+     only toggles the `open` attribute, this transition is purely visual
+     for when it IS open. */
   .trt-step-card:not([open]) .trt-step-card-summary {
     opacity: 0.75;
   }
 
-  /* Barra de progreso del auto-avance — solo la card abierta la anima
-     (ver .trt-step-card-progress-bar.is-animating en el script). Oculta
-     por completo si el usuario prefiere menos movimiento. */
+  /* Auto-advance progress bar — only the open card animates it
+     (see .trt-step-card-progress-bar.is-animating in the script). Hidden
+     entirely if the user prefers reduced motion. */
   .trt-step-card-progress {
     display: block;
     position: absolute;
@@ -819,7 +751,7 @@ const procedureSchema = {
     margin: 0.75rem 0 0;
   }
 
-  /* ── CTA final ── */
+  /* ── Final CTA ── */
   .trt-cta-section {
     background-color: var(--bg-secondary);
     padding: 4.5rem 0;
@@ -862,7 +794,7 @@ const procedureSchema = {
     }
   }
 
-  /* ── Botones intercalados en el contenido (antes de "Cómo lo hacemos") ── */
+  /* ── Buttons interleaved in the content (before "How we do it") ── */
   .trt-inline-actions {
     display: flex;
     flex-direction: column;
@@ -876,20 +808,20 @@ const procedureSchema = {
     }
   }
 
-  /* Estos botones viven dentro de `.trt-prose`, y `.trt-prose a` (más abajo)
-     tiene más especificidad que una sola clase (.trt-btn, .trt-btn-outline,
-     .trt-btn-solid) porque combina clase + elemento — por eso el color y el
-     subrayado de link de texto le ganaban al estilo de botón. Se pisa acá
-     con dos clases para asegurar la especificidad, en vez de duplicar todas
-     las reglas de .trt-btn.
+  /* These buttons live inside `.trt-prose`, and `.trt-prose a` (further down)
+     has higher specificity than a single class (.trt-btn, .trt-btn-outline,
+     .trt-btn-solid) because it combines class + element — so the text-link
+     colour and underline were beating the button style. It is overridden here
+     with two classes to guarantee specificity, instead of duplicating all
+     the .trt-btn rules.
 
-     OJO con el :hover: Astro le agrega el atributo de scope a CADA clase del
-     selector compuesto (".trt-inline-actions[data-astro-cid] .trt-btn-outline
-     [data-astro-cid]"), así que estas reglas de acá terminan con MÁS
-     especificidad que ".trt-btn-outline:hover" (que solo tiene una clase).
-     Sin el hover repetido acá abajo, el color en reposo le ganaba también al
-     hover y el texto se perdía contra el fondo — por eso hace falta declarar
-     el hover explícito con el mismo nivel de anidamiento. */
+     WATCH OUT for :hover: Astro adds the scope attribute to EVERY class of
+     the compound selector (".trt-inline-actions[data-astro-cid] .trt-btn-outline
+     [data-astro-cid]"), so the rules here end up with MORE specificity than
+     ".trt-btn-outline:hover" (which only has one class). Without the hover
+     repeated down here, the resting colour also beat the hover and the text
+     got lost against the background — hence the explicit hover has to be
+     declared at the same nesting level. */
   .trt-inline-actions .trt-btn {
     text-decoration: none;
   }
@@ -926,7 +858,7 @@ const procedureSchema = {
     color: rgba(244, 240, 235, 0.85);
   }
 
-  /* ── Botones — modo claro ── */
+  /* ── Buttons — light mode ── */
   .trt-btn {
     display: inline-flex;
     align-items: center;
@@ -989,7 +921,7 @@ const procedureSchema = {
     border-color: rgba(244, 240, 235, 0.30);
   }
 
-  /* ── Botón sólido sobre el hero oscuro (#0d2219) — mismo patrón que .hero-btn-primary ── */
+  /* ── Solid button on the dark hero (#0d2219) — same pattern as .hero-btn-primary ── */
   .trt-btn-solid-hero {
     background-color: #C49B38;
     color: #0d2219;
@@ -1015,12 +947,12 @@ const procedureSchema = {
   }
 </style>
 
-<!-- Cards de "El proceso, paso a paso" — se abren solas en secuencia cada
-6s y se pueden abrir a mano en cualquier momento (clic reinicia el ciclo).
-Solo corre mientras la sección está en pantalla (IntersectionObserver) y
-se pausa con el mouse/foco encima; respeta prefers-reduced-motion
-desactivando el auto-avance por completo (el usuario sigue pudiendo abrir
-cada card a mano). -->
+<!-- "The process, step by step" cards — they open by themselves in sequence every
+6s and can be opened by hand at any time (a click restarts the cycle).
+They only run while the section is on screen (IntersectionObserver) and
+pause with the mouse/focus over them; prefers-reduced-motion is respected
+by disabling auto-advance entirely (the user can still open
+each card by hand). -->
 <script>
   const trtSteps = document.getElementById("trt-steps");
   const trtStepCards = Array.from(
@@ -1040,7 +972,7 @@ cada card a mano). -->
       const bar = card.querySelector<HTMLElement>(".trt-step-card-progress-bar");
       if (!bar) return;
       bar.classList.remove("is-animating");
-      // Fuerza reflow para poder reiniciar la animación desde 0% cada vez.
+      // Force a reflow so the animation can restart from 0% every time.
       void bar.offsetWidth;
       bar.style.setProperty("--trt-step-duration", `${STEP_DURATION_MS}ms`);
       bar.classList.add("is-animating");
@@ -1074,7 +1006,7 @@ cada card a mano). -->
     trtStepCards.forEach((card, i) => {
       card.addEventListener("toggle", () => {
         if (isProgrammaticToggle || !card.open) return;
-        // El usuario abrió esta card a mano: reinicia el ciclo desde acá.
+        // The user opened this card by hand: restart the cycle from here.
         goToStep(i);
         startAutoAdvance();
       });
@@ -1103,10 +1035,10 @@ cada card a mano). -->
   }
 </script>
 
-<!-- Envío del formulario del hero de esta landing — misma lógica y mismo
-endpoint que el hero del home (HeroScroll.astro) y /contacto (api/lead.ts). -->
+<!-- Submission of this landing's hero form — same logic and same
+endpoint as the home hero (HeroScroll.astro) and /contact (api/lead.ts). -->
 <script>
-  import { getAttribution, tratamientoPorPagina } from "../scripts/attribution";
+  import { getAttribution, tratamientoPorPagina } from "../../scripts/attribution";
 
   const trtForm      = document.getElementById("trt-lead-form")   as HTMLFormElement | null;
   const trtSubmitBtn = document.getElementById("trt-form-submit") as HTMLButtonElement | null;
@@ -1117,7 +1049,7 @@ endpoint que el hero del home (HeroScroll.astro) y /contacto (api/lead.ts). -->
     if (!trtSubmitBtn || !trtStatus) return;
 
     trtSubmitBtn.disabled = true;
-    trtSubmitBtn.textContent = "Enviando…";
+    trtSubmitBtn.textContent = "Sending…";
     trtStatus.hidden = true;
     trtStatus.className = "trt-hero-form-status";
 
@@ -1131,36 +1063,36 @@ endpoint que el hero del home (HeroScroll.astro) y /contacto (api/lead.ts). -->
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, telefono, email, tratamiento: tratamientoPorPagina(), consentimiento, _gotcha, ...getAttribution() }),
+        body: JSON.stringify({ nombre, telefono, email, tratamiento: tratamientoPorPagina(), consentimiento, _gotcha, lang: "en", ...getAttribution() }),
       });
 
       const data = await response.json().catch(() => null);
 
       if (response.ok && data?.success) {
         trtForm.hidden = true;
-        trtStatus.textContent = "¡Gracias! Te contactaremos pronto.";
+        trtStatus.textContent = "Thank you! We'll be in touch soon.";
         trtStatus.classList.add("trt-hero-form-status-success");
         trtStatus.hidden = false;
 
-        // Mismo evento que el resto de los formularios del sitio — el
-        // trigger de GTM "Formulario de contacto" escucha form_submit_success
-        // sin importar form_name, así que este envío también cuenta como
-        // conversión. form_name distinto solo para poder segmentar después.
+        // Same event as the rest of the forms on the site — the
+        // GTM trigger "Formulario de contacto" listens for form_submit_success
+        // regardless of form_name, so this submission also counts as a
+        // conversion. A distinct form_name only lets us segment later.
         (window as any).dataLayer = (window as any).dataLayer || [];
-        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "implantes-landing" });
+        (window as any).dataLayer.push({ event: "form_submit_success", form_name: "cosmetic-dentistry-landing-en" });
         return;
       }
 
-      trtStatus.textContent = data?.error || "No hemos podido enviar tu solicitud. Escríbenos por WhatsApp.";
+      trtStatus.textContent = data?.error || "We couldn't send your request. Message us on WhatsApp.";
       trtStatus.classList.add("trt-hero-form-status-error");
       trtStatus.hidden = false;
     } catch {
-      trtStatus.textContent = "No hemos podido enviar tu solicitud. Revisa tu conexión o escríbenos por WhatsApp.";
+      trtStatus.textContent = "We couldn't send your request. Check your connection or message us on WhatsApp.";
       trtStatus.classList.add("trt-hero-form-status-error");
       trtStatus.hidden = false;
     } finally {
       trtSubmitBtn.disabled = false;
-      trtSubmitBtn.textContent = "Enviar";
+      trtSubmitBtn.textContent = "Send";
     }
   });
 </script>

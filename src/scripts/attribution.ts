@@ -27,6 +27,14 @@ const TRATAMIENTO_POR_RUTA: Record<string, string> = {
   '/periodoncia': 'Periodoncia',
   '/rehabilitacion-oral': 'Rehabilitación Oral',
   '/odontologia-digital': 'Odontología Digital',
+  // Landings en inglés: el CRM sigue recibiendo el valor en español.
+  '/en/dental-implants': 'Implantología',
+  '/en/orthodontics': 'Ortodoncia',
+  '/en/cosmetic-dentistry': 'Estética Dental',
+  '/en/root-canal-treatment': 'Endodoncia',
+  '/en/gum-treatment': 'Periodoncia',
+  '/en/oral-rehabilitation': 'Rehabilitación Oral',
+  '/en/digital-dentistry': 'Odontología Digital',
 };
 
 function normalizePath(path: string): string {

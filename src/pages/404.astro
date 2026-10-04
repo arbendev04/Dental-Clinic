@@ -1,11 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+// Vercel sirve este único /404.html para cualquier ruta inexistente, así que no
+// hay forma de generar una 404 por idioma: el contenido está en español y un
+// script al final lo pasa a inglés si la URL pedida empieza por /en/ (cada
+// elemento traducible lleva su versión en data-en / data-en-href / data-en-aria).
 const links = [
-  { href: '/',          label: 'Inicio'    },
-  { href: '/servicios', label: 'Servicios' },
-  { href: '/nosotros',  label: 'Nosotros'  },
-  { href: '/contacto',  label: 'Contacto'  },
+  { href: '/',          enHref: '/en/',          label: 'Inicio',    en: 'Home'     },
+  { href: '/servicios', enHref: '/en/services/', label: 'Servicios', en: 'Services' },
+  { href: '/nosotros',  enHref: '/en/about-us/', label: 'Nosotros',  en: 'About us' },
+  { href: '/contacto',  enHref: '/en/contact/',  label: 'Contacto',  en: 'Contact'  },
 ];
 ---
 
@@ -20,22 +24,43 @@ const links = [
     </p>
     <div class="err-container">
       <p class="err-label">Arango Dental Clinic</p>
-      <h1 class="err-title">Esta página no existe</h1>
-      <p class="err-sub">
-        Puede que el enlace esté roto o que la página se haya movido. Probá con el inicio o con alguno de estos accesos.
+      <h1 class="err-title" data-en="This page does not exist">Esta página no existe</h1>
+      <p class="err-sub" data-en="The link may be broken or the page may have moved. Try the home page or one of these shortcuts.">
+        Puede que el enlace esté roto o que la página se haya movido. Prueba con el inicio o con alguno de estos accesos.
       </p>
       <div class="err-actions">
-        <a href="/" class="err-btn err-btn-solid">Volver al inicio</a>
-        <a href="/contacto" class="err-btn err-btn-outline">Contactar</a>
+        <a href="/" class="err-btn err-btn-solid" data-en="Back to home" data-en-href="/en/">Volver al inicio</a>
+        <a href="/contacto" class="err-btn err-btn-outline" data-en="Contact us" data-en-href="/en/contact/">Contactar</a>
       </div>
-      <nav class="err-links" aria-label="Páginas principales">
+      <nav class="err-links" aria-label="Páginas principales" data-en-aria="Main pages">
         {links.map((l) => (
-          <a href={l.href} class="err-link">{l.label}</a>
+          <a href={l.href} class="err-link" data-en={l.en} data-en-href={l.enHref}>{l.label}</a>
         ))}
       </nav>
     </div>
   </section>
 </Layout>
+
+<script is:inline>
+  (function () {
+    if (!/^\/en(\/|$)/.test(window.location.pathname)) return;
+
+    document.documentElement.lang = 'en';
+    document.title = 'Page not found | Arango Dental Clinic';
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', 'The page you are looking for does not exist or has moved. Go back to the home page or contact Arango Dental Clinic in Benidorm.');
+
+    document.querySelectorAll('.err-hero [data-en]').forEach(function (el) {
+      el.textContent = el.getAttribute('data-en');
+    });
+    document.querySelectorAll('.err-hero [data-en-href]').forEach(function (el) {
+      el.setAttribute('href', el.getAttribute('data-en-href'));
+    });
+    document.querySelectorAll('.err-hero [data-en-aria]').forEach(function (el) {
+      el.setAttribute('aria-label', el.getAttribute('data-en-aria'));
+    });
+  })();
+</script>
 
 <style>
   .err-hero {
