@@ -1,30 +1,52 @@
 # Arango Dental Clinic
 
-> Clínica dental de alta gama en Benidorm (Alicante, España), especializada en implantología, estética dental, ortodoncia, endodoncia, periodoncia y odontología digital.
+> Clínica dental en Benidorm (Alicante, España), especializada en implantes dentales, ortodoncia, estética dental, endodoncia, periodoncia, rehabilitación oral y odontología digital. Atención en español, inglés y francés.
 
 ## Sobre Arango Dental Clinic
 
 Arango Dental Clinic es una clínica odontológica privada ubicada en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante, España, dirigida por el Dr. Sebastián Arango (especialista en implantología y rehabilitación oral). El equipo clínico incluye especialistas en ortodoncia, endodoncia e higiene dental.
 
-La clínica combina tecnología digital (escáner intraoral 3D, radiografía digital de baja dosis, diseño de sonrisa asistido por ordenador) con atención personalizada. Atiende tanto a pacientes residentes en Benidorm y la Costa Blanca como a población internacional (residentes extranjeros y visitantes) que buscan tratamientos dentales de alta gama en la zona.
+La clínica combina tecnología digital (escáner intraoral 3D, radiografía digital de baja dosis, diseño de sonrisa asistido por ordenador) con atención personalizada. Atiende tanto a pacientes residentes en Benidorm y la Costa Blanca como a población internacional (residentes extranjeros y visitantes). El equipo habla español, inglés y francés.
+
+La valoración inicial es gratuita. El presupuesto de cada tratamiento se entrega después de esa valoración; la clínica no trabaja con seguros dentales ni ofrece financiación.
 
 Horario de atención: lunes a jueves de 10:00 a 14:00 y de 15:00 a 19:00; viernes de 10:00 a 14:00. Cerrado sábados y domingos.
 
 ## Servicios
 
-- [Odontología Digital](https://arangodentalclinic.es/servicios/): diagnóstico y planificación con escáner intraoral 3D, radiografía digital y diseño de sonrisa asistido por ordenador.
-- [Implantología](https://arangodentalclinic.es/servicios/): implantes dentales de titanio para reemplazar piezas perdidas, desde 800€.
-- [Estética Dental](https://arangodentalclinic.es/servicios/): carillas de porcelana, blanqueamiento profesional y diseño de sonrisa, desde 300€.
-- [Rehabilitación Oral](https://arangodentalclinic.es/servicios/): prótesis, coronas y puentes para restaurar la función masticatoria y estética.
-- [Periodoncia](https://arangodentalclinic.es/servicios/): diagnóstico y tratamiento de enfermedades de las encías, desde 80€.
-- [Ortodoncia](https://arangodentalclinic.es/servicios/): brackets y alineadores invisibles, desde 1.500€.
+- [Implantes dentales en Benidorm](https://arangodentalclinic.es/implantes/): implantes de titanio con planificación digital para reemplazar piezas perdidas.
+- [Ortodoncia en Benidorm](https://arangodentalclinic.es/ortodoncia/): brackets y alineadores transparentes.
+- [Estética dental en Benidorm](https://arangodentalclinic.es/estetica-dental/): carillas, blanqueamiento profesional y diseño de sonrisa.
+- [Endodoncia en Benidorm](https://arangodentalclinic.es/endodoncia/): tratamiento de conducto para intentar conservar el diente natural.
+- [Periodoncia en Benidorm](https://arangodentalclinic.es/periodoncia/): diagnóstico y tratamiento de enfermedades de las encías.
+- [Rehabilitación oral en Benidorm](https://arangodentalclinic.es/rehabilitacion-oral/): coronas, puentes y prótesis.
+- [Odontología digital en Benidorm](https://arangodentalclinic.es/odontologia-digital/): escáner intraoral 3D, radiografía digital y diseño de sonrisa.
 
 ## Páginas
 
-- [Inicio](https://arangodentalclinic.es/): presentación general de la clínica y sus especialidades principales.
-- [Servicios](https://arangodentalclinic.es/servicios/): listado completo de tratamientos con precios orientativos.
+- [Inicio](https://arangodentalclinic.es/): presentación general de la clínica y sus especialidades.
+- [Servicios](https://arangodentalclinic.es/servicios/): listado completo de tratamientos.
 - [Nosotros](https://arangodentalclinic.es/nosotros/): equipo clínico, historia, valores y director de la clínica.
+- [Blog](https://arangodentalclinic.es/blog/): artículos de salud dental sobre tratamientos y dudas frecuentes.
 - [Contacto](https://arangodentalclinic.es/contacto/): formulario de contacto, teléfono, dirección y mapa.
+- [Política de privacidad](https://arangodentalclinic.es/politica-privacidad/), [Aviso legal](https://arangodentalclinic.es/aviso-legal/) y [Términos y condiciones](https://arangodentalclinic.es/terminos-condiciones/).
+
+## English version
+
+Arango Dental Clinic is a private dental clinic in Benidorm, Alicante, Spain. The team speaks English, Spanish and French, and the initial assessment is free of charge.
+
+- [Home](https://arangodentalclinic.es/en/)
+- [Services](https://arangodentalclinic.es/en/services/)
+- [Dental implants in Benidorm](https://arangodentalclinic.es/en/dental-implants/)
+- [Orthodontics in Benidorm](https://arangodentalclinic.es/en/orthodontics/)
+- [Cosmetic dentistry in Benidorm](https://arangodentalclinic.es/en/cosmetic-dentistry/)
+- [Root canal treatment in Benidorm](https://arangodentalclinic.es/en/root-canal-treatment/)
+- [Gum disease treatment in Benidorm](https://arangodentalclinic.es/en/gum-treatment/)
+- [Oral rehabilitation in Benidorm](https://arangodentalclinic.es/en/oral-rehabilitation/)
+- [Digital dentistry in Benidorm](https://arangodentalclinic.es/en/digital-dentistry/)
+- [About us](https://arangodentalclinic.es/en/about-us/)
+- [Blog](https://arangodentalclinic.es/en/blog/): dental health articles in English.
+- [Contact](https://arangodentalclinic.es/en/contact/)
 
 ## Contacto
 

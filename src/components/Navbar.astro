@@ -7,7 +7,12 @@ import { getLang, getSwitchHref } from '../data/i18n';
 const currentPath = Astro.url.pathname;
 // Compara sin barra final: /servicios y /servicios/ son la misma página.
 const trimSlash = (path: string) => path.replace(/\/+$/, '') || '/';
-const isCurrent = (href: string) => trimSlash(href) === trimSlash(currentPath);
+// El link "Blog" también queda activo dentro de cada artículo (/blog/<slug>/).
+const isCurrent = (href: string) => {
+  const target = trimSlash(href);
+  const current = trimSlash(currentPath);
+  return current === target || (target.endsWith('/blog') && current.startsWith(`${target}/`));
+};
 const lang = getLang(currentPath);
 
 const dict = {
@@ -16,6 +21,7 @@ const dict = {
       { href: "/",          label: "Inicio",    hasSubmenu: false },
       { href: "/servicios", label: "Servicios", hasSubmenu: true  },
       { href: "/nosotros",  label: "Nosotros",  hasSubmenu: false },
+      { href: "/blog",      label: "Blog",      hasSubmenu: false },
       { href: "/contacto",  label: "Contacto",  hasSubmenu: false },
     ],
     servicios: serviciosEs,
@@ -41,6 +47,7 @@ const dict = {
       { href: "/en/",          label: "Home",     hasSubmenu: false },
       { href: "/en/services/", label: "Services", hasSubmenu: true  },
       { href: "/en/about-us/", label: "About us", hasSubmenu: false },
+      { href: "/en/blog/",     label: "Blog",     hasSubmenu: false },
       { href: "/en/contact/",  label: "Contact",  hasSubmenu: false },
     ],
     servicios: serviciosEn,
@@ -315,7 +322,10 @@ const switchEn = getSwitchHref(currentPath, 'en');
     transform: translateX(-50%);
   }
 
-  @media (min-width: 768px) {
+  /* Los links en línea solo caben desde 1280px (logo + 5 links + selector de
+     idioma + toggle + CTA + hamburguesa); por debajo se navega con el overlay,
+     que ya lista los mismos links. */
+  @media (min-width: 1280px) {
     .navbar-nav {
       display: block;
     }
@@ -342,9 +352,21 @@ const switchEn = getSwitchHref(currentPath, 'en');
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 3rem;
+    gap: 1.4rem;
     align-items: center;
     position: relative;
+  }
+
+  @media (min-width: 1366px) {
+    .navbar-links {
+      gap: 2rem;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .navbar-links {
+      gap: 3rem;
+    }
   }
 
   .navbar-links li {
@@ -358,6 +380,7 @@ const switchEn = getSwitchHref(currentPath, 'en');
   .navbar-links li:nth-child(2) { animation-delay: 0.22s; }
   .navbar-links li:nth-child(3) { animation-delay: 0.29s; }
   .navbar-links li:nth-child(4) { animation-delay: 0.36s; }
+  .navbar-links li:nth-child(5) { animation-delay: 0.43s; }
 
   @keyframes navFadeIn {
     to { opacity: 1; transform: translateY(0); }

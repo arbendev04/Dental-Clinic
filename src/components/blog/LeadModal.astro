@@ -1,0 +1,447 @@
+---
+import type { Lang } from '../../data/i18n';
+
+interface Props {
+  lang: Lang;
+  /** Nombre canónico (español) del tratamiento que va a "Tratamiento de interés" en Zoho. */
+  treatment: string;
+  /** Slug del artículo: se guarda en el aviso interno para saber qué artículo trajo al lead. */
+  article: string;
+  /** Nombre del tratamiento tal como lo lee el visitante (en su idioma). */
+  treatmentLabel: string;
+}
+
+// Formulario emergente de los artículos del blog. Mismo endpoint (/api/lead), mismos
+// campos y mismo evento de conversión que el resto de los formularios del sitio; se
+// abre con cualquier elemento [data-lead-open] (si el JS falla, esos elementos son
+// enlaces normales a la página de contacto).
+const { lang, treatment, article, treatmentLabel } = Astro.props;
+
+const t = {
+  es: {
+    eyebrow: 'Valoración inicial gratuita',
+    title: 'Cuéntanos qué necesitas',
+    intro: `Te contactamos para valorar tu caso (${treatmentLabel.toLowerCase()}) sin compromiso.`,
+    name: 'Nombre completo',
+    phone: 'Teléfono',
+    email: 'Email (opcional)',
+    consentPrefix: 'He leído y acepto la',
+    privacyLabel: 'Política de Privacidad',
+    privacyHref: '/politica-privacidad/',
+    submit: 'Solicitar valoración gratuita',
+    sending: 'Enviando…',
+    close: 'Cerrar',
+    successTitle: '¡Gracias!',
+    successText: 'Te contactaremos pronto.',
+    errorGeneric: 'No hemos podido enviar tu solicitud. Escríbenos por WhatsApp.',
+    errorNetwork: 'No hemos podido enviar tu solicitud. Revisa tu conexión o escríbenos por WhatsApp.',
+    formName: `blog-${article}`,
+  },
+  en: {
+    eyebrow: 'Free initial assessment',
+    title: 'Tell us what you need',
+    intro: `We will contact you to assess your case (${treatmentLabel.toLowerCase()}) with no obligation.`,
+    name: 'Full name',
+    phone: 'Phone',
+    email: 'Email (optional)',
+    consentPrefix: 'I have read and accept the',
+    privacyLabel: 'Privacy Policy',
+    privacyHref: '/en/privacy-policy/',
+    submit: 'Request a free assessment',
+    sending: 'Sending…',
+    close: 'Close',
+    successTitle: 'Thank you!',
+    successText: 'We will be in touch shortly.',
+    errorGeneric: 'We could not send your request. Please message us on WhatsApp.',
+    errorNetwork: 'We could not send your request. Please check your connection or message us on WhatsApp.',
+    formName: `blog-${article}-en`,
+  },
+}[lang];
+---
+
+<dialog
+  id="lead-dialog"
+  class="ld-dialog"
+  aria-labelledby="ld-title"
+  data-lang={lang}
+  data-treatment={treatment}
+  data-article={article}
+  data-form-name={t.formName}
+  data-sending={t.sending}
+  data-submit={t.submit}
+  data-error-generic={t.errorGeneric}
+  data-error-network={t.errorNetwork}
+>
+  <div class="ld-panel">
+    <button type="button" class="ld-close" id="ld-close" aria-label={t.close}>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+      </svg>
+    </button>
+
+    <div id="ld-form-view">
+      <p class="ld-eyebrow">{t.eyebrow}</p>
+      <h2 class="ld-title" id="ld-title">{t.title}</h2>
+      <p class="ld-intro">{t.intro}</p>
+
+      <form id="ld-form" class="ld-form" novalidate>
+        <input type="text" id="ld-gotcha" name="_gotcha" class="ld-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="ld-field">
+          <label for="ld-nombre">{t.name}</label>
+          <input type="text" id="ld-nombre" name="nombre" autocomplete="name" required />
+        </div>
+        <div class="ld-field">
+          <label for="ld-telefono">{t.phone}</label>
+          <input type="tel" id="ld-telefono" name="telefono" autocomplete="tel" inputmode="tel" required />
+        </div>
+        <div class="ld-field">
+          <label for="ld-email">{t.email}</label>
+          <input type="email" id="ld-email" name="email" autocomplete="email" />
+        </div>
+        <label class="ld-consent">
+          <input type="checkbox" id="ld-consentimiento" name="consentimiento" required />
+          <span>{t.consentPrefix} <a href={t.privacyHref} target="_blank" rel="noopener">{t.privacyLabel}</a>.</span>
+        </label>
+        <p class="ld-status" id="ld-status" role="alert" aria-live="assertive" hidden></p>
+        <button type="submit" class="ld-submit" id="ld-submit">{t.submit}</button>
+      </form>
+    </div>
+
+    <div id="ld-success-view" class="ld-success" hidden>
+      <p class="ld-eyebrow">{t.eyebrow}</p>
+      <h2 class="ld-title">{t.successTitle}</h2>
+      <p class="ld-intro">{t.successText}</p>
+      <button type="button" class="ld-submit" id="ld-success-close">{t.close}</button>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .ld-dialog {
+    width: min(92vw, 30rem);
+    max-height: 92vh;
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--border-primary);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow: auto;
+  }
+
+  .ld-dialog::backdrop {
+    background-color: rgba(8, 14, 11, 0.72);
+    backdrop-filter: blur(3px);
+  }
+
+  .ld-dialog[open] {
+    animation: ld-in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes ld-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ld-dialog[open] {
+      animation: none;
+    }
+  }
+
+  .ld-panel {
+    position: relative;
+    padding: 2.5rem 2rem 2rem;
+  }
+
+  .ld-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .ld-close:hover,
+  .ld-close:focus-visible {
+    color: var(--text-primary);
+  }
+
+  .ld-eyebrow {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-600);
+    margin: 0 0 0.6rem;
+  }
+
+  .ld-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.15;
+    margin: 0 0 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .ld-intro {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 0 0 1.5rem;
+  }
+
+  .ld-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ld-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .ld-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .ld-field label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .ld-field input {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    padding: 0.8rem 0.9rem;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 0;
+    transition: border-color 0.2s ease;
+  }
+
+  .ld-field input:focus {
+    outline: none;
+    border-color: var(--gold-500);
+  }
+
+  .ld-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+
+  .ld-consent input {
+    margin-top: 0.2rem;
+    accent-color: var(--gold-500);
+  }
+
+  .ld-consent a {
+    color: var(--teal-600);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .ld-status {
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #b3261e;
+    margin: 0;
+  }
+
+  :global(html.dark) .ld-status {
+    color: #f2b8b5;
+  }
+
+  .ld-submit {
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.95rem 1.5rem;
+    color: #0d2219;
+    background-color: #C49B38;
+    border: 1px solid #C49B38;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .ld-submit:hover,
+  .ld-submit:focus-visible {
+    background-color: transparent;
+    color: var(--text-primary);
+  }
+
+  .ld-submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  :global(html.dark) .ld-submit {
+    background-color: #D4AF55;
+    border-color: #D4AF55;
+    color: #141210;
+  }
+
+  :global(html.dark) .ld-submit:hover,
+  :global(html.dark) .ld-submit:focus-visible {
+    background-color: transparent;
+    color: var(--text-primary);
+  }
+
+  .ld-success {
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .ld-success .ld-submit {
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .ld-panel {
+      padding: 2.25rem 1.25rem 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  import { getAttribution } from '../../scripts/attribution';
+
+  const dialog = document.getElementById('lead-dialog') as HTMLDialogElement | null;
+  if (dialog) {
+    const form = document.getElementById('ld-form') as HTMLFormElement;
+    const status = document.getElementById('ld-status') as HTMLElement;
+    const submit = document.getElementById('ld-submit') as HTMLButtonElement;
+    const formView = document.getElementById('ld-form-view') as HTMLElement;
+    const successView = document.getElementById('ld-success-view') as HTMLElement;
+    const firstField = document.getElementById('ld-nombre') as HTMLInputElement;
+
+    const open = () => {
+      if (dialog.open) return;
+      formView.hidden = false;
+      successView.hidden = true;
+      status.hidden = true;
+      dialog.showModal();
+      document.body.classList.add('ld-open');
+      firstField.focus();
+    };
+
+    const close = () => dialog.close();
+    dialog.addEventListener('close', () => document.body.classList.remove('ld-open'));
+
+    // Cualquier botón/enlace marcado abre el formulario; sin JS siguen llevando a /contacto/.
+    document.querySelectorAll<HTMLElement>('[data-lead-open]').forEach((el) => {
+      el.addEventListener('click', (event) => {
+        event.preventDefault();
+        open();
+      });
+    });
+
+    document.getElementById('ld-close')?.addEventListener('click', close);
+    document.getElementById('ld-success-close')?.addEventListener('click', close);
+
+    // Clic en el fondo oscuro (fuera del panel) cierra.
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+
+    const showError = (message: string) => {
+      status.textContent = message;
+      status.hidden = false;
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status.hidden = true;
+
+      if (!form.reportValidity()) return;
+
+      const original = submit.textContent;
+      submit.disabled = true;
+      submit.textContent = dialog.dataset.sending ?? '…';
+
+      const value = (id: string) => (document.getElementById(id) as HTMLInputElement | null)?.value ?? '';
+      const consentimiento = (document.getElementById('ld-consentimiento') as HTMLInputElement).checked;
+
+      try {
+        const response = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nombre: value('ld-nombre'),
+            telefono: value('ld-telefono'),
+            email: value('ld-email'),
+            tratamiento: dialog.dataset.treatment ?? '',
+            consentimiento,
+            _gotcha: value('ld-gotcha'),
+            lang: dialog.dataset.lang ?? 'es',
+            source: 'blog',
+            article: dialog.dataset.article ?? '',
+            ...getAttribution(),
+          }),
+        });
+        const data = await response.json().catch(() => null);
+
+        if (response.ok && data?.success) {
+          formView.hidden = true;
+          successView.hidden = false;
+          form.reset();
+
+          // Mismo evento que el resto de formularios: GTM lo usa para las conversiones.
+          // form_name distinto solo para poder segmentar los leads del blog.
+          (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer.push({ event: 'form_submit_success', form_name: dialog.dataset.formName });
+          return;
+        }
+
+        showError(data?.error || dialog.dataset.errorGeneric || '');
+      } catch {
+        showError(dialog.dataset.errorNetwork || '');
+      } finally {
+        submit.disabled = false;
+        submit.textContent = original;
+      }
+    });
+  }
+</script>
+
+<style is:global>
+  body.ld-open {
+    overflow: hidden;
+  }
+</style>

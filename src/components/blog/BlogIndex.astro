@@ -1,0 +1,356 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { SITE_URL, type Lang } from '../../data/i18n';
+import { getPosts, postPath, formatDate, readingMinutes, SERVICE_INFO, blogBasePath } from '../../data/blog';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const posts = await getPosts(lang);
+
+const t = {
+  es: {
+    title: 'Blog de salud dental en Benidorm',
+    description: 'Consejos de salud dental, tratamientos y dudas frecuentes explicados por Arango Dental Clinic, tu dentista en Benidorm.',
+    label: 'Blog',
+    h1: 'Salud dental, explicada con claridad',
+    sub: 'Guías y respuestas a las preguntas más habituales sobre implantes, ortodoncia, estética dental, encías y más, escritas por el equipo de Arango Dental Clinic en Benidorm.',
+    empty: 'Estamos preparando los primeros artículos. Vuelve pronto.',
+    read: 'Leer artículo',
+    minutes: 'min de lectura',
+    homeAria: 'Inicio',
+  },
+  en: {
+    title: 'Dental Health Blog in Benidorm',
+    description: 'Dental health tips, treatments and frequently asked questions explained by Arango Dental Clinic, your English-speaking dentist in Benidorm.',
+    label: 'Blog',
+    h1: 'Dental health, clearly explained',
+    sub: 'Guides and answers to the most common questions about implants, orthodontics, cosmetic dentistry, gum health and more, written by the Arango Dental Clinic team in Benidorm.',
+    empty: 'We are preparing our first articles. Please check back soon.',
+    read: 'Read article',
+    minutes: 'min read',
+    homeAria: 'Home',
+  },
+}[lang];
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: `${t.title} | Arango Dental Clinic`,
+  url: SITE_URL + blogBasePath(lang),
+  inLanguage: lang,
+  publisher: { '@type': 'Organization', name: 'Arango Dental Clinic', url: SITE_URL },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.data.title,
+    url: SITE_URL + postPath(p),
+    datePublished: p.data.pubDate.toISOString(),
+    dateModified: (p.data.updatedDate ?? p.data.pubDate).toISOString(),
+  })),
+};
+---
+
+<Layout title={t.title} description={t.description} image="/img/servicios/servicios.webp">
+  <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
+
+  <section class="blg-hero">
+    <div class="blg-container">
+      <p class="blg-label">{t.label}</p>
+      <h1 class="blg-hero-title">{t.h1}</h1>
+      <p class="blg-hero-sub">{t.sub}</p>
+    </div>
+  </section>
+
+  <section class="blg-list-section">
+    <div class="blg-container">
+      {posts.length === 0 ? (
+        <p class="blg-empty">{t.empty}</p>
+      ) : (
+        <ul class="blg-grid">
+          {posts.map((post, i) => (
+            <li class={`blg-card ${i === 0 ? 'blg-card-featured' : ''} ${post.data.image ? 'has-media' : ''}`}>
+              <article>
+                {post.data.image && (
+                  <a class="blg-card-media" href={postPath(post)} tabindex="-1" aria-hidden="true">
+                    <Image
+                      src={post.data.image}
+                      alt=""
+                      width={800}
+                      height={420}
+                      widths={[400, 640, 800]}
+                      sizes={i === 0 ? '(min-width: 768px) 440px, 100vw' : '(min-width: 768px) 520px, 100vw'}
+                      fit="cover"
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  </a>
+                )}
+                <div class="blg-card-body">
+                <p class="blg-card-meta">
+                  <a class="blg-card-tag" href={SERVICE_INFO[post.data.service][lang].href}>{SERVICE_INFO[post.data.service][lang].label}</a>
+                  <span aria-hidden="true">·</span>
+                  <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, lang)}</time>
+                  <span aria-hidden="true">·</span>
+                  <span>{readingMinutes(post.body)} {t.minutes}</span>
+                </p>
+                <h2 class="blg-card-title">
+                  <a href={postPath(post)}>{post.data.title}</a>
+                </h2>
+                <p class="blg-card-desc">{post.data.description}</p>
+                <a class="blg-card-link" href={postPath(post)} aria-label={`${t.read}: ${post.data.title}`}>
+                  {t.read} <span aria-hidden="true">→</span>
+                </a>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .blg-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .blg-hero {
+    background-color: #0d2219;
+    padding: 9rem 0 4rem;
+    text-align: center;
+  }
+
+  .blg-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #C49B38;
+    margin: 0 0 1rem;
+  }
+
+  :global(html.dark) .blg-label {
+    color: #D4AF55;
+  }
+
+  .blg-hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.15;
+    color: rgba(244, 240, 235, 0.95);
+    margin: 0 0 1.25rem;
+    text-wrap: balance;
+  }
+
+  .blg-hero-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(244, 240, 235, 0.6);
+    max-width: 58ch;
+    margin: 0 auto;
+  }
+
+  .blg-list-section {
+    background-color: var(--bg-primary);
+    padding: 4.5rem 0 6rem;
+  }
+
+  .blg-empty {
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    color: var(--text-secondary);
+  }
+
+  .blg-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .blg-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .blg-card-featured {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .blg-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-left: 3px solid var(--border-primary);
+    transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .blg-card:hover,
+  .blg-card:focus-within {
+    border-color: var(--gold-500);
+    background-color: var(--bg-tertiary);
+    transform: translateY(-2px);
+  }
+
+  .blg-card article {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blg-card-body {
+    padding: 1.75rem 1.75rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  /* Miniatura: decorativa para lectores de pantalla (alt vacío, aria-hidden, fuera
+     del tabulador) porque el título de la tarjeta ya enlaza al artículo.
+     Proporción fija 1200:630 para que no salte el layout al cargar. */
+  .blg-card-media {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 1200 / 630;
+    background-color: var(--bg-tertiary);
+  }
+
+  .blg-card-media :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .blg-card:hover .blg-card-media :global(img) {
+    transform: scale(1.03);
+  }
+
+  /* Destacada con imagen: miniatura a la izquierda, texto a la derecha */
+  @media (min-width: 768px) {
+    .blg-card-featured.has-media article {
+      flex-direction: row;
+    }
+
+    .blg-card-featured.has-media .blg-card-media {
+      flex: 0 0 44%;
+      aspect-ratio: auto;
+    }
+
+    .blg-card-featured.has-media .blg-card-body {
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blg-card-media :global(img) {
+      transition: none;
+    }
+
+    .blg-card:hover .blg-card-media :global(img) {
+      transform: none;
+    }
+  }
+
+  .blg-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+    margin: 0;
+  }
+
+  .blg-card-tag {
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-600);
+    text-decoration: none;
+  }
+
+  .blg-card-tag:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .blg-card-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .blg-card-featured .blg-card-title {
+    font-size: clamp(1.9rem, 3vw, 2.4rem);
+  }
+
+  .blg-card-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .blg-card-title a:hover {
+    color: var(--teal-600);
+  }
+
+  .blg-card-desc {
+    font-family: "Inter", sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
+    flex: 1;
+  }
+
+  .blg-card-link {
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-600);
+    text-decoration: none;
+    align-self: flex-start;
+  }
+
+  .blg-card-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .blg-container {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .blg-hero {
+      padding: 7.5rem 0 3rem;
+    }
+
+    .blg-list-section {
+      padding: 3rem 0 4rem;
+    }
+  }
+</style>

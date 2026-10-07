@@ -11,6 +11,13 @@ interface Props {
   image?: string;
   preloadHero?: boolean;
   noindex?: boolean;
+  /** Open Graph type: "article" para las entradas del blog. */
+  ogType?: 'website' | 'article';
+  /** ISO 8601 — solo para ogType "article". */
+  publishedTime?: string;
+  modifiedTime?: string;
+  /** Migas intermedias entre Inicio y la página actual (ej. Blog). */
+  breadcrumbTrail?: Array<{ name: string; path: string }>;
 }
 
 const {
@@ -18,7 +25,11 @@ const {
   description: descriptionProp,
   image = '/img/hero/instrumentos-odontologicos-esterilizados.webp',
   preloadHero = false,
-  noindex = false
+  noindex = false,
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  breadcrumbTrail = [],
 } = Astro.props;
 
 const siteUrl = SITE_URL;
@@ -120,14 +131,21 @@ const breadcrumbSchema = normalizePath(Astro.url.pathname) === homePath ? null :
       "name": isEn ? "Home" : "Inicio",
       "item": siteUrl + homePath,
     },
+    ...breadcrumbTrail.map((crumb, i) => ({
+      "@type": "ListItem",
+      "position": i + 2,
+      "name": crumb.name,
+      "item": siteUrl + crumb.path,
+    })),
     {
       "@type": "ListItem",
-      "position": 2,
+      "position": breadcrumbTrail.length + 2,
       "name": title,
       "item": canonicalUrl,
     },
   ],
 };
+const rssHref = isEn ? '/en/blog/rss.xml' : '/blog/rss.xml';
 ---
 
 <!doctype html>
@@ -190,6 +208,7 @@ const breadcrumbSchema = normalizePath(Astro.url.pathname) === homePath ? null :
         <link rel="alternate" hreflang="x-default" href={siteUrl + alternates.es} />
       </>
     )}
+    <link rel="alternate" type="application/rss+xml" title="Arango Dental Clinic — Blog" href={rssHref} />
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -199,7 +218,9 @@ const breadcrumbSchema = normalizePath(Astro.url.pathname) === homePath ? null :
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {ogType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {ogType === 'article' && (modifiedTime ?? publishedTime) && <meta property="article:modified_time" content={modifiedTime ?? publishedTime} />}
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />

@@ -1,3 +1,5 @@
+import { getBlogPairs } from './blog-pairs.ts';
+
 export type Lang = 'es' | 'en';
 
 export const SITE_URL = 'https://arangodentalclinic.es';
@@ -21,7 +23,15 @@ export const PAGE_PAIRS: ReadonlyArray<{ es: string; en: string }> = [
   { es: '/nosotros/', en: '/en/about-us/' },
   { es: '/aviso-legal/', en: '/en/legal-notice/' },
   { es: '/terminos-condiciones/', en: '/en/terms-and-conditions/' },
+  { es: '/blog/', en: '/en/blog/' },
 ];
+
+// Páginas fijas + artículos del blog que existen publicados en los dos idiomas
+// (emparejados por `translationKey`, ver blog-pairs.ts). Es la lista que usan
+// el hreflang del <head>, el selector de idioma y el sitemap.
+export function getAllPairs(): Array<{ es: string; en: string }> {
+  return [...PAGE_PAIRS, ...getBlogPairs()];
+}
 
 export function normalizePath(pathname: string): string {
   return pathname.endsWith('/') ? pathname : `${pathname}/`;
@@ -33,7 +43,7 @@ export function getLang(pathname: string): Lang {
 
 export function getAlternates(pathname: string): { es: string; en: string } | null {
   const path = normalizePath(pathname);
-  return PAGE_PAIRS.find((pair) => pair.es === path || pair.en === path) ?? null;
+  return getAllPairs().find((pair) => pair.es === path || pair.en === path) ?? null;
 }
 
 // Destino del selector de idioma: la página equivalente o, si no existe, el home del idioma pedido.

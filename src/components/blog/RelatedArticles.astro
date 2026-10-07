@@ -1,0 +1,149 @@
+---
+import type { Lang } from '../../data/i18n';
+import { getPosts, postPath, formatDate, blogBasePath, type BlogService } from '../../data/blog';
+
+interface Props {
+  lang: Lang;
+  service: BlogService;
+}
+
+// Artículos del blog del mismo tratamiento que la landing: enlaza la landing
+// hacia sus artículos (y cada artículo ya enlaza de vuelta). No renderiza nada
+// si todavía no hay artículos de ese tratamiento en ese idioma.
+const { lang, service } = Astro.props;
+const posts = (await getPosts(lang)).filter((p) => p.data.service === service).slice(0, 3);
+
+const t = {
+  es: { title: 'Artículos relacionados', all: 'Ver todos los artículos del blog' },
+  en: { title: 'Related articles', all: 'See all blog articles' },
+}[lang];
+---
+
+{posts.length > 0 && (
+  <section class="ra-section" aria-labelledby="ra-title">
+    <div class="ra-container">
+      <h2 class="ra-title" id="ra-title">{t.title}</h2>
+      <ul class="ra-list">
+        {posts.map((post) => (
+          <li>
+            <a href={postPath(post)}>
+              <span class="ra-name">{post.data.title}</span>
+              <span class="ra-desc">{post.data.description}</span>
+              <time class="ra-date" datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, lang)}</time>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="ra-all"><a href={blogBasePath(lang)}>{t.all} →</a></p>
+    </div>
+  </section>
+)}
+
+<style>
+  .ra-section {
+    background-color: var(--bg-secondary);
+    padding: 4rem 0;
+  }
+
+  .ra-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .ra-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 1.5rem;
+  }
+
+  .ra-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .ra-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .ra-list a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 1.4rem 1.5rem;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-left: 3px solid var(--border-primary);
+    text-decoration: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  .ra-list a:hover,
+  .ra-list a:focus-visible {
+    border-color: var(--gold-500);
+    background-color: var(--bg-tertiary);
+  }
+
+  .ra-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--text-primary);
+  }
+
+  .ra-desc {
+    font-family: "Inter", sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .ra-date {
+    font-family: "Inter", sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+    margin-top: auto;
+  }
+
+  .ra-all {
+    font-family: "Inter", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 1.5rem 0 0;
+  }
+
+  .ra-all a {
+    color: var(--teal-600);
+    text-decoration: none;
+  }
+
+  .ra-all a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .ra-container {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .ra-section {
+      padding: 3rem 0;
+    }
+  }
+</style>

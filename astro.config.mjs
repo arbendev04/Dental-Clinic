@@ -2,7 +2,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
-import { PAGE_PAIRS, SITE_URL } from './src/data/i18n.ts';
+import { getAllPairs, SITE_URL } from './src/data/i18n.ts';
+import { getBlogLastmod, getBlogIndexLastmod } from './src/data/blog-pairs.ts';
 
 // Páginas con noindex en Layout.astro que no deben aparecer en el sitemap
 // (hoy solo la 404; las páginas legales son indexables).
@@ -32,18 +33,24 @@ export default defineConfig({
     sitemap({
       // Excluye las páginas con noindex (ver NOINDEX_PAGES arriba).
       filter: (page) => !NOINDEX_PAGES.some((path) => page.includes(path)),
-      // Alternates es/en para cada par de src/data/i18n.ts (la opción `i18n` del
+      // Alternates es/en para cada par de src/data/i18n.ts, artículos del blog
+      // incluidos (la opción `i18n` del
       // plugin solo empareja URLs que difieren únicamente por el prefijo /en, y
       // acá los slugs cambian). Tienen que coincidir con los <link hreflang> del <head>.
       serialize(item) {
         const path = new URL(item.url).pathname;
-        const pair = PAGE_PAIRS.find((p) => p.es === path || p.en === path);
+        const pair = getAllPairs().find((p) => p.es === path || p.en === path);
         if (pair) {
           item.links = [
             { url: SITE_URL + pair.es, lang: 'es' },
             { url: SITE_URL + pair.en, lang: 'en' },
           ];
         }
+        // <lastmod> real para el blog: fecha del artículo o, en el índice, la del más reciente.
+        const lastmod =
+          getBlogLastmod(path) ??
+          (path === '/blog/' ? getBlogIndexLastmod('es') : path === '/en/blog/' ? getBlogIndexLastmod('en') : undefined);
+        if (lastmod) item.lastmod = new Date(lastmod).toISOString();
         return item;
       },
     }),

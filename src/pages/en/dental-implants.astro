@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import RelatedArticles from '../../components/blog/RelatedArticles.astro';
 
 const WHATSAPP_PHONE = '34665886439';
 const whatsappHref = (text: string) =>
@@ -275,6 +276,8 @@ const procedureSchema = {
 
     </div>
   </section>
+
+  <RelatedArticles lang="en" service="implantes" />
 
   <!-- ── Final CTA ── -->
   <section class="trt-cta-section">

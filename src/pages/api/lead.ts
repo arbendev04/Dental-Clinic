@@ -16,6 +16,9 @@ interface LeadPayload {
   utm_term?: string;
   landing_url?: string;
   lang?: string;
+  // Formularios del blog: `source: 'blog'` y el slug del artículo desde el que se escribe.
+  source?: string;
+  article?: string;
 }
 
 interface CachedToken {
@@ -46,6 +49,7 @@ const GOOGLE_PAID_MEDIUMS = ['cpc', 'ppc', 'paid'];
 const DEFAULT_LEAD_SOURCE = 'Sitio Web';
 const META_LEAD_SOURCE = 'Facebook Ads';
 const GOOGLE_LEAD_SOURCE = 'Google Ads';
+const BLOG_LEAD_SOURCE = 'Blog';
 const MAX_ATTRIBUTION_RETRIES = 4;
 
 // Mensajes de error que ve el visitante según el idioma del sitio desde el que escribe.
@@ -97,11 +101,20 @@ function cleanText(value: unknown, maxLength: number): string {
   return value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, maxLength);
 }
 
-function resolveLeadSource(utmSource: string, utmMedium: string): string {
+// La campaña de pago manda: un visitante que llegó por un anuncio y escribe desde un
+// artículo sigue contando como Facebook/Google Ads. "Blog" es solo para tráfico orgánico.
+function resolveLeadSource(utmSource: string, utmMedium: string, fromBlog: boolean): string {
   const source = utmSource.toLowerCase();
   if (META_UTM_SOURCES.includes(source)) return META_LEAD_SOURCE;
   if (source === 'google' && GOOGLE_PAID_MEDIUMS.includes(utmMedium.toLowerCase())) return GOOGLE_LEAD_SOURCE;
+  if (fromBlog) return BLOG_LEAD_SOURCE;
   return DEFAULT_LEAD_SOURCE;
+}
+
+// El slug del artículo solo se usa en el aviso por WhatsApp: se acepta únicamente un slug válido.
+function cleanArticleSlug(value: unknown): string {
+  const text = cleanText(value, 120);
+  return /^[a-z0-9-]+$/.test(text) ? text : '';
 }
 
 // Solo URLs http(s) de nuestro propio dominio: el campo se muestra como link en Zoho.
@@ -202,6 +215,7 @@ async function sendWhatsAppNotification(
   origen: string,
   campana: string,
   idioma: string,
+  articulo = '',
 ): Promise<void> {
   const phone = import.meta.env.CALLMEBOT_PHONE;
   const apiKey = import.meta.env.CALLMEBOT_APIKEY;
@@ -219,6 +233,7 @@ async function sendWhatsAppNotification(
     `Origen: ${origen}`,
     `Idioma del sitio: ${idioma}`,
     ...(campana ? [`Campaña: ${campana}`] : []),
+    ...(articulo ? [`Artículo del blog: ${articulo}`] : []),
     'Revisá tu email o el CRM para más detalles.',
   ].join('\n');
 
@@ -309,9 +324,11 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       if (value) marketing[zohoField] = value;
     }
 
+    const fromBlog = body.source === 'blog';
     const leadSource = resolveLeadSource(
       cleanText(body.utm_source, MARKETING_FIELDS.utm_source.maxLength),
       cleanText(body.utm_medium, MARKETING_FIELDS.utm_medium.maxLength),
+      fromBlog,
     );
     const attributedLead: Record<string, string> = { ...baseLead, ...marketing, Lead_Source: leadSource };
 
@@ -353,6 +370,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       savedLead.Lead_Source,
       savedLead.Designation ?? '',
       lang === 'en' ? 'Inglés' : 'Español',
+      fromBlog ? cleanArticleSlug(body.article) : '',
     );
 
     return jsonResponse({ success: true }, 200);
