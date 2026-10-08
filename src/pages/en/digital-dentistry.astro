@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { CLINIC_ID } from '../../data/i18n';
 import RelatedArticles from '../../components/blog/RelatedArticles.astro';
 
 const WHATSAPP_PHONE = '34665886439';
@@ -74,8 +75,8 @@ const faqSchema = {
   })),
 };
 
-// No `@id` to the Dentist yet (pending Task 9 of the SEO plan) — the clinic is
-// declared inline, same as the ItemList schema on /en/services/.
+// The provider is the clinic, referenced by its @id (CLINIC_ID, see src/data/i18n.ts):
+// the full Dentist block is emitted by the Layout on every page.
 const procedureSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
@@ -85,11 +86,7 @@ const procedureSchema = {
   "procedureType": "https://schema.org/NoninvasiveProcedure",
   "bodyLocation": "Mouth (upper and lower jaw)",
   "howPerformed": "3D intraoral scanning and digital X-rays to generate an exact model of the patient's mouth, used as the basis for diagnosis and for planning any later treatment.",
-  "provider": {
-    "@type": "Dentist",
-    "name": "Arango Dental Clinic",
-    "url": "https://arangodentalclinic.es",
-  },
+  "provider": { "@id": CLINIC_ID },
 };
 ---
 

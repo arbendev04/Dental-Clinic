@@ -3,7 +3,9 @@ import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import CookieConsent from '../components/CookieConsent.astro';
-import { getLang, getAlternates, normalizePath, SITE_URL } from '../data/i18n';
+import { getLang, getAlternates, normalizePath, SITE_URL, CLINIC_ID, WEBSITE_ID, CLINIC_MAP_URL, AREA_SERVED_SCHEMA } from '../data/i18n';
+import { servicios as serviciosEs } from '../data/servicios';
+import { servicios as serviciosEn } from '../data/servicios-en';
 
 interface Props {
   title: string;
@@ -41,21 +43,23 @@ const description = descriptionProp ?? (isEn
   : 'Arango Dental Clinic - Clínica dental en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implantes, ortodoncia, estética dental y odontología digital.');
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 
-const offerNames = isEn
-  ? ['Digital Dentistry', 'Dental Implants', 'Cosmetic Dentistry', 'Oral Rehabilitation', 'Periodontics', 'Orthodontics', 'Endodontics']
-  : ['Odontología Digital', 'Implantología', 'Estética Dental', 'Rehabilitación Oral', 'Periodoncia', 'Ortodoncia', 'Endodoncia'];
+// Los 7 servicios con su landing real, de la misma fuente que el navbar, el footer y /servicios/.
+const offerServices = isEn ? serviciosEn : serviciosEs;
 const fullTitle = `${title} | Arango Dental Clinic`;
 
 // Schema.org structured data for Dentist
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "Dentist",
+  "@id": CLINIC_ID,
   "name": "Arango Dental Clinic",
   "description": isEn
     ? "Dental clinic at Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implants, orthodontics, cosmetic dentistry and digital dentistry."
     : "Clínica dental en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implantes, ortodoncia, estética dental y odontología digital.",
   "knowsLanguage": ["es"],
   "url": siteUrl,
+  "hasMap": CLINIC_MAP_URL,
+  "areaServed": AREA_SERVED_SCHEMA,
   "logo": `${siteUrl}/img/logo/logo-oscuro.webp`,
   "image": `${siteUrl}/img/hero/instrumentos-odontologicos-esterilizados.webp`,
   "telephone": "+34 965 08 82 82",
@@ -103,9 +107,13 @@ const schemaData = {
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": isEn ? "Dental Services" : "Servicios Dentales",
-    "itemListElement": offerNames.map((name) => ({
+    "itemListElement": offerServices.map((s) => ({
       "@type": "Offer",
-      "itemOffered": { "@type": "Service", "name": name },
+      "itemOffered": {
+        "@type": "Service",
+        "name": s.nombre,
+        "url": s.landingHref ? siteUrl + s.landingHref : undefined,
+      },
     })),
   }
 };
@@ -114,9 +122,11 @@ const schemaData = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": WEBSITE_ID,
   "name": "Arango Dental Clinic",
   "url": siteUrl,
   "inLanguage": lang,
+  "publisher": { "@id": CLINIC_ID },
 };
 
 // BreadcrumbList — Inicio/Home > página actual (se omite en el home, no aporta ahí)

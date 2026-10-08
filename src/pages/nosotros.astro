@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { CLINIC_ID } from '../data/i18n';
 
 const equipo = [
   {
@@ -69,14 +70,14 @@ const equipoSchema = {
       "@type": "Person",
       "name": "Dr. Sebastián Arango",
       "jobTitle": "Director · Implantología · Rehabilitación Oral",
-      "worksFor": { "@type": "Dentist", "name": "Arango Dental Clinic" },
+      "worksFor": { "@id": CLINIC_ID },
       "description": "Fundador y director de Arango Dental Clinic. Especialista en implantología y rehabilitación oral, con formación en las técnicas más avanzadas de odontología digital.",
     },
     ...equipo.map((persona) => ({
       "@type": "Person",
       "name": persona.nombre,
       "jobTitle": persona.especialidad,
-      "worksFor": { "@type": "Dentist", "name": "Arango Dental Clinic" },
+      "worksFor": { "@id": CLINIC_ID },
       "description": persona.descripcion,
     })),
   ],

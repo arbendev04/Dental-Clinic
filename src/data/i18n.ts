@@ -4,6 +4,30 @@ export type Lang = 'es' | 'en';
 
 export const SITE_URL = 'https://arangodentalclinic.es';
 
+// ── Identidad de la clínica para el schema (JSON-LD) ──
+// El bloque `Dentist` completo vive en Layout.astro (se emite en todas las páginas) con
+// este @id; el resto del sitio (servicios, landings, blog, equipo) lo REFERENCIA con
+// { "@id": CLINIC_ID } en vez de repetir la clínica, así Google ve un solo grafo coherente.
+export const CLINIC_ID = `${SITE_URL}/#clinica`;
+export const WEBSITE_ID = `${SITE_URL}/#website`;
+
+// Ficha de Google Maps (mismo place_id que usa el footer).
+export const CLINIC_MAP_URL =
+  'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJrZfws2MFYg0RHzre1V7ThzY';
+
+// Municipios que atiende la clínica (mismos que el texto visible de la home y las landings).
+export const AREA_SERVED_CITIES = [
+  'Benidorm',
+  'La Nucía',
+  'Alfaz del Pi',
+  'Finestrat',
+  'Villajoyosa',
+  'Altea',
+  'Polop',
+] as const;
+
+export const AREA_SERVED_SCHEMA = AREA_SERVED_CITIES.map((name) => ({ '@type': 'City', name }));
+
 // Páginas que existen en los dos idiomas (rutas con barra final, sin dominio).
 // Layout.astro genera de acá los <link rel="alternate" hreflang>; Navbar usa
 // el mismo mapa para el selector de idioma. Una página que no esté acá no

@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { CLINIC_ID } from '../../data/i18n';
 
 const team = [
   {
@@ -70,14 +71,14 @@ const teamSchema = {
       "@type": "Person",
       "name": "Dr. Sebastián Arango",
       "jobTitle": "Director · Implantology · Oral Rehabilitation",
-      "worksFor": { "@type": "Dentist", "name": "Arango Dental Clinic" },
+      "worksFor": { "@id": CLINIC_ID },
       "description": "Founder and director of Arango Dental Clinic. Specialist in implantology and oral rehabilitation, trained in the most advanced digital dentistry techniques.",
     },
     ...team.map((person) => ({
       "@type": "Person",
       "name": person.name,
       "jobTitle": person.specialty,
-      "worksFor": { "@type": "Dentist", "name": "Arango Dental Clinic" },
+      "worksFor": { "@id": CLINIC_ID },
       "description": person.description,
     })),
   ],

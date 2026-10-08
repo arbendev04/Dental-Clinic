@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import LeadModal from './LeadModal.astro';
-import { SITE_URL, type Lang } from '../../data/i18n';
+import { SITE_URL, CLINIC_ID, type Lang } from '../../data/i18n';
 import {
   getPosts,
   postPath,
@@ -103,9 +103,10 @@ const postSchema = {
   dateModified: modified,
   inLanguage: lang,
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  author: { '@type': 'Organization', name: 'Arango Dental Clinic', url: SITE_URL },
+  author: { '@type': 'Organization', '@id': CLINIC_ID, name: 'Arango Dental Clinic', url: SITE_URL },
   publisher: {
     '@type': 'Organization',
+    '@id': CLINIC_ID,
     name: 'Arango Dental Clinic',
     url: SITE_URL,
     logo: { '@type': 'ImageObject', url: `${SITE_URL}/img/logo/logo-oscuro.webp` },

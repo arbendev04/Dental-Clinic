@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { CLINIC_ID } from '../data/i18n';
 import RelatedArticles from '../components/blog/RelatedArticles.astro';
 
 const WHATSAPP_PHONE = '34665886439';
@@ -73,8 +74,8 @@ const faqSchema = {
   })),
 };
 
-// Sin `@id` al Dentist todavía (pendiente Tarea 9 del Plan SEO) — se declara
-// la clínica en línea, igual que ya hace el schema ItemList de /servicios/.
+// El proveedor es la clínica, referenciada por su @id (CLINIC_ID, ver src/data/i18n.ts):
+// el bloque Dentist completo lo emite el Layout en todas las páginas.
 const procedureSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
@@ -83,11 +84,7 @@ const procedureSchema = {
   "procedureType": "https://schema.org/NoninvasiveProcedure",
   "bodyLocation": "Encías y tejido periodontal",
   "howPerformed": "Valoración con sondaje periodontal, limpieza profunda mediante raspado y alisado radicular, y revisiones de mantenimiento periódico para controlar la enfermedad de las encías.",
-  "provider": {
-    "@type": "Dentist",
-    "name": "Arango Dental Clinic",
-    "url": "https://arangodentalclinic.es",
-  },
+  "provider": { "@id": CLINIC_ID },
 };
 ---
 

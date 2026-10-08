@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { servicios } from '../../data/servicios-en';
+import { CLINIC_ID, AREA_SERVED_SCHEMA } from '../../data/i18n';
 
 const WHATSAPP_PHONE = '34665886439';
 const whatsappHref = (serviceName: string) =>
@@ -19,14 +20,8 @@ const serviciosSchema = {
       "@type": "Service",
       "name": s.nombre,
       "description": s.descripcion,
-      "provider": {
-        "@type": "Dentist",
-        "name": "Arango Dental Clinic",
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Benidorm",
-      },
+      "provider": { "@id": CLINIC_ID },
+      "areaServed": AREA_SERVED_SCHEMA,
       "url": s.landingHref
         ? `https://arangodentalclinic.es${s.landingHref}`
         : "https://arangodentalclinic.es/en/services/",

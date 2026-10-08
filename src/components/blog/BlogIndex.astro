@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
-import { SITE_URL, type Lang } from '../../data/i18n';
+import { SITE_URL, CLINIC_ID, type Lang } from '../../data/i18n';
 import { getPosts, postPath, formatDate, readingMinutes, SERVICE_INFO, blogBasePath } from '../../data/blog';
 
 interface Props {
@@ -42,7 +42,7 @@ const blogSchema = {
   name: `${t.title} | Arango Dental Clinic`,
   url: SITE_URL + blogBasePath(lang),
   inLanguage: lang,
-  publisher: { '@type': 'Organization', name: 'Arango Dental Clinic', url: SITE_URL },
+  publisher: { '@type': 'Organization', '@id': CLINIC_ID, name: 'Arango Dental Clinic', url: SITE_URL },
   blogPost: posts.map((p) => ({
     '@type': 'BlogPosting',
     headline: p.data.title,
