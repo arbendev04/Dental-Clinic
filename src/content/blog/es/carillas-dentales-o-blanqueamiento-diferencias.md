@@ -70,6 +70,6 @@ Esta exploración también sirve para hablar de lo que esperas y de lo que es re
 
 ## Pide tu valoración inicial gratuita
 
-Si tienes dudas entre carillas o blanqueamiento, o si te interesa combinarlos, el mejor paso es una exploración personalizada. En Arango Dental Clinic, en Benidorm, ofrecemos una valoración inicial gratuita para revisar tu boca, escuchar lo que buscas y explicarte tus opciones. Nuestro equipo atiende en español, inglés y francés.
+Si tienes dudas entre carillas o blanqueamiento, o si te interesa combinarlos, el mejor paso es una exploración personalizada. En Arango Dental Clinic, en Benidorm, ofrecemos una valoración inicial gratuita para revisar tu boca, escuchar lo que buscas y explicarte tus opciones.
 
 Puedes [contactar con la clínica](/contacto/) para solicitar tu cita.

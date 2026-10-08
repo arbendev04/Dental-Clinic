@@ -71,4 +71,4 @@ Cuando hay enfermedad de las encías, el tratamiento especializado se llama [per
 
 ## Reserva tu valoración inicial gratuita en Benidorm
 
-Si tus encías sangran y no sabes a qué se debe, en Arango Dental Clinic podemos hacerte una valoración inicial gratuita en nuestra clínica de Benidorm. Revisaremos tus encías, te explicaremos qué ocurre y qué opciones tienes. Si hay algún tratamiento recomendable, el coste dependerá de cada caso y se te indicará después de la valoración. Nuestro equipo atiende en español, inglés y francés. Puedes [contactar con nosotros](/contacto/) para pedir tu cita.
+Si tus encías sangran y no sabes a qué se debe, en Arango Dental Clinic podemos hacerte una valoración inicial gratuita en nuestra clínica de Benidorm. Revisaremos tus encías, te explicaremos qué ocurre y qué opciones tienes. Si hay algún tratamiento recomendable, el coste dependerá de cada caso y se te indicará después de la valoración. Puedes [contactar con nosotros](/contacto/) para pedir tu cita.

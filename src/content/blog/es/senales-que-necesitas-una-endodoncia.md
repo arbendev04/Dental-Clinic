@@ -73,4 +73,4 @@ Si además de dolor notas fiebre, una hinchazón en la cara que va a más, dific
 
 ## Reserva tu valoración inicial gratuita en Benidorm
 
-Si has notado alguna de estas señales, o simplemente quieres revisar un diente que te preocupa, en Arango Dental Clinic podemos hacerte una valoración inicial gratuita en nuestra clínica de Benidorm. Tras explorarte te explicaremos qué tienes y qué opciones existen. El coste depende de cada caso y se te indica después de esa valoración. Nuestro equipo atiende en español, inglés y francés. Puedes [ponerte en contacto con nosotros](/contacto/) y reservar tu cita.
+Si has notado alguna de estas señales, o simplemente quieres revisar un diente que te preocupa, en Arango Dental Clinic podemos hacerte una valoración inicial gratuita en nuestra clínica de Benidorm. Tras explorarte te explicaremos qué tienes y qué opciones existen. El coste depende de cada caso y se te indica después de esa valoración. Puedes [ponerte en contacto con nosotros](/contacto/) y reservar tu cita.

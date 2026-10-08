@@ -6,7 +6,7 @@ export async function GET(context: APIContext) {
   const posts = await getPosts('en');
   return rss({
     title: 'Arango Dental Clinic — Blog',
-    description: 'Dental health tips, treatments and frequently asked questions from Arango Dental Clinic, your English-speaking dentist in Benidorm.',
+    description: 'Dental health tips, treatments and frequently asked questions from Arango Dental Clinic, your dentist in Benidorm.',
     site: context.site ?? 'https://arangodentalclinic.es',
     customData: '<language>en-gb</language>',
     items: posts.map((post) => ({

@@ -70,6 +70,6 @@ The examination is also a chance to talk about what you hope for and what is rea
 
 ## Book your free initial assessment
 
-If you are unsure whether veneers or whitening is right for you, or you are interested in combining them, the best step is a personal examination. At Arango Dental Clinic in Benidorm, we offer a free initial assessment to review your mouth, listen to what you are looking for and explain your options. Our team speaks Spanish, English and French.
+If you are unsure whether veneers or whitening is right for you, or you are interested in combining them, the best step is a personal examination. At Arango Dental Clinic in Benidorm, we offer a free initial assessment to review your mouth, listen to what you are looking for and explain your options.
 
 You can [contact the clinic](/en/contact/) to arrange your appointment.

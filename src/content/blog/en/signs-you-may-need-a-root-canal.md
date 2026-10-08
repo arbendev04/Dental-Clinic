@@ -75,4 +75,4 @@ If, along with the toothache, you have a fever, swelling in the face that is spr
 
 ## Book your free initial assessment in Benidorm
 
-If you have noticed any of these signs, or simply want a tooth that worries you looked at, you can book a free initial assessment at Arango Dental Clinic in Benidorm. After examining you, we will explain what we find and what options you have. The cost depends on each case and is given after that assessment. Our team speaks Spanish, English and French. Just [get in touch with the team](/en/contact/) to arrange your visit.
+If you have noticed any of these signs, or simply want a tooth that worries you looked at, you can book a free initial assessment at Arango Dental Clinic in Benidorm. After examining you, we will explain what we find and what options you have. The cost depends on each case and is given after that assessment. Just [get in touch with the team](/en/contact/) to arrange your visit.

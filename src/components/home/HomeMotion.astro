@@ -1,0 +1,150 @@
+---
+// Animaciones de entrada de la home (todo lo que va DESPUÉS del hero; el hero
+// tiene su propia lógica con GSAP y no se toca).
+//
+// Uso en el markup, sin JS adicional:
+//   data-reveal-group        contenedor: cuando entra en pantalla, revela sus
+//                            [data-reveal-item] en cascada (stagger).
+//   data-reveal-item         elemento que aparece con fade + leve subida.
+//   data-reveal              elemento suelto que aparece solo.
+//   data-reveal-line         línea decorativa que se "dibuja" (scaleX).
+//   data-reveal-mask         contenedor de imagen: la imagen entra con máscara.
+//
+// Mejora progresiva: el estado oculto solo existe con la clase .rv-on en <html>,
+// que se pone acá mismo (antes de que el navegador pinte las secciones) salvo con
+// "reducir movimiento". Si el script del observer no llega a correr, un temporizador
+// la quita y todo queda visible. Al terminar cada entrada se borran los atributos:
+// el elemento vuelve exactamente a sus estilos originales (hovers incluidos).
+---
+
+<script is:inline>
+  (function () {
+    var root = document.documentElement;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+    root.classList.add('rv-on');
+    setTimeout(function () {
+      if (!root.classList.contains('rv-ready')) root.classList.remove('rv-on');
+    }, 4000);
+  })();
+</script>
+
+<script>
+  const root = document.documentElement;
+
+  if (root.classList.contains('rv-on')) {
+    root.classList.add('rv-ready');
+
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+    const STAGGER_MS = isMobile ? 60 : 90; // separación entre elementos de un grupo
+    const MAX_STAGGERED = 6; // a partir del 6.º elemento no se acumula más retraso
+    const CLEANUP_MS = 1600; // > duración más larga (máscara de imagen)
+
+    // Devuelve el elemento a su estado original: sin atributos ni estilos de entrada.
+    const cleanup = (el: HTMLElement) => {
+      el.removeAttribute('data-reveal');
+      el.removeAttribute('data-reveal-item');
+      el.classList.remove('is-revealed');
+      el.style.removeProperty('--rv-delay');
+      el.querySelectorAll('[data-reveal-line], [data-reveal-mask]').forEach((child) => {
+        child.removeAttribute('data-reveal-line');
+        child.removeAttribute('data-reveal-mask');
+      });
+    };
+
+    const reveal = (el: HTMLElement, delay: number) => {
+      el.style.setProperty('--rv-delay', `${delay}ms`);
+      el.classList.add('is-revealed');
+      window.setTimeout(() => cleanup(el), delay + CLEANUP_MS);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const target = entry.target as HTMLElement;
+          observer.unobserve(target);
+
+          if (target.hasAttribute('data-reveal-group')) {
+            const items = target.querySelectorAll<HTMLElement>('[data-reveal-item]');
+            items.forEach((item, i) => reveal(item, Math.min(i, MAX_STAGGERED) * STAGGER_MS));
+            target.removeAttribute('data-reveal-group');
+          } else {
+            reveal(target, 0);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+    );
+
+    // Los grupos se observan como bloque (así funcionan también los carruseles,
+    // cuyas tarjetas fuera de pantalla en horizontal nunca "intersectan").
+    document.querySelectorAll('[data-reveal-group], [data-reveal]').forEach((el) => observer.observe(el));
+  }
+</script>
+
+<style is:global>
+  :root {
+    --rv-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --rv-duration: 800ms;
+    --rv-distance: 22px;
+  }
+
+  /* En móvil: menos recorrido y algo más rápido. */
+  @media (max-width: 640px) {
+    :root {
+      --rv-duration: 650ms;
+      --rv-distance: 14px;
+    }
+  }
+
+  html.rv-on [data-reveal],
+  html.rv-on [data-reveal-item] {
+    opacity: 0;
+    transform: translate3d(0, var(--rv-distance), 0);
+    transition:
+      opacity var(--rv-duration) var(--rv-ease),
+      transform var(--rv-duration) var(--rv-ease);
+    transition-delay: var(--rv-delay, 0ms);
+  }
+
+  html.rv-on [data-reveal].is-revealed,
+  html.rv-on [data-reveal-item].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Líneas decorativas de los encabezados: se dibujan desde la etiqueta hacia afuera. */
+  html.rv-on [data-reveal-line] {
+    transform: scaleX(0);
+    transition: transform 1100ms var(--rv-ease);
+    transition-delay: calc(var(--rv-delay, 0ms) + 150ms);
+  }
+
+  html.rv-on [data-reveal-line]:first-child {
+    transform-origin: right center;
+  }
+
+  html.rv-on [data-reveal-line]:last-child {
+    transform-origin: left center;
+  }
+
+  html.rv-on .is-revealed [data-reveal-line] {
+    transform: scaleX(1);
+  }
+
+  /* Imágenes: entran con una máscara de arriba hacia abajo y un zoom mínimo que se asienta. */
+  html.rv-on [data-reveal-mask] img {
+    clip-path: inset(0 0 100% 0);
+    transform: scale(1.06);
+    transition:
+      clip-path 1000ms var(--rv-ease),
+      transform 1400ms var(--rv-ease);
+    transition-delay: calc(var(--rv-delay, 0ms) + 120ms);
+  }
+
+  html.rv-on .is-revealed [data-reveal-mask] img {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+</style>

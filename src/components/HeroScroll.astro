@@ -61,7 +61,7 @@ const dict = {
     frame3Alt: 'Dental model with an exploratory probe',
     frame4Alt: 'High-speed dental handpiece',
     label: 'Dental Clinic in Benidorm',
-    description: 'Advanced technology and personalised care for your smile, from a team that speaks English, Spanish and French.',
+    description: 'Advanced technology and personalised care for your smile, in the heart of Benidorm.',
     ctaPrimaryHref: '/en/contact/#contact-form',
     ctaPrimary: 'Book My Free Assessment',
     ctaSecondaryHref: '/en/services/',
@@ -141,10 +141,11 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
         <span>{dict.label}</span>
       </div>
 
-      <!-- Título principal -->
-      <h1 class="hero-title">
+      {/* Título principal: es la marca, no un H1 — el único H1 de la home está en
+          HomeIntro.astro ("Dentista en Benidorm"). La tipografía va por clase, no por la etiqueta. */}
+      <p class="hero-title">
         <span class="hero-chars" id="hero-chars">Arango Dental Clinic</span>
-      </h1>
+      </p>
 
       <!-- Descripción -->
       <p class="hero-description" id="hero-description">

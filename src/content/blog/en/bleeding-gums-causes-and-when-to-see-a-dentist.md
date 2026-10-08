@@ -71,4 +71,4 @@ When gum disease is present, specialist care is known as periodontics, and our [
 
 ## Book your free initial assessment in Benidorm
 
-If your gums bleed and you are not sure why, you can book a free initial assessment at Arango Dental Clinic in Benidorm. We will check your gums and explain what is happening and what your options are. If a treatment is advisable, the cost depends on each case and is given after the assessment. Our team speaks Spanish, English and French. Feel free to [contact the clinic](/en/contact/) to arrange your visit.
+If your gums bleed and you are not sure why, you can book a free initial assessment at Arango Dental Clinic in Benidorm. We will check your gums and explain what is happening and what your options are. If a treatment is advisable, the cost depends on each case and is given after the assessment. Feel free to [contact the clinic](/en/contact/) to arrange your visit.

@@ -93,6 +93,6 @@ Si quieres conocer cómo es el proceso completo, puedes consultar nuestra págin
 
 ## Pide tu valoración inicial gratuita
 
-Si estás pensando en un implante y quieres saber qué recuperación te espera a ti, lo mejor es una exploración personalizada. En Arango Dental Clinic, en Benidorm, ofrecemos una valoración inicial gratuita en la que revisamos tu caso y resolvemos tus dudas. Nuestro equipo atiende en español, inglés y francés, así que puedes preguntar con tranquilidad en tu idioma.
+Si estás pensando en un implante y quieres saber qué recuperación te espera a ti, lo mejor es una exploración personalizada. En Arango Dental Clinic, en Benidorm, ofrecemos una valoración inicial gratuita en la que revisamos tu caso y resolvemos tus dudas.
 
 Puedes [contactar con la clínica](/contacto/) para solicitar tu cita.

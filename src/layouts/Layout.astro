@@ -37,7 +37,7 @@ const lang = getLang(Astro.url.pathname);
 const isEn = lang === 'en';
 const alternates = noindex ? null : getAlternates(Astro.url.pathname);
 const description = descriptionProp ?? (isEn
-  ? 'Arango Dental Clinic - Dental clinic at Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. English-speaking dentists: implants, orthodontics, cosmetic dentistry and digital dentistry.'
+  ? 'Arango Dental Clinic - Dental clinic at Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implants, orthodontics, cosmetic dentistry and digital dentistry.'
   : 'Arango Dental Clinic - Clínica dental en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implantes, ortodoncia, estética dental y odontología digital.');
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 
@@ -52,9 +52,9 @@ const schemaData = {
   "@type": "Dentist",
   "name": "Arango Dental Clinic",
   "description": isEn
-    ? "Dental clinic at Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. English-speaking dentists: implants, orthodontics, cosmetic dentistry and digital dentistry."
+    ? "Dental clinic at Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implants, orthodontics, cosmetic dentistry and digital dentistry."
     : "Clínica dental en Avinguda Alfonso Puchades, 22, bajo, Benidorm, Alicante. Implantes, ortodoncia, estética dental y odontología digital.",
-  "knowsLanguage": ["es", "en", "fr"],
+  "knowsLanguage": ["es"],
   "url": siteUrl,
   "logo": `${siteUrl}/img/logo/logo-oscuro.webp`,
   "image": `${siteUrl}/img/hero/instrumentos-odontologicos-esterilizados.webp`,

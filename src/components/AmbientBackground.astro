@@ -1,0 +1,184 @@
+---
+// Fondo ambiental ("mesh gradient") detrás del contenido de una sección: luz difusa,
+// grande y de baja saturación, como una iluminación fotografiada sobre una superficie.
+// CSS puro (gradientes radiales en capas), sin imágenes, canvas ni librerías.
+//
+// Uso: la sección que lo contiene lleva la clase "amb-host" y el componente va como
+// primer hijo:
+//   <section class="amb-host ..."> <AmbientBackground intensity="strong" tone="forest" /> ...
+//
+//   tone="forest"   en oscuro usa el verde bosque de la marca (#153328) como base;
+//                   en claro, un marfil cálido. Para secciones principales.
+//   tone="neutral"  respeta el fondo actual de la sección (var(--amb-host-bg)) y solo
+//                   le suma una luz mínima. Para secciones con mucho contenido.
+//   intensity       strong | medium | soft (escala la opacidad de toda la luz).
+//   variant         a | b | c: cambia dónde caen las luces, para que las secciones no
+//                   se vean iguales entre sí.
+//
+// El tema se resuelve solo con la clase .dark de <html> (variables CSS, sin JS).
+// La deriva es lentísima (dos capas con ciclos de 27s y 37s, así no se nota el loop),
+// se pausa fuera de pantalla y se desactiva con prefers-reduced-motion.
+interface Props {
+  intensity?: 'strong' | 'medium' | 'soft';
+  tone?: 'forest' | 'neutral';
+  variant?: 'a' | 'b' | 'c';
+}
+
+const { intensity = 'medium', tone = 'forest', variant = 'a' } = Astro.props;
+---
+
+<div class={`ambient ambient--${tone} ambient--${intensity} ambient--${variant}`} aria-hidden="true"></div>
+
+<script>
+  // Solo anima los fondos que están en pantalla (el resto queda en pausa).
+  const layers = document.querySelectorAll<HTMLElement>('.ambient');
+  if (layers.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) entry.target.classList.toggle('is-visible', entry.isIntersecting);
+      },
+      { rootMargin: '100px 0px' },
+    );
+    layers.forEach((el) => io.observe(el));
+  }
+</script>
+
+<style is:global>
+  /* ── Sección anfitriona: el fondo queda detrás y el contenido encima ── */
+  .amb-host {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .amb-host > :not(.ambient) {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Paleta y posiciones (todo por variables) ── */
+  .ambient {
+    /* Tema claro: marfil cálido, verde apagado casi invisible, beige y un toque de oro. */
+    --amb-base: #f8f6f0;
+    --amb-c1: rgba(70, 101, 88, 0.075);   /* verde apagado */
+    --amb-c2: rgba(222, 205, 172, 0.42);  /* beige cálido */
+    --amb-c3: rgba(201, 166, 107, 0.085); /* oro, apenas */
+    --amb-c4: rgba(255, 253, 248, 0.6);   /* luz marfil */
+    --amb-strength: 1;
+    --amb-drift: 2.2%;
+
+    /* Posiciones: la luz (c1) va a una esquina y la zona profunda (c2) detrás de la
+       columna central de texto, así el ambiente suma contraste en vez de restarlo. */
+    --amb-p1: 0% 0%;
+    --amb-p2: 50% 62%;
+    --amb-p3: 96% 8%;
+    --amb-p4: 100% 100%;
+
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background-color: var(--amb-base);
+  }
+
+  .ambient--neutral {
+    --amb-base: var(--amb-host-bg, var(--bg-secondary));
+    --amb-c1: rgba(70, 101, 88, 0.05);
+    --amb-c2: rgba(222, 205, 172, 0.28);
+    --amb-c3: rgba(201, 166, 107, 0.055);
+    --amb-c4: rgba(255, 253, 248, 0.45);
+  }
+
+  /* Tema oscuro: verde bosque como base, luz verde suave, zona más profunda y un oro casi imperceptible. */
+  html.dark .ambient--forest {
+    --amb-base: #153328;
+    --amb-c1: rgba(40, 84, 66, 0.85);  /* #285442: luz verde suave */
+    --amb-c2: rgba(16, 39, 31, 0.9);   /* #10271F: zona atmosférica profunda */
+    --amb-c3: rgba(201, 166, 107, 0.07); /* #C9A66B: oro, solo profundidad */
+    --amb-c4: rgba(29, 68, 54, 0.7);   /* #1D4436: verde secundario */
+  }
+
+  html.dark .ambient--neutral {
+    --amb-base: var(--amb-host-bg, var(--bg-secondary));
+    --amb-c1: rgba(40, 84, 66, 0.16);
+    --amb-c2: rgba(10, 9, 8, 0.35);
+    --amb-c3: rgba(201, 166, 107, 0.035);
+    --amb-c4: rgba(29, 68, 54, 0.12);
+  }
+
+  .ambient--strong { --amb-strength: 1; }
+  .ambient--medium { --amb-strength: 0.8; }
+  .ambient--soft { --amb-strength: 0.6; }
+
+  .ambient--b {
+    --amb-p1: 100% 0%;
+    --amb-p2: 46% 58%;
+    --amb-p3: 4% 10%;
+    --amb-p4: 0% 100%;
+  }
+
+  .ambient--c {
+    --amb-p1: 100% 100%;
+    --amb-p2: 50% 45%;
+    --amb-p3: 2% 4%;
+    --amb-p4: 0% 100%;
+  }
+
+  /* Capa 1: las dos luces grandes (verde suave + zona profunda). */
+  .ambient::before,
+  .ambient::after {
+    content: "";
+    position: absolute;
+    inset: -12%;
+    opacity: var(--amb-strength);
+    will-change: transform;
+  }
+
+  .ambient::before {
+    background:
+      radial-gradient(ellipse 58% 75% at var(--amb-p1), var(--amb-c1) 0%, transparent 70%),
+      radial-gradient(ellipse 55% 70% at var(--amb-p2), var(--amb-c2) 0%, transparent 72%);
+    animation: amb-drift-a 27s ease-in-out infinite alternate;
+  }
+
+  /* Capa 2: oro mínimo + verde secundario, con su propio ciclo. */
+  .ambient::after {
+    background:
+      radial-gradient(ellipse 38% 42% at var(--amb-p3), var(--amb-c3) 0%, transparent 70%),
+      radial-gradient(ellipse 55% 50% at var(--amb-p4), var(--amb-c4) 0%, transparent 72%);
+    animation: amb-drift-b 37s ease-in-out infinite alternate;
+  }
+
+  /* Fuera de pantalla no hay nada que animar. */
+  .ambient:not(.is-visible)::before,
+  .ambient:not(.is-visible)::after {
+    animation-play-state: paused;
+  }
+
+  @keyframes amb-drift-a {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(var(--amb-drift), calc(var(--amb-drift) * -0.6), 0) scale(1.03); }
+    100% { transform: translate3d(calc(var(--amb-drift) * -0.4), calc(var(--amb-drift) * 0.5), 0) scale(1.01); }
+  }
+
+  @keyframes amb-drift-b {
+    0%   { transform: translate3d(0, 0, 0) scale(1.02); }
+    50%  { transform: translate3d(calc(var(--amb-drift) * -0.8), calc(var(--amb-drift) * 0.7), 0) scale(1); }
+    100% { transform: translate3d(calc(var(--amb-drift) * 0.5), calc(var(--amb-drift) * -0.3), 0) scale(1.03); }
+  }
+
+  /* En móvil, menos recorrido. */
+  @media (max-width: 640px) {
+    .ambient {
+      --amb-drift: 1.2%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ambient::before,
+    .ambient::after {
+      animation: none;
+    }
+  }
+</style>

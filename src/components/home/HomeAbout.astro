@@ -1,0 +1,266 @@
+---
+import type { Lang } from '../../data/i18n';
+import AmbientBackground from '../AmbientBackground.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+// "Por qué elegirnos" + zona de servicio, entre los tratamientos y las cifras.
+// Solo datos confirmados: valoración gratuita, tecnología digital, trato claro,
+// equipo y zona. Sin precios, sin financiación y sin cifras de pacientes.
+const { lang } = Astro.props;
+
+const MAPS_HREF = 'https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJrZfws2MFYg0RHzre1V7ThzY';
+
+const t = {
+  es: {
+    whyLabel: 'Por qué elegirnos',
+    whyTitle: 'Un dentista en Benidorm que te explica cada paso',
+    reasons: [
+      { title: 'Valoración inicial gratuita', text: 'Revisamos tu caso, te explicamos las opciones y el presupuesto de lo que necesitas. Sin compromiso.' },
+      { title: 'Tecnología digital', text: 'Escáner intraoral 3D y radiografía digital para diagnosticar y planificar cada tratamiento con detalle.' },
+      { title: 'Trato cercano y claro', text: 'Te explicamos cada diagnóstico y cada plan de tratamiento con claridad antes de empezar, para que decidas con tranquilidad.' },
+      { title: 'Un equipo, varios tratamientos', text: 'Implantología, ortodoncia, endodoncia, periodoncia, estética dental, rehabilitación oral e higiene dental, en un mismo lugar.' },
+    ],
+    areaLabel: 'Dónde estamos',
+    areaTitle: 'Dentista en Benidorm y la Marina Baixa',
+    areaText: 'Estamos en la Avinguda Alfonso Puchades, 22, bajo, en Benidorm (Alicante). Atendemos a pacientes de Benidorm y de los municipios cercanos: La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea y Polop, además de visitantes que están de paso por la Costa Blanca.',
+    hoursTitle: 'Horario',
+    hoursText: 'Lunes a jueves, de 10:00 a 14:00 y de 15:00 a 19:00. Viernes, de 10:00 a 14:00.',
+    mapsLabel: 'Cómo llegar',
+    contactLabel: 'Contacto',
+    contactHref: '/contacto/',
+  },
+  en: {
+    whyLabel: 'Why choose us',
+    whyTitle: 'A dentist in Benidorm who explains every step',
+    reasons: [
+      { title: 'Free initial assessment', text: 'We review your case, explain your options and the quote for what you need. No obligation.' },
+      { title: 'Digital technology', text: '3D intraoral scanning and digital X-rays to diagnose and plan every treatment in detail.' },
+      { title: 'Clear, personal care', text: 'We explain every diagnosis and every treatment plan clearly before we begin, so you can decide with peace of mind.' },
+      { title: 'One team, many treatments', text: 'Implantology, orthodontics, root canal treatment, gum care, cosmetic dentistry, oral rehabilitation and dental hygiene, all in one place.' },
+    ],
+    areaLabel: 'Where we are',
+    areaTitle: 'Dentist in Benidorm and the Marina Baixa',
+    areaText: 'We are at Avinguda Alfonso Puchades, 22, bajo, in Benidorm (Alicante). We see patients from Benidorm and the nearby towns: La Nucía, Alfaz del Pi, Finestrat, Villajoyosa, Altea and Polop, as well as visitors passing through the Costa Blanca.',
+    hoursTitle: 'Opening hours',
+    hoursText: 'Monday to Thursday, 10:00 to 14:00 and 15:00 to 19:00. Friday, 10:00 to 14:00.',
+    mapsLabel: 'Get directions',
+    contactLabel: 'Contact us',
+    contactHref: '/en/contact/',
+  },
+}[lang];
+---
+
+<section class="hm-why amb-host" aria-labelledby="hm-why-title">
+  <AmbientBackground intensity="soft" tone="neutral" variant="b" />
+  <div class="hm-container">
+    <div class="hm-head" data-reveal-group>
+      <p class="hm-label" data-reveal-item>{t.whyLabel}</p>
+      <h2 class="hm-title" id="hm-why-title" data-reveal-item>{t.whyTitle}</h2>
+    </div>
+    <ul class="hm-reasons" data-reveal-group>
+      {t.reasons.map((r) => (
+        <li class="hm-reason" data-reveal-item>
+          <h3 class="hm-reason-title">{r.title}</h3>
+          <p>{r.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="hm-area" aria-labelledby="hm-area-title">
+  <div class="hm-container hm-area-grid" data-reveal-group>
+    <div>
+      <p class="hm-label" data-reveal-item>{t.areaLabel}</p>
+      <h2 class="hm-title hm-title-left" id="hm-area-title" data-reveal-item>{t.areaTitle}</h2>
+      <p class="hm-area-text" data-reveal-item>{t.areaText}</p>
+    </div>
+    <div class="hm-area-card" data-reveal-item>
+      <h3 class="hm-reason-title">{t.hoursTitle}</h3>
+      <p>{t.hoursText}</p>
+      <address class="hm-address">
+        Avinguda Alfonso Puchades, 22, bajo<br />
+        03501 Benidorm, Alicante
+      </address>
+      <div class="hm-area-actions">
+        <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" class="hm-link">{t.mapsLabel} →</a>
+        <a href={t.contactHref} class="hm-link">{t.contactLabel} →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hm-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Acento de bordes y detalles: verde en tema claro, dorado en oscuro
+     (las etiquetas pequeñas de arriba se quedan doradas, como en el resto de la home). */
+  .hm-why,
+  .hm-area {
+    --hm-accent: var(--teal-500);
+  }
+
+  :global(html.dark) .hm-why,
+  :global(html.dark) .hm-area {
+    --hm-accent: var(--gold-500);
+  }
+
+  .hm-why {
+    background-color: var(--bg-secondary);
+    padding: 4.5rem 1.25rem;
+  }
+
+  .hm-area {
+    background-color: var(--bg-primary);
+    padding: 4.5rem 1.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    .hm-why,
+    .hm-area {
+      padding: 6rem 5rem;
+    }
+  }
+
+  .hm-head {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .hm-label {
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-600);
+    margin: 0 0 1rem;
+  }
+
+  .hm-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--text-primary);
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .hm-title-left {
+    margin-bottom: 1.5rem;
+  }
+
+  .hm-reasons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .hm-reasons {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hm-reasons {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .hm-reason {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-top: 3px solid var(--hm-accent);
+    padding: 1.75rem 1.5rem;
+    transition: transform 450ms cubic-bezier(0.22, 0.61, 0.36, 1), border-color 0.3s ease;
+  }
+
+  /* Hover sutil: la tarjeta se eleva apenas y el borde toma el acento. */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .hm-reason:hover {
+      transform: translateY(-3px);
+      border-color: var(--hm-accent);
+    }
+  }
+
+  .hm-reason-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem;
+  }
+
+  .hm-reason p,
+  .hm-area-text,
+  .hm-area-card p {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .hm-area-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .hm-area-grid {
+      grid-template-columns: 1.3fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .hm-area-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-left: 3px solid var(--hm-accent);
+    padding: 1.75rem 1.75rem 1.5rem;
+  }
+
+  .hm-address {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin: 1.25rem 0;
+  }
+
+  .hm-area-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+
+  .hm-link {
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal-600);
+    text-decoration: none;
+  }
+
+  .hm-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>

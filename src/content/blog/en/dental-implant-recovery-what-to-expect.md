@@ -93,6 +93,6 @@ If you are an overseas resident or visiting for an extended stay, tell the team 
 
 ## Book your free initial assessment
 
-If you are considering an implant and want to know what recovery would look like for you, the best step is a personal examination. At Arango Dental Clinic in Benidorm, we offer a free initial assessment where we review your case and answer your questions. Our team speaks Spanish, English and French, so you can ask everything in the language you feel most comfortable with.
+If you are considering an implant and want to know what recovery would look like for you, the best step is a personal examination. At Arango Dental Clinic in Benidorm, we offer a free initial assessment where we review your case and answer your questions.
 
 You can [contact the clinic](/en/contact/) to arrange your appointment.
