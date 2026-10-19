@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { CLINIC_ID } from '../data/i18n';
 import RelatedArticles from '../components/blog/RelatedArticles.astro';
+import RelatedServices from '../components/RelatedServices.astro';
+import LandingCrumbs from '../components/LandingCrumbs.astro';
 
 const WHATSAPP_PHONE = '34665886439';
 const whatsappHref = (texto: string) =>
@@ -88,7 +90,7 @@ const procedureSchema = {
 };
 ---
 
-<Layout title="Implantes Dentales en Benidorm | Precio y Valoración" description="Implantes dentales en Benidorm con planificación 3D y implantes de titanio. Valoración inicial sin coste y presupuesto personalizado. Pide cita hoy." image="/img/servicios/servicios.webp">
+<Layout title="Implantes Dentales en Benidorm | Precio y Valoración" description="Implantes dentales en Benidorm con planificación 3D y implantes de titanio. Valoración inicial sin coste y presupuesto personalizado. Pide cita hoy." image="/img/servicios/servicios.webp" breadcrumbTrail={[{ name: 'Servicios', path: '/servicios/' }]} breadcrumbName="Implantes dentales en Benidorm">
   <script type="application/ld+json" set:html={JSON.stringify(procedureSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
@@ -107,6 +109,7 @@ const procedureSchema = {
     <div class="trt-hero-overlay" aria-hidden="true"></div>
     <div class="trt-hero-inner">
       <div class="trt-hero-text">
+        <LandingCrumbs lang="es" current="Implantes dentales en Benidorm" />
         <p class="trt-label">Arango Dental Clinic</p>
         <h1 class="trt-hero-title">Implantes dentales en Benidorm</h1>
         <p class="trt-hero-sub">
@@ -272,6 +275,7 @@ const procedureSchema = {
     </div>
   </section>
 
+  <RelatedServices lang="es" service="implantes" />
   <RelatedArticles lang="es" service="implantes" />
 
   <!-- ── CTA final ── -->

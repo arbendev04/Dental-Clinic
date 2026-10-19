@@ -2,6 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import { CLINIC_ID } from '../../data/i18n';
 import RelatedArticles from '../../components/blog/RelatedArticles.astro';
+import RelatedServices from '../../components/RelatedServices.astro';
+import LandingCrumbs from '../../components/LandingCrumbs.astro';
 
 const WHATSAPP_PHONE = '34665886439';
 const whatsappHref = (text: string) =>
@@ -90,7 +92,7 @@ const procedureSchema = {
 };
 ---
 
-<Layout title={"Root Canal Treatment in Benidorm | Save Your Tooth"} description={"Root canal treatment in Benidorm to save your tooth. Digital diagnosis and a free initial assessment. Book today."} image="/img/servicios/servicios.webp">
+<Layout title={"Root Canal Treatment in Benidorm | Save Your Tooth"} description={"Root canal treatment in Benidorm to save your tooth. Digital diagnosis and a free initial assessment. Book today."} image="/img/servicios/servicios.webp" breadcrumbTrail={[{ name: 'Services', path: '/en/services/' }]} breadcrumbName="Root canal treatment in Benidorm">
   <script type="application/ld+json" set:html={JSON.stringify(procedureSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
@@ -109,6 +111,7 @@ const procedureSchema = {
     <div class="trt-hero-overlay" aria-hidden="true"></div>
     <div class="trt-hero-inner">
       <div class="trt-hero-text">
+        <LandingCrumbs lang="en" current="Root canal treatment in Benidorm" />
         <p class="trt-label">Arango Dental Clinic</p>
         <h1 class="trt-hero-title">Root canal treatment in Benidorm</h1>
         <p class="trt-hero-sub">
@@ -226,6 +229,7 @@ const procedureSchema = {
     </div>
   </section>
 
+  <RelatedServices lang="en" service="endodoncia" />
   <RelatedArticles lang="en" service="endodoncia" />
 
   <!-- ── Final CTA ── -->

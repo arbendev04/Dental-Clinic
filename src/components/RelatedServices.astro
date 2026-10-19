@@ -1,0 +1,192 @@
+---
+import type { Lang } from '../data/i18n';
+import { SERVICE_INFO, type BlogService } from '../data/blog';
+import { RELATED_SERVICES } from '../data/servicios-relacionados';
+
+interface Props {
+  lang: Lang;
+  service: BlogService;
+}
+
+// "Tratamientos relacionados" al pie de cada landing (Tarea 11 del Plan SEO): enlaza la landing
+// con los 3 tratamientos con los que más se relaciona, con anclas descriptivas. Los datos están en
+// src/data/servicios-relacionados.ts. Solo el nombre es el enlace (anchor text limpio para SEO);
+// una capa transparente (::after) hace clicable toda la tarjeta.
+const { lang, service } = Astro.props;
+const items = RELATED_SERVICES[service].map((rel) => ({
+  name: lang === 'en' ? `${SERVICE_INFO[rel.key].en.label} in Benidorm` : `${SERVICE_INFO[rel.key].es.label} en Benidorm`,
+  href: SERVICE_INFO[rel.key][lang].href,
+  why: rel.why[lang],
+}));
+
+const t = {
+  es: { title: 'Tratamientos relacionados', intro: 'Muchos tratamientos se complementan entre sí. Estos son los que más se relacionan con este.', all: 'Ver todos los servicios', allHref: '/servicios/' },
+  en: { title: 'Related treatments', intro: 'Many treatments complement each other. These are the ones most closely related to this one.', all: 'See all services', allHref: '/en/services/' },
+}[lang];
+---
+
+<section class="rs-section" aria-labelledby="rs-title">
+  <div class="rs-container">
+    <h2 class="rs-title" id="rs-title">{t.title}</h2>
+    <p class="rs-intro">{t.intro}</p>
+    <ul class="rs-list">
+      {items.map((item) => (
+        <li class="rs-card">
+          <h3 class="rs-name"><a href={item.href}>{item.name}</a></h3>
+          <p class="rs-why">{item.why}</p>
+          <span class="rs-arrow" aria-hidden="true">→</span>
+        </li>
+      ))}
+    </ul>
+    <p class="rs-all"><a href={t.allHref}>{t.all} →</a></p>
+  </div>
+</section>
+
+<style>
+  .rs-section {
+    --rs-accent: var(--teal-500);
+    background-color: var(--bg-primary);
+    padding: 4rem 0;
+  }
+
+  :global(html.dark) .rs-section {
+    --rs-accent: var(--gold-500);
+  }
+
+  .rs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .rs-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 0.6rem;
+  }
+
+  .rs-intro {
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 62ch;
+    margin: 0 0 1.75rem;
+  }
+
+  .rs-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 900px) {
+    .rs-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .rs-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.5rem 1.5rem 1.25rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-left: 3px solid var(--border-primary);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  .rs-card:hover,
+  .rs-card:focus-within {
+    border-color: var(--rs-accent);
+    background-color: var(--bg-tertiary);
+  }
+
+  .rs-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .rs-name a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  /* Toda la tarjeta es clicable sin meter el texto descriptivo dentro del enlace. */
+  .rs-name a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  .rs-name a:focus-visible {
+    outline: none;
+  }
+
+  .rs-card:has(a:focus-visible) {
+    outline: 2px solid var(--rs-accent);
+    outline-offset: 2px;
+  }
+
+  .rs-why {
+    font-family: "Inter", sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .rs-arrow {
+    margin-top: auto;
+    font-size: 1.1rem;
+    color: var(--rs-accent);
+    transition: transform 0.3s ease;
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .rs-card:hover .rs-arrow {
+      transform: translateX(4px);
+    }
+  }
+
+  .rs-all {
+    font-family: "Inter", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 1.5rem 0 0;
+  }
+
+  .rs-all a {
+    color: var(--teal-600);
+    text-decoration: none;
+  }
+
+  .rs-all a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .rs-container {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .rs-section {
+      padding: 3rem 0;
+    }
+  }
+</style>

@@ -2,6 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import { CLINIC_ID } from '../../data/i18n';
 import RelatedArticles from '../../components/blog/RelatedArticles.astro';
+import RelatedServices from '../../components/RelatedServices.astro';
+import LandingCrumbs from '../../components/LandingCrumbs.astro';
 
 const WHATSAPP_PHONE = '34665886439';
 const whatsappHref = (text: string) =>
@@ -90,7 +92,7 @@ const procedureSchema = {
 };
 ---
 
-<Layout title={"Cosmetic Dentistry in Benidorm | Veneers and Whitening"} description={"Cosmetic dentistry in Benidorm: veneers and teeth whitening with digital smile design. Free initial assessment and personalised quote. Book today."} image="/img/servicios/servicios.webp">
+<Layout title={"Cosmetic Dentistry in Benidorm | Veneers and Whitening"} description={"Cosmetic dentistry in Benidorm: veneers and teeth whitening with digital smile design. Free initial assessment and personalised quote. Book today."} image="/img/servicios/servicios.webp" breadcrumbTrail={[{ name: 'Services', path: '/en/services/' }]} breadcrumbName="Cosmetic dentistry in Benidorm">
   <script type="application/ld+json" set:html={JSON.stringify(procedureSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
@@ -109,6 +111,7 @@ const procedureSchema = {
     <div class="trt-hero-overlay" aria-hidden="true"></div>
     <div class="trt-hero-inner">
       <div class="trt-hero-text">
+        <LandingCrumbs lang="en" current="Cosmetic dentistry in Benidorm" />
         <p class="trt-label">Arango Dental Clinic</p>
         <h1 class="trt-hero-title">Cosmetic dentistry in Benidorm</h1>
         <p class="trt-hero-sub">
@@ -226,6 +229,7 @@ const procedureSchema = {
     </div>
   </section>
 
+  <RelatedServices lang="en" service="estetica-dental" />
   <RelatedArticles lang="en" service="estetica-dental" />
 
   <!-- ── Final CTA ── -->

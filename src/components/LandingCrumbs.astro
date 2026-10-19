@@ -1,0 +1,69 @@
+---
+import type { Lang } from '../data/i18n';
+
+interface Props {
+  lang: Lang;
+  /** Texto del último nivel (el H1 de la landing). */
+  current: string;
+}
+
+// Migas visibles de las landings de tratamiento: Inicio › Servicios › <tratamiento>.
+// El BreadcrumbList del <head> lo emite Layout.astro con la misma ruta (prop breadcrumbTrail),
+// así lo que ve la gente y lo que lee Google coincide. Va sobre el hero (fondo siempre oscuro).
+const { lang, current } = Astro.props;
+const t = {
+  es: { aria: 'Ruta de navegación', home: 'Inicio', homeHref: '/', services: 'Servicios', servicesHref: '/servicios/' },
+  en: { aria: 'Breadcrumb', home: 'Home', homeHref: '/en/', services: 'Services', servicesHref: '/en/services/' },
+}[lang];
+---
+
+<nav class="lc-crumbs" aria-label={t.aria}>
+  <ol>
+    <li><a href={t.homeHref}>{t.home}</a></li>
+    <li><a href={t.servicesHref}>{t.services}</a></li>
+    <li aria-current="page">{current}</li>
+  </ol>
+</nav>
+
+<style>
+  .lc-crumbs {
+    margin: 0 0 1.1rem;
+  }
+
+  .lc-crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+  }
+
+  .lc-crumbs li + li::before {
+    content: "›";
+    margin-right: 0.35rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .lc-crumbs a {
+    color: #ffffff;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.5);
+    text-underline-offset: 3px;
+  }
+
+  .lc-crumbs a:hover,
+  .lc-crumbs a:focus-visible {
+    color: #fff;
+    text-decoration-color: currentColor;
+  }
+
+  .lc-crumbs [aria-current="page"] {
+    color: #ffffff;
+  }
+</style>

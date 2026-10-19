@@ -20,6 +20,8 @@ interface Props {
   modifiedTime?: string;
   /** Migas intermedias entre Inicio y la página actual (ej. Blog). */
   breadcrumbTrail?: Array<{ name: string; path: string }>;
+  /** Nombre del último nivel de las migas; por defecto el título de la página (que puede llevar "| …"). */
+  breadcrumbName?: string;
 }
 
 const {
@@ -32,6 +34,7 @@ const {
   publishedTime,
   modifiedTime,
   breadcrumbTrail = [],
+  breadcrumbName,
 } = Astro.props;
 
 const siteUrl = SITE_URL;
@@ -150,7 +153,7 @@ const breadcrumbSchema = normalizePath(Astro.url.pathname) === homePath ? null :
     {
       "@type": "ListItem",
       "position": breadcrumbTrail.length + 2,
-      "name": title,
+      "name": breadcrumbName ?? title,
       "item": canonicalUrl,
     },
   ],
