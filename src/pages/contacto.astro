@@ -58,16 +58,19 @@ const faqSchema = {
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <!-- Header -->
   <section class="ctt-hero" data-scroll-hero>
-    <img
-      src="/img/contacto/contacto.webp"
-      alt="Interior de Arango Dental Clinic en Benidorm"
-      class="ctt-hero-img"
-      width="1717"
-      height="916"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-    />
+    <picture>
+      <source media="(max-width: 640px)" srcset="/img/contacto/contacto-mobile.webp" width="1080" height="1620" />
+      <img
+        src="/img/contacto/contacto.webp"
+        alt="Consultorio dental moderno con sillón de tratamiento"
+        class="ctt-hero-img"
+        width="2000"
+        height="1336"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
     <div class="ctt-hero-overlay" aria-hidden="true"></div>
     <div class="ctt-container ctt-hero-inner">
       <p class="ctt-label">Arango Dental Clinic</p>
@@ -338,9 +341,9 @@ const faqSchema = {
     background:
       linear-gradient(
         180deg,
-        rgba(6, 18, 10, 0.72) 0%,
-        rgba(6, 18, 10, 0.48) 50%,
-        rgba(6, 18, 10, 0.72) 100%
+        rgba(6, 18, 10, 0.78) 0%,
+        rgba(6, 18, 10, 0.66) 50%,
+        rgba(6, 18, 10, 0.78) 100%
       );
   }
 
@@ -348,9 +351,9 @@ const faqSchema = {
     background:
       linear-gradient(
         180deg,
-        rgba(4, 12, 7, 0.82) 0%,
-        rgba(4, 12, 7, 0.55) 50%,
-        rgba(4, 12, 7, 0.82) 100%
+        rgba(4, 12, 7, 0.84) 0%,
+        rgba(4, 12, 7, 0.70) 50%,
+        rgba(4, 12, 7, 0.84) 100%
       );
   }
 
@@ -378,11 +381,16 @@ const faqSchema = {
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #C49B38;
+    color: var(--gold-text);
   }
 
   :global(html.dark) .ctt-label {
     color: #D4AF55;
+  }
+
+  /* En el hero el fondo es oscuro en los dos temas: ahí va el dorado claro. */
+  .ctt-hero-inner .ctt-label {
+    color: #E4C278;
   }
 
   .ctt-hero-title {
@@ -399,7 +407,7 @@ const faqSchema = {
     font-family: "Inter", sans-serif;
     font-size: 1rem;
     line-height: 1.7;
-    color: rgba(244, 240, 235, 0.50);
+    color: rgba(244, 240, 235, 0.92);
     max-width: 48ch;
     margin: 0;
   }
@@ -682,7 +690,7 @@ const faqSchema = {
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #C49B38;
+    color: var(--gold-text);
   }
 
   :global(html.dark) .ctt-trust-line {
