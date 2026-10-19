@@ -1,9 +1,10 @@
 ---
-title: "Bleeding Gums: Causes and When to See a Dentist"
-description: "Bleeding gums when you brush? Learn the most common causes, what helps and when to see a dentist. Book a free initial assessment in Benidorm."
+title: "Gums Bleeding When Brushing: Causes and What to Do"
+description: "Gums bleeding when you brush or floss? The most common causes, what helps at home and when to see a dentist. Free initial assessment in Benidorm."
 lang: en
 translationKey: bleeding-gums
 pubDate: 2026-10-07
+updatedDate: 2026-10-18
 service: periodoncia
 tags: ["bleeding gums", "gingivitis", "gum disease", "oral health"]
 image: ../../../assets/blog/toothbrush-floss-interdental-brush.webp
@@ -53,6 +54,32 @@ At the surgery, the first step is to examine your gums and look at the rest of y
 ## Do not stop brushing the area that bleeds
 
 It is an understandable reaction: if a spot bleeds, you are wary of touching it. But the usual advice is the opposite. If you avoid that area, plaque builds up and the inflammation gets worse. Cleaning it gently and consistently is normally what helps the gums settle. If you see no improvement after a few days, get it checked.
+
+## Frequently asked questions
+
+### Why do my gums bleed when I floss?
+
+When you start flossing or using interdental brushes, a little bleeding in areas that were not being cleaned before is common. It usually eases within days if you keep at it gently. If it does not, get it checked.
+
+### Why have my gums started bleeding all of a sudden?
+
+Sudden bleeding is most often linked to plaque build-up or a change in your routine, such as brushing harder, a new brush or starting to floss. Hormonal changes, some medicines and stopping smoking can also play a part. If it keeps happening, see a dentist.
+
+### Can a new or electric toothbrush make gums bleed?
+
+A firmer brush or pressing too hard can irritate gums. An electric toothbrush can help you clean better when used gently, without scrubbing. Technique and consistency matter more than the type of brush.
+
+### Is it normal for gums to bleed during pregnancy?
+
+Hormonal changes can make gums react more to plaque, so they swell and bleed more easily. Keeping up good hygiene and telling your dentist you are pregnant helps look after them.
+
+### What if my gums bleed and I have bad breath?
+
+Persistent bad breath together with bleeding can mean the inflammation has progressed. It is worth a check-up, as it could be gum disease rather than gingivitis alone.
+
+### Do bleeding gums with braces need special care?
+
+Braces make cleaning harder, so plaque can build up around the gum line. Interdental brushes and a careful routine help; your dentist can show you how to clean around brackets.
 
 ## When to see a dentist
 

@@ -1,9 +1,10 @@
 ---
-title: "Sangrado de encías: causas y cuándo ir al dentista"
-description: "Sangrado de encías al cepillarte: causas más habituales, cómo cuidarlas y cuándo acudir al dentista. Pide tu valoración inicial gratuita en Benidorm."
+title: "Sangrado de encías: causas, qué hacer y cuándo ir"
+description: "¿Te sangran las encías al cepillarte? Causas más habituales, qué hacer en casa y cuándo ir al dentista. Valoración inicial gratuita en Benidorm."
 lang: es
 translationKey: bleeding-gums
 pubDate: 2026-10-07
+updatedDate: 2026-10-18
 service: periodoncia
 tags: ["sangrado de encías", "gingivitis", "periodoncia", "salud bucodental"]
 image: ../../../assets/blog/toothbrush-floss-interdental-brush.webp
@@ -53,6 +54,32 @@ En la consulta, el primer paso es explorar las encías y ver cómo está el rest
 ## No dejes de cepillar la zona que sangra
 
 Es una reacción comprensible: si una zona sangra, da miedo tocarla. Pero lo habitual es lo contrario. Si evitas cepillar esa zona, la placa se acumula y la inflamación empeora. Limpiarla con suavidad y constancia es, normalmente, lo que ayuda a que la encía mejore. Si pasados unos días no ves mejoría, consulta.
+
+## Preguntas frecuentes
+
+### ¿Por qué me sangran las encías por la noche o al despertar?
+
+Notar un poco de sangre en la almohada o en la saliva al levantarte suele relacionarse con encías inflamadas por la placa, igual que el sangrado al cepillarte. También puede influir respirar por la boca al dormir. Si se repite, conviene que lo revise un dentista.
+
+### ¿Es normal que sangren al usar hilo dental?
+
+Al empezar a usar hilo o cepillos interdentales es habitual que las encías sangren un poco en zonas que antes no se limpiaban. Suele disminuir en pocos días si eres constante y lo haces con suavidad. Si no mejora, consulta.
+
+### ¿Por qué sangran más al dejar de fumar?
+
+El tabaco reduce el riego de las encías y puede ocultar el sangrado. Al dejarlo, la encía recupera circulación y la inflamación que ya existía se hace visible. No es motivo para volver a fumar: es una buena señal para revisar tus encías.
+
+### ¿Y en el embarazo?
+
+Los cambios hormonales pueden hacer que las encías reaccionen más a la placa e inflamen y sangren con más facilidad. Mantener una buena higiene y contarle a tu dentista que estás embarazada ayuda a cuidarlas.
+
+### ¿Qué hago si me sangran las encías y me huele la boca?
+
+El mal aliento persistente junto al sangrado puede indicar que la inflamación ha avanzado. Merece una revisión, porque podría tratarse de enfermedad de las encías y no solo de gingivitis.
+
+### ¿Sirve un cepillo eléctrico?
+
+Puede ayudar a limpiar mejor si se usa bien, sin apretar. Lo importante es la técnica y la constancia más que el tipo de cepillo. Tu dentista puede indicarte qué te conviene.
 
 ## Cuándo ir al dentista
 
