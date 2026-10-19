@@ -4,6 +4,7 @@ description: "¿Puente dental o implante? Ventajas y desventajas de cada uno, cu
 lang: es
 translationKey: bridge-vs-implant
 pubDate: 2026-10-19
+updatedDate: 2026-10-19
 service: rehabilitacion-oral
 tags: ["puente dental o implante", "puente dental", "implante dental", "rehabilitación oral", "puente sobre implantes"]
 image: ../../../assets/blog/porcelain-crowns-row.webp
@@ -27,7 +28,7 @@ En líneas generales, el proceso consiste en:
 
 1. Explorar la boca y comprobar que los dientes pilares están sanos y tienen soporte suficiente.
 2. Tallar los pilares y tomar registros de la boca, por ejemplo con escáner intraoral.
-3. Colocar un puente provisional mientras se fabrica el definitivo.
+3. Si hace falta, colocar un puente provisional mientras se fabrica el definitivo.
 4. Ajustar y fijar el puente definitivo a tu mordida.
 
 ### Puente dental fijo o removible

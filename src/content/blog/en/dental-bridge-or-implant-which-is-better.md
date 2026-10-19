@@ -4,6 +4,7 @@ description: "Dental bridge or implant? Pros and cons of each, how long a bridge
 lang: en
 translationKey: bridge-vs-implant
 pubDate: 2026-10-19
+updatedDate: 2026-10-19
 service: rehabilitacion-oral
 tags: ["dental bridge or implant", "dental bridge", "dental implant", "implant-supported bridge", "oral rehabilitation"]
 image: ../../../assets/blog/porcelain-crowns-row.webp
@@ -27,7 +28,7 @@ In broad terms, the process looks like this:
 
 1. Examining your mouth to check the supporting teeth are healthy and well supported.
 2. Preparing the supporting teeth and recording your bite, for example with an intraoral scanner.
-3. Fitting a temporary bridge while the permanent one is made.
+3. If needed, fitting a temporary bridge while the permanent one is made.
 4. Adjusting and fixing the permanent bridge to your bite.
 
 ### Fixed bridge or removable denture
