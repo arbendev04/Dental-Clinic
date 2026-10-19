@@ -86,7 +86,7 @@ const stats = [
       <div class="text-center mb-10 md:mb-16" data-reveal-group>
         <div class="flex items-center justify-center gap-3 mb-4" data-reveal-item>
           <div class="w-8 h-px" style="background-color: var(--gold-500);" data-reveal-line></div>
-          <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
+          <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-text);">
             Our Services
           </span>
           <div class="w-8 h-px" style="background-color: var(--gold-500);" data-reveal-line></div>
@@ -184,7 +184,7 @@ const stats = [
       <div class="text-center mb-10 md:mb-16" data-reveal-group>
         <div class="flex items-center justify-center gap-3 mb-4" data-reveal-item>
           <div class="w-8 h-px" style="background-color: var(--gold-500);" data-reveal-line></div>
-          <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
+          <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-text);">
             In Numbers
           </span>
           <div class="w-8 h-px" style="background-color: var(--gold-500);" data-reveal-line></div>
@@ -217,7 +217,7 @@ const stats = [
       <div class="text-center mb-10 md:mb-16" data-reveal-group>
         <div class="flex items-center justify-center gap-3 mb-4" data-reveal-item>
           <div class="w-8 h-px" style="background-color: var(--gold-500);" data-reveal-line></div>
-          <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-600);">
+          <span class="text-[0.65rem] tracking-[0.2em] uppercase font-medium" style="color: var(--gold-text);">
             Testimonials
           </span>
           <div class="w-8 h-px" style="background-color: var(--gold-500);" data-reveal-line></div>
@@ -770,6 +770,8 @@ const stats = [
     (function () {
       const els = document.querySelectorAll('.stat-number');
       if (!els.length) return;
+      // Con 'reducir movimiento' las cifras se quedan en su valor final, sin contar desde 0.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
       function animateCounter(el) {
         const target = el.getAttribute('data-target') || '';

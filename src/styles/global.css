@@ -30,11 +30,12 @@
   --gold-700: #745b1b;         /* Stitch: secondary */
   --gold-800: #5a4302;         /* Stitch: on_secondary_fixed_variant */
   --gold-900: #251a00;         /* Stitch: on_secondary_fixed */
+  --gold-text: #7d5f12;        /* dorado para TEXTO sobre fondo claro (5.4:1 sobre #f6f3f2). --gold-600 solo da 3.4:1 */
 
   /* Text — Soft Editorial Blacks (Stitch: on_surface / on_surface_variant) */
   --text-primary: #1c1b1b;     /* Stitch: on_surface */
   --text-secondary: #414845;   /* Stitch: on_surface_variant */
-  --text-tertiary: #727974;    /* Stitch: outline */
+  --text-tertiary: #5f6662;    /* gris verdoso para texto terciario: 5.06:1 sobre el fondo más oscuro del tema (el #727974 original daba 3.8-4.3) */
 }
 
 .dark {
@@ -66,11 +67,12 @@
   --gold-700: #e4c278;         /* Stitch: secondary_fixed_dim */
   --gold-800: #ffdf9b;         /* Stitch: secondary_fixed */
   --gold-900: #ffdc8e;         /* Stitch: secondary_container */
+  --gold-text: #D4AF55;        /* texto dorado sobre fondo oscuro (>9:1) */
 
   /* Text — Warm Whites (todos pasan WCAG AA) */
   --text-primary: #F4F0EB;
   --text-secondary: #A8A199;
-  --text-tertiary: #7A7268;
+  --text-tertiary: #948C81;    /* 4.83:1 sobre el fondo más claro del tema oscuro (el #7A7268 original daba 3.4-3.9) */
 }
 
 /* Typography */
@@ -121,6 +123,14 @@ select:focus-visible,
 [tabindex]:focus-visible {
   outline: 2px solid var(--teal-500);
   outline-offset: 2px;
+}
+
+/* Placeholder legible (≥4.5:1) en los dos temas; el de Tailwind (50% del color del texto) daba ~3.3:1 en claro.
+   Los formularios sobre fondo oscuro de los heroes definen el suyo (más específico). */
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
 }
 
 /* Remove default focus outline when using mouse */

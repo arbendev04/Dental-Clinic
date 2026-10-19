@@ -504,7 +504,7 @@ const procedureSchema = {
   }
 
   .trt-hero-form-input::placeholder {
-    color: rgba(244, 240, 235, 0.45);
+    color: rgba(244, 240, 235, 0.64);
   }
 
   .trt-hero-form-input:focus {
@@ -719,12 +719,8 @@ const procedureSchema = {
     padding-left: calc(2.35rem + 1rem);
   }
 
-  /* Cerrado: sin <p> visible (display:none nativo de <details>) — el script
-     solo alterna el atributo `open`, esta transición es puramente visual
-     para cuando SÍ está abierto. */
-  .trt-step-card:not([open]) .trt-step-card-summary {
-    opacity: 0.75;
-  }
+  /* Cerrada: el <p> queda oculto (display:none nativo de <details>); el script solo
+     alterna `open`. Sin bajar la opacidad del resumen: reducía el contraste del texto. */
 
   /* Barra de progreso del auto-avance — solo la card abierta la anima
      (ver .trt-step-card-progress-bar.is-animating en el script). Oculta
