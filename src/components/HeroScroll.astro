@@ -244,7 +244,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
      sus reglas más abajo) para apilarse con flexbox — el resto de los hijos
      (frames, overlays, scroll-indicator) sigue con position:absolute y no
      participa del flex, así que no se ven afectados. */
-  @media (max-width: 640px) {
+  @media (max-width: 767.98px) {
     .hero-scroll-inner {
       display: flex;
       flex-direction: column;
@@ -331,7 +331,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
      (ver .hero-scroll-inner y .hero-form-panel más abajo) — se ordenan con
      flexbox en vez de superponerse con posiciones calculadas a mano, así
      conviven sin pisarse sea cual sea la altura de cada bloque. */
-  @media (max-width: 640px) {
+  @media (max-width: 767.98px) {
     .hero-content {
       position: relative;
       order: 2;
@@ -340,7 +340,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
       right: auto;
       transform: none;
       max-width: none;
-      width: calc(100% - 12%);
+      width: min(calc(100% - 12%), 560px);
       margin: 0.6rem auto 0;
     }
   }
@@ -359,7 +359,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
      vuelta), el bloque de texto necesita ser más compacto para que el CTA
      "Nuestros Servicios" no quede tapado por el overflow:hidden del hero
      en pantallas chicas (probado en 375×667). */
-  @media (max-width: 640px) {
+  @media (max-width: 767.98px) {
     .hero-label {
       margin-bottom: 0.7rem;
     }
@@ -390,7 +390,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
     white-space: nowrap;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 767.98px) {
     .hero-title {
       margin-bottom: 0.7rem;
     }
@@ -426,8 +426,9 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
   /* CTAs */
   .hero-ctas {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem 2rem;
     opacity: 0;
     will-change: opacity, transform;
   }
@@ -578,19 +579,33 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
     }
   }
 
+  /* 641-767: apilado como en móvil, pero con más aire entre el formulario y el texto. */
+  @media (min-width: 641px) and (max-width: 767.98px) {
+    .hero-content {
+      margin-top: 1.5rem;
+    }
+  }
+
+  /* Tablet: con el 35% de ancho, el padding de escritorio dejaba campos de ~180px. */
+  @media (min-width: 768px) and (max-width: 1023.98px) {
+    .hero-form-panel {
+      padding: 2.5rem 1.75rem;
+    }
+  }
+
   /* Mobile: va primero (order:1, antes que .hero-content) y en flujo
      normal — más ancho que antes (ya no topeado a 300px) pero sin pegarse
      al borde, mismo margen lateral que el resto del hero (6%). El campo de
      email vuelve a mostrarse (ver .hero-form-input más abajo, ya no hay
      regla que lo oculte). */
-  @media (max-width: 640px) {
+  @media (max-width: 767.98px) {
     .hero-form-panel {
       position: relative;
       order: 1;
       left: auto;
       bottom: auto;
       transform: none;
-      width: calc(100% - 12%);
+      width: min(calc(100% - 12%), 560px);
       max-width: none;
       margin: 5.5rem auto 0;
       padding: 0.75rem 1.1rem 0.9rem;
@@ -638,7 +653,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
     gap: 0.55rem;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 767.98px) {
     .hero-form-eyebrow {
       margin-bottom: 0.2rem;
     }
@@ -692,7 +707,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
   /* Mobile: con el desplegable de tratamientos son 4 campos + consentimiento
      + botón dentro de un hero de altura fija (100vh) — se compacta el padding
      vertical para que el CTA de abajo no quede tapado en 375×667. */
-  @media (max-width: 640px) {
+  @media (max-width: 767.98px) {
     .hero-form-input {
       padding: 0.4rem 0.75rem;
     }
@@ -862,7 +877,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
     transition: background-color 0.25s ease;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 767.98px) {
     .hero-form-submit {
       padding: 0.6rem 1rem;
     }
