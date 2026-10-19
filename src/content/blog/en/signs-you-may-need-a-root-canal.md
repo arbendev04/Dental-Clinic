@@ -1,9 +1,10 @@
 ---
-title: "Signs You Need a Root Canal: Symptoms to Watch For"
-description: "Lingering toothache, sensitivity to hot or cold, a darkened tooth: learn the signs you need a root canal and how to book a free initial assessment."
+title: "Signs You Need a Root Canal and What to Expect"
+description: "How to know if you need a root canal, root canal or extraction, whether you need a crown and what to expect afterwards. Free assessment in Benidorm."
 lang: en
 translationKey: root-canal-signs
 pubDate: 2026-10-07
+updatedDate: 2026-10-18
 service: endodoncia
 tags: ["root canal", "toothache", "dental health", "endodontics"]
 image: ../../../assets/blog/tooth-cross-section-model.webp
@@ -66,6 +67,51 @@ Depending on the case, treatment may take more than one visit. Some tenderness i
 ## A common myth: "a root canal is very painful"
 
 This idea is still widespread, but with modern local anaesthesia the procedure is generally comfortable for most patients. In fact, the pain people remember usually comes from the infection or inflammation beforehand, not from the treatment itself. If you feel nervous, tell your dentist before you start: they can explain what you will feel and answer your questions.
+
+## Root canal or extraction? Pros and cons
+
+When a tooth's pulp is damaged, the two usual alternatives are a root canal treatment or taking the tooth out. You cannot always choose: it depends on how much healthy tooth is left and on the state of the root and bone.
+
+**Root canal treatment:**
+
+- **Pro:** it keeps your natural tooth and its root, which helps preserve your bite and the bone in that area.
+- **Pro:** it avoids having to fill the gap a lost tooth leaves.
+- **Con:** it may take more than one visit and often needs a crown or rebuild afterwards.
+- **Con:** it is not possible for every tooth; if little structure remains or the root is fractured, it may not be viable.
+
+**Extraction:**
+
+- **Pro:** it is a more straightforward procedure on the day.
+- **Con:** the gap usually needs filling, for example with a [dental implant](/en/dental-implants/) or a bridge, so neighbouring teeth do not drift.
+- **Con:** over time, the bone in that area tends to shrink if the tooth is not replaced.
+
+Your dentist will explain which options are realistic in your case.
+
+## Frequently asked questions
+
+### Root canal or filling: how do I know which I need?
+
+A filling repairs decay that has not reached the pulp. A root canal is needed when the pulp itself is inflamed or infected. Symptoms can overlap, so only an examination, usually with an X-ray, can tell which treatment applies.
+
+### Is it normal to have pain after a root canal?
+
+Some tenderness, especially when biting, is common for a few days while the tissues around the root settle. If the pain gets worse rather than better, or swelling appears, contact the clinic.
+
+### When can I eat after a root canal?
+
+Wait until the anaesthetic wears off so you do not bite yourself without noticing. After that, chew on the other side until the tooth has its final restoration, because a treated tooth that is not yet protected is more fragile.
+
+### Do I need a crown after a root canal?
+
+Often yes, especially on back teeth, because a treated tooth can become more brittle when chewing. In other cases a rebuild is enough. It depends on how much healthy tooth remains.
+
+### Is the tooth dead after a root canal?
+
+The pulp inside is removed, so the tooth no longer has its nerve, but it stays in place, held by the surrounding tissues and bone, and can keep working normally for chewing.
+
+### What if a root canal fails?
+
+Sometimes a treated tooth causes problems again. In many cases the treatment can be redone, and if not, other options are considered. That is why check-ups matter.
 
 ## Why you should not wait
 

@@ -1,9 +1,10 @@
 ---
-title: "Veneers vs Teeth Whitening: Which Is Right for You?"
-description: "Veneers vs teeth whitening: what each treatment can and cannot change, who each suits best and whether you can combine them. Book a free assessment."
+title: "Veneers vs Teeth Whitening: Which Is Better?"
+description: "Veneers vs teeth whitening: pros and cons, who each suits, whether veneers can be whitened and if you can combine them. Free assessment in Benidorm."
 lang: en
 translationKey: veneers-vs-whitening
 pubDate: 2026-10-07
+updatedDate: 2026-10-18
 service: estetica-dental
 tags: ["veneers", "teeth whitening", "cosmetic dentistry", "smile"]
 image: ../../../assets/blog/veneers-and-shade-guide.webp
@@ -30,11 +31,34 @@ Veneers are very thin shells, usually made of porcelain or composite resin, bond
 
 Unlike whitening, veneers involve a procedure on the tooth. In many cases a thin layer of enamel has to be removed so the veneer fits properly, which is why it is a decision to weigh up carefully and with full information. Veneers also do not last forever: over time they may need repair or replacement, and they depend on good hygiene and regular check-ups. Ceramic materials generally resist staining well, but they are not immune to wear.
 
-## A quick comparison
+## Teeth whitening: pros and cons
 
-**Teeth whitening:** lightens the colour of natural teeth. It does not change shape, size or position, it does not affect crowns, fillings or veneers, and its effect can fade over time depending on your habits.
+**Pros:**
 
-**Dental veneers:** change the colour, shape and look of the visible surface of the tooth. They involve a procedure on the tooth, usually with a thin layer of enamel removed, and need maintenance and, in time, possible adjustments or replacement.
+- **It is minimally invasive.** The structure of the tooth is not altered.
+- **It keeps your natural teeth** as they are, just in a lighter shade.
+- **It is often the first step** when colour is the only thing that bothers you.
+
+**Cons:**
+
+- **It does not change the shape, size or position** of your teeth.
+- **It does not work on crowns, fillings or veneers.**
+- **Its effect can fade** over time depending on your habits.
+- **It can cause temporary sensitivity** in some people.
+
+## Veneers: pros and cons
+
+**Pros:**
+
+- **They change several things at once:** colour, shape, size and the look of the visible surface.
+- **They can disguise** small chips, wear, gaps or minor irregularities.
+- **Porcelain veneers resist staining well.**
+
+**Cons:**
+
+- **They involve a procedure on the tooth**, often removing a thin layer of enamel.
+- **They do not last forever:** over time they may need repair or replacement.
+- **They need upkeep**, good hygiene and regular check-ups.
 
 ## Which suits which situation?
 
@@ -62,14 +86,36 @@ No cosmetic treatment lasts the same length of time for everyone. Some habits cl
 
 Your dentist will give you advice specific to your case. If you notice discomfort, or a veneer feels loose or chipped, do not wait: contact the clinic.
 
+## Frequently asked questions
+
+### Can you whiten veneers?
+
+No. Whitening products act on natural teeth, not on the porcelain or resin of veneers. If you want lighter teeth, it is best to whiten before your veneers are made, so their colour can be matched to the new shade.
+
+### Composite or porcelain veneers?
+
+Composite (resin) veneers are shaped directly on the tooth and are easier to touch up, although they tend to stain and wear more over time. Porcelain veneers are custom-made and usually keep their colour and lustre better. Which suits you depends on your case and what you want; your dentist will explain the options.
+
+### Are whitening strips or home kits a good alternative?
+
+Over-the-counter products exist, but whitening supervised by a dentist means your mouth is checked first, the treatment is adapted to your teeth and sensitivity is monitored. Your dentist will tell you which approach suits you.
+
+### How long does whitening last?
+
+It varies from person to person and depends heavily on habits: coffee, tea, red wine and smoking make teeth darken again sooner. Good hygiene and regular check-ups help the result last longer.
+
+### How much does each treatment cost?
+
+There is no single price: it depends on how many teeth are treated, the material and what you need. We give you an exact quote after the free initial assessment.
+
 ## Why the assessment comes first
 
 Before any cosmetic treatment, your dentist needs to make sure your mouth is healthy. That usually means checking for cavities, making sure your gums are in good condition and looking for underlying problems that should be dealt with first. If your gums are inflamed, for example, they may need [gum treatment](/en/gum-treatment/) first, because cosmetic results depend on a healthy foundation.
 
 The examination is also a chance to talk about what you hope for and what is realistic in your case. The cost varies according to what you need and is explained once the assessment has been carried out.
 
-## Book your free initial assessment
+## Book your free initial assessment in Benidorm
 
-If you are unsure whether veneers or whitening is right for you, or you are interested in combining them, the best step is a personal examination. At Arango Dental Clinic in Benidorm, we offer a free initial assessment to review your mouth, listen to what you are looking for and explain your options.
+If you are unsure whether veneers or whitening is right for you, or you are interested in combining them, the most useful step is a personal examination. At Arango Dental Clinic in Benidorm, we offer a free initial assessment to review your mouth, listen to what you are looking for and explain your options.
 
 You can [contact the clinic](/en/contact/) to arrange your appointment.
