@@ -244,7 +244,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
      sus reglas más abajo) para apilarse con flexbox — el resto de los hijos
      (frames, overlays, scroll-indicator) sigue con position:absolute y no
      participa del flex, así que no se ven afectados. */
-  @media (max-width: 767.98px) {
+  @media (max-width: 767.98px), (max-width: 1023.98px) and (max-aspect-ratio: 1333/1000) {
     .hero-scroll-inner {
       display: flex;
       flex-direction: column;
@@ -321,7 +321,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
   /* Desktop: el formulario ocupa el 35% derecho del hero, con margen antes
      del borde (ver .hero-form-panel) — se acota el texto para dejarle aire
      de sobra y que no se pisen. */
-  @media (min-width: 768px) {
+  @media (min-width: 1024px), (min-width: 768px) and (min-aspect-ratio: 4/3) {
     .hero-content {
       right: 40%;
     }
@@ -331,7 +331,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
      (ver .hero-scroll-inner y .hero-form-panel más abajo) — se ordenan con
      flexbox en vez de superponerse con posiciones calculadas a mano, así
      conviven sin pisarse sea cual sea la altura de cada bloque. */
-  @media (max-width: 767.98px) {
+  @media (max-width: 767.98px), (max-width: 1023.98px) and (max-aspect-ratio: 1333/1000) {
     .hero-content {
       position: relative;
       order: 2;
@@ -340,7 +340,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
       right: auto;
       transform: none;
       max-width: none;
-      width: min(calc(100% - 12%), 560px);
+      width: min(calc(100% - 12%), 640px);
       margin: 0.6rem auto 0;
     }
   }
@@ -359,7 +359,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
      vuelta), el bloque de texto necesita ser más compacto para que el CTA
      "Nuestros Servicios" no quede tapado por el overflow:hidden del hero
      en pantallas chicas (probado en 375×667). */
-  @media (max-width: 767.98px) {
+  @media (max-width: 767.98px), (max-width: 1023.98px) and (max-aspect-ratio: 1333/1000) {
     .hero-label {
       margin-bottom: 0.7rem;
     }
@@ -390,7 +390,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
     white-space: nowrap;
   }
 
-  @media (max-width: 767.98px) {
+  @media (max-width: 767.98px), (max-width: 1023.98px) and (max-aspect-ratio: 1333/1000) {
     .hero-title {
       margin-bottom: 0.7rem;
     }
@@ -566,7 +566,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
      debe dominar la sección. .hero-content (ver "right: 40%" arriba) deja
      de sobra el resto del espacio libre. Padding vertical generoso: la
      tarjeta debe leerse alta/proporcionada, no ancha y plana. */
-  @media (min-width: 768px) {
+  @media (min-width: 1024px), (min-width: 768px) and (min-aspect-ratio: 4/3) {
     .hero-form-panel {
       left: auto;
       bottom: auto;
@@ -580,14 +580,14 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
   }
 
   /* 641-767: apilado como en móvil, pero con más aire entre el formulario y el texto. */
-  @media (min-width: 641px) and (max-width: 767.98px) {
+  @media (min-width: 641px) and (max-width: 767.98px), (min-width: 768px) and (max-width: 1023.98px) and (max-aspect-ratio: 1333/1000) {
     .hero-content {
       margin-top: 1.5rem;
     }
   }
 
   /* Tablet: con el 35% de ancho, el padding de escritorio dejaba campos de ~180px. */
-  @media (min-width: 768px) and (max-width: 1023.98px) {
+  @media (min-width: 768px) and (max-width: 1023.98px) and (min-aspect-ratio: 4/3) {
     .hero-form-panel {
       padding: 2.5rem 1.75rem;
     }
@@ -598,14 +598,14 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
      al borde, mismo margen lateral que el resto del hero (6%). El campo de
      email vuelve a mostrarse (ver .hero-form-input más abajo, ya no hay
      regla que lo oculte). */
-  @media (max-width: 767.98px) {
+  @media (max-width: 767.98px), (max-width: 1023.98px) and (max-aspect-ratio: 1333/1000) {
     .hero-form-panel {
       position: relative;
       order: 1;
       left: auto;
       bottom: auto;
       transform: none;
-      width: min(calc(100% - 12%), 560px);
+      width: min(calc(100% - 12%), 640px);
       max-width: none;
       margin: 5.5rem auto 0;
       padding: 0.75rem 1.1rem 0.9rem;
@@ -623,7 +623,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
   }
 
   /* Más grande y llamativa en desktop — mismo dorado, más peso y tamaño. */
-  @media (min-width: 768px) {
+  @media (min-width: 1024px), (min-width: 768px) and (min-aspect-ratio: 4/3) {
     .hero-form-eyebrow {
       font-size: 0.8rem;
       font-weight: 700;
@@ -640,7 +640,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
     margin: 0 0 0.85rem;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px), (min-width: 768px) and (min-aspect-ratio: 4/3) {
     .hero-form-title {
       font-size: 1.6rem;
       margin-bottom: 1.1rem;
@@ -653,7 +653,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
     gap: 0.55rem;
   }
 
-  @media (max-width: 767.98px) {
+  @media (max-width: 767.98px), (max-width: 1023.98px) and (max-aspect-ratio: 1333/1000) {
     .hero-form-eyebrow {
       margin-bottom: 0.2rem;
     }
@@ -668,7 +668,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
   /* Los campos ocupan todo el ancho útil del panel (100% menos el padding
      horizontal de .hero-form-panel) — sin tope propio, para que abarquen
      más ancho en escritorio. */
-  @media (min-width: 768px) {
+  @media (min-width: 1024px), (min-width: 768px) and (min-aspect-ratio: 4/3) {
     .hero-form {
       gap: 1.1rem;
     }
@@ -697,7 +697,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
 
   /* Campos más grandes en desktop — que no se vean pequeños/aplastados
      dentro de una tarjeta ahora más alta. */
-  @media (min-width: 768px) {
+  @media (min-width: 1024px), (min-width: 768px) and (min-aspect-ratio: 4/3) {
     .hero-form-input {
       padding: 0.85rem 1rem;
       font-size: 0.92rem;
@@ -707,7 +707,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
   /* Mobile: con el desplegable de tratamientos son 4 campos + consentimiento
      + botón dentro de un hero de altura fija (100vh) — se compacta el padding
      vertical para que el CTA de abajo no quede tapado en 375×667. */
-  @media (max-width: 767.98px) {
+  @media (max-width: 767.98px), (max-width: 1023.98px) and (max-aspect-ratio: 1333/1000) {
     .hero-form-input {
       padding: 0.4rem 0.75rem;
     }
@@ -776,7 +776,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px), (min-width: 768px) and (min-aspect-ratio: 4/3) {
     .hero-dropdown-panel {
       max-height: 15rem;
     }
@@ -794,7 +794,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
     transition: background-color 0.15s ease;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px), (min-width: 768px) and (min-aspect-ratio: 4/3) {
     .hero-dropdown-option {
       padding: 0.65rem 1rem;
       font-size: 0.88rem;
@@ -877,7 +877,7 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
     transition: background-color 0.25s ease;
   }
 
-  @media (max-width: 767.98px) {
+  @media (max-width: 767.98px), (max-width: 1023.98px) and (max-aspect-ratio: 1333/1000) {
     .hero-form-submit {
       padding: 0.6rem 1rem;
     }
@@ -890,6 +890,34 @@ const tratamientosForm = tratamientoValues.map((value, i) => ({ value, label: di
   .hero-form-submit:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  /* Tablet en vertical (768-1023 px): apilado como en móvil pero con más holgura (el alto sobra). */
+  @media (min-width: 768px) and (max-width: 1023.98px) and (max-aspect-ratio: 1333/1000) {
+    .hero-form-panel {
+      margin-top: 6.5rem;
+      padding: 1.6rem 2rem 1.8rem;
+    }
+    .hero-form-eyebrow {
+      font-size: 0.72rem;
+      margin-bottom: 0.4rem;
+    }
+    .hero-form-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.9rem;
+    }
+    .hero-form {
+      gap: 0.8rem;
+    }
+    .hero-form-input {
+      padding: 0.75rem 1rem;
+    }
+    .hero-form-submit {
+      padding: 0.85rem 1rem;
+    }
+    .hero-content {
+      margin-top: 2.25rem;
+    }
   }
 
   .hero-form-status {
