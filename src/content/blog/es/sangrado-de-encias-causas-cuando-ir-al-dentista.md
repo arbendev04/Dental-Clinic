@@ -63,7 +63,7 @@ Notar un poco de sangre en la almohada o en la saliva al levantarte suele relaci
 
 ### ¿Es normal que sangren al usar hilo dental?
 
-Al empezar a usar hilo o cepillos interdentales es habitual que las encías sangren un poco en zonas que antes no se limpiaban. Suele disminuir en pocos días si eres constante y lo haces con suavidad. Si no mejora, consulta.
+Al empezar a usar hilo o cepillos interdentales es habitual que las encías sangren un poco en zonas que antes no se limpiaban. Suele ir disminuyendo a medida que las encías se acostumbran, si eres constante y lo haces con suavidad. Si no mejora, consulta.
 
 ### ¿Por qué sangran más al dejar de fumar?
 

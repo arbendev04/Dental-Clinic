@@ -59,7 +59,7 @@ It is an understandable reaction: if a spot bleeds, you are wary of touching it.
 
 ### Why do my gums bleed when I floss?
 
-When you start flossing or using interdental brushes, a little bleeding in areas that were not being cleaned before is common. It usually eases within days if you keep at it gently. If it does not, get it checked.
+When you start flossing or using interdental brushes, a little bleeding in areas that were not being cleaned before is common. It usually eases as your gums get used to it, if you keep at it gently. If it does not, get it checked.
 
 ### Why have my gums started bleeding all of a sudden?
 

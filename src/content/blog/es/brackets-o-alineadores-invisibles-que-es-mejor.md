@@ -21,7 +21,7 @@ Los dos sistemas necesitan un estudio previo, revisiones periódicas durante el 
 
 ## Brackets: cómo funcionan, ventajas y desventajas
 
-Los brackets son pequeñas piezas que se pegan a la superficie de los dientes y se unen entre sí con un arco metálico. En cada revisión, tu dentista ajusta ese arco para seguir guiando el movimiento. Además de los metálicos, hay brackets del color del diente que se notan menos.
+Los brackets son pequeñas piezas que se pegan a la superficie de los dientes y se unen entre sí con un arco metálico. En cada revisión, tu dentista ajusta ese arco para seguir guiando el movimiento. Además de los metálicos, existen brackets del color del diente que se notan menos; tu dentista te indicará qué opciones son adecuadas en tu caso.
 
 **Ventajas:**
 
@@ -53,7 +53,7 @@ Los alineadores son férulas de plástico transparente hechas a medida. Cada jue
 
 ## Brackets o alineadores: diferencias clave
 
-- **Estética:** los alineadores pasan más desapercibidos; los brackets estéticos son una opción intermedia.
+- **Estética:** los alineadores pasan más desapercibidos; los brackets estéticos, cuando están indicados, son una opción intermedia.
 - **Comida:** con alineadores puedes comer de todo, porque te los quitas. Con brackets conviene evitar algunos alimentos.
 - **Higiene:** más sencilla con alineadores; con brackets hay que dedicarle más atención.
 - **Disciplina:** los brackets trabajan solos; los alineadores necesitan tu constancia.

@@ -21,7 +21,7 @@ Both systems need a proper assessment beforehand, regular check-ups during treat
 
 ## Braces: how they work, pros and cons
 
-Braces are small brackets bonded to the surface of the teeth and linked by a wire. At each check-up, your dentist adjusts the wire to keep guiding the movement. As well as metal braces, there are tooth-coloured brackets that are less noticeable.
+Braces are small brackets bonded to the surface of the teeth and linked by a wire. At each check-up, your dentist adjusts the wire to keep guiding the movement. As well as metal braces, tooth-coloured brackets exist and are less noticeable; your dentist will tell you which options suit your case.
 
 **Pros:**
 
@@ -53,7 +53,7 @@ Aligners are custom-made trays of clear plastic. Each set moves the teeth a litt
 
 ## Braces vs aligners: the key differences
 
-- **Appearance:** aligners are harder to spot; tooth-coloured braces sit somewhere in between.
+- **Appearance:** aligners are harder to spot; tooth-coloured braces, where suitable, sit somewhere in between.
 - **Food:** with aligners you can eat anything, because you take them out. With braces, some foods are best avoided.
 - **Cleaning:** simpler with aligners; braces need more attention.
 - **Discipline:** braces work on their own; aligners need your commitment.
