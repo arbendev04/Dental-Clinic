@@ -57,9 +57,14 @@ export const postSlug = (post: BlogPost): string => post.id.split('/').pop() as 
 export const postPath = (post: BlogPost): string => `${blogBasePath(post.data.lang)}${postSlug(post)}/`;
 
 // Artículos publicados (sin borradores) de un idioma, del más nuevo al más viejo.
+// Con la misma fecha desempata por id: sin eso el orden dependía del sistema operativo
+// (el glob lee los archivos en distinto orden en Windows y en Linux/Vercel) y el build local
+// no coincidía con producción.
 export async function getPosts(lang: Lang): Promise<BlogPost[]> {
   const posts = await getCollection('blog', (p) => p.data.lang === lang && !p.data.draft);
-  return posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+  return posts.sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime() || a.id.localeCompare(b.id),
+  );
 }
 
 // Minutos de lectura (~220 palabras por minuto), mínimo 1.
